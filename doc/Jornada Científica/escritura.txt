@@ -1,0 +1,36 @@
+Requisitos del texto cientifico
+-elementos paratextuales:
+    - El aparato critico: citas, ¿cuales, comoy cuando?
+    - La bibliografia: libros, revistas e internet
+    - Los recursos graficos: tablas, cuadros resuemens, mapas conceptuales
+
+
+citar la informacion
+    -metodos para citar 
+        -normas APA (perez, 2018) (autor, año publicacion)
+        -IEEE textotexto[1]
+
+titulo
+autores, primer apellido y primer nombre
+adscripcion institucional, a donde pertenecen 
+
+introduccion 
+metodologia - como hizo el estudio
+resultados - resultados
+discusión - 
+
+
+
+normas de la jornada
+caracteristicas del contexto del estusio
+objetivos/ finalidad
+metodos/metodologia empleadas
+resultados esperados y/o logrados
+conclusiones
+
+
+
+en este estudio se buca identificar
+la razon de que hayan elegido ... se debe ... 
+
+el proyecto se hizo o se va a hacer, tiempos verbales
