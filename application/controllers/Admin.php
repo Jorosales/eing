@@ -12,6 +12,8 @@ class Admin extends CI_Controller{
         $this->load->model('Carrera_model');
         $this->load->model('Materia_model');
         $this->load->model('Ciclo_materia_model');
+        $this->load->model('Titulo_model');
+        $this->load->model('Orientaciones_model');
     } 
 
     /*
@@ -23,6 +25,8 @@ class Admin extends CI_Controller{
         $data['total_planes'] = $this->Planes_model->get_all_planes_count();
         $data['total_materias'] = $this->Materia_model->get_all_materias_count();
         $data['total_ciclo_materias'] = $this->Ciclo_materia_model->get_all_ciclo_materia_count();
+        $data['total_orientaciones'] = $this->Orientaciones_model->get_all_orientaciones_count();
+        $data['total_titulos'] = $this->Titulo_model->get_all_titulos_count();
 
         $data['_view'] = 'admin/index';
         $this->load->view('layouts/main',$data);

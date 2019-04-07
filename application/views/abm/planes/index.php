@@ -17,6 +17,7 @@
 		<th>ID</th>
 		<th>Carrera</th>
 		<th>Nombre</th>
+		<th>Duración</th>
 		<th>Acciones</th>
     </tr>
 	<?php foreach($planes as $p){ ?>
@@ -24,6 +25,7 @@
 		<td><?php echo $p['id']; ?></td>
 		<td><?php echo $p['carrera']; ?></td>
 		<td><?php echo $p['nombre']; ?></td>
+		<td><?php echo $p['duracion']; ?></td>
 		<td>
             <a href="<?php echo site_url('planes/edit/'.$p['id']); ?>" class="btn btn-info btn-xs">Editar</a> 
             <a href="<?php echo site_url('planes/remove/'.$p['id']); ?>" class="btn btn-danger btn-xs">Eliminar</a>

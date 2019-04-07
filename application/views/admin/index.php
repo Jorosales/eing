@@ -48,6 +48,28 @@
 	            </div>
 	            </a>
 	        </div>
+
+	        <div class="col-md-4 col-xl-3">
+	        	<a href="http://localhost/eing/titulo">
+	            <div class="card bg-c-blue order-card">
+	                <div class="card-block">
+	                    <h2 class="m-b-20">Títulos</h2>
+	                    <h2 class="text-right"><span><?php echo $total_titulos; ?></span></h2>
+	                </div>
+	            </div>
+	            </a>
+	        </div>
+	        
+	        <div class="col-md-4 col-xl-3">
+	            <a href="http://localhost/eing/orientaciones/">
+	            <div class="card bg-c-green order-card">
+	                <div class="card-block">
+	                    <h2 class="m-b-20">Orientaciones</h2>
+	                    <h2 class="text-right"><span><?php echo $total_orientaciones; ?></span></h2>
+	                </div>
+	            </div>
+	            </a>
+	        </div>
 		</div>
 	</div>
 	

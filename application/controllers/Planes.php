@@ -39,12 +39,14 @@ class Planes extends CI_Controller{
         $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('nombre','Nombre','required');
+        $this->form_validation->set_rules('duracion','Duracion','numeric|required');
 		
 		if($this->form_validation->run())     
         {   
             $params = array(
 				'id_carrera' => $this->input->post('id_carrera'),
 				'nombre' => $this->input->post('nombre'),
+                'duracion' => $this->input->post('duracion'),
             );
             
             $plane_id = $this->Planes_model->add_planes($params);
@@ -73,12 +75,14 @@ class Planes extends CI_Controller{
             $this->load->library('form_validation');
 
 			$this->form_validation->set_rules('nombre','Nombre','required');
+            $this->form_validation->set_rules('duracion','Duracion','numeric|required');
 		
 			if($this->form_validation->run())     
             {   
                 $params = array(
 					'id_carrera' => $this->input->post('id_carrera'),
 					'nombre' => $this->input->post('nombre'),
+                    'duracion' => $this->input->post('duracion'),
                 );
 
                 $this->Planes_model->update_planes($id,$params);            

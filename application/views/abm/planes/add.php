@@ -22,6 +22,14 @@
 			<span class="text-danger"><?php echo form_error('nombre');?></span>
 		</div>
 	</div>
+
+	<div class="form-group">
+		<label for="duracion" class="col-md-4 control-label">Duración en años</label>
+		<div class="col-md-8">
+			<input type="text" name="duracion" value="<?php echo $this->input->post('duracion'); ?>" class="form-control" id="duracion" />
+			<span class="text-danger"><?php echo form_error('duracion');?></span>
+		</div>
+	</div>
 	
 	<div class="form-group">
 		<div class="col-sm-offset-4 col-sm-8">
