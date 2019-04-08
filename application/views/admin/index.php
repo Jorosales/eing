@@ -70,6 +70,41 @@
 	            </div>
 	            </a>
 	        </div>
+
+	        <div class="col-md-4 col-xl-3">
+	            <a href="http://localhost/eing/ciclo/">
+	            <div class="card bg-c-yellow order-card">
+	                <div class="card-block">
+	                    <h2 class="m-b-20">Ciclos</h2>
+	                    <h2 class="text-right"><span><?php echo $total_ciclos; ?></span></h2>
+	                </div>
+	            </div>
+	            </a>
+	        </div>
+
+	        <div class="col-md-4 col-xl-3">
+	            <a href="http://localhost/eing/correlativa/">
+	            <div class="card bg-c-pink order-card">
+	                <div class="card-block">
+	                    <h2 class="m-b-20">Correlativas</h2>
+	                    <h2 class="text-right"><span><?php echo $total_correlativas; ?></span></h2>
+	                </div>
+	            </div>
+	            </a>
+	        </div>
+
+	        <div class="col-md-4 col-xl-3">
+	        	<a href="http://localhost/eing/correlativas_tipo">
+	            <div class="card bg-c-blue order-card">
+	                <div class="card-block">
+	                    <h2 class="m-b-20">Tipo de Correlativa</h2>
+	                    <h2 class="text-right"><span><?php echo $total_tipo_correlativas; ?></span></h2>
+	                </div>
+	            </div>
+	            </a>
+	        </div>
+
+
 		</div>
 	</div>
 	

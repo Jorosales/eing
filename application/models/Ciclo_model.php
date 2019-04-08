@@ -33,12 +33,18 @@ class Ciclo_model extends CI_Model
      */
     function get_all_ciclos($params = array())
     {
-        $this->db->order_by('id', 'desc');
+        $query = "SELECT c.*, p.nombre as plan, o.nombre as orientacion
+                  FROM ciclos c
+                  INNER JOIN planes p on p.id = c.id_plan
+                  LEFT JOIN orientaciones o on o.id = c.id_orientacion
+                  ORDER BY id desc ";
+
         if(isset($params) && !empty($params))
         {
-            $this->db->limit($params['limit'], $params['offset']);
+            $query.="LIMIT ".$params['limit']." OFFSET ".$params['offset']."";
         }
-        return $this->db->get('ciclos')->result_array();
+                
+        return $this->db->query($query)->result_array();
     }
         
     /*

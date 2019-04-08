@@ -22,6 +22,7 @@ class Titulo extends CI_Controller{
         $config = $this->config->item('pagination');
         $config['base_url'] = site_url('titulo/index?');
         $config['total_rows'] = $this->Titulo_model->get_all_titulos_count();
+        $config['attributes'] = array('class' => 'page-link');
         $this->pagination->initialize($config);
 
         $data['titulos'] = $this->Titulo_model->get_all_titulos($params);

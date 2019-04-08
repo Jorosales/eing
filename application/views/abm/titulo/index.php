@@ -4,6 +4,14 @@
 	</div>
 </div>
 
+<hr>
+
+<div class="clearfix">
+	<div class="float-right">
+	    <?php echo $this->pagination->create_links(); ?>    
+	</div>
+</div>
+
 <table class="table table-striped table-bordered">
     <tr>
 		<th>ID</th>
@@ -25,6 +33,9 @@
     </tr>
 	<?php } ?>
 </table>
-<div class="pull-right">
-    <?php echo $this->pagination->create_links(); ?>    
+
+<div class="clearfix">
+	<div class="float-right">
+	    <?php echo $this->pagination->create_links(); ?>    
+	</div>
 </div>

@@ -14,6 +14,9 @@ class Admin extends CI_Controller{
         $this->load->model('Ciclo_materia_model');
         $this->load->model('Titulo_model');
         $this->load->model('Orientaciones_model');
+        $this->load->model('Ciclo_model');
+        $this->load->model('Correlativa_model');
+        $this->load->model('Correlativas_tipo_model');
     } 
 
     /*
@@ -27,6 +30,9 @@ class Admin extends CI_Controller{
         $data['total_ciclo_materias'] = $this->Ciclo_materia_model->get_all_ciclo_materia_count();
         $data['total_orientaciones'] = $this->Orientaciones_model->get_all_orientaciones_count();
         $data['total_titulos'] = $this->Titulo_model->get_all_titulos_count();
+        $data['total_ciclos'] = $this->Ciclo_model->get_all_ciclos_count();
+        $data['total_correlativas'] = $this->Correlativa_model->get_all_correlativas_count();
+        $data['total_tipo_correlativas'] = $this->Correlativas_tipo_model->get_all_correlativas_tipo_count();
 
         $data['_view'] = 'admin/index';
         $this->load->view('layouts/main',$data);
