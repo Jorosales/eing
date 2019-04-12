@@ -10,14 +10,14 @@
 	<div class="form-group">
 		<label for="plan_pdf" class="col-md-4 control-label">Plan Pdf</label>
 		<div class="col-md-8">
-			<input type="text" name="plan_pdf" value="<?php echo $this->input->post('plan_pdf'); ?>" class="form-control" id="plan_pdf" />
+			<input type="file" name="plan_pdf" value="<?php echo $this->input->post('plan_pdf'); ?>" class="form-control" id="plan_pdf" />
 			<span class="text-danger"><?php echo form_error('plan_pdf');?></span>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="imagen" class="col-md-4 control-label">Imagen</label>
 		<div class="col-md-8">
-			<input type="text" name="imagen" value="<?php echo $this->input->post('imagen'); ?>" class="form-control" id="imagen" />
+			<input type="file" name="imagen" value="<?php echo $this->input->post('imagen'); ?>" class="form-control" id="imagen" />
 			<span class="text-danger"><?php echo form_error('imagen');?></span>
 		</div>
 	</div>
@@ -43,3 +43,9 @@
 	</div>
 
 <?php echo form_close(); ?>
+
+
+<script>
+    CKEDITOR.replace( 'presentacion' );
+    CKEDITOR.replace( 'perfil' );
+</script>

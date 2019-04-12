@@ -9,6 +9,7 @@
 		<script src="<?= base_url('js/popper.min.js') ?>"></script>
 		<script src="<?= base_url('js/bootstrap.min.js') ?>"></script>
 		<script src="<?= base_url('js/script.js') ?>"></script>
+		<script src="<?= base_url('js/ckeditor/ckeditor.js') ?>"></script>
 	</head>
 	
 		
