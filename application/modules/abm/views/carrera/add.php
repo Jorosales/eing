@@ -13,6 +13,7 @@
 		<div class="col-md-8">
 			<input type="file" name="plan_pdf" value="<?php echo $this->input->post('plan_pdf'); ?>" class="form-control" id="plan_pdf" />
 			<span class="text-danger"><?php echo form_error('plan_pdf');?></span>
+			<p class="help-block"><b>*El archivo debe estar en formato PDF.</b></p>
 		</div>
 	</div>
 	<div class="form-group">
@@ -20,6 +21,7 @@
 		<div class="col-md-8">
 			<input type="file" name="imagen" value="<?php echo $this->input->post('imagen'); ?>" class="form-control" id="imagen" />
 			<span class="text-danger"><?php echo form_error('imagen');?></span>
+			<p class="help-block"><b>*La imágen debe estar en formato JPG o PNG.</b></p>
 		</div>
 	</div>
 	<div class="form-group">

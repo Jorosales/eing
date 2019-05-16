@@ -67,4 +67,29 @@ class Template extends MX_Controller
         
         return $config;
 	}
+
+
+	public function subir_archivo($path, $type, $name)
+	{
+		$config['upload_path'] = $path;
+        $config['allowed_types'] = $type;
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        //$this->upload->do_upload($name);
+        //$archivo = $this->upload->data();
+
+        if (!$this->upload->do_upload($name))
+        {
+            $archivo = array('error' => $this->upload->display_errors());
+            //var_dump($archivo); exit();
+        }
+        else
+        {
+            $archivo = $this->upload->data();
+
+        }
+        
+        return $archivo;
+	}
 }

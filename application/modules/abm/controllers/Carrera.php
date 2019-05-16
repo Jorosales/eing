@@ -45,23 +45,23 @@ class Carrera extends MX_Controller {
             if($this->form_validation->run())     
             {   
                 
+                if(!empty($_FILES['plan_pdf']['name']))
+                    $pdf = $this->template->subir_archivo(PDFS_UPLOAD, '*', 'plan_pdf');
 
-                $config['upload_path'] = './uploads';
-                $config['allowed_types'] = '*';
-                $this->load->library('upload', $config);
-
-                $this->upload->do_upload('plan_pdf');
-                $pdf = $this->upload->data();
-                $this->upload->do_upload('imagen');
-                $imagen = $this->upload->data();
+                if(!empty($_FILES['imagen']['name']))
+                    $imagen = $this->template->subir_archivo(IMAGES_UPLOAD, 'jpg|png', 'imagen');
 
                 $params = array(
                     'nombre' => $this->input->post('nombre'),
-                    'plan_pdf' => 'uploads/'.$pdf['file_name'],
-                    'imagen' => 'uploads/'.$imagen['file_name'],
                     'presentacion' => $this->input->post('presentacion'),
                     'perfil' => $this->input->post('perfil'),
                 );
+
+                if(!empty($_FILES['plan_pdf']['name']))
+                        $params['plan_pdf']= $pdf['file_name'];
+
+                if(!empty($_FILES['imagen']['name']))
+                    $params['imagen']= $imagen['file_name'];
                 
                 $carrera_id = $this->Carrera_model->add_carrera($params);
                 redirect('abm/carrera/');
@@ -93,23 +93,12 @@ class Carrera extends MX_Controller {
                 $this->form_validation->set_rules('nombre','Nombre','required');
                 
                 if($this->form_validation->run())     
-                {   
-                    //var_dump($_FILES['plan_pdf']);
-                    $config['upload_path'] = CARRERAS_UPLOAD;
-                    $config['allowed_types'] = '*';
-                    $this->load->library('upload', $config);
-                    
+                {                       
                     if(!empty($_FILES['plan_pdf']['name']))
-                    {   
-                        $this->upload->do_upload('plan_pdf');
-                        $pdf = $this->upload->data();
-                    }
+                        $pdf = $this->template->subir_archivo(PDFS_UPLOAD, 'pdf', 'plan_pdf');
 
                     if(!empty($_FILES['imagen']['name']))
-                    {
-                        $this->upload->do_upload('imagen');
-                        $imagen = $this->upload->data();
-                    } 
+                        $imagen = $this->template->subir_archivo(IMAGES_UPLOAD, 'jpg|png', 'imagen');
 
                     $params = array(
                         'nombre' => $this->input->post('nombre'),
@@ -117,23 +106,25 @@ class Carrera extends MX_Controller {
                         'perfil' => $this->input->post('perfil'),
                     );
 
-                    if(!empty($_FILES['plan_pdf']['name']))
-                    {
-                        $params['plan_pdf']= $pdf['file_name'];
-                    }
+                    if(!empty($_FILES['plan_pdf']['name']) && !isset($pdf['error']))
+                        $params['plan_pdf'] = $pdf['file_name'];
 
-                    if(!empty($_FILES['imagen']['name']))
-                    {
+                    if(!empty($_FILES['imagen']['name']) && !isset($imagen['error']))
                         $params['imagen']= $imagen['file_name'];
-                    }   
-
-                    $this->Carrera_model->update_carrera($id,$params);            
-                    redirect('abm/carrera/');
+                   
+                
+                    if (isset($imagen['error']) || isset($pdf['error'])){         
+                        redirect($this->uri->uri_string());
+                    }else{
+                        $params['imagen']= $imagen['file_name'];
+                        $this->Carrera_model->update_carrera($id,$params);            
+                        redirect('abm/carrera/');    
+                    }
+                    
                 }
                 else
                 {
                     $data['user'] = $this->ion_auth->user()->row();
-
                     $this->template->cargar_vista('abm/carrera/edit', $data);
                 }
             }

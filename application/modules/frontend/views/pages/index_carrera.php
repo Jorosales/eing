@@ -5,7 +5,7 @@
 					<a href="<?= base_url("/carrera/".$row->id) ?>">
 						<div class="card" style="width: 20rem; border-radius: 20px;">
 							<?php if ($row->imagen <> ''){ ?>
-								<img class="card-img-top" style="border-radius: 20px;" src="<?= base_url(CARRERAS_UPLOAD.$row->imagen) ?>" alt="<?= $row->nombre?>">
+								<img class="card-img-top" style="border-radius: 20px;" src="<?= base_url(IMAGES_UPLOAD.$row->imagen) ?>" alt="<?= $row->nombre?>">
 							<?php }else { ?>
 								<img class="card-img-top" src="<?= base_url('assets/images/default.jpg') ?>" alt="<?= $row->nombre?>">
 							<?php } ?>

@@ -12,13 +12,30 @@
 			<div class="col-md-8">
 				<input type="file" name="plan_pdf" value="<?php echo ($this->input->post('plan_pdf') ? $this->input->post('plan_pdf') : $carrera['plan_pdf']); ?>" class="form-control" id="plan_pdf" />
 				<span class="text-danger"><?php echo form_error('plan_pdf');?></span>
+				 
+				<?php if($carrera['plan_pdf'] != '') echo "<a target='_blank' href='".base_url(PDFS_UPLOAD.$carrera['plan_pdf'])."'/>"; ?>
+						<p class="help-block"><?php echo ($carrera['plan_pdf'] ? $carrera['plan_pdf'] : '<b>* El archivo debe estar en formato PDF.</b>'); ?></p>
+				<?php if($carrera['plan_pdf'] != '') echo "</a>"; ?>
 			</div>
 	</div>
 	<div class="form-group">
-			<label for="imagen" class="col-md-2 control-label">Imagen</label>
-			<div class="col-md-8">
+			<label for="imagen" class="col-md-2 control-label">Imágen</label>
+			<div class="col-md-6">
 				<input type="file" name="imagen" value="<?php echo ($this->input->post('imagen') ? $this->input->post('imagen') : $carrera['imagen']); ?>" class="form-control" id="imagen" />
-					<span class="text-danger"><?php echo form_error('imagen');?></span>
+				<p class="help-block"> <?php echo ($carrera['imagen'] ? '' : '<b>* La imágen debe estar en formato JPG o PNG.</b>'); ?> </p>
+					
+			</div>
+			<div class="col-md-3">
+				<span class="text-danger"><?php echo form_error('imagen');?></span>
+				
+				<?php if($carrera['imagen'] != '') echo "<a target='_blank' href='".base_url(IMAGES_UPLOAD.$carrera['imagen'])."'/>"; ?>
+					
+					<img style="height: 140px; width: 140px;" src="<?=base_url(IMAGES_UPLOAD.$carrera['imagen']); ?>" alt="..." class="img-thumbnail">
+					
+					<p class="help-block"><?php echo ($carrera['imagen'] != '' ? $carrera['imagen'] : 'SIN IMAGEN'); ?></p>
+				
+				<?php if($carrera['imagen'] != '') echo "</a>"; ?>
+
 			</div>
 	</div>
 	<div class="form-group">

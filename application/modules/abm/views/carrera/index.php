@@ -28,7 +28,7 @@
 		<td><?php echo $c['nombre']; ?></td>
 		<td><?php echo $c['plan_pdf']; ?></td>
 		<td>
-			<img style="height: 140px; width: 140px;" src="<?=base_url(CARRERAS_UPLOAD.$c['imagen']); ?>" alt="..." class="img-thumbnail">
+			<img style="height: 140px; width: 140px;" src="<?=base_url(IMAGES_UPLOAD.$c['imagen']); ?>" alt="..." class="img-thumbnail">
 		</td>
 		<td>
             <a href="<?php echo site_url('abm/carrera/edit/'.$c['id']); ?>" class="btn btn-info btn-xs">Editar</a> 
