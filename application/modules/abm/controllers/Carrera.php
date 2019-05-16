@@ -149,6 +149,81 @@ class Carrera extends MX_Controller {
         else
             show_error('The carrera you are trying to delete does not exist.');
     }
+
+
+    public function activate($id, $code = FALSE)
+	{
+		if ($code !== FALSE)
+		{
+			$activation = $this->ion_auth->activate($id, $code);
+		}
+		else if ($this->ion_auth->is_admin())
+		{
+			$activation = $this->ion_auth->activate($id);
+		}
+
+		if ($activation)
+		{
+			// redirect them to the auth page
+			$this->session->set_flashdata('message', $this->ion_auth->messages());
+			redirect("abm/carrera", 'refresh');
+		}
+		else
+		{
+			// redirect them to the forgot password page
+			$this->session->set_flashdata('message', $this->ion_auth->errors());
+			redirect("auth/forgot_password", 'refresh');
+		}
+	}
+
+
+    public function deactivate($id = NULL)
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			// redirect them to the home page because they must be an administrator to view this
+			return show_error('You must be an administrator to view this page.');
+		}
+
+        $id = (int)$id;
+
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('confirm', $this->lang->line('deactivate_validation_confirm_label'), 'required');
+		$this->form_validation->set_rules('id', $this->lang->line('deactivate_validation_user_id_label'), 'required|alpha_numeric');
+
+		if ($this->form_validation->run() === FALSE)
+		{
+			// insert csrf check
+			//$this->data['csrf'] = $this->_get_csrf_nonce();
+			//$this->data['user'] = $this->ion_auth->user($id)->row();
+
+            $data['carrera'] = $this->Carrera_model->get_carrera($id);
+            $data['user'] = $this->ion_auth->user()->row();
+            $this->template->cargar_vista('abm/carrera/deactivate_carrera', $data);
+		}
+		else
+		{
+			// do we really want to deactivate?
+			if ($this->input->post('confirm') == 'yes')
+			{
+				// do we have a valid request?
+				if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id'))
+				{
+					return show_error($this->lang->line('error_csrf'));
+				}
+
+				// do we have the right userlevel?
+				if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin())
+				{
+					$this->ion_auth->deactivate($id);
+				}
+			}
+
+			// redirect them back to the auth page
+			redirect('abm/carrera/', 'refresh');
+		}
+	}
+
     
 }
 

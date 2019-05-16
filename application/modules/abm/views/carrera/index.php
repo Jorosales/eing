@@ -19,6 +19,7 @@
 		<th>Nombre</th>
 		<th>Plan Pdf</th>
 		<th>Imagen</th>
+		<th>Activo</th>
 		<th>Acciones</th>
     </tr>
 
@@ -30,6 +31,8 @@
 		<td>
 			<img style="height: 140px; width: 140px;" src="<?=base_url(IMAGES_UPLOAD.$c['imagen']); ?>" alt="..." class="img-thumbnail">
 		</td>
+		<?php if($c['activo'] == 1) { echo '<td><a href="http://localhost/eing/abm/carrera/deactivate/'.$c['id'].'" class="btn btn-success btn-xs">Activo</a></td>'; }
+			else { echo '<td><a href="http://localhost/eing/abm/carrera/activate/'.$c['id'].'" class="btn btn-danger btn-xs">Inactivo</a></td>'; } ?>
 		<td>
             <a href="<?php echo site_url('abm/carrera/edit/'.$c['id']); ?>" class="btn btn-info btn-xs">Editar</a> 
             <a href="<?php echo site_url('abm/carrera/remove/'.$c['id']); ?>" class="btn btn-danger btn-xs">Eliminar</a>
