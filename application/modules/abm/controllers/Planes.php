@@ -110,5 +110,61 @@ class Planes extends MX_Controller{
         else
             show_error('The plane you are trying to delete does not exist.');
     }
+
+    public function activate($id, $code = FALSE)
+    {
+        if ($this->ion_auth->is_admin())
+        {
+            $params['vigente']= true;
+            $this->Planes_model->change_status($id, $params);
+        }
+
+        redirect('abm/planes/', 'refresh');
+    }
+
+
+    public function deactivate($id = NULL)
+    {
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+        {
+            // redirect them to the home page because they must be an administrator to view this
+            return show_error('You must be an administrator to view this page.');
+        }
+
+        $id = (int)$id;
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('confirm', $this->lang->line('deactivate_validation_confirm_label'), 'required');
+        $this->form_validation->set_rules('id', $this->lang->line('deactivate_validation_user_id_label'), 'required|alpha_numeric');
+
+        if ($this->form_validation->run() === FALSE)
+        {
+            $data['planes'] = $this->Planes_model->get_planes($id);
+            $data['user'] = $this->ion_auth->user()->row();
+            $this->template->cargar_vista('abm/planes/deactivate_plan', $data);
+        }
+        else
+        {
+            // do we really want to deactivate?
+            if ($this->input->post('confirm') == 'yes')
+            {
+                // do we have a valid request?
+                if ($id != $this->input->post('id'))
+                {
+                    return show_error($this->lang->line('error_csrf'));
+                }
+
+                // do we have the right userlevel?
+                if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin())
+                {
+                    $params['vigente']= false;
+                    $this->Planes_model->change_status($id, $params);
+                }
+            }
+
+            // redirect them back to the auth page
+            redirect('abm/planes/', 'refresh');
+        }
+    }
     
 }

@@ -153,27 +153,13 @@ class Carrera extends MX_Controller {
 
     public function activate($id, $code = FALSE)
 	{
-		if ($code !== FALSE)
+		if ($this->ion_auth->is_admin())
 		{
-			$activation = $this->ion_auth->activate($id, $code);
-		}
-		else if ($this->ion_auth->is_admin())
-		{
-			$activation = $this->ion_auth->activate($id);
+            $params['activo']= true;
+            $this->Carrera_model->change_status($id, $params);
 		}
 
-		if ($activation)
-		{
-			// redirect them to the auth page
-			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("abm/carrera", 'refresh');
-		}
-		else
-		{
-			// redirect them to the forgot password page
-			$this->session->set_flashdata('message', $this->ion_auth->errors());
-			redirect("auth/forgot_password", 'refresh');
-		}
+		redirect('abm/carrera/', 'refresh');
 	}
 
 
@@ -193,11 +179,7 @@ class Carrera extends MX_Controller {
 
 		if ($this->form_validation->run() === FALSE)
 		{
-			// insert csrf check
-			//$this->data['csrf'] = $this->_get_csrf_nonce();
-			//$this->data['user'] = $this->ion_auth->user($id)->row();
-
-            $data['carrera'] = $this->Carrera_model->get_carrera($id);
+			$data['carrera'] = $this->Carrera_model->get_carrera($id);
             $data['user'] = $this->ion_auth->user()->row();
             $this->template->cargar_vista('abm/carrera/deactivate_carrera', $data);
 		}
@@ -207,7 +189,7 @@ class Carrera extends MX_Controller {
 			if ($this->input->post('confirm') == 'yes')
 			{
 				// do we have a valid request?
-				if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id'))
+				if ($id != $this->input->post('id'))
 				{
 					return show_error($this->lang->line('error_csrf'));
 				}
@@ -215,7 +197,8 @@ class Carrera extends MX_Controller {
 				// do we have the right userlevel?
 				if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin())
 				{
-					$this->ion_auth->deactivate($id);
+                    $params['activo']= false;
+					$this->Carrera_model->change_status($id, $params);
 				}
 			}
 

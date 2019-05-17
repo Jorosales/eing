@@ -55,6 +55,15 @@ class Carrera_model  extends CI_Model  {
         return $this->db->delete('carrera',array('id'=>$id));
     }	
 
+    /*
+     * function to change status carrera
+     */
+    function change_status($id, $params)
+    {
+        $this->db->where('id',$id);
+        return $this->db->update('carrera',$params);
+    }   
+
 }
 
 ?>

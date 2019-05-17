@@ -23,7 +23,7 @@ class Carrera_model  extends CI_Model  {
 				INNER JOIN carrera ca ON ca.id = p.id_carrera
 				INNER JOIN regimen r ON r.id = cm.id_regimen
 				INNER JOIN materias_tipo mt ON mt.id = m.id_tipo
-				WHERE ca.id = '. $idCarrera .' AND ISNULL(c.id_orientacion)
+				WHERE ca.id = '. $idCarrera .' AND ISNULL(c.id_orientacion) AND p.vigente = 1
 				ORDER BY m.id, cm.anio, cm.id_regimen');
 		return $query->result();
 	}

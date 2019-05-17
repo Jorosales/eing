@@ -67,4 +67,10 @@ class Planes_model extends CI_Model
     {
         return $this->db->delete('planes',array('id'=>$id));
     }
+
+    function change_status($id, $params)
+    {
+        $this->db->where('id',$id);
+        return $this->db->update('planes',$params);
+    } 
 }
