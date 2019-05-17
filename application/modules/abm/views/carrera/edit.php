@@ -1,3 +1,8 @@
+<?php if(isset($alerta))  {  
+	echo $alerta;
+	} 
+?>
+	
 <?php echo form_open_multipart('abm/carrera/edit/'.$carrera['id'],array("class"=>"form-horizontal")); ?>
 
 	<div class="form-group">

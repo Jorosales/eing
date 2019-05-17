@@ -100,25 +100,36 @@ class Carrera extends MX_Controller {
                     if(!empty($_FILES['imagen']['name']))
                         $imagen = $this->template->subir_archivo(IMAGES_UPLOAD, 'jpg|png', 'imagen');
 
-                    $params = array(
+                    $update = array(
                         'nombre' => $this->input->post('nombre'),
                         'presentacion' => $this->input->post('presentacion'),
                         'perfil' => $this->input->post('perfil'),
                     );
 
                     if(!empty($_FILES['plan_pdf']['name']) && !isset($pdf['error']))
-                        $params['plan_pdf'] = $pdf['file_name'];
+                        $update['plan_pdf'] = $pdf['file_name'];
 
                     if(!empty($_FILES['imagen']['name']) && !isset($imagen['error']))
-                        $params['imagen']= $imagen['file_name'];
+                        $update['imagen']= $imagen['file_name'];
                    
-                
-                    if (isset($imagen['error']) || isset($pdf['error'])){         
-                        redirect($this->uri->uri_string());
+                    //echo ('imagen: '.isset($imagen['error']) .'  pdf: '. isset($pdf['error'])); exit();     
+                    //var_dump($pdf); exit();
+
+                    if (isset($imagen['error']) || isset($pdf['error'])){
+                        $data['alerta'] = $this->template->cargar_alerta('danger', 'Error de formato', 'El archivo seleccionado no corresponde con el formato.');
+                        $this->template->cargar_vista('abm/carrera/edit', $data);
                     }else{
-                        $params['imagen']= $imagen['file_name'];
-                        $this->Carrera_model->update_carrera($id,$params);            
-                        redirect('abm/carrera/');    
+                        //$update['imagen']= $imagen['file_name'];
+                        $this->Carrera_model->update_carrera($id,$update);
+                        $data['alerta'] = $this->template->cargar_alerta('success', 'Carrera guardada', 'La carrera se actualizo correctamente.');
+                        
+                        $params = $this->template->get_params();
+                        $config = $this->template->get_config('abm/carrera/index?', $this->Carrera_model->get_all_carrera_count());
+                        $this->pagination->initialize($config);
+
+                        $data['carrera'] = $this->Carrera_model->get_all_carrera($params);
+
+                        $this->template->cargar_vista('abm/carrera/index', $data);    
                     }
                     
                 }

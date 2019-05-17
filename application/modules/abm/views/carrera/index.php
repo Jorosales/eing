@@ -1,3 +1,7 @@
+<?php if(isset($alerta))  {  
+	echo $alerta;
+	} 
+?>
 
 <div class="clearfix">
 	<div class="float-right">

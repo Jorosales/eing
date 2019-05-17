@@ -76,20 +76,24 @@ class Template extends MX_Controller
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
 
-        //$this->upload->do_upload($name);
-        //$archivo = $this->upload->data();
-
         if (!$this->upload->do_upload($name))
         {
             $archivo = array('error' => $this->upload->display_errors());
-            //var_dump($archivo); exit();
         }
         else
         {
             $archivo = $this->upload->data();
-
         }
         
         return $archivo;
+	}
+
+	public function cargar_alerta($tipo, $titulo, $mensaje)
+	{
+		$data['titulo'] = $titulo;
+		$data['tipo'] = $tipo;
+		$data['mensaje'] = $mensaje;
+
+		return $this->load->view('../../abm/views/layouts/alerta',$data, true);
 	}
 }
