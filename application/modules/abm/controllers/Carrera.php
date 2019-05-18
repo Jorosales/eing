@@ -112,16 +112,13 @@ class Carrera extends MX_Controller {
                     if(!empty($_FILES['imagen']['name']) && !isset($imagen['error']))
                         $update['imagen']= $imagen['file_name'];
                    
-                    //echo ('imagen: '.isset($imagen['error']) .'  pdf: '. isset($pdf['error'])); exit();     
-                    //var_dump($pdf); exit();
 
                     if (isset($imagen['error']) || isset($pdf['error'])){
                         $data['alerta'] = $this->template->cargar_alerta('danger', 'Error de formato', 'El archivo seleccionado no corresponde con el formato.');
                         $this->template->cargar_vista('abm/carrera/edit', $data);
                     }else{
-                        //$update['imagen']= $imagen['file_name'];
                         $this->Carrera_model->update_carrera($id,$update);
-                        $data['alerta'] = $this->template->cargar_alerta('success', 'Carrera guardada', 'La carrera se actualizo correctamente.');
+                        $data['alerta'] = $this->template->cargar_alerta('success', 'Datos actualizados', 'La carrera se actualizo correctamente.');
                         
                         $params = $this->template->get_params();
                         $config = $this->template->get_config('abm/carrera/index?', $this->Carrera_model->get_all_carrera_count());

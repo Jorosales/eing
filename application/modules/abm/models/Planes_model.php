@@ -31,7 +31,7 @@ class Planes_model extends CI_Model
     {
         $query = "SELECT p.*, c.nombre as carrera
                   FROM planes p
-                  INNER JOIN carrera c on p.id_carrera = c.id
+                  LEFT JOIN carrera c on p.id_carrera = c.id
                   ORDER BY id desc ";
 
         if(isset($params) && !empty($params))
@@ -73,4 +73,14 @@ class Planes_model extends CI_Model
         $this->db->where('id',$id);
         return $this->db->update('planes',$params);
     } 
+
+    function existe_plan_carrera($plan)
+    {
+        $query = $this->db->query('
+            SELECT COUNT(id) as cantidad
+            FROM planes
+            WHERE id_carrera = (SELECT id_carrera FROM planes WHERE id = '.$plan.') AND vigente = 1'
+        );
+          return $query->result();
+    }
 }

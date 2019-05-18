@@ -2,7 +2,6 @@
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     
     <h4>
-        <?php //echo ($tipo == 'danger') ? '<i class="icon fa fa-ban">' : '<i class="icon fa fa-'.$tipo.'">' ?>
         <?php switch($tipo){
             case 'danger': echo '<i class="icon fa fa-ban">'; break;
             case 'success': echo '<i class="icon fa fa-info">'; break;

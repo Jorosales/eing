@@ -115,11 +115,24 @@ class Planes extends MX_Controller{
     {
         if ($this->ion_auth->is_admin())
         {
-            $params['vigente']= true;
-            $this->Planes_model->change_status($id, $params);
-        }
+            $cantidad = $this->Planes_model->existe_plan_carrera($id);
+            if($cantidad[0]->cantidad == 1){
+                $data['alerta'] = $this->template->cargar_alerta('danger', 'Error', 'El plan no se pudo activar, debido a que la carrera ya posee un plan activo.');
+            }else{
+                $update['vigente']= true;
+                $this->Planes_model->change_status($id, $update);
+                $data['alerta'] = $this->template->cargar_alerta('success', 'Plan Activo', 'El plan se actualizó correctamente.');
+            }
 
-        redirect('abm/planes/', 'refresh');
+            $params = $this->template->get_params();
+            $config = $this->template->get_config('abm/planes/index?', $this->Planes_model->get_all_planes_count());
+            $this->pagination->initialize($config);
+
+            $data['planes'] = $this->Planes_model->get_all_planes($params);
+            $data['user'] = $this->ion_auth->user()->row();
+            
+            $this->template->cargar_vista('abm/planes/index', $data);   
+        }
     }
 
 
