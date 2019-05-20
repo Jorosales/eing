@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 17-05-2019 a las 02:39:54
+-- Tiempo de generación: 20-05-2019 a las 20:03:21
 -- Versión del servidor: 5.7.23
 -- Versión de PHP: 7.2.10
 
@@ -746,7 +746,15 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
   `login` varchar(100) NOT NULL,
   `time` int(11) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `login_attempts`
+--
+
+INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
+(7, '::1', 'amit@amit.com', 1558374107),
+(8, '::1', 'sergio', 1558374210);
 
 -- --------------------------------------------------------
 
@@ -761,7 +769,7 @@ CREATE TABLE IF NOT EXISTS `materias` (
   `id_tipo` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `tipo_id` (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
 
 --
 -- Volcado de datos para la tabla `materias`
@@ -827,7 +835,7 @@ INSERT INTO `materias` (`id`, `nombre`, `id_tipo`) VALUES
 (57, 'Manejo de planilla de cálculo y base de datos', 3),
 (58, 'Manejo de planilla de cálculo y base de datos', 3),
 (59, 'materia 59', 1),
-(60, 'materia 60', 1);
+(61, '51632', 3);
 
 -- --------------------------------------------------------
 
@@ -1209,12 +1217,12 @@ INSERT INTO `planes` (`id`, `id_carrera`, `nombre`, `duracion`, `vigente`) VALUE
 (1, 1, '139/11', 5, 1),
 (2, 3, '123/12', 5, 1),
 (3, 4, '123', 3, 0),
-(4, 8, '123', 5, 0),
+(4, 5, '123', 5, 0),
 (5, 6, 'nuevo plansito', 6, 1),
-(6, 9, 'plan nuevito', 7, 0),
-(7, 10, 'plan', 7, 0),
+(6, 7, 'plan nuevito', 7, 0),
+(7, 16, 'plan', 7, 0),
 (8, 3, 'plan nuevitoiu', 5, 1),
-(9, 1, '1614', 5, 1);
+(9, 1, '1614', 5, 0);
 
 -- --------------------------------------------------------
 
@@ -1295,8 +1303,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'sergio', '$2y$08$mhfmoQX8kxDzkw/c6L.yFO2yAVrwkSOAaXKyTRNS1QqOfRptvrUne', '', 'admin@admin.com', NULL, NULL, NULL, 'gQYNjuDIYlghQ3cYUqHPM.', 1268889823, 1558050425, 1, 'Sergio', 'Arevalo', 'ADMIN', '0'),
-(2, '127.0.0.1', 'amit@amit.com', '$2y$08$aYvLMT5brXwAyik.L2CLweWN6/rtt7yOVDwU0bXpl0m9bc61UF/5e', NULL, 'amit@amit.com', NULL, 'dbh2E39uTZ5Ud9Tb.wO9ee37b9e7bb6f9ed71b6b', 1522911545, NULL, 1521634623, 1557694461, 1, 'Amit', 'Kumar', 'XYZ Tech', '9874563210');
+(1, '127.0.0.1', 'admin', '$2y$08$mhfmoQX8kxDzkw/c6L.yFO2yAVrwkSOAaXKyTRNS1QqOfRptvrUne', '', 'admin@admin.com', NULL, NULL, NULL, 'gQYNjuDIYlghQ3cYUqHPM.', 1268889823, 1558374216, 1, 'Sergio', 'Arevalo', 'ADMIN', '0'),
+(2, '127.0.0.1', 'usuario', '$2y$08$tvPA9a8wbhjElKzrVx4WbOOhCwEUZZFWpcA2gk4cGlBI4r9OhMe3y', NULL, 'usuario@usuario.com', NULL, 'dbh2E39uTZ5Ud9Tb.wO9ee37b9e7bb6f9ed71b6b', 1522911545, NULL, 1521634623, 1558374177, 1, 'Amit', 'Kumar', '', '');
 
 -- --------------------------------------------------------
 
@@ -1313,7 +1321,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
   UNIQUE KEY `uc_users_groups` (`user_id`,`group_id`),
   KEY `fk_users_groups_users1_idx` (`user_id`),
   KEY `fk_users_groups_groups1_idx` (`group_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `users_groups`
@@ -1322,7 +1330,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (12, 1, 1),
 (13, 1, 2),
-(14, 2, 2);
+(18, 2, 2);
 
 --
 -- Restricciones para tablas volcadas
