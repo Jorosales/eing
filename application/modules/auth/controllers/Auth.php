@@ -602,8 +602,9 @@ class Auth extends MX_Controller
 		// validate form input
 		$this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'trim|required');
 		$this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'trim|required');
-		$this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'trim|required');
-		$this->form_validation->set_rules('company', $this->lang->line('edit_user_validation_company_label'), 'trim|required');
+		$this->form_validation->set_rules('email', $this->lang->line('edit_user_validation_email_label'), 'trim|required');
+		$this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'trim');
+		$this->form_validation->set_rules('company', $this->lang->line('edit_user_validation_company_label'), 'trim');
 
 		if (isset($_POST) && !empty($_POST))
 		{
@@ -626,6 +627,7 @@ class Auth extends MX_Controller
 					'username' => $this->input->post('username'),
 					'first_name' => $this->input->post('first_name'),
 					'last_name' => $this->input->post('last_name'),
+					'email' => $this->input->post('email'),
 					'company' => $this->input->post('company'),
 					'phone' => $this->input->post('phone'),
 				);
@@ -720,6 +722,13 @@ class Auth extends MX_Controller
 			'class' => 'form-control',
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('last_name', $user->last_name),
+		);
+		$this->data['email'] = array(
+			'name'  => 'email',
+			'id'    => 'email',
+			'class' => 'form-control',
+			'type'  => 'email',
+			'value' => $this->form_validation->set_value('email', $user->email),
 		);
 		$this->data['company'] = array(
 			'name'  => 'company',
