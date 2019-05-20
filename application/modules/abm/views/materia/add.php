@@ -1,4 +1,4 @@
-<?php echo form_open('materia/add',array("class"=>"form-horizontal")); ?>
+<?php echo form_open('abm/materia/add',array("class"=>"form-horizontal")); ?>
 
 	<div class="form-group">
 		<label for="id_tipo" class="col-md-4 control-label"><span class="text-danger">*</span>Materias Tipo</label>

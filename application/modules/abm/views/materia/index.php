@@ -1,6 +1,11 @@
+<?php if(isset($alerta))  {  
+	echo $alerta;
+	} 
+?>
+
 <div class="clearfix">
 	<div class="float-right">
-		<a href="<?php echo site_url('materia/add'); ?>" class="btn btn-success">Nueva Materia</a> 
+		<a href="<?php echo site_url('abm/materia/add'); ?>" class="btn btn-success">Nueva Materia</a> 
 	</div>
 </div>
 
@@ -24,8 +29,8 @@
 		<td><?php echo $m['nombre']; ?></td>
 		<td><?php echo $m['tipo']; ?></td>
 		<td>
-            <a href="<?php echo site_url('materia/edit/'.$m['id']); ?>" class="btn btn-info btn-xs">Editar</a> 
-            <a href="<?php echo site_url('materia/remove/'.$m['id']); ?>" class="btn btn-danger btn-xs">Eliminar</a>
+            <a href="<?php echo site_url('abm/materia/edit/'.$m['id']); ?>" class="btn btn-info btn-xs">Editar</a> 
+            <a href="<?php echo site_url('abm/materia/remove/'.$m['id']); ?>" class="btn btn-danger btn-xs">Eliminar</a>
         </td>
     </tr>
 	<?php } ?>

@@ -1,56 +1,33 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Materia extends CI_Controller {
+class Materia extends MX_Controller {
 
 	function __construct(){
 		parent::__construct();
-        $this->load->helper('url');
-		$this->load->model('Materia_model');
+        $this->load->module('template');
+        $this->load->model('Materia_model');
+        $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
+        $this->load->library(array('ion_auth', 'form_validation'));
+        $this->load->helper(array('language'));
+        $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
     }
 
-
-	public function verMateria($idMateria)
-	{
-		$this->load->view('head');
-		$this->load->view('nav');
-		
-		//Se obtienen datos del modelo
-		$data['materia'] = $this->Materia_model->getMateria($idMateria);
-		
-		if($data['materia'][0]->id_tipo == '2')
-		{
-			$data['optativas'] = $this->Materia_model->getOptativas($idMateria);
-		}
-		else
-		{
-			$data['pr'] = $this->Materia_model->getProgramaResumido($idMateria);
-			$data['equipo'] = $this->Materia_model->getEquipo($idMateria);
-
-			$data['regulCursar'] = $this->Materia_model->getCorrelatividades($idMateria, 1);
-			$data['aprobadaCursar'] = $this->Materia_model->getCorrelatividades($idMateria, 2);
-			$data['aprobadaRendir'] = $this->Materia_model->getCorrelatividades($idMateria, 3);	
-		}
-
-		//Se cargan datos en la vista
-		$this->load->view('pages/materiaView', $data);
-		$this->load->view('footer');
-	}
-
-	function index()
+    function index()
     {
-        $params['limit'] = RECORDS_PER_PAGE; 
-        $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
-        
-        $config = $this->config->item('pagination');
-        $config['base_url'] = site_url('materia/index?');
-        $config['total_rows'] = $this->Materia_model->get_all_materias_count();
-        $config['attributes'] = array('class' => 'page-link');
-        $this->pagination->initialize($config);
+        if (!$this->ion_auth->logged_in())
+        {
+            redirect('login', 'refresh');
+        }else {
+            $params = $this->template->get_params();
+            $config = $this->template->get_config('abm/materia/index?', $this->Materia_model->get_all_materias_count());
+            $this->pagination->initialize($config);
 
-        $data['materias'] = $this->Materia_model->get_all_materias($params);
-        
-        $data['_view'] = 'abm/materia/index';
-        $this->load->view('layouts/main',$data);
+            $data['materias'] = $this->Materia_model->get_all_materias($params);
+            $data['user'] = $this->ion_auth->user()->row();
+
+            $this->template->cargar_vista('abm/materia/index', $data);
+        }
+
     }
 
     /*
@@ -71,15 +48,15 @@ class Materia extends CI_Controller {
             );
             
             $materia_id = $this->Materia_model->add_materia($params);
-            redirect('materia/index');
+            redirect('abm/materia/index');
         }
         else
         {
 			$this->load->model('Materias_tipo_model');
 			$data['all_materias_tipo'] = $this->Materias_tipo_model->get_all_materias_tipo();
-            
-            $data['_view'] = 'abm/materia/add';
-            $this->load->view('layouts/main',$data);
+            $data['user'] = $this->ion_auth->user()->row();
+        
+            $this->template->cargar_vista('abm/materia/add', $data);
         }
     }  
 
@@ -106,15 +83,15 @@ class Materia extends CI_Controller {
                 );
 
                 $this->Materia_model->update_materia($id,$params);            
-                redirect('materia/index');
+                redirect('abm/materia/index');
             }
             else
             {
 				$this->load->model('Materias_tipo_model');
 				$data['all_materias_tipo'] = $this->Materias_tipo_model->get_all_materias_tipo();
-
-                $data['_view'] = 'abm/materia/edit';
-                $this->load->view('layouts/main',$data);
+                $data['user'] = $this->ion_auth->user()->row();
+        
+                $this->template->cargar_vista('abm/materia/edit', $data);
             }
         }
         else
@@ -132,7 +109,7 @@ class Materia extends CI_Controller {
         if(isset($materia['id']))
         {
             $this->Materia_model->delete_materia($id);
-            redirect('materia/index');
+            redirect('abm/materia/index');
         }
         else
             show_error('The materia you are trying to delete does not exist.');
