@@ -8,7 +8,7 @@
 		<!-- SlimScroll -->
 		<script src="<?php echo base_url(); ?>assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 		<!-- FastClick -->
-		<script src="<?php echo base_url(); ?>assets/plugins/fastclick/fastclick.js"></script>
+		<script src="<?php echo base_url(); ?>assets/plugins/fastclick/fastclick.min.js"></script>
 		<!-- AdminLTE App -->
 		<script src="<?php echo base_url(); ?>assets/dist/js/app.min.js"></script>
 		<!-- iCheck -->
