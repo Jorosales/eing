@@ -3,19 +3,11 @@
 	} 
 ?>
 
-<div class="clearfix">
-	<div class="float-right">
-		<a href="<?php echo site_url('abm/carrera/add'); ?>" class="btn btn-success">Nueva Carrera</a> 
-	</div>
-</div>
+<?php echo $this->template->boton_nuevo('abm/carrera/add', 'Nueva Carrera'); ?>
 
 <hr>
 
-<div class="clearfix">
-	<div class="float-right">
-	    <?php echo $this->pagination->create_links(); ?>    
-	</div>
-</div>
+<?php echo $this->template->get_links(); ?>
 
 <table class="table table-striped table-bordered">
     <tr>
@@ -45,11 +37,7 @@
 	<?php } ?>			
 </table>
 
-<div class="clearfix">
-	<div class="float-right">
-	    <?php echo $this->pagination->create_links(); ?>    
-	</div>
-</div>
+<?php echo $this->template->get_links(); ?>
 
 <hr>
 

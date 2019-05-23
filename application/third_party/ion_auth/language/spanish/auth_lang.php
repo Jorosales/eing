@@ -162,3 +162,11 @@ $lang['email_forgot_password_link']       = 'Restablecer Tu Contraseña';
 // New Password Email
 $lang['email_new_password_heading']    = 'Nueva contraseña para %s';
 $lang['email_new_password_subheading'] = 'Tu contraseña ha sido restablecida a: %s';
+
+
+
+$lang['table_id_th']    = 'ID';
+$lang['table_name_th']    = 'Nombre';
+$lang['table_type_th']    = 'Tipo';
+$lang['table_actions_th']    = 'Acciones';
+

@@ -3,43 +3,60 @@
 	} 
 ?>
 
-<div class="clearfix">
-	<div class="float-right">
-		<a href="<?php echo site_url('abm/materia/add'); ?>" class="btn btn-success">Nueva Materia</a> 
-	</div>
-</div>
+<?php echo $this->template->boton_nuevo('abm/materia/add', 'Nueva Materia'); ?>
 
 <hr>
-<div class="clearfix">
-	<div class="float-right">
-	    <?php echo $this->pagination->create_links(); ?>    
+
+<?php echo $this->template->get_links(); ?>
+   
+
+<div class="col-xs-12">
+	<div class="box">
+
+		<div class="box-header">
+			<h3 class="box-title">Materias</h3>
+		</div>
+
+		<div class="box-body">
+			<table id="example2" class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th><?php echo lang('table_id_th');?></th>
+						<th><?php echo lang('table_name_th');?></th>
+						<th><?php echo lang('table_type_th');?></th>
+						<th colspan="2"><?php echo lang('table_actions_th');?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($materias as $m):?>
+					<tr>
+						<td><?php echo htmlspecialchars($m->id,ENT_QUOTES,'UTF-8');?></td>
+						<td><?php echo htmlspecialchars($m->nombre,ENT_QUOTES,'UTF-8');?></td>
+						<td><?php echo htmlspecialchars($m->tipo,ENT_QUOTES,'UTF-8');?></td>
+						<td><?php echo anchor("abm/materia/edit/".$m->id, '<span class="btn btn-primary btn-xs">Editar</span>') ;?>
+					 	<?php echo anchor("abm/materia/remove/".$m->id, '<span class="btn btn-danger btn-xs">Eliminar</span>') ;?></td>
+					 </tr>
+					 <?php endforeach;?>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th><?php echo lang('table_id_th');?></th>
+						<th><?php echo lang('table_name_th');?></th>
+						<th><?php echo lang('table_type_th');?></th>
+						<th colspan="2"><?php echo lang('table_actions_th');?></th>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+
 	</div>
+	<!-- /.box -->
 </div>
+<!-- /.col -->
 
-<table class="table table-striped table-bordered">
-    <tr>
-		<th>ID</th>
-		<th>Nombre</th>
-		<th>Tipo</th>
-		<th>Acciones</th>
-    </tr>
-	<?php foreach($materias as $m){ ?>
-    <tr>
-		<td><?php echo $m['id']; ?></td>
-		<td><?php echo $m['nombre']; ?></td>
-		<td><?php echo $m['tipo']; ?></td>
-		<td>
-            <a href="<?php echo site_url('abm/materia/edit/'.$m['id']); ?>" class="btn btn-info btn-xs">Editar</a> 
-            <a href="<?php echo site_url('abm/materia/remove/'.$m['id']); ?>" class="btn btn-danger btn-xs">Eliminar</a>
-        </td>
-    </tr>
-	<?php } ?>
-</table>
+<?php echo $this->template->get_links(); ?>
 
-<div class="clearfix">
-	<div class="float-right">
-	    <?php echo $this->pagination->create_links(); ?>    
-	</div>
-</div>
 
-<hr>
+
+	
+

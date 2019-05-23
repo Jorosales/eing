@@ -10,6 +10,7 @@ class Materia extends MX_Controller {
         $this->load->library(array('ion_auth', 'form_validation'));
         $this->load->helper(array('language'));
         $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
+        $this->lang->load('auth');
     }
 
     function index()
@@ -22,7 +23,7 @@ class Materia extends MX_Controller {
             $config = $this->template->get_config('abm/materia/index?', $this->Materia_model->get_all_materias_count());
             $this->pagination->initialize($config);
 
-            $data['materias'] = $this->Materia_model->get_all_materias($params);
+            $data['materias'] = $this->Materia_model->get_all_materias($params); 
             $data['user'] = $this->ion_auth->user()->row();
 
             $this->template->cargar_vista('abm/materia/index', $data);

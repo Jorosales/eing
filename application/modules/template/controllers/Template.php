@@ -46,10 +46,27 @@ class Template extends MX_Controller
             $data['_view'] = $vista;
         else
             $data['_view'] = 'sin-permiso';
-        $this->load->view('../../abm/views/layouts/main',$data);
+        $this->_render_page('../../abm/views/layouts/main', $data);
         $this->footer();
         $this->commonFooter();
 	}
+
+	public function _render_page($view, $data = NULL, $returnhtml = FALSE)//I think this makes more sense
+	{
+
+		$this->viewdata = (empty($data)) ? $this->data : $data;
+
+		$view_html = $this->load->view($view, $this->viewdata, $returnhtml);
+
+		// This will return html on 3rd argument being true
+		if ($returnhtml)
+		{
+			return $view_html;
+		}
+	}
+
+
+	//Links
 
 	public function get_params()
 	{
@@ -67,6 +84,19 @@ class Template extends MX_Controller
         
         return $config;
 	}
+
+	public function get_links()
+	{
+		$links = '<div class="clearfix">
+					<div class="float-right">
+					    '.$this->pagination->create_links().'    
+					</div>
+				</div>';
+        
+        return $links;
+	}
+
+	//Fin Links
 
 
 	public function subir_archivo($path, $type, $name)
@@ -93,7 +123,17 @@ class Template extends MX_Controller
 		$data['titulo'] = $titulo;
 		$data['tipo'] = $tipo;
 		$data['mensaje'] = $mensaje;
-
 		return $this->load->view('../../abm/views/layouts/alerta',$data, true);
 	}
+
+
+	public function boton_nuevo($url, $titulo)
+	{
+		$boton = '<div class="clearfix">
+					<div class="float-right">
+						<a href='.site_url($url).' class="btn btn-success">'.$titulo.'</a> 
+					</div>
+				</div>';
+		return $boton;
+	}	
 }

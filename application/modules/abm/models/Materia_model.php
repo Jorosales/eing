@@ -103,7 +103,7 @@ class Materia_model  extends CI_Model  {
         	$query.="LIMIT ".$params['limit']." OFFSET ".$params['offset']."";
         }
                 
-        return $this->db->query($query)->result_array();
+        return $this->db->query($query)->result();
     }
 
     function get_all_materias_en_ciclos($params = array())
