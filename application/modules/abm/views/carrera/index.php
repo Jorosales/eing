@@ -9,33 +9,52 @@
 
 <?php echo $this->template->get_links(); ?>
 
-<table class="table table-striped table-bordered">
-    <tr>
-		<th>ID</th>
-		<th>Nombre</th>
-		<th>Plan Pdf</th>
-		<th>Imagen</th>
-		<th>Estado</th>
-		<th>Acciones</th>
-    </tr>
+<div class="col-xs-12">
+	<div class="box">
 
-	<?php foreach($carrera as $c){ ?>
-    <tr>
-		<td><?php echo $c['id']; ?></td>
-		<td><?php echo $c['nombre']; ?></td>
-		<td><?php echo $c['plan_pdf']; ?></td>
-		<td>
-			<img style="height: 140px; width: 140px;" src="<?=base_url(IMAGES_UPLOAD.$c['imagen']); ?>" alt="..." class="img-thumbnail">
-		</td>
-		<?php if($c['activo'] == 1) { echo '<td><a href="'.site_url('abm/carrera/deactivate/'.$c['id']).'" class="btn btn-success btn-xs">Activo</a></td>'; }
-			else { echo '<td><a href="'.site_url('abm/carrera/activate/'.$c['id']).'" class="btn btn-danger btn-xs">Inactivo</a></td>'; } ?>
-		<td>
-            <a href="<?php echo site_url('abm/carrera/edit/'.$c['id']); ?>" class="btn btn-info btn-xs">Editar</a> 
-            <a href="<?php echo site_url('abm/carrera/remove/'.$c['id']); ?>" class="btn btn-danger btn-xs">Eliminar</a>
-	    </td>
-    </tr>
-	<?php } ?>			
-</table>
+		<div class="box-header">
+			<h3 class="box-title">Materias</h3>
+		</div>
+
+		<div class="box-body">
+			<table id="example2" class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th><?php echo lang('table_id_th');?></th>
+						<th><?php echo lang('table_name_th');?></th>
+						<th><?php echo lang('table_plan_pdf_th');?></th>
+						<th><?php echo lang('table_image_th');?></th>
+						<th colspan="2"><?php echo lang('table_actions_th');?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($carreras as $c):?>
+					<tr>
+						<td><?php echo htmlspecialchars($c->id,ENT_QUOTES,'UTF-8');?></td>
+						<td><?php echo htmlspecialchars($c->nombre,ENT_QUOTES,'UTF-8');?></td>
+						<td><?php echo htmlspecialchars($c->plan_pdf,ENT_QUOTES,'UTF-8');?></td>
+						<td><img style="height: 140px; width: 140px;" src="<?=base_url(IMAGES_UPLOAD.$c->imagen); ?>" alt="<?= $c->imagen; ?>" class="img-thumbnail"></td>
+						<td><?php echo anchor("abm/carrera/edit/".$c->id, '<span class="btn btn-primary btn-xs">Editar</span>') ;?>
+					 	<?php echo anchor("abm/carrera/remove/".$c->id, '<span class="btn btn-danger btn-xs">Eliminar</span>') ;?></td>
+					 </tr>
+					 <?php endforeach;?>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th><?php echo lang('table_id_th');?></th>
+						<th><?php echo lang('table_name_th');?></th>
+						<th><?php echo lang('table_plan_pdf_th');?></th>
+						<th><?php echo lang('table_image_th');?></th>
+						<th colspan="2"><?php echo lang('table_actions_th');?></th>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+
+	</div>
+	<!-- /.box -->
+</div>
+<!-- /.col -->
 
 <?php echo $this->template->get_links(); ?>
 

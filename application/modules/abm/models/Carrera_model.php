@@ -26,7 +26,7 @@ class Carrera_model  extends CI_Model  {
         {
             $this->db->limit($params['limit'], $params['offset']);
         }
-        return $this->db->get('carrera')->result_array();
+        return $this->db->get('carrera')->result();
     }
         
     /*

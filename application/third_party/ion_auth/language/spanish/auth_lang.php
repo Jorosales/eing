@@ -164,9 +164,20 @@ $lang['email_new_password_heading']    = 'Nueva contraseña para %s';
 $lang['email_new_password_subheading'] = 'Tu contraseña ha sido restablecida a: %s';
 
 
+//Titulos de tablas
 
+//Comunes
 $lang['table_id_th']    = 'ID';
 $lang['table_name_th']    = 'Nombre';
 $lang['table_type_th']    = 'Tipo';
 $lang['table_actions_th']    = 'Acciones';
+$lang['table_status_th']    = 'Estado';
+
+//Carreras
+$lang['table_plan_pdf_th']    = 'Plan PDF';
+$lang['table_image_th']    = 'Imágen';
+
+//Planes
+$lang['table_career_th']    = 'Carrera';
+$lang['table_duration_th']    = 'Duración';
 
