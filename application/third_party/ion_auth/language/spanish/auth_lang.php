@@ -181,3 +181,16 @@ $lang['table_image_th']    = 'Imágen';
 $lang['table_career_th']    = 'Carrera';
 $lang['table_duration_th']    = 'Duración';
 
+//Orientaciones
+$lang['table_plan_th']    = 'Plan';
+
+//Ciclo_materias
+$lang['table_cicle_th']    = 'Ciclo';
+$lang['table_course_th']    = 'Materia';
+$lang['table_regimen_th']    = 'Regimén';
+$lang['table_hours_th']    = 'Horas';
+$lang['table_total_hours_th']    = 'Horas Total';
+$lang['table_programa_th']    = 'programa';
+$lang['table_hours_th']    = 'Horas';
+$lang['table_year_th']    = 'Año';
+$lang['table_code_th']    = 'Código';
