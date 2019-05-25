@@ -172,6 +172,7 @@ $lang['table_name_th']    = 'Nombre';
 $lang['table_type_th']    = 'Tipo';
 $lang['table_actions_th']    = 'Acciones';
 $lang['table_status_th']    = 'Estado';
+$lang['table_orientation_th']    = 'Orientación';
 
 //Carreras
 $lang['table_plan_pdf_th']    = 'Plan PDF';
@@ -190,7 +191,7 @@ $lang['table_course_th']    = 'Materia';
 $lang['table_regimen_th']    = 'Regimén';
 $lang['table_hours_th']    = 'Horas';
 $lang['table_total_hours_th']    = 'Horas Total';
-$lang['table_programa_th']    = 'programa';
+$lang['table_programa_th']    = 'Programa';
 $lang['table_hours_th']    = 'Horas';
 $lang['table_year_th']    = 'Año';
 $lang['table_code_th']    = 'Código';

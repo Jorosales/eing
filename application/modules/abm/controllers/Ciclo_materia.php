@@ -64,7 +64,7 @@ class Ciclo_materia extends MX_Controller{
             );
             
             $ciclo_materia_id = $this->Ciclo_materia_model->add_ciclo_materia($params);
-            redirect('ciclo_materia/index');
+            redirect('abm/ciclo_materia/index');
         }
         else
         {
@@ -112,21 +112,16 @@ class Ciclo_materia extends MX_Controller{
                 );
 
                 $this->Ciclo_materia_model->update_ciclo_materia($id,$params);            
-                redirect('ciclo_materia/index');
+                redirect('abm/ciclo_materia/index');
             }
             else
             {
-				$this->load->model('Ciclo_model');
-				$data['all_ciclos'] = $this->Ciclo_model->get_all_ciclos();
+                $data['user'] = $this->ion_auth->user()->row();
+				$data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
+				$data['materias'] = $this->Materia_model->get_all_materias();
+				$data['regimenes'] = $this->Regimen_model->get_all_regimen();
 
-				$this->load->model('Materia_model');
-				$data['all_materias'] = $this->Materia_model->get_all_materias();
-
-				$this->load->model('Regimen_model');
-				$data['all_regimen'] = $this->Regimen_model->get_all_regimen();
-
-                $data['_view'] = 'abm/ciclo_materia/edit';
-                $this->load->view('layouts/main',$data);
+                $this->template->cargar_vista('abm/ciclo_materia/edit', $data);
             }
         }
         else
@@ -144,7 +139,7 @@ class Ciclo_materia extends MX_Controller{
         if(isset($ciclo_materia['id']))
         {
             $this->Ciclo_materia_model->delete_ciclo_materia($id);
-            redirect('ciclo_materia/index');
+            redirect('abm/ciclo_materia/index');
         }
         else
             show_error('El ciclo_materia que está tratando de eliminar no existe.');

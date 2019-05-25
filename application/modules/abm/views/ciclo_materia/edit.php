@@ -1,15 +1,15 @@
-<?php echo form_open('ciclo_materia/edit/'.$ciclo_materia['id'],array("class"=>"form-horizontal")); ?>
+<?php echo form_open_multipart('abm/ciclo_materia/edit/'.$ciclo_materia['id'],array("class"=>"form-horizontal")); ?>
 
 	<div class="form-group">
 		<label for="id_ciclo" class="col-md-4 control-label"><span class="text-danger">*</span>Ciclo</label>
 		<div class="col-md-8">
 			<select name="id_ciclo" class="form-control">
 				<?php 
-				foreach($all_ciclos as $ciclo)
+				foreach($ciclos as $ciclo)
 				{
-					$selected = ($ciclo['id'] == $ciclo_materia['id_ciclo']) ? ' selected="selected"' : "";
+					$selected = ($ciclo->id == $ciclo_materia['id_ciclo']) ? ' selected="selected"' : "";
 
-					echo '<option value="'.$ciclo['id'].'" '.$selected.'>'.$ciclo['nombre'].'</option>';
+					echo '<option value="'.$ciclo->id.'" '.$selected.'>'.$ciclo->nombre.'</option>';
 				} 
 				?>
 			</select>
@@ -21,11 +21,11 @@
 		<div class="col-md-8">
 			<select name="id_materia" class="form-control">
 				<?php 
-				foreach($all_materias as $materia)
+				foreach($materias as $materia)
 				{
-					$selected = ($materia['id'] == $ciclo_materia['id_materia']) ? ' selected="selected"' : "";
+					$selected = ($materia->id == $ciclo_materia['id_materia']) ? ' selected="selected"' : "";
 
-					echo '<option value="'.$materia['id'].'" '.$selected.'>'.$materia['id_ciclo'].' - '.$materia['nombre'].'</option>';
+					echo '<option value="'.$materia->id.'" '.$selected.'>'.$materia->id_ciclo.' - '.$materia->nombre.'</option>';
 				} 
 				?>
 			</select>
@@ -37,11 +37,11 @@
 		<div class="col-md-8">
 			<select name="id_regimen" class="form-control">
 				<?php 
-				foreach($all_regimen as $regiman)
+				foreach($regimenes as $regimen)
 				{
-					$selected = ($regiman['id'] == $ciclo_materia['id_regimen']) ? ' selected="selected"' : "";
+					$selected = ($regimen->id == $ciclo_materia['id_regimen']) ? ' selected="selected"' : "";
 
-					echo '<option value="'.$regiman['id'].'" '.$selected.'>'.$regiman['nombre'].'</option>';
+					echo '<option value="'.$regimen->id.'" '.$selected.'>'.$regimen->nombre.'</option>';
 				} 
 				?>
 			</select>

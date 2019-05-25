@@ -1,15 +1,15 @@
-<?php echo form_open('ciclo/edit/'.$ciclo['id'],array("class"=>"form-horizontal")); ?>
+<?php echo form_open('abm/ciclo/edit/'.$ciclo['id'],array("class"=>"form-horizontal")); ?>
 
 	<div class="form-group">
 		<label for="id_plan" class="col-md-4 control-label"><span class="text-danger">*</span>Plan</label>
 		<div class="col-md-8">
 			<select name="id_plan" class="form-control">
 				<?php 
-				foreach($all_planes as $plan)
+				foreach($planes as $plan)
 				{
-					$selected = ($plan['id'] == $ciclo['id_plan']) ? ' selected="selected"' : "";
+					$selected = ($plan->id == $ciclo['id_plan']) ? ' selected="selected"' : "";
 
-					echo '<option value="'.$plan['id'].'" '.$selected.'>'.$plan['nombre'].'</option>';
+					echo '<option value="'.$plan->id.'" '.$selected.'>'.$plan->nombre.'</option>';
 				} 
 				?>
 			</select>
@@ -21,12 +21,20 @@
 		<div class="col-md-8">
 			<select name="id_orientacion" class="form-control">
 				<?php 
-				foreach($all_orientaciones as $orientacion)
-				{
-					$selected = ($orientacion['id'] == $ciclo['id_orientacion']) ? ' selected="selected"' : "";
-
-					echo '<option value="'.$orientacion['id'].'" '.$selected.'>'.$orientacion['nombre'].'</option>';
-				} 
+				if (is_null($ciclo['id_orientacion'])) {
+					echo '<option value="" selected="selected"></option>';
+					foreach($orientaciones as $orientacion)
+					{
+						echo '<option value="'.$orientacion->id.'" >'.$orientacion->nombre.'</option>';
+					} 
+				} else {
+					echo '<option value="" ></option>';
+					foreach($orientaciones as $orientacion)
+					{
+						$selected = ($orientacion->id == $ciclo['id_orientacion']) ? ' selected="selected"' : "";
+						echo '<option value="'.$orientacion->id.'" '.$selected.'>'.$orientacion->nombre.'</option>';
+					} 
+				}
 				?>
 			</select>
 		</div>

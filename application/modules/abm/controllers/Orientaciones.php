@@ -17,7 +17,7 @@ class Orientaciones extends MX_Controller{
     /*
      * Listing of orientaciones
      */
-    function index()
+    function index($mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
         {
@@ -29,6 +29,9 @@ class Orientaciones extends MX_Controller{
 
             $data['orientaciones'] = $this->Orientaciones_model->get_all_orientaciones($params);
             $data['user'] = $this->ion_auth->user()->row();
+            if (isset($mensaje)) {
+                $data['alerta'] = $mensaje;
+            }
 
             $this->template->cargar_vista('abm/orientaciones/index', $data);
         }
@@ -50,9 +53,13 @@ class Orientaciones extends MX_Controller{
 				'id_plan' => $this->input->post('id_plan'),
 				'nombre' => $this->input->post('nombre'),
             );
+
+            if ($this->Orientaciones_model->add_orientaciones($params))
+                $mensaje = $this->template->cargar_alerta('success', 'Orientación registrada', 'La orientación se registro correctamente.');    
+            else   
+                $mensaje = $this->template->cargar_alerta('danger', 'Error', 'La orientación no se registro correctamente.');           
             
-            $Orientaciones_id = $this->Orientaciones_model->add_orientaciones($params);
-            redirect('abm/orientaciones/index');
+            $this->index($mensaje);
         }
         else
         {
@@ -64,7 +71,7 @@ class Orientaciones extends MX_Controller{
     }  
 
     /*
-     * Editing a orientacione
+     * Editing a orientaciones
      */
     function edit($id)
     {   
@@ -84,9 +91,14 @@ class Orientaciones extends MX_Controller{
 					'id_plan' => $this->input->post('id_plan'),
 					'nombre' => $this->input->post('nombre'),
                 );
+   
 
-                $this->Orientaciones_model->update_orientaciones($id,$params);            
-                redirect('abm/orientaciones/index');
+                if ($this->Orientaciones_model->update_orientaciones($id,$params))
+                    $mensaje = $this->template->cargar_alerta('success', 'Datos actualizados', 'La orientación se actualizo correctamente.');    
+                else   
+                    $mensaje = $this->template->cargar_alerta('danger', 'Error', 'La orientación no se actualizo correctamente.');           
+                
+                $this->index($mensaje);
             }
             else
             {

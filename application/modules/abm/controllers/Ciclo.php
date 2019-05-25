@@ -18,7 +18,7 @@ class Ciclo extends MX_Controller{
     /*
      * Listing of ciclos
      */
-    function index()
+    function index($mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
         {
@@ -30,6 +30,9 @@ class Ciclo extends MX_Controller{
 
             $data['ciclos'] = $this->Ciclo_model->get_all_ciclos($params);
             $data['user'] = $this->ion_auth->user()->row();
+            if (isset($mensaje)) {
+                $data['alerta'] = $mensaje;
+            }
 
             $this->template->cargar_vista('abm/ciclo/index', $data);
         }
@@ -69,7 +72,7 @@ class Ciclo extends MX_Controller{
     /*
      * Editing a ciclo
      */
-    function edit($id)
+    function edit($id, $mensaje = null)
     {   
         // check if the ciclo exists before trying to edit it
         $data['ciclo'] = $this->Ciclo_model->get_ciclo($id);
@@ -89,19 +92,20 @@ class Ciclo extends MX_Controller{
 					'nombre' => $this->input->post('nombre'),
                 );
 
-                $this->Ciclo_model->update_ciclo($id,$params);            
-                redirect('ciclo/index');
+                if ($this->Ciclo_model->update_ciclo($id,$params))
+                    $mensaje = $this->template->cargar_alerta('success', 'Datos actualizados', 'El ciclo se actualizo correctamente.');    
+                else   
+                    $mensaje = $this->template->cargar_alerta('danger', 'Error', 'El ciclo no se actualizo correctamente.');    
+                    
+                $this->index($mensaje);
             }
             else
             {
-				$this->load->model('Planes_model');
-				$data['all_planes'] = $this->Planes_model->get_all_planes();
+                $data['user'] = $this->ion_auth->user()->row();
+				$data['planes'] = $this->Planes_model->get_all_planes();
+				$data['orientaciones'] = $this->Orientaciones_model->get_all_orientaciones(); 
 
-				$this->load->model('Orientaciones_model');
-				$data['all_orientaciones'] = $this->Orientaciones_model->get_all_orientaciones();
-
-                $data['_view'] = 'abm/ciclo/edit';
-                $this->load->view('layouts/main',$data);
+                $this->template->cargar_vista('abm/ciclo/edit', $data);
             }
         }
         else

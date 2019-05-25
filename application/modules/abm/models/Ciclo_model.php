@@ -33,9 +33,10 @@ class Ciclo_model extends CI_Model
      */
     function get_all_ciclos($params = array())
     {
-        $query = "SELECT c.*, p.nombre as plan
+        $query = "SELECT c.*, p.nombre as plan, o.nombre as orientacion
                   FROM ciclos c
                   INNER JOIN planes p on c.id_plan = p.id
+                  LEFT JOIN orientaciones o on c.id_orientacion = o.id 
                   ORDER BY c.id desc ";
 
         if(isset($params) && !empty($params))
@@ -50,6 +51,9 @@ class Ciclo_model extends CI_Model
      */
     function add_ciclo($params)
     {
+        if (empty($params['id_orientacion'])) {
+            $params['id_orientacion'] = NULL;
+        }
         $this->db->insert('ciclos',$params);
         return $this->db->insert_id();
     }
@@ -58,7 +62,10 @@ class Ciclo_model extends CI_Model
      * function to update ciclo
      */
     function update_ciclo($id,$params)
-    {
+    {   
+        if (empty($params['id_orientacion'])) {
+            $params['id_orientacion'] = NULL;
+        }
         $this->db->where('id',$id);
         return $this->db->update('ciclos',$params);
     }

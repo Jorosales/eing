@@ -21,10 +21,10 @@
 		<div class="col-md-8">
 			<select name="id_orientacion" class="form-control">
 				<?php 
+				echo '<option value="" selected="selected"></option>';
 				foreach($orientaciones as $orientacion)
 				{
 					$selected = ($orientacion->id == $this->input->post('id_orientacion')) ? ' selected="selected"' : "";
-
 					echo '<option value="'.$orientacion->id.'" '.$selected.'>'.$orientacion->nombre.'</option>';
 				} 
 				?>

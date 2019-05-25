@@ -1,4 +1,4 @@
-<?php echo form_open('abm/ciclo_materia/add',array("class"=>"justify-content-center align-items-center")); ?>
+<?php echo form_open_multipart('abm/ciclo_materia/add',array("class"=>"form-horizontal")); ?>
 
 	<div class="form-group">
 		<label for="id_ciclo" class="col-md-4 control-label"><span class="text-danger">*</span>Ciclo</label>
