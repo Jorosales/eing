@@ -2,6 +2,7 @@
 
 class Carrera extends MX_Controller {
 
+    public $name = 'La carrera';
 	function __construct(){
 		parent::__construct();
         $this->load->module('template');
@@ -13,7 +14,7 @@ class Carrera extends MX_Controller {
         $this->lang->load('auth');
     }
 
-	function index()
+	function index($mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
         {
@@ -25,6 +26,9 @@ class Carrera extends MX_Controller {
 
             $data['carreras'] = $this->Carrera_model->get_all_carrera($params);
             $data['user'] = $this->ion_auth->user()->row();
+            if (isset($mensaje)) {
+                $data['alerta'] = $mensaje;
+            }
 
             $this->template->cargar_vista('abm/carrera/index', $data);
         }
@@ -64,8 +68,14 @@ class Carrera extends MX_Controller {
                 if(!empty($_FILES['imagen']['name']))
                     $params['imagen']= $imagen['file_name'];
                 
-                $carrera_id = $this->Carrera_model->add_carrera($params);
-                redirect('abm/carrera/');
+                if ($this->Carrera_model->add_carrera($params))
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('record_add_success_text'), $this->name));    
+                else   
+                        $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                    sprintf(lang('record_add_error_text'), $this->name)); 
+                        
+                $this->index($mensaje);
             }
             else
             {            
@@ -118,16 +128,15 @@ class Carrera extends MX_Controller {
                         $data['alerta'] = $this->template->cargar_alerta('danger', 'Error de formato', 'El archivo seleccionado no corresponde con el formato.');
                         $this->template->cargar_vista('abm/carrera/edit', $data);
                     }else{
-                        $this->Carrera_model->update_carrera($id,$update);
-                        $data['alerta'] = $this->template->cargar_alerta('success', 'Datos actualizados', 'La carrera se actualizo correctamente.');
-                        
-                        $params = $this->template->get_params();
-                        $config = $this->template->get_config('abm/carrera/index?', $this->Carrera_model->get_all_carrera_count());
-                        $this->pagination->initialize($config);
 
-                        $data['carrera'] = $this->Carrera_model->get_all_carrera($params);
-
-                        $this->template->cargar_vista('abm/carrera/index', $data);    
+                        if ($this->Carrera_model->update_carrera($id,$update))
+                            $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                            sprintf(lang('record_edit_success_text'), $this->name));    
+                        else   
+                                $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                            sprintf(lang('record_edit_error_text'), $this->name));    
+                            
+                        $this->index($mensaje);
                     }
                     
                 }
@@ -138,7 +147,7 @@ class Carrera extends MX_Controller {
                 }
             }
             else
-                show_error('The carrera you are trying to edit does not exist.');
+                show_error(sprintf(lang('no_existe'), $this->name));
         }
     } 
 
@@ -152,11 +161,17 @@ class Carrera extends MX_Controller {
         // check if the carrera exists before trying to delete it
         if(isset($carrera['id']))
         {
-            $this->Carrera_model->delete_carrera($id);
-            redirect('abm/carrera/');
+            if ($this->Carrera_model->delete_carrera($id))
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('record_remove_success_text'), $this->name));    
+            else   
+                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('record_remove_error_text'), $this->name));    
+                
+            $this->index($mensaje);
         }
         else
-            show_error('The carrera you are trying to delete does not exist.');
+            show_error(sprintf(lang('no_existe'), $this->name));
     }
 
 

@@ -1,6 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  
 class Ciclo_materia extends MX_Controller{
+
+    public $name = 'El ciclo-materia';
     function __construct()
     {
         parent::__construct();
@@ -19,7 +21,7 @@ class Ciclo_materia extends MX_Controller{
     /*
      * Listing of ciclo_materia
      */
-    function index()
+    function index($mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
         {
@@ -31,6 +33,9 @@ class Ciclo_materia extends MX_Controller{
 
             $data['ciclo_materia'] = $this->Ciclo_materia_model->get_all_ciclo_materia($params);
             $data['user'] = $this->ion_auth->user()->row();
+            if (isset($mensaje)) {
+                $data['alerta'] = $mensaje;
+            }
 
             $this->template->cargar_vista('abm/ciclo_materia/index', $data);
         }
@@ -63,8 +68,14 @@ class Ciclo_materia extends MX_Controller{
 				'codigo' => $this->input->post('codigo'),
             );
             
-            $ciclo_materia_id = $this->Ciclo_materia_model->add_ciclo_materia($params);
-            redirect('abm/ciclo_materia/index');
+            if ($this->Ciclo_materia_model->add_ciclo_materia($params))
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('record_add_success_text'), $this->name));    
+            else   
+                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('record_add_error_text'), $this->name)); 
+                    
+            $this->index($mensaje);
         }
         else
         {
@@ -111,8 +122,14 @@ class Ciclo_materia extends MX_Controller{
 					'codigo' => $this->input->post('codigo'),
                 );
 
-                $this->Ciclo_materia_model->update_ciclo_materia($id,$params);            
-                redirect('abm/ciclo_materia/index');
+                if ($this->Ciclo_materia_model->update_ciclo_materia($id,$params))
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                    sprintf(lang('record_edit_success_text'), $this->name));    
+                else   
+                        $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                    sprintf(lang('record_edit_error_text'), $this->name));    
+                    
+                $this->index($mensaje);
             }
             else
             {
@@ -125,7 +142,7 @@ class Ciclo_materia extends MX_Controller{
             }
         }
         else
-            show_error('El ciclo_materia que está tratando de editar no existe.');
+            show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
     /*
@@ -138,11 +155,17 @@ class Ciclo_materia extends MX_Controller{
         // check if the ciclo_materia exists before trying to delete it
         if(isset($ciclo_materia['id']))
         {
-            $this->Ciclo_materia_model->delete_ciclo_materia($id);
-            redirect('abm/ciclo_materia/index');
+            if ($this->Ciclo_materia_model->delete_ciclo_materia($id))
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('record_remove_success_text'), $this->name));    
+            else   
+                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('record_remove_error_text'), $this->name));    
+                
+            $this->index($mensaje);
         }
         else
-            show_error('El ciclo_materia que está tratando de eliminar no existe.');
+            show_error(sprintf(lang('no_existe'), $this->name));
     }
     
 }

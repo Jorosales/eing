@@ -1,6 +1,6 @@
 <?php if(isset($alerta))  {  
 	echo $alerta;
-	} 
+} 
 ?>
 <?php echo $this->template->boton_nuevo('abm/planes/add', 'Nuevo Plan'); ?>
 <hr>

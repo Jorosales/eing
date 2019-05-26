@@ -1,6 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Planes extends MX_Controller{
+
+    public $name = 'El plan';
     function __construct()
     {
         parent::__construct();
@@ -16,7 +18,7 @@ class Planes extends MX_Controller{
     /*
      * Listing of planes
      */
-    function index()
+    function index($mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
         {
@@ -28,6 +30,10 @@ class Planes extends MX_Controller{
 
             $data['planes'] = $this->Planes_model->get_all_planes($params);
             $data['user'] = $this->ion_auth->user()->row();
+            
+            if (isset($mensaje)) {
+                $data['alerta'] = $mensaje;
+            } //var_dump($mensaje); exit();
             
             $this->template->cargar_vista('abm/planes/index', $data);
         }
@@ -47,8 +53,15 @@ class Planes extends MX_Controller{
 				'id_carrera' => $this->input->post('id_carrera'),
 				'nombre' => $this->input->post('nombre'),
             );
-            $plane_id = $this->Planes_model->add_planes($params);
-            redirect('abm/planes/');
+            
+            if ($this->Planes_model->add_planes($params))
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('record_add_success_text'), $this->name));    
+            else   
+                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('record_add_error_text'), $this->name)); 
+                    
+            $this->index($mensaje);
         }
         else
         {
@@ -80,9 +93,15 @@ class Planes extends MX_Controller{
 					'nombre' => $this->input->post('nombre'),
                     'duracion' => $this->input->post('duracion'),
                 );
-
-                $this->Planes_model->update_planes($id,$params);            
-                redirect('abm/planes/');
+            
+                if ($this->Planes_model->update_planes($id,$params))
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                    sprintf(lang('record_edit_success_text'), $this->name));    
+                else   
+                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                    sprintf(lang('record_edit_error_text'), $this->name));    
+                    
+                $this->index($mensaje);
             }
             else
             {
@@ -92,7 +111,7 @@ class Planes extends MX_Controller{
             }
         }
         else
-            show_error('The plane you are trying to edit does not exist.');
+            show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
     /*
@@ -105,11 +124,17 @@ class Planes extends MX_Controller{
         // check if the plane exists before trying to delete it
         if(isset($plane['id']))
         {
-            $this->Planes_model->delete_planes($id);
-            redirect('abm/planes/');
+            if ($this->Planes_model->delete_planes($id))
+                $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('record_remove_success_text'), $this->name));    
+            else   
+                $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('record_remove_error_text'), $this->name));    
+                
+            $this->index($mensaje);
         }
         else
-            show_error('The plane you are trying to delete does not exist.');
+            show_error(sprintf(lang('no_existe'), $this->name));
     }
 
     public function activate($id, $code = FALSE)
@@ -118,21 +143,16 @@ class Planes extends MX_Controller{
         {
             $cantidad = $this->Planes_model->existe_plan_carrera($id);
             if($cantidad[0]->cantidad == 1){
-                $data['alerta'] = $this->template->cargar_alerta('danger', 'Error', 'El plan no se pudo activar, debido a que la carrera ya posee un plan activo.');
+                $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('plan_activate_error'), $this->name));
             }else{
                 $update['vigente']= true;
                 $this->Planes_model->change_status($id, $update);
-                $data['alerta'] = $this->template->cargar_alerta('success', 'Plan Activo', 'El plan se actualizó correctamente.');
+                $mensaje = $this->template->cargar_alerta('success', lang('record_success'),
+                                sprintf(lang('plan_activate_success'), $this->name));
             }
 
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/planes/index?', $this->Planes_model->get_all_planes_count());
-            $this->pagination->initialize($config);
-
-            $data['planes'] = $this->Planes_model->get_all_planes($params);
-            $data['user'] = $this->ion_auth->user()->row();
-            
-            $this->template->cargar_vista('abm/planes/index', $data);   
+            $this->index($mensaje);   
         }
     }
 
@@ -171,13 +191,20 @@ class Planes extends MX_Controller{
                 // do we have the right userlevel?
                 if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin())
                 {
-                    $params['vigente']= false;
-                    $this->Planes_model->change_status($id, $params);
-                }
-            }
+                    $params['vigente']= false; 
+                    if ($this->Planes_model->change_status($id, $params))
+                        $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                        sprintf(lang('plan_deactivate_success'), $this->name));    
+                    else   
+                        $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                        sprintf(lang('plan_deactivate__error'), $this->name));    
 
-            // redirect them back to the auth page
-            redirect('abm/planes/', 'refresh');
+                    $this->index($mensaje);
+                }
+            }else{
+                // redirect them back to the auth page
+                redirect('abm/planes/', 'refresh');
+            }
         }
     }
     

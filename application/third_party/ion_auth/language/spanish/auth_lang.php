@@ -167,6 +167,26 @@ $lang['email_new_password_subheading'] = 'Tu contraseña ha sido restablecida a:
 //Titulos de tablas
 
 //Comunes
+$lang['no_existe']    = '%s no existe.';
+
+$lang['record_success']    = 'Datos Registrados';
+$lang['record_error']    = 'Error';
+
+$lang['record_add_success_text']    = '%s se registró correctamente.';
+$lang['record_add_error_text']    = 'Hubo un error, %s no se pudo registrar.';
+
+$lang['record_edit_success_text']    = '%s se actualizó correctamente';
+$lang['record_edit_error_text']    = 'Hubo un error, %s no se pudo modificar.';
+
+$lang['record_remove_success_text']    = '%s se eliminó correctamente';
+$lang['record_remove_error_text']    = 'Hubo un error, %s no se pudo eliminar.';
+
+$lang['plan_activate_success']    = 'El plan se activo correctamente.';
+$lang['plan_activate_error']    = 'El plan no se pudo activar, debido a que la carrera ya posee un plan activo.';
+
+$lang['plan_deactivate_success']    = 'El plan se desactivo correctamente.';
+$lang['plan_deactivate_error']    = 'El plan no se pudo desactivar.';
+
 $lang['table_id_th']    = 'ID';
 $lang['table_name_th']    = 'Nombre';
 $lang['table_type_th']    = 'Tipo';

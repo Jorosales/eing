@@ -1,6 +1,7 @@
 <?php
 
 class Orientaciones extends MX_Controller{
+    public $name = 'La orientación';
     function __construct()
     {
         parent::__construct();
@@ -55,10 +56,12 @@ class Orientaciones extends MX_Controller{
             );
 
             if ($this->Orientaciones_model->add_orientaciones($params))
-                $mensaje = $this->template->cargar_alerta('success', 'Orientación registrada', 'La orientación se registro correctamente.');    
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('record_add_success_text'), $this->name));    
             else   
-                $mensaje = $this->template->cargar_alerta('danger', 'Error', 'La orientación no se registro correctamente.');           
-            
+                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('record_add_error_text'), $this->name)); 
+                    
             $this->index($mensaje);
         }
         else
@@ -94,10 +97,12 @@ class Orientaciones extends MX_Controller{
    
 
                 if ($this->Orientaciones_model->update_orientaciones($id,$params))
-                    $mensaje = $this->template->cargar_alerta('success', 'Datos actualizados', 'La orientación se actualizo correctamente.');    
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                    sprintf(lang('record_edit_success_text'), $this->name));    
                 else   
-                    $mensaje = $this->template->cargar_alerta('danger', 'Error', 'La orientación no se actualizo correctamente.');           
-                
+                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                    sprintf(lang('record_edit_error_text'), $this->name));    
+                    
                 $this->index($mensaje);
             }
             else
@@ -109,7 +114,7 @@ class Orientaciones extends MX_Controller{
             }
         }
         else
-            show_error('The orientaciones you are trying to edit does not exist.');
+            show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
     /*
@@ -122,11 +127,17 @@ class Orientaciones extends MX_Controller{
         // check if the orientacione exists before trying to delete it
         if(isset($orientaciones['id']))
         {
-            $this->Orientaciones_model->delete_orientaciones($id);
-            redirect('abm/orientaciones/index');
+            if ($this->Orientaciones_model->delete_orientaciones($id))
+                $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('record_remove_success_text'), $this->name));    
+            else   
+                $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('record_remove_error_text'), $this->name));    
+                
+            $this->index($mensaje);
         }
         else
-            show_error('The orientaciones you are trying to delete does not exist.');
+            show_error(sprintf(lang('no_existe'), $this->name));
     }
     
 }
