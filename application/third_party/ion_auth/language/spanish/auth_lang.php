@@ -215,3 +215,11 @@ $lang['table_programa_th']    = 'Programa';
 $lang['table_hours_th']    = 'Horas';
 $lang['table_year_th']    = 'Año';
 $lang['table_code_th']    = 'Código';
+
+
+//Docentes
+$lang['table_teacher_th']    = 'Docente';
+$lang['table_category_th']    = 'Categoria';
+$lang['table_description_th']    = 'Descripción';
+
+
