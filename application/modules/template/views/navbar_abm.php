@@ -14,7 +14,7 @@
 		<li><a href="<?php echo base_url();?>abm/materia">Materias</a></li>
 		<li><a href="<?php echo base_url();?>abm/ciclo_materia">Ciclo - Materia</a></li>
 		<li><a href="<?php echo base_url();?>abm/orientaciones">Orientaciones</a></li>
-		<li><a href="<?php echo base_url();?>abm/titulos">Títulos</a></li>
+		<li><a href="<?php echo base_url();?>abm/titulo">Títulos</a></li>
 		<li><a href="<?php echo base_url();?>abm/tipo_materia">Tipo Materia</a></li>
 		<li><a href="<?php echo base_url();?>abm/regimen">Regimén</a></li>
 	</ul>
