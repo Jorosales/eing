@@ -135,5 +135,28 @@ class Template extends MX_Controller
 					</div>
 				</div>';
 		return $boton;
+	}
+
+
+	//Formulario
+	public function cargar_input($label, $nombre, $type, $obligatorio, $error, $value)
+	{
+		$data['label'] = $label;
+		$data['nombre'] = $nombre;
+		$data['obligatorio'] = $obligatorio;
+		$data['error'] = $error;
+		$data['value'] = $value;
+		$data['type'] = $type;
+
+		return $this->load->view('label-input',$data, true);
 	}	
+
+	public function cargar_submit()
+	{
+		return $this->load->view('form_button');
+	}
+
+
+
+	
 }

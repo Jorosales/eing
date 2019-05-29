@@ -8,6 +8,7 @@ class Planes extends MX_Controller{
         parent::__construct();
         $this->load->module('template');
         $this->load->model('Planes_model');
+        $this->load->model('Carrera_model');
         $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
         $this->load->library(array('ion_auth', 'form_validation'));
         $this->load->helper(array('language'));
@@ -44,7 +45,6 @@ class Planes extends MX_Controller{
      */
     function add()
     {   
-        $this->load->library('form_validation');
 		$this->form_validation->set_rules('nombre','Nombre','required');
 		
 		if($this->form_validation->run())     
@@ -65,8 +65,7 @@ class Planes extends MX_Controller{
         }
         else
         {
-			$this->load->model('Carrera_model');
-			$data['all_carrera'] = $this->Carrera_model->get_all_carrera();
+			$data['carreras'] = $this->Carrera_model->get_all_carrera();
             
             $this->template->cargar_vista('abm/planes/add', $data);
         }
@@ -78,13 +77,14 @@ class Planes extends MX_Controller{
     function edit($id)
     {   
         // check if the plane exists before trying to edit it
-        $data['planes'] = $this->Planes_model->get_planes($id);
+        $data['plan'] = $this->Planes_model->get_planes($id);
         
-        if(isset($data['planes']['id']))
+        if(isset($data['plan']['id']))
         {
             $this->load->library('form_validation');
 
-			$this->form_validation->set_rules('nombre','Nombre','required');
+            $this->form_validation->set_rules('nombre','Nombre','required');
+			$this->form_validation->set_rules('duracion','Duración','numeric');
 		
 			if($this->form_validation->run())     
             {   
@@ -105,8 +105,7 @@ class Planes extends MX_Controller{
             }
             else
             {
-				$this->load->model('Carrera_model');
-				$data['all_carrera'] = $this->Carrera_model->get_all_carrera();
+				$data['carreras'] = $this->Carrera_model->get_all_carrera();
                 $this->template->cargar_vista('abm/planes/edit', $data);
             }
         }

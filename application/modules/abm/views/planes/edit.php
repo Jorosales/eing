@@ -1,40 +1,25 @@
-<?php echo form_open('abm/planes/edit/'.$planes['id'],array("class"=>"form-horizontal")); ?>
+<?php echo form_open('abm/planes/edit/'.$plan['id'],array("class"=>"form-horizontal")); ?>
 
 	<div class="form-group">
 		<label for="id_carrera" class="col-md-2 control-label">Carrera</label>
 		<div class="col-md-8">
 			<select name="id_carrera" class="form-control">
 				<?php 
-				foreach($all_carrera as $carrera)
+				foreach($carreras as $carrera)
 				{
-					$selected = ($carrera['id'] == $planes['id_carrera']) ? ' selected="selected"' : "";
+					$selected = ($carrera->id == $plan['id_carrera']) ? ' selected="selected"' : "";
 
-					echo '<option value="'.$carrera['id'].'" '.$selected.'>'.$carrera['nombre'].'</option>';
+					echo '<option value="'.$carrera->id.'" '.$selected.'>'.$carrera->nombre.'</option>';
 				} 
 				?>
 			</select>
 		</div>
 	</div>
-	<div class="form-group">
-		<label for="nombre" class="col-md-2 control-label">Nombre</label>
-		<div class="col-md-8">
-			<input type="text" name="nombre" value="<?php echo ($this->input->post('nombre') ? $this->input->post('nombre') : $planes['nombre']); ?>" class="form-control" id="nombre" />
-			<span class="text-danger"><?php echo form_error('nombre');?></span>
-		</div>
-	</div>
 
-	<div class="form-group">
-		<label for="nombre" class="col-md-2 control-label">Duración</label>
-		<div class="col-md-8">
-			<input type="text" name="duracion" value="<?php echo ($this->input->post('duracion') ? $this->input->post('duracion') : $planes['duracion']); ?>" class="form-control" id="duracion" />
-			<span class="text-danger"><?php echo form_error('duracion');?></span>
-		</div>
-	</div>
+	<?php echo $this->template->cargar_input('Nombre', 'nombre', 'text', '*', form_error('nombre'), ($this->input->post('nombre') ? $this->input->post('nombre') : $plan['nombre'])); ?>	
+
+	<?php echo $this->template->cargar_input('Duración', 'duracion', 'text', '', form_error('duracion'), ($this->input->post('duracion') ? $this->input->post('duracion') : $plan['duracion'])); ?>
 	
-	<div class="form-group">
-		<div class="col-sm-offset-8 col-sm-8">
-			<button type="submit" class="btn btn-success">Guardar</button>
-        </div>
-	</div>
+	<?php echo $this->template->cargar_submit(); ?>
 	
 <?php echo form_close(); ?>

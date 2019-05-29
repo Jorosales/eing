@@ -73,7 +73,7 @@ class Titulo extends MX_Controller{
         else
         {
             $data['planes'] = $this->Planes_model->get_all_planes();
-            $data['orientaciones'] = $this->Orientaciones_model->get_all_orientaciones(); var_dump($data); exit();
+            $data['orientaciones'] = $this->Orientaciones_model->get_all_orientaciones();
             
             $this->template->cargar_vista('abm/titulo/add', $data);
         }
@@ -89,8 +89,6 @@ class Titulo extends MX_Controller{
         
         if(isset($data['titulo']['id']))
         {
-            $this->load->library('form_validation');
-
 			$this->form_validation->set_rules('nombre','Nombre','required');
 		
 			if($this->form_validation->run())     
@@ -100,24 +98,26 @@ class Titulo extends MX_Controller{
 					'id_orientacion' => $this->input->post('id_orientacion'),
 					'nombre' => $this->input->post('nombre'),
                 );
-
-                $this->Titulo_model->update_titulo($id,$params);            
-                redirect('titulo/index');
+            
+                if ($this->Titulo_model->update_titulo($id,$params))
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                    sprintf(lang('record_edit_success_text'), $this->name));    
+                else   
+                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                    sprintf(lang('record_edit_error_text'), $this->name));    
+                    
+                $this->index($mensaje);
             }
             else
             {
-				$this->load->model('Planes_model');
-				$data['all_planes'] = $this->Planes_model->get_all_planes();
+				$data['planes'] = $this->Planes_model->get_all_planes();
+				$data['orientaciones'] = $this->Orientaciones_model->get_all_orientaciones();
 
-				$this->load->model('Orientaciones_model');
-				$data['all_orientaciones'] = $this->Orientaciones_model->get_all_orientaciones();
-
-                $data['_view'] = 'abm/titulo/edit';
-                $this->load->view('layouts/main',$data);
+                 $this->template->cargar_vista('abm/titulo/edit', $data);
             }
         }
         else
-            show_error('The titulo you are trying to edit does not exist.');
+            show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
     /*
@@ -130,11 +130,17 @@ class Titulo extends MX_Controller{
         // check if the titulo exists before trying to delete it
         if(isset($titulo['id']))
         {
-            $this->Titulo_model->delete_titulo($id);
-            redirect('titulo/index');
+            if ($this->Titulo_model->delete_titulo($id))
+                $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('record_remove_success_text'), $this->name));    
+            else   
+                $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('record_remove_error_text'), $this->name));    
+                
+            $this->index($mensaje);
         }
         else
-            show_error('The titulo you are trying to delete does not exist.');
+            show_error(sprintf(lang('no_existe'), $this->name));
     }
     
 }
