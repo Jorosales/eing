@@ -1,49 +1,21 @@
-			
+<?php if(isset($alerta))  {  
+	echo $alerta;
+	} 
+?>			
 <?php echo form_open_multipart('abm/carrera/add',array("class"=>"form-horizontal")); ?>
 
-	<div class="form-group">
-		<label for="nombre" class="col-md-2 control-label"><span class="text-danger">*</span>Nombre</label>
-		<div class="col-md-8">
-			<input type="text" name="nombre" value="<?php echo $this->input->post('nombre'); ?>" class="form-control" id="nombre" />
-			<span class="text-danger"><?php echo form_error('nombre');?></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="plan_pdf" class="col-md-2 control-label">Plan Pdf</label>
-		<div class="col-md-8">
-			<input type="file" name="plan_pdf" value="<?php echo $this->input->post('plan_pdf'); ?>" class="form-control" id="plan_pdf" />
-			<span class="text-danger"><?php echo form_error('plan_pdf');?></span>
-			<p class="help-block"><b>*El archivo debe estar en formato PDF.</b></p>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="imagen" class="col-md-2 control-label">Imagen</label>
-		<div class="col-md-8">
-			<input type="file" name="imagen" value="<?php echo $this->input->post('imagen'); ?>" class="form-control" id="imagen" />
-			<span class="text-danger"><?php echo form_error('imagen');?></span>
-			<p class="help-block"><b>*La imágen debe estar en formato JPG o PNG.</b></p>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="presentacion" class="col-md-2 control-label">Presentacion</label>
-		<div class="col-md-8">
-			<textarea name="presentacion" class="form-control" id="presentacion"><?php echo $this->input->post('presentacion'); ?></textarea>
-			<span class="text-danger"><?php echo form_error('presentacion');?></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="perfil" class="col-md-2 control-label">Perfil</label>
-		<div class="col-md-8">
-			<textarea name="perfil" class="form-control" id="perfil"><?php echo $this->input->post('perfil'); ?></textarea>
-			<span class="text-danger"><?php echo form_error('perfil');?></span>
-		</div>
-	</div>
-			
-	<div class="form-group">
-		<div class="col-sm-offset-8 col-sm-8">
-			<button type="submit" class="btn btn-success">Guardar</button>
-        </div>
-	</div>
+	<?php echo $this->template->cargar_input(lang('form_name'), 'nombre', 'text', '*', form_error('nombre'), $this->input->post('nombre')); ?>
+
+	<?php echo $this->template->cargar_input(lang('form_plan_pdf'), 'plan_pdf', 'file', '', form_error('plan_pdf'), $this->input->post('plan_pdf'), '*El archivo debe estar en formato PDF.'); ?>
+
+	<?php echo $this->template->cargar_input(lang('form_image'), 'imagen', 'file', '', form_error('imagen'), $this->input->post('imagen'), '*La imágen debe estar en formato JPG o PNG.'); ?>
+
+
+	<?php echo $this->template->cargar_textarea(lang('form_presentation'), 'presentacion', '', form_error('presentacion'), $this->input->post('presentacion')); ?>
+
+	<?php echo $this->template->cargar_textarea(lang('form_career_profile'), 'perfil', '', form_error('perfil'), $this->input->post('perfil')); ?>
+		
+	<?php echo $this->template->cargar_submit(); ?>
 
 <?php echo form_close(); ?>
 							

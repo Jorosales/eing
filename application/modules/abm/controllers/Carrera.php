@@ -50,10 +50,10 @@ class Carrera extends MX_Controller {
             if($this->form_validation->run())     
             {   
                 
-                if(!empty($_FILES['plan_pdf']['name']))
+                if($_FILES['plan_pdf']['type'] == 'application/pdf')
                     $pdf = $this->template->subir_archivo(PDFS_UPLOAD, '*', 'plan_pdf');
 
-                if(!empty($_FILES['imagen']['name']))
+                if($_FILES['imagen']['type'] == 'image/jpeg' || $_FILES['imagen']['type'] == 'image/png')
                     $imagen = $this->template->subir_archivo(IMAGES_UPLOAD, 'jpg|png', 'imagen');
 
                 $params = array(
@@ -62,20 +62,28 @@ class Carrera extends MX_Controller {
                     'perfil' => $this->input->post('perfil'),
                 );
 
-                if(!empty($_FILES['plan_pdf']['name']))
+                if($_FILES['plan_pdf']['type'] == 'application/pdf')
                         $params['plan_pdf']= $pdf['file_name'];
 
-                if(!empty($_FILES['imagen']['name']))
+                if($_FILES['imagen']['type'] == 'image/jpeg' || $_FILES['imagen']['type'] == 'image/png')
                     $params['imagen']= $imagen['file_name'];
                 
-                if ($this->Carrera_model->add_carrera($params))
-                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
-                                sprintf(lang('record_add_success_text'), $this->name));    
-                else   
-                        $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
-                                    sprintf(lang('record_add_error_text'), $this->name)); 
-                        
-                $this->index($mensaje);
+                
+                if (!isset($imagen) || !isset($pdf)){
+                    $data['alerta'] = $this->template->cargar_alerta('danger', 'Error de formato', 'El archivo seleccionado no corresponde con el formato.');
+                    $this->template->cargar_vista('abm/carrera/add', $data);
+                }else{
+             
+                    if ($this->Carrera_model->add_carrera($params))
+                        $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                        sprintf(lang('record_edit_success_text'), $this->name));    
+                    else   
+                            $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                        sprintf(lang('record_edit_error_text'), $this->name));  
+
+                    $this->index($mensaje);
+                }
+
             }
             else
             {            
@@ -97,47 +105,52 @@ class Carrera extends MX_Controller {
         }else {
             // check if the carrera exists before trying to edit it
             $data['carrera'] = $this->Carrera_model->get_carrera($id);
-            
+            var_dump($data['carrera']); exit();
             if(isset($data['carrera']['id']))
             {
-                $this->load->library('form_validation');
                 $this->form_validation->set_rules('nombre','Nombre','required');
                 
                 if($this->form_validation->run())     
                 {                       
-                    if(!empty($_FILES['plan_pdf']['name']))
-                        $pdf = $this->template->subir_archivo(PDFS_UPLOAD, 'pdf', 'plan_pdf');
+                    if(($this->input->post('pdf') != $data['plan_pdf']){
+                        if($_FILES['plan_pdf']['type'] == 'application/pdf')){
+                        $pdf = $this->template->subir_archivo(PDFS_UPLOAD, '*', 'plan_pdf');
+                        $params['plan_pdf']= $pdf['file_name'];
+                    }
+                    else{
+                        $params['plan_pdf'] = $this->input->post('pdf');  
+                    }
 
-                    if(!empty($_FILES['imagen']['name']))
+                    if(($this->input->post('imagen') != $data['imagen']) &&  ($_FILES['imagen']['type'] == 'image/jpeg' || $_FILES['imagen']['type'] == 'image/png'){
                         $imagen = $this->template->subir_archivo(IMAGES_UPLOAD, 'jpg|png', 'imagen');
+                        $params['imagen']= $imagen['file_name'];
+                    }
+                    else{
+                        $this->input->post('imagen') = $this->input->post('imagen');  
+                    }
 
-                    $update = array(
+                    $params = array(
                         'nombre' => $this->input->post('nombre'),
                         'presentacion' => $this->input->post('presentacion'),
                         'perfil' => $this->input->post('perfil'),
                     );
 
-                    if(!empty($_FILES['plan_pdf']['name']) && !isset($pdf['error']))
-                        $update['plan_pdf'] = $pdf['file_name'];
 
-                    if(!empty($_FILES['imagen']['name']) && !isset($imagen['error']))
-                        $update['imagen']= $imagen['file_name'];
-                   
-
-                    if (isset($imagen['error']) || isset($pdf['error'])){
+                    if (!isset($imagen) || !isset($pdf)){
                         $data['alerta'] = $this->template->cargar_alerta('danger', 'Error de formato', 'El archivo seleccionado no corresponde con el formato.');
-                        $this->template->cargar_vista('abm/carrera/edit', $data);
+                        //$this->template->cargar_vista('abm/carrera/edit/'.$data['carrera']['id'], $data);
+                        $this->edit($data['carrera']['id']);
                     }else{
-
-                        if ($this->Carrera_model->update_carrera($id,$update))
+                 
+                        if ($this->Carrera_model->update_carrera($id, $params))
                             $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                             sprintf(lang('record_edit_success_text'), $this->name));    
                         else   
                                 $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
-                                            sprintf(lang('record_edit_error_text'), $this->name));    
-                            
+                                            sprintf(lang('record_edit_error_text'), $this->name));  
+
                         $this->index($mensaje);
-                    }
+                }
                     
                 }
                 else

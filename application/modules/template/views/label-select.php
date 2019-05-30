@@ -5,6 +5,7 @@
 	<div class="col-md-8">
 		<select name="<?= $nombre; ?>" class="form-control">
 			<?php 
+				echo (empty($obligatorio))?'<option value="" selected="selected"></option>':'';
 				foreach($array as $item)
 				{
 					$selected = ($item->id == $comp) ? ' selected="selected"' : "";

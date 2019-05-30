@@ -32,6 +32,7 @@ class Ciclo extends MX_Controller{
 
             $data['ciclos'] = $this->Ciclo_model->get_all_ciclos($params);
             $data['user'] = $this->ion_auth->user()->row();
+            
             if (isset($mensaje)) {
                 $data['alerta'] = $mensaje;
             }
@@ -48,7 +49,7 @@ class Ciclo extends MX_Controller{
         $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('nombre','Nombre','required');
-		$this->form_validation->set_rules('id_plan','Id Plan','required');
+		$this->form_validation->set_rules('id_plan','Plan','required');
 		
 		if($this->form_validation->run())     
         {   
@@ -90,7 +91,7 @@ class Ciclo extends MX_Controller{
             $this->load->library('form_validation');
 
 			$this->form_validation->set_rules('nombre','Nombre','required');
-			$this->form_validation->set_rules('id_plan','Id Plan','required');
+			$this->form_validation->set_rules('id_plan','Plan','required');
 		
 			if($this->form_validation->run())     
             {   

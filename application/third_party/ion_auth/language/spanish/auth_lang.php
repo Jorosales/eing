@@ -223,8 +223,6 @@ $lang['table_category_th']    	= 'Categoria';
 $lang['table_description_th']   = 'Descripción';
 
 
-
-
 //TITULOS DE FORMULARIOS
 $lang['form_name']    			= 'Nombre';
 $lang['form_last_name']    		= 'Apellido';
@@ -233,12 +231,24 @@ $lang['form_dni']    			= 'DNI';
 $lang['form_cuit']    			= 'CUIT';
 $lang['form_email']    			= 'E-mail %s';
 $lang['form_description']    	= 'Descripción';
-$lang['form_category']    	= 'Categoría';
+$lang['form_category']    		= 'Categoría';
 
 $lang['form_orientation']    	= 'Orientación';
 $lang['form_plan']    			= 'Plan';
 $lang['form_career']    		= 'Carrera';
 $lang['form_duration']    		= 'Duración';
+$lang['form_course']  			= 'Materia';
 $lang['form_course_type']  		= 'Tipo Materia';
+$lang['form_cycle']  			= 'Ciclo';
+$lang['form_regimen']  			= 'Regimén';
+$lang['form_hours']  			= 'Horas';
+$lang['form_total_hours']  		= 'Horas Total';
+$lang['form_program']  			= 'Programa';
+$lang['form_year']  			= 'Año';
+$lang['form_code']  			= 'Código';
+$lang['form_plan_pdf']  		= 'Plan PDF';
+$lang['form_image']  			= 'Imágen';
+$lang['form_presentation']  	= 'Presentación';
+$lang['form_career_profile']  	= 'Perfil';
 
 

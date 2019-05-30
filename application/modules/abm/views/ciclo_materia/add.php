@@ -1,93 +1,21 @@
 <?php echo form_open_multipart('abm/ciclo_materia/add',array("class"=>"form-horizontal")); ?>
 
-	<div class="form-group">
-		<label for="id_ciclo" class="col-md-4 control-label"><span class="text-danger">*</span>Ciclo</label>
-		<div class="col-md-8">
-			<select name="id_ciclo" class="form-control">
-				<?php 
-				foreach($ciclos as $ciclo)
-				{
-					$selected = ($ciclo->id == $this->input->post('id_ciclo')) ? ' selected="selected"' : "";
+	<?php echo $this->template->cargar_select(lang('form_cycle'), 'id_ciclo', '*', form_error('id_ciclo'), $ciclos, $this->input->post('id_ciclo')); ?>
 
-					echo '<option value="'.$ciclo->id.'" '.$selected.'>'.$ciclo->nombre.'</option>';
-				} 
-				?>
-			</select>
-			<span class="text-danger"><?php echo form_error('id_ciclo');?></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="id_materia" class="col-md-4 control-label"><span class="text-danger">*</span>Materia</label>
-		<div class="col-md-8">
-			<select name="id_materia" class="form-control">
-				<?php 
-				foreach($materias as $materia)
-				{
-					$selected = ($materia->id == $this->input->post('id_materia')) ? ' selected="selected"' : "";
+	<?php echo $this->template->cargar_select(lang('form_course'), 'id_materia', '*', form_error('id_materia'), $materias, $this->input->post('id_materia')); ?>
 
-					echo '<option value="'.$materia->id.'" '.$selected.'>'.$materia->id_ciclo.' - '.$materia->nombre.'</option>';
-				} 
-				?>
-			</select>
-			<span class="text-danger"><?php echo form_error('id_materia');?></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="id_regimen" class="col-md-4 control-label"><span class="text-danger">*</span>Regimén</label>
-		<div class="col-md-8">
-			<select name="id_regimen" class="form-control">
-				<?php 
-				foreach($regimenes as $regimen)
-				{
-					$selected = ($regimen->id == $this->input->post('id_regimen')) ? ' selected="selected"' : "";
+	<?php echo $this->template->cargar_select(lang('form_regimen'), 'id_regimen', '*', form_error('id_regimen'), $regimenes, $this->input->post('id_regimen')); ?>
 
-					echo '<option value="'.$regimen->id.'" '.$selected.'>'.$regimen->nombre.'</option>';
-				} 
-				?>
-			</select>
-			<span class="text-danger"><?php echo form_error('id_regimen');?></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="horas" class="col-md-4 control-label">Horas</label>
-		<div class="col-md-8">
-			<input type="text" name="horas" value="<?php echo $this->input->post('horas'); ?>" class="form-control" id="horas" />
-			<span class="text-danger"><?php echo form_error('horas');?></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="hs_total" class="col-md-4 control-label">Hs Total</label>
-		<div class="col-md-8">
-			<input type="text" name="hs_total" value="<?php echo $this->input->post('hs_total'); ?>" class="form-control" id="hs_total" />
-			<span class="text-danger"><?php echo form_error('hs_total');?></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="programa" class="col-md-4 control-label">Programa</label>
-		<div class="col-md-8">
-			<input type="file" name="programa" value="<?php echo $this->input->post('programa'); ?>" class="form-control file" id="programa" />
-			<span class="text-danger"><?php echo form_error('programa');?></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="anio" class="col-md-4 control-label"><span class="text-danger">*</span>Año</label>
-		<div class="col-md-8">
-			<input type="text" name="anio" value="<?php echo $this->input->post('anio'); ?>" class="form-control" id="anio" />
-			<span class="text-danger"><?php echo form_error('anio');?></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="codigo" class="col-md-4 control-label">Codigo</label>
-		<div class="col-md-8">
-			<input type="text" name="codigo" value="<?php echo $this->input->post('codigo'); ?>" class="form-control" id="codigo" />
-			<span class="text-danger"><?php echo form_error('codigo');?></span>
-		</div>
-	</div>
+	<?php echo $this->template->cargar_input(lang('form_hours'), 'horas', 'text', '', form_error('horas'), $this->input->post('horas')); ?>
+
+	<?php echo $this->template->cargar_input(lang('form_total_hours'), 'hs_total', 'text', '', form_error('hs_total'), $this->input->post('hs_total')); ?>
+
+	<?php echo $this->template->cargar_input(lang('form_program'), 'programa', 'file', '', form_error('programa'), $this->input->post('programa')); ?>
+
+	<?php echo $this->template->cargar_input(lang('form_year'), 'anio', 'text', '*', form_error('anio'), $this->input->post('anio')); ?>
+
+	<?php echo $this->template->cargar_input(lang('form_code'), 'codigo', 'text', '', form_error('codigo'), $this->input->post('codigo')); ?>
 	
-	<div class="form-group">
-		<div class="col-sm-offset-4 col-sm-8">
-			<button type="submit" class="btn btn-success">Guardar</button>
-        </div>
-	</div>
+	<?php echo $this->template->cargar_submit(); ?>
 
 <?php echo form_close(); ?>

@@ -139,14 +139,24 @@ class Template extends MX_Controller
 
 
 	//Formulario
-	public function cargar_input($label, $nombre, $type, $obligatorio, $error, $value)
+	public function cargar_input()
 	{
-		$data['label'] = $label;
-		$data['nombre'] = $nombre;
-		$data['obligatorio'] = $obligatorio;
-		$data['error'] = $error;
-		$data['value'] = $value;
-		$data['type'] = $type;
+		$args = func_get_args();
+		  
+		$data['label'] = $args[0];
+		$data['nombre'] = $args[1];
+		$data['obligatorio'] = $args[3];
+		$data['error'] = $args[4];
+		$data['value'] = $args[5];
+		$data['type'] = $args[2];
+		 
+		if ( count(func_get_args()) == 7){
+			$data['mensaje'] = $args[6];
+		  }
+		  
+		  elseif ( count(func_get_args()) == 7 ){
+
+		  }
 
 		return $this->load->view('label-input',$data, true);
 	}	

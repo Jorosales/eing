@@ -48,12 +48,12 @@ class Ciclo_materia extends MX_Controller{
     {   
         $this->load->library('form_validation');
 
-		$this->form_validation->set_rules('anio','Anio','integer|required');
-		$this->form_validation->set_rules('horas','Horas','numeric');
-		$this->form_validation->set_rules('hs_total','Hs Total','numeric');
-		$this->form_validation->set_rules('id_ciclo','Id Ciclo','required');
-		$this->form_validation->set_rules('id_materia','Id Materia','required');
-		$this->form_validation->set_rules('id_regimen','Id Regimen','required');
+		$this->form_validation->set_rules('anio','Año','integer|required');
+		$this->form_validation->set_rules('horas','Horas','integer');
+		$this->form_validation->set_rules('hs_total','Horas Total','integer');
+		$this->form_validation->set_rules('id_ciclo','Ciclo','required');
+		$this->form_validation->set_rules('id_materia','Materia','required');
+		$this->form_validation->set_rules('id_regimen','Regimén','required');
 		
 		if($this->form_validation->run())     
         {   

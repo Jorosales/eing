@@ -6,5 +6,6 @@
 	<div class="col-md-8">
 		<input type="<?= $type; ?>" name="<?= $nombre; ?>" value="<?= $value; ?>" class="form-control" id="<?= $nombre; ?>" />
 		<span class="text-danger"><?php echo $error;?></span>
+		<p class="help-block"><b><?php if (isset($mensaje)) echo $mensaje; ?></b></p>
 	</div>
 </div>
