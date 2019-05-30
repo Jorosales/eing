@@ -45,13 +45,15 @@ class Planes extends MX_Controller{
      */
     function add()
     {   
-		$this->form_validation->set_rules('nombre','Nombre','required');
+        $this->form_validation->set_rules('nombre',lang('form_name'),'required');
+		$this->form_validation->set_rules('duracion',lang('form_duration'),'required|integer');
 		
 		if($this->form_validation->run())     
         {   
             $params = array(
 				'id_carrera' => $this->input->post('id_carrera'),
-				'nombre' => $this->input->post('nombre'),
+                'nombre' => $this->input->post('nombre'),
+				'duracion' => $this->input->post('duracion'),
             );
             
             if ($this->Planes_model->add_planes($params))
@@ -76,15 +78,14 @@ class Planes extends MX_Controller{
      */
     function edit($id)
     {   
-        // check if the plane exists before trying to edit it
         $data['plan'] = $this->Planes_model->get_planes($id);
         
         if(isset($data['plan']['id']))
         {
-            $this->load->library('form_validation');
 
-            $this->form_validation->set_rules('nombre','Nombre','required');
-			$this->form_validation->set_rules('duracion','Duración','numeric');
+            $this->form_validation->set_rules('nombre',lang('form_name'),'required');
+            $this->form_validation->set_rules('duracion',lang('form_duration'),'required|integer');
+
 		
 			if($this->form_validation->run())     
             {   
@@ -120,7 +121,6 @@ class Planes extends MX_Controller{
     {
         $plane = $this->Planes_model->get_planes($id);
 
-        // check if the plane exists before trying to delete it
         if(isset($plane['id']))
         {
             if ($this->Planes_model->delete_planes($id))
@@ -159,10 +159,7 @@ class Planes extends MX_Controller{
     public function deactivate($id = NULL)
     {
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-        {
-            // redirect them to the home page because they must be an administrator to view this
             return show_error('You must be an administrator to view this page.');
-        }
 
         $id = (int)$id;
 

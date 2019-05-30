@@ -1,33 +1,9 @@
 <?php echo form_open('abm/materia/edit/'.$materia['id'],array("class"=>"form-horizontal")); ?>
 
-	<div class="form-group">
-		<label for="id_tipo" class="col-md-4 control-label"><span class="text-danger">*</span>Materias Tipo</label>
-		<div class="col-md-8">
-			<select name="id_tipo" class="form-control">
-				<?php 
-				foreach($all_materias_tipo as $materias_tipo)
-				{
-					$selected = ($materias_tipo['id'] == $materia['id_tipo']) ? ' selected="selected"' : "";
+	<?php echo $this->template->cargar_select(lang('form_course_type'), 'id_tipo', '*', form_error('id_tipo'), $materias_tipo, $materia['id_tipo']); ?>
 
-					echo '<option value="'.$materias_tipo['id'].'" '.$selected.'>'.$materias_tipo['nombre'].'</option>';
-				} 
-				?>
-			</select>
-			<span class="text-danger"><?php echo form_error('id_tipo');?></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="nombre" class="col-md-4 control-label"><span class="text-danger">*</span>Nombre</label>
-		<div class="col-md-8">
-			<input type="text" name="nombre" value="<?php echo ($this->input->post('nombre') ? $this->input->post('nombre') : $materia['nombre']); ?>" class="form-control" id="nombre" />
-			<span class="text-danger"><?php echo form_error('nombre');?></span>
-		</div>
-	</div>
+	<?php echo $this->template->cargar_input(lang('form_name'), 'nombre', 'text', '*', form_error('nombre'), ($this->input->post('nombre') ? $this->input->post('nombre') : $materia['nombre'])); ?>
 	
-	<div class="form-group">
-		<div class="col-sm-offset-4 col-sm-8">
-			<button type="submit" class="btn btn-success">Guardar</button>
-        </div>
-	</div>
+	<?php echo $this->template->cargar_submit(); ?>
 	
 <?php echo form_close(); ?>

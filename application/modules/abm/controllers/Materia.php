@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Materia extends MX_Controller {
+    
     public $name = 'La materia';
 
 	function __construct(){
@@ -40,10 +41,8 @@ class Materia extends MX_Controller {
      */
     function add()
     {   
-        $this->load->library('form_validation');
-
-		$this->form_validation->set_rules('id_tipo','Id Tipo','required');
-		$this->form_validation->set_rules('nombre','Nombre','required');
+		$this->form_validation->set_rules('id_tipo',lang('form_course_type'),'required');
+		$this->form_validation->set_rules('nombre',lang('form_name'),'required');
 		
 		if($this->form_validation->run())     
         {   
@@ -64,7 +63,7 @@ class Materia extends MX_Controller {
         else
         {
 			$this->load->model('Materias_tipo_model');
-			$data['all_materias_tipo'] = $this->Materias_tipo_model->get_all_materias_tipo();
+			$data['materias_tipo'] = $this->Materias_tipo_model->get_all_materias_tipo();
             $data['user'] = $this->ion_auth->user()->row();
         
             $this->template->cargar_vista('abm/materia/add', $data);
@@ -76,15 +75,12 @@ class Materia extends MX_Controller {
      */
     function edit($id)
     {   
-        // check if the materia exists before trying to edit it
         $data['materia'] = $this->Materia_model->get_materia($id);
         
         if(isset($data['materia']['id']))
         {
-            $this->load->library('form_validation');
-
-			$this->form_validation->set_rules('id_tipo','Id Tipo','required');
-			$this->form_validation->set_rules('nombre','Nombre','required');
+			$this->form_validation->set_rules('id_tipo',lang('form_course_type'),'required');
+			$this->form_validation->set_rules('nombre',lang('form_name'),'required');
 		
 			if($this->form_validation->run())     
             {   
@@ -105,7 +101,7 @@ class Materia extends MX_Controller {
             else
             {
 				$this->load->model('Materias_tipo_model');
-				$data['all_materias_tipo'] = $this->Materias_tipo_model->get_all_materias_tipo();
+				$data['materias_tipo'] = $this->Materias_tipo_model->get_all_materias_tipo();
                 $data['user'] = $this->ion_auth->user()->row();
         
                 $this->template->cargar_vista('abm/materia/edit', $data);

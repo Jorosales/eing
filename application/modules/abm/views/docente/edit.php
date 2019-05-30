@@ -1,67 +1,24 @@
 <?php echo form_open('abm/docente/edit/'.$docente['id'],array("class"=>"form-horizontal")); ?>
 
-	<div class="form-group">
-		<label for="persona_id" class="col-md-4 control-label">Apellido</label>
-		<div class="col-md-8">
-			<input type="text" name="apellido" value="<?php echo ($this->input->post('apellido') ? $this->input->post('apellido') : $docente['apellido']); ?>" class="form-control" id="apellido">
-		</div>
-	</div>	
 
-	<div class="form-group">
-		<label class="col-md-4 control-label">Nombre</label>
-		<div class="col-md-8">
-			<input type="text" name="nombre" value="<?php echo ($this->input->post('nombre') ? $this->input->post('nombre') : $docente['nombre']); ?>" class="form-control" id="nombre">
-		</div>
-	</div>
+	<?php echo $this->template->cargar_input(lang('form_last_name'), 'apellido', 'text', '*', form_error('apellido'), ($this->input->post('apellido') ? $this->input->post('apellido') : $docente['apellido'])); ?>
 
-	<div class="form-group">
-		<label class="col-md-4 control-label">DNI</label>
-		<div class="col-md-8">
-			<input type="text" name="dni" value="<?php echo ($this->input->post('dni') ? $this->input->post('dni') : $docente['dni']); ?>" class="form-control" id="dni">
-		</div>
-	</div>
+	<?php echo $this->template->cargar_input(lang('form_name'), 'nombre', 'text', '*', form_error('nombre'), ($this->input->post('nombre') ? $this->input->post('nombre') : $docente['nombre'])); ?>
 
-	<div class="form-group">
-		<label class="col-md-4 control-label">E-Mail 1</label>
-		<div class="col-md-8">
-			<input type="text" name="email1" value="<?php echo ($this->input->post('email1') ? $this->input->post('email1') : $docente['email1']); ?>" class="form-control" id="email1">
-		</div>
-	</div>
+	<?php echo $this->template->cargar_input(lang('form_second_name'), 'nombre_2', 'text', '', form_error('nombre_2'), ($this->input->post('nombre_2') ? $this->input->post('nombre_2') : $docente['nombre_2'])); ?>
 
-	<div class="form-group">
-		<label class="col-md-4 control-label">E-Mail 2</label>
-		<div class="col-md-8">
-			<input type="text" name="email2" value="<?php echo ($this->input->post('email2') ? $this->input->post('email2') : $docente['email2']); ?>" class="form-control" id="email2">
-		</div>
-	</div>
+	<?php echo $this->template->cargar_input(lang('form_dni'), 'dni', 'text', '', form_error('dni'), ($this->input->post('dni') ? $this->input->post('dni') : $docente['dni'])); ?>
 
-	<div class="form-group">
-		<label for="categoria" class="col-md-4 control-label">Categoría</label>
-		<div class="col-md-8">
-			<select name="categoria" class="form-control">
-				<?php 
-					foreach($categorias as $categoria)
-					{
-						$selected = ($categoria->id == $docente['id_docente_categoria']) ? ' selected="selected"' : "";
+	<?php echo $this->template->cargar_input(lang('form_cuit'), 'cuit', 'text', '', form_error('cuit'), ($this->input->post('dni') ? $this->input->post('cuit') : $docente['cuit'])); ?>
 
-						echo '<option value="'.$categoria->id.'" '.$selected.'>'.$categoria->nombre.'</option>';
-					} 
-				?>
-			</select>
-		</div>
-	</div>
+	<?php echo $this->template->cargar_input(sprintf(lang('form_email'),'1'), 'email1', 'text', '*', form_error('email1'), ($this->input->post('email1') ? $this->input->post('email1') : $docente['email1'])); ?>
 
-	<div class="form-group">
-		<label for="descripcion" class="col-md-4 control-label">Descripción</label>
-		<div class="col-md-8">
-			<textarea name="descripcion" class="form-control" id="descripcion"><?php echo ($this->input->post('descripcion') ? $this->input->post('descripcion') : $docente['descripcion']); ?></textarea>
-		</div>
-	</div>
+	<?php echo $this->template->cargar_input(sprintf(lang('form_email'),'2'), 'email2', 'text', '', form_error('email2'), ($this->input->post('email2') ? $this->input->post('email2') : $docente['email2'])); ?>
+
+	<?php echo $this->template->cargar_select(lang('form_category'), 'id_docente_categoria', '*', form_error('id_docente_categoria'), $categorias, $docente['id_docente_categoria']); ?>
+
+	<?php echo $this->template->cargar_textarea(lang('form_description'), 'descripcion', '', form_error('descripcion'), ($this->input->post('descripcion') ? $this->input->post('descripcion') : $docente['descripcion'])); ?>
 	
-	<div class="form-group">
-		<div class="col-sm-offset-4 col-sm-8">
-			<button type="submit" class="btn btn-success">Guardar</button>
-        </div>
-	</div>
+	<?php echo $this->template->cargar_submit(); ?>
 	
 <?php echo form_close(); ?>

@@ -151,6 +151,29 @@ class Template extends MX_Controller
 		return $this->load->view('label-input',$data, true);
 	}	
 
+	public function cargar_select($label, $nombre, $obligatorio, $error, $array, $comp)
+	{
+		$data['label'] = $label;
+		$data['nombre'] = $nombre;
+		$data['obligatorio'] = $obligatorio;
+		$data['error'] = $error;
+		$data['array'] = $array;
+		$data['comp'] = $comp;
+
+		return $this->load->view('label-select',$data, true);
+	}	
+
+	public function cargar_textarea($label, $nombre, $obligatorio, $error, $descripcion)
+	{
+		$data['label'] = $label;
+		$data['nombre'] = $nombre;
+		$data['obligatorio'] = $obligatorio;
+		$data['error'] = $error;
+		$data['descripcion'] = $descripcion;
+
+		return $this->load->view('label-textarea',$data, true);
+	}	
+
 	public function cargar_submit()
 	{
 		return $this->load->view('form_button');

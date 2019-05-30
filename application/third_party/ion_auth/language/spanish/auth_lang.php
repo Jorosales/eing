@@ -164,62 +164,81 @@ $lang['email_new_password_heading']    = 'Nueva contraseña para %s';
 $lang['email_new_password_subheading'] = 'Tu contraseña ha sido restablecida a: %s';
 
 
-//Titulos de tablas
+//TITULOS DE TABLAS
 
 //Comunes
-$lang['no_existe']    = '%s no existe.';
+$lang['no_existe']    					= '%s no existe.';
 
-$lang['record_success']    = 'Datos Registrados';
-$lang['record_error']    = 'Error';
+$lang['record_success']    				= 'Datos Registrados';
+$lang['record_error']    				= 'Error';
 
-$lang['record_add_success_text']    = '%s se registró correctamente.';
-$lang['record_add_error_text']    = 'Hubo un error, %s no se pudo registrar.';
+$lang['record_add_success_text']    	= '%s se registró correctamente.';
+$lang['record_add_error_text']    		= 'Hubo un error, %s no se pudo registrar.';
 
-$lang['record_edit_success_text']    = '%s se actualizó correctamente';
-$lang['record_edit_error_text']    = 'Hubo un error, %s no se pudo modificar.';
+$lang['record_edit_success_text']   	= '%s se actualizó correctamente';
+$lang['record_edit_error_text']   		= 'Hubo un error, %s no se pudo modificar.';
 
-$lang['record_remove_success_text']    = '%s se eliminó correctamente';
-$lang['record_remove_error_text']    = 'Hubo un error, %s no se pudo eliminar.';
+$lang['record_remove_success_text']    	= '%s se eliminó correctamente';
+$lang['record_remove_error_text']    	= 'Hubo un error, %s no se pudo eliminar.';
 
-$lang['plan_activate_success']    = 'El plan se activo correctamente.';
-$lang['plan_activate_error']    = 'El plan no se pudo activar, debido a que la carrera ya posee un plan activo.';
+$lang['plan_activate_success']    		= 'El plan se activo correctamente.';
+$lang['plan_activate_error']    		= 'El plan no se pudo activar, debido a que la carrera ya posee un plan activo.';
 
-$lang['plan_deactivate_success']    = 'El plan se desactivo correctamente.';
-$lang['plan_deactivate_error']    = 'El plan no se pudo desactivar.';
+$lang['plan_deactivate_success']    	= 'El plan se desactivo correctamente.';
+$lang['plan_deactivate_error']    		= 'El plan no se pudo desactivar.';
 
-$lang['table_id_th']    = 'ID';
-$lang['table_name_th']    = 'Nombre';
-$lang['table_type_th']    = 'Tipo';
-$lang['table_actions_th']    = 'Acciones';
-$lang['table_status_th']    = 'Estado';
-$lang['table_orientation_th']    = 'Orientación';
+$lang['table_id_th']    		= 'ID';
+$lang['table_name_th']    		= 'Nombre';
+$lang['table_type_th']    		= 'Tipo';
+$lang['table_actions_th']    	= 'Acciones';
+$lang['table_status_th']    	= 'Estado';
+$lang['table_orientation_th']   = 'Orientación';
 
 //Carreras
-$lang['table_plan_pdf_th']    = 'Plan PDF';
-$lang['table_image_th']    = 'Imágen';
+$lang['table_plan_pdf_th']    	= 'Plan PDF';
+$lang['table_image_th']    		= 'Imágen';
 
 //Planes
-$lang['table_career_th']    = 'Carrera';
-$lang['table_duration_th']    = 'Duración';
+$lang['table_career_th']   		= 'Carrera';
+$lang['table_duration_th']    	= 'Duración';
 
 //Orientaciones
-$lang['table_plan_th']    = 'Plan';
+$lang['table_plan_th']    		= 'Plan';
 
 //Ciclo_materias
-$lang['table_cicle_th']    = 'Ciclo';
-$lang['table_course_th']    = 'Materia';
-$lang['table_regimen_th']    = 'Regimén';
-$lang['table_hours_th']    = 'Horas';
-$lang['table_total_hours_th']    = 'Horas Total';
-$lang['table_programa_th']    = 'Programa';
-$lang['table_hours_th']    = 'Horas';
-$lang['table_year_th']    = 'Año';
-$lang['table_code_th']    = 'Código';
+$lang['table_cicle_th']    		= 'Ciclo';
+$lang['table_course_th']   		= 'Materia';
+$lang['table_regimen_th']    	= 'Regimén';
+$lang['table_hours_th']    		= 'Horas';
+$lang['table_total_hours_th']   = 'Horas Total';
+$lang['table_programa_th']    	= 'Programa';
+$lang['table_hours_th']    		= 'Horas';
+$lang['table_year_th']    		= 'Año';
+$lang['table_code_th']    		= 'Código';
 
 
 //Docentes
-$lang['table_teacher_th']    = 'Docente';
-$lang['table_category_th']    = 'Categoria';
-$lang['table_description_th']    = 'Descripción';
+$lang['table_teacher_th']    	= 'Docente';
+$lang['table_category_th']    	= 'Categoria';
+$lang['table_description_th']   = 'Descripción';
+
+
+
+
+//TITULOS DE FORMULARIOS
+$lang['form_name']    			= 'Nombre';
+$lang['form_last_name']    		= 'Apellido';
+$lang['form_second_name']    	= '2° Nombre';
+$lang['form_dni']    			= 'DNI';
+$lang['form_cuit']    			= 'CUIT';
+$lang['form_email']    			= 'E-mail %s';
+$lang['form_description']    	= 'Descripción';
+$lang['form_category']    	= 'Categoría';
+
+$lang['form_orientation']    	= 'Orientación';
+$lang['form_plan']    			= 'Plan';
+$lang['form_career']    		= 'Carrera';
+$lang['form_duration']    		= 'Duración';
+$lang['form_course_type']  		= 'Tipo Materia';
 
 
