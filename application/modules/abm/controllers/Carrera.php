@@ -34,6 +34,42 @@ class Carrera extends MX_Controller {
         }
     }
 
+    public function pdf_file_check($str, $nombre)
+    {
+        if ($_FILES[$nombre]['size']>0){
+
+            if($_FILES[$nombre]['type'] == 'application/pdf')
+            {
+                return TRUE;
+            }
+            else
+            {
+                $this->form_validation->set_message('pdf_file_check', '{field} solo puede ser del tipo PDF');
+                return FALSE;
+            }
+        }
+
+        
+    }
+
+    public function image_file_check($str, $nombre)
+    {
+        if ($_FILES[$nombre]['size']>0){
+
+            if($_FILES[$nombre]['type'] == 'image/jpeg' || $_FILES[$nombre]['type'] == 'image/png')
+            {
+                return TRUE;
+            }
+            else
+            {
+                $this->form_validation->set_message('image_file_check', '{field} solo puede ser del tipo jpg o png');
+                return FALSE;
+            }
+        }
+        
+    }
+
+
     /*
      * Adding a new carrera
      */
@@ -44,51 +80,35 @@ class Carrera extends MX_Controller {
             redirect('login', 'refresh');
         }else {
 
-            $this->load->library('form_validation');
             $this->form_validation->set_rules('nombre','Nombre','required');
-            
-            if($this->form_validation->run())     
+            $this->form_validation->set_rules('plan_pdf','Plan PDF','callback_pdf_file_check[plan_pdf]');
+            $this->form_validation->set_rules('imagen','Imagen','callback_image_file_check[imagen]');
+
+            if($this->form_validation->run($this))     
             {   
-                
-                if($_FILES['plan_pdf']['type'] == 'application/pdf')
-                    $pdf = $this->template->subir_archivo(PDFS_UPLOAD, '*', 'plan_pdf');
-
-                if($_FILES['imagen']['type'] == 'image/jpeg' || $_FILES['imagen']['type'] == 'image/png')
-                    $imagen = $this->template->subir_archivo(IMAGES_UPLOAD, 'jpg|png', 'imagen');
-
                 $params = array(
                     'nombre' => $this->input->post('nombre'),
+                    'imagen' => $_FILES['plan_pdf']['name'],
+                    'plan_pdf' => $_FILES['imagen']['name'],
                     'presentacion' => $this->input->post('presentacion'),
                     'perfil' => $this->input->post('perfil'),
                 );
 
-                if($_FILES['plan_pdf']['type'] == 'application/pdf')
-                        $params['plan_pdf']= $pdf['file_name'];
-
-                if($_FILES['imagen']['type'] == 'image/jpeg' || $_FILES['imagen']['type'] == 'image/png')
-                    $params['imagen']= $imagen['file_name'];
-                
-                
-                if (!isset($imagen) || !isset($pdf)){
-                    $data['alerta'] = $this->template->cargar_alerta('danger', 'Error de formato', 'El archivo seleccionado no corresponde con el formato.');
-                    $this->template->cargar_vista('abm/carrera/add', $data);
-                }else{
+                $pdf = $this->template->subir_archivo(PDFS_UPLOAD, 'pdf', 'plan_pdf');
+                $imagen = $this->template->subir_archivo(IMAGES_UPLOAD, 'jpg|png', 'imagen');
              
-                    if ($this->Carrera_model->add_carrera($params))
-                        $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
-                                        sprintf(lang('record_edit_success_text'), $this->name));    
-                    else   
-                            $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
-                                        sprintf(lang('record_edit_error_text'), $this->name));  
+                if ($this->Carrera_model->add_carrera($params))
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                    sprintf(lang('record_edit_success_text'), $this->name));    
+                else   
+                        $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                    sprintf(lang('record_edit_error_text'), $this->name));  
 
-                    $this->index($mensaje);
-                }
-
+                $this->index($mensaje);
             }
             else
             {            
                 $data['user'] = $this->ion_auth->user()->row();
-
                 $this->template->cargar_vista('abm/carrera/add', $data);
             }
         }
@@ -112,7 +132,7 @@ class Carrera extends MX_Controller {
                 
                 if($this->form_validation->run())     
                 {                       
-                    if(($this->input->post('pdf') != $data['plan_pdf']){
+                    /*if(($this->input->post('pdf') != $data['plan_pdf']){
                         if($_FILES['plan_pdf']['type'] == 'application/pdf')){
                         $pdf = $this->template->subir_archivo(PDFS_UPLOAD, '*', 'plan_pdf');
                         $params['plan_pdf']= $pdf['file_name'];
@@ -127,7 +147,7 @@ class Carrera extends MX_Controller {
                     }
                     else{
                         $this->input->post('imagen') = $this->input->post('imagen');  
-                    }
+                    }*/
 
                     $params = array(
                         'nombre' => $this->input->post('nombre'),
