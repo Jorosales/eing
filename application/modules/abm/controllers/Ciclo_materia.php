@@ -101,15 +101,16 @@ class Ciclo_materia extends MX_Controller{
         {
             $this->load->library('form_validation');
 
-			$this->form_validation->set_rules('anio','Anio','integer|required');
+			$this->form_validation->set_rules('anio','Año','integer|required');
 			$this->form_validation->set_rules('codigo','Codigo','alpha_numeric');
 			$this->form_validation->set_rules('horas','Horas','numeric');
 			$this->form_validation->set_rules('hs_total','Hs Total','numeric');
-			$this->form_validation->set_rules('id_ciclo','Id Ciclo','required');
-			$this->form_validation->set_rules('id_materia','Id Materia','required');
-			$this->form_validation->set_rules('id_regimen','Id Regimen','required');
+			$this->form_validation->set_rules('id_ciclo','Ciclo','required');
+			$this->form_validation->set_rules('id_materia','Materia','required');
+			$this->form_validation->set_rules('id_regimen','Regimen','required');
+            $this->form_validation->set_rules('programa','Programa','callback_pdf_file_check[programa]');
 		
-			if($this->form_validation->run())     
+			if($this->form_validation->run($this))     
             {   
                 $params = array(
 					'id_ciclo' => $this->input->post('id_ciclo'),
@@ -117,16 +118,21 @@ class Ciclo_materia extends MX_Controller{
 					'id_regimen' => $this->input->post('id_regimen'),
 					'horas' => $this->input->post('horas'),
 					'hs_total' => $this->input->post('hs_total'),
-					'programa' => $this->input->post('programa'),
+					//'programa' => $this->input->post('programa'),
 					'anio' => $this->input->post('anio'),
 					'codigo' => $this->input->post('codigo'),
                 );
+
+                if($_FILES['programa']['name'] != ''){
+                    $pdf = $this->template->subir_archivo(PDFS_UPLOAD.'programas', 'pdf', 'programa');
+                    $params['programa'] = $pdf['file_name'];
+                }
 
                 if ($this->Ciclo_materia_model->update_ciclo_materia($id,$params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                     sprintf(lang('record_edit_success_text'), $this->name));    
                 else   
-                        $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                     sprintf(lang('record_edit_error_text'), $this->name));    
                     
                 $this->index($mensaje);
@@ -166,6 +172,12 @@ class Ciclo_materia extends MX_Controller{
         }
         else
             show_error(sprintf(lang('no_existe'), $this->name));
+    }
+
+
+    public function pdf_file_check($str, $nombre)
+    {
+        return $this->template->pdf_file_check($str, $nombre);
     }
     
 }

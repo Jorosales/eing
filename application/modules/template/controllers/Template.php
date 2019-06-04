@@ -190,6 +190,44 @@ class Template extends MX_Controller
 	}
 
 
+	//carga de archivos
+	public function pdf_file_check($str, $nombre)
+    {
+        if ($_FILES[$nombre]['size']>0){
+
+            if($_FILES[$nombre]['type'] == 'application/pdf')
+            {
+                return TRUE;
+            }
+            else
+            {
+                $this->form_validation->set_message('pdf_file_check', '{field} solo puede ser del tipo PDF');
+                return FALSE;
+            }
+        }
+
+        
+    }
+
+    public function image_file_check($str, $nombre)
+    {
+        if ($_FILES[$nombre]['size']>0){
+
+            if($_FILES[$nombre]['type'] == 'image/jpeg' || $_FILES[$nombre]['type'] == 'image/png')
+            {
+                return TRUE;
+            }
+            else
+            {
+                $this->form_validation->set_message('image_file_check', '{field} solo puede ser del tipo jpg o png');
+                return FALSE;
+            }
+        }
+        
+    }
+
+
+
 
 	
 }
