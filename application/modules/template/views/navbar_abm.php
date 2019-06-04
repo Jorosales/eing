@@ -30,7 +30,7 @@
 
 	<ul class="treeview-menu">
 		<li><a href="<?php echo base_url();?>abm/docente">Docentes</a></li>
-		<li><a href="<?php echo base_url();?>abm/docente">Categoría</a></li>
+		<li><a href="<?php echo base_url();?>abm/categoria">Categoría</a></li>
 		<li><a href="<?php echo base_url();?>abm/cvar">CVAR</a></li>
 	</ul>
 </li>

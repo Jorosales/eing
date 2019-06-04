@@ -46,15 +46,14 @@ class Ciclo_materia extends MX_Controller{
      */
     function add()
     {   
-
-		$this->form_validation->set_rules('anio','Año','integer|required');
-        $this->form_validation->set_rules('codigo','Codigo','alpha_numeric');
-        $this->form_validation->set_rules('horas','Horas','numeric');
-        $this->form_validation->set_rules('hs_total','Hs Total','numeric');
-        $this->form_validation->set_rules('id_ciclo','Ciclo','required');
-        $this->form_validation->set_rules('id_materia','Materia','required');
-        $this->form_validation->set_rules('id_regimen','Regimen','required');
-        $this->form_validation->set_rules('programa','Programa','callback_pdf_file_check[programa]');
+        $this->form_validation->set_rules('anio',lang('form_year'),'integer|required');
+        $this->form_validation->set_rules('codigo',lang('form_code'),'alpha_numeric');
+        $this->form_validation->set_rules('horas',lang('form_hours'),'numeric');
+        $this->form_validation->set_rules('hs_total',lang('form_total_hours'),'numeric');
+        $this->form_validation->set_rules('id_ciclo',lang('form_cycle'),'required');
+        $this->form_validation->set_rules('id_materia',lang('form_course'),'required');
+        $this->form_validation->set_rules('id_regimen',lang('form_regimen'),'required');
+        $this->form_validation->set_rules('programa',lang('form_program'),'callback_pdf_file_check[programa]');
 		
 		if($this->form_validation->run($this))     
         {   
@@ -103,14 +102,14 @@ class Ciclo_materia extends MX_Controller{
         
         if(isset($data['ciclo_materia']['id']))
         {
-			$this->form_validation->set_rules('anio','Año','integer|required');
-			$this->form_validation->set_rules('codigo','Codigo','alpha_numeric');
-			$this->form_validation->set_rules('horas','Horas','numeric');
-			$this->form_validation->set_rules('hs_total','Hs Total','numeric');
-			$this->form_validation->set_rules('id_ciclo','Ciclo','required');
-			$this->form_validation->set_rules('id_materia','Materia','required');
-			$this->form_validation->set_rules('id_regimen','Regimen','required');
-            $this->form_validation->set_rules('programa','Programa','callback_pdf_file_check[programa]');
+			$this->form_validation->set_rules('anio',lang('form_year'),'integer|required');
+			$this->form_validation->set_rules('codigo',lang('form_code'),'alpha_numeric');
+			$this->form_validation->set_rules('horas',lang('form_hours'),'numeric');
+			$this->form_validation->set_rules('hs_total',lang('form_total_hours'),'numeric');
+			$this->form_validation->set_rules('id_ciclo',lang('form_cycle'),'required');
+			$this->form_validation->set_rules('id_materia',lang('form_course'),'required');
+			$this->form_validation->set_rules('id_regimen',lang('form_regimen'),'required');
+            $this->form_validation->set_rules('programa',lang('form_program'),'callback_pdf_file_check[programa]');
 		
 			if($this->form_validation->run($this))     
             {   

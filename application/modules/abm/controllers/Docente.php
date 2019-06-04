@@ -104,8 +104,6 @@ class Docente extends MX_Controller{
      */
     function edit($id)
     {   
-        // check if the docente exists before trying to edit it
-
         $data['docente'] = $this->Docente_model->get_docente($id);
         $data['persona'] = $this->Persona_model->get_persona($data['docente']['id']);
 
