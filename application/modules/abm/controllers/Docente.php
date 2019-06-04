@@ -52,7 +52,7 @@ class Docente extends MX_Controller{
     {   
 
         $this->form_validation->set_rules('apellido',lang('form_last_name'),'required');
-        $this->form_validation->set_rules('nombre',lang('form_name'),'required');
+        $this->form_validation->set_rules('nombre','1º Nombre','required');
         $this->form_validation->set_rules('cuit',lang('form_cuit'),'alpha_numeric');
         $this->form_validation->set_rules('email1',sprintf(lang('form_email'),'1'),'required|valid_email');
         $this->form_validation->set_rules('email2',sprintf(lang('form_email'),'2'),'valid_email');
@@ -113,11 +113,11 @@ class Docente extends MX_Controller{
         
         if(isset($data['docente']['id']))
         {
-            $this->form_validation->set_rules('apellido','Apellido','required');
+            $this->form_validation->set_rules('apellido',lang('form_last_name'),'required');
             $this->form_validation->set_rules('nombre','1º Nombre','required');
-            $this->form_validation->set_rules('cuit','CUIT','alpha_numeric');
-            $this->form_validation->set_rules('email1','email 1','required|valid_email');
-            $this->form_validation->set_rules('email2','email 2','valid_email');
+            $this->form_validation->set_rules('cuit',lang('form_cuit'),'alpha_numeric');
+            $this->form_validation->set_rules('email1',sprintf(lang('form_email'),'1'),'required|valid_email');
+            $this->form_validation->set_rules('email2',sprintf(lang('form_email'),'2'),'valid_email');
         
             if($this->form_validation->run())     
             {   
@@ -170,7 +170,6 @@ class Docente extends MX_Controller{
     {
         $docente = $this->Docente_model->get_docente($id);
 
-        // check if the docente exists before trying to delete it
         if(isset($docente['id']))
         {
             if ($this->Docente_model->delete_docente($id))

@@ -48,8 +48,8 @@ class Ciclo extends MX_Controller{
     {   
         $this->load->library('form_validation');
 
-		$this->form_validation->set_rules('nombre','Nombre','required');
-		$this->form_validation->set_rules('id_plan','Plan','required');
+		$this->form_validation->set_rules('nombre',lang('form_name'),'required');
+		$this->form_validation->set_rules('id_plan',lang('form_plan'),'required');
 		
 		if($this->form_validation->run())     
         {   
@@ -90,8 +90,8 @@ class Ciclo extends MX_Controller{
         {
             $this->load->library('form_validation');
 
-			$this->form_validation->set_rules('nombre','Nombre','required');
-			$this->form_validation->set_rules('id_plan','Plan','required');
+			$this->form_validation->set_rules('nombre',lang('form_name'),'required');
+			$this->form_validation->set_rules('id_plan',lang('form_plan'),'required');
 		
 			if($this->form_validation->run())     
             {   

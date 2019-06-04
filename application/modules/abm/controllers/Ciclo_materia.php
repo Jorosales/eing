@@ -46,27 +46,32 @@ class Ciclo_materia extends MX_Controller{
      */
     function add()
     {   
-        $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('anio','Año','integer|required');
-		$this->form_validation->set_rules('horas','Horas','integer');
-		$this->form_validation->set_rules('hs_total','Horas Total','integer');
-		$this->form_validation->set_rules('id_ciclo','Ciclo','required');
-		$this->form_validation->set_rules('id_materia','Materia','required');
-		$this->form_validation->set_rules('id_regimen','Regimén','required');
+        $this->form_validation->set_rules('codigo','Codigo','alpha_numeric');
+        $this->form_validation->set_rules('horas','Horas','numeric');
+        $this->form_validation->set_rules('hs_total','Hs Total','numeric');
+        $this->form_validation->set_rules('id_ciclo','Ciclo','required');
+        $this->form_validation->set_rules('id_materia','Materia','required');
+        $this->form_validation->set_rules('id_regimen','Regimen','required');
+        $this->form_validation->set_rules('programa','Programa','callback_pdf_file_check[programa]');
 		
-		if($this->form_validation->run())     
+		if($this->form_validation->run($this))     
         {   
             $params = array(
-				'id_ciclo' => $this->input->post('id_ciclo'),
-				'id_materia' => $this->input->post('id_materia'),
-				'id_regimen' => $this->input->post('id_regimen'),
-				'horas' => $this->input->post('horas'),
-				'hs_total' => $this->input->post('hs_total'),
-				'programa' => $this->input->post('programa'),
-				'anio' => $this->input->post('anio'),
-				'codigo' => $this->input->post('codigo'),
+                'id_ciclo' => $this->input->post('id_ciclo'),
+                'id_materia' => $this->input->post('id_materia'),
+                'id_regimen' => $this->input->post('id_regimen'),
+                'horas' => $this->input->post('horas'),
+                'hs_total' => $this->input->post('hs_total'),
+                'anio' => $this->input->post('anio'),
+                'codigo' => $this->input->post('codigo'),
             );
+
+            if($_FILES['programa']['name'] != ''){
+                $pdf = $this->template->subir_archivo(PDFS_UPLOAD.'programas', 'pdf', 'programa');
+                $params['programa'] = $pdf['file_name'];
+            }
             
             if ($this->Ciclo_materia_model->add_ciclo_materia($params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
@@ -94,13 +99,10 @@ class Ciclo_materia extends MX_Controller{
      */
     function edit($id)
     {   
-        // check if the ciclo_materia exists before trying to edit it
         $data['ciclo_materia'] = $this->Ciclo_materia_model->get_ciclo_materia($id);
         
         if(isset($data['ciclo_materia']['id']))
         {
-            $this->load->library('form_validation');
-
 			$this->form_validation->set_rules('anio','Año','integer|required');
 			$this->form_validation->set_rules('codigo','Codigo','alpha_numeric');
 			$this->form_validation->set_rules('horas','Horas','numeric');
@@ -118,7 +120,6 @@ class Ciclo_materia extends MX_Controller{
 					'id_regimen' => $this->input->post('id_regimen'),
 					'horas' => $this->input->post('horas'),
 					'hs_total' => $this->input->post('hs_total'),
-					//'programa' => $this->input->post('programa'),
 					'anio' => $this->input->post('anio'),
 					'codigo' => $this->input->post('codigo'),
                 );
@@ -158,7 +159,6 @@ class Ciclo_materia extends MX_Controller{
     {
         $ciclo_materia = $this->Ciclo_materia_model->get_ciclo_materia($id);
 
-        // check if the ciclo_materia exists before trying to delete it
         if(isset($ciclo_materia['id']))
         {
             if ($this->Ciclo_materia_model->delete_ciclo_materia($id))

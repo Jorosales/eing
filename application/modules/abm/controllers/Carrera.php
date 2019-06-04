@@ -44,9 +44,9 @@ class Carrera extends MX_Controller {
             redirect('login', 'refresh');
         }else {
 
-            $this->form_validation->set_rules('nombre','Nombre','required');
-            $this->form_validation->set_rules('plan_pdf','Plan PDF','callback_pdf_file_check[plan_pdf]');
-            $this->form_validation->set_rules('imagen','Imagen','callback_image_file_check[imagen]');
+            $this->form_validation->set_rules('nombre',lang('form_name'),'required');
+            $this->form_validation->set_rules('plan_pdf',lang('form_plan_pdf'),'callback_pdf_file_check[plan_pdf]');
+            $this->form_validation->set_rules('imagen',lang('form_image'),'callback_image_file_check[imagen]');
 
             if($this->form_validation->run($this))     
             {   
@@ -93,9 +93,9 @@ class Carrera extends MX_Controller {
             
             if(isset($data['carrera']['id']))
             {
-                $this->form_validation->set_rules('nombre','Nombre','required');
-                $this->form_validation->set_rules('plan_pdf','Plan PDF','callback_pdf_file_check[plan_pdf]');
-                $this->form_validation->set_rules('imagen','Imagen','callback_image_file_check[imagen]');
+                $this->form_validation->set_rules('nombre',lang('form_name'),'required');
+                $this->form_validation->set_rules('plan_pdf',lang('form_plan_pdf'),'callback_pdf_file_check[plan_pdf]');
+                $this->form_validation->set_rules('imagen',lang('form_image'),'callback_image_file_check[imagen]');
                 
                 if($this->form_validation->run($this))     
                 {                       
@@ -142,7 +142,6 @@ class Carrera extends MX_Controller {
     {
         $carrera = $this->Carrera_model->get_carrera($id);
 
-        // check if the carrera exists before trying to delete it
         if(isset($carrera['id']))
         {
             if ($this->Carrera_model->delete_carrera($id))
@@ -192,24 +191,21 @@ class Carrera extends MX_Controller {
 		}
 		else
 		{
-			// do we really want to deactivate?
+
 			if ($this->input->post('confirm') == 'yes')
 			{
-				// do we have a valid request?
+
 				if ($id != $this->input->post('id'))
 				{
 					return show_error($this->lang->line('error_csrf'));
 				}
 
-				// do we have the right userlevel?
 				if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin())
 				{
                     $params['activo']= false;
 					$this->Carrera_model->change_status($id, $params);
 				}
 			}
-
-			// redirect them back to the auth page
 			redirect('abm/carrera/', 'refresh');
 		}
 	}
