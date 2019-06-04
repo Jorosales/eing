@@ -1,14 +1,14 @@
 <?php
 
  
-class Regimen extends MX_Controller{
+class Categoria extends MX_Controller{
     
-    public $name = 'El regimen';
+    public $name = 'La categoría';
     function __construct()
     {
         parent::__construct();
         $this->load->module('template');
-        $this->load->model('Regimen_model');
+        $this->load->model('Categoria_model');
         $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
         $this->load->library(array('ion_auth', 'form_validation'));
         $this->load->helper(array('language'));
@@ -17,7 +17,7 @@ class Regimen extends MX_Controller{
     } 
 
     /*
-     * Listing of regimen
+     * Listing of titulos
      */
     function index($mensaje=null)
     {
@@ -27,21 +27,21 @@ class Regimen extends MX_Controller{
             redirect('login', 'refresh');
         }else {
             $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/regimen/index?', $this->Regimen_model->get_all_regimen_count($params));
+            $config = $this->template->get_config('abm/categoría/index?', $this->Categoria_model->get_all_categoria_count($params));
             $this->pagination->initialize($config);
 
-            $data['regimenes'] = $this->Regimen_model->get_all_regimen($params);
+            $data['categorias'] = $this->Categoria_model->get_all_categoria($params);
             $data['user'] = $this->ion_auth->user()->row();
             if (isset($mensaje)) {
                 $data['alerta'] = $mensaje;
             }
 
-            $this->template->cargar_vista('abm/regimen/index', $data);
+            $this->template->cargar_vista('abm/categoria/index', $data);
         }
     }
 
     /*
-     * Adding a new regimen
+     * Adding a new categoria
      */
     function add()
     {   
@@ -54,7 +54,7 @@ class Regimen extends MX_Controller{
                 'nombre' => $this->input->post('nombre'),
             );
             
-            if ($this->Regimen_model->add_regimen($params))
+            if ($this->Categoria_model->add_categoria($params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                 sprintf(lang('record_add_success_text'), $this->name));    
             else   
@@ -67,18 +67,18 @@ class Regimen extends MX_Controller{
         {
             $data['user'] = $this->ion_auth->user()->row();
             
-            $this->template->cargar_vista('abm/regimen/add', $data);
+            $this->template->cargar_vista('abm/categoria/add', $data);
         }
     }  
 
     /*
-     * Editing a regimen
+     * Editing a categoria
      */
     function edit($id)
     {   
-        $data['regimen'] = $this->Regimen_model->get_regimen($id); 
+        $data['categoria'] = $this->Categoria_model->get_categoria($id); 
         
-        if(isset($data['regimen']['id']))
+        if(isset($data['categoria']['id']))
         {
             $this->form_validation->set_rules('nombre',lang('form_name'),'required');
         
@@ -88,7 +88,7 @@ class Regimen extends MX_Controller{
                     'nombre' => $this->input->post('nombre'),
                     );
 
-                if ($this->Regimen_model->update_regimen($id,$params))
+                if ($this->Categoria_model->update_categoria($id,$params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                     sprintf(lang('record_edit_success_text'), $this->name));    
                 else   
@@ -100,7 +100,7 @@ class Regimen extends MX_Controller{
             else
             {
                 $data['user'] = $this->ion_auth->user()->row(); 
-                $this->template->cargar_vista('abm/regimen/edit', $data);
+                $this->template->cargar_vista('abm/categoria/edit', $data);
             }
         }
         else
@@ -109,15 +109,15 @@ class Regimen extends MX_Controller{
 
 
     /*
-     * Deleting regimen
+     * Deleting categoria
      */
     function remove($id)
     {
-        $regimen = $this->Regimen_model->get_regimen($id);
+        $categoria = $this->Categoria_model->get_categoria($id);
 
-        if(isset($regimen['id']))
+        if(isset($categoria['id']))
         {
-            if ($this->Regimen_model->delete_regimen($id))
+            if ($this->Categoria_model->delete_categoria($id))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                 sprintf(lang('record_remove_success_text'), $this->name));    
             else   

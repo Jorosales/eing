@@ -16,7 +16,7 @@ class Regimen_model extends CI_Model
     }
 
      /*
-     * Get all titulos count
+     * Get all regimen count
      */
     function get_all_regimen_count()
     {

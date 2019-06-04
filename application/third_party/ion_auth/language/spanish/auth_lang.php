@@ -221,6 +221,7 @@ $lang['table_code_th']    		= 'Código';
 $lang['table_teacher_th']    	= 'Docente';
 $lang['table_category_th']    	= 'Categoria';
 $lang['table_description_th']   = 'Descripción';
+$lang['table_cvar_th']   		= 'CVAR';
 
 
 //TITULOS DE FORMULARIOS

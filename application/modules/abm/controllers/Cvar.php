@@ -1,8 +1,8 @@
 <?php
  
-class Docente extends MX_Controller{
+class Cvar extends MX_Controller{
     
-    public $name = 'El docente';
+    public $name = 'CVAR';
     function __construct(){
         parent::__construct();
         $this->load->module('template');
@@ -16,34 +16,7 @@ class Docente extends MX_Controller{
         $this->lang->load('auth');
     } 
 
-    /*
-     * Listing of docente
-     */
-    function index($mensaje=null)
-    {
 
-        if (!$this->ion_auth->logged_in())
-        {
-            redirect('login', 'refresh');
-        }else {
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/docente/index?', $this->Docente_model->get_all_docente_count());
-            $this->pagination->initialize($config);
-
-            $data['docentes'] = $this->Docente_model->get_all_docente($params);
-            $data['user'] = $this->ion_auth->user()->row();
-
-            if (isset($mensaje)) {
-                $data['alerta'] = $mensaje;
-            }
-
-            $this->template->cargar_vista('abm/docente/index', $data);
-        }
-    }
-
-    /*
-     * Adding a new docente
-     */
     function add()
     {   
 
@@ -157,26 +130,5 @@ class Docente extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting docente
-     */
-    function remove($id)
-    {
-        $docente = $this->Docente_model->get_docente($id);
-
-        if(isset($docente['id']))
-        {
-            if ($this->Docente_model->delete_docente($id))
-                $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
-                                sprintf(lang('record_remove_success_text'), $this->name));    
-            else   
-                $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
-                                sprintf(lang('record_remove_error_text'), $this->name));    
-                
-            $this->index($mensaje);
-        }
-        else
-            show_error(sprintf(lang('no_existe'), $this->name));
-    }
     
 }
