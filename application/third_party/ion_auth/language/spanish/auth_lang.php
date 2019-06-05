@@ -252,4 +252,11 @@ $lang['form_image']  			= 'Imágen';
 $lang['form_presentation']  	= 'Presentación';
 $lang['form_career_profile']  	= 'Perfil';
 
+$lang['form_area']  			= 'Áreas';
+$lang['form_expertes']  		= 'Experticia';
+$lang['form_grade']  			= 'Grado';
+$lang['form_specialization']  	= 'Especialización';
+$lang['form_master']  	= 'Maestria';
+$lang['form_doctorate']  		= 'Doctorado';
+
 

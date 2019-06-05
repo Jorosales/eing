@@ -77,9 +77,9 @@ class Docente_model extends CI_Model
     /*
      * Get docente by id
      */
-    function get_cvar($id)
+    function get_cvar_by_docente($id)
     {
-        return $this->db->get_where('cvar',array('id'=>$id))->row_array();
+        return $this->db->get_where('cvar',array('id_docente'=>$id))->row_array();
     }
 
 
@@ -101,5 +101,12 @@ class Docente_model extends CI_Model
         return $this->db->get()->result();
     }
 
-
+    /*
+     * function to update cvar
+     */
+    function update_cvar($id,$params)
+    {
+        $this->db->where('id_docente',$id);
+        return $this->db->update('cvar',$params);
+    }
 }

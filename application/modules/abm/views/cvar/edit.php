@@ -1,24 +1,49 @@
-<?php echo form_open('abm/docente/edit/'.$docente['id'],array("class"=>"form-horizontal")); ?>
+<?php if(isset($alerta))  {  
+	echo $alerta;
+	} 
+?>
 
-
-	<?php echo $this->template->cargar_input(lang('form_last_name'), 'apellido', 'text', '*', form_error('apellido'), ($this->input->post('apellido') ? $this->input->post('apellido') : $docente['apellido'])); ?>
-
-	<?php echo $this->template->cargar_input(lang('form_name'), 'nombre', 'text', '*', form_error('nombre'), ($this->input->post('nombre') ? $this->input->post('nombre') : $docente['nombre'])); ?>
-
-	<?php echo $this->template->cargar_input(lang('form_second_name'), 'nombre_2', 'text', '', form_error('nombre_2'), ($this->input->post('nombre_2') ? $this->input->post('nombre_2') : $docente['nombre_2'])); ?>
-
-	<?php echo $this->template->cargar_input(lang('form_dni'), 'dni', 'text', '', form_error('dni'), ($this->input->post('dni') ? $this->input->post('dni') : $docente['dni'])); ?>
-
-	<?php echo $this->template->cargar_input(lang('form_cuit'), 'cuit', 'text', '', form_error('cuit'), ($this->input->post('dni') ? $this->input->post('cuit') : $docente['cuit'])); ?>
-
-	<?php echo $this->template->cargar_input(sprintf(lang('form_email'),'1'), 'email1', 'text', '*', form_error('email1'), ($this->input->post('email1') ? $this->input->post('email1') : $docente['email1'])); ?>
-
-	<?php echo $this->template->cargar_input(sprintf(lang('form_email'),'2'), 'email2', 'text', '', form_error('email2'), ($this->input->post('email2') ? $this->input->post('email2') : $docente['email2'])); ?>
-
-	<?php echo $this->template->cargar_select(lang('form_category'), 'id_docente_categoria', '*', form_error('id_docente_categoria'), $categorias, $docente['id_docente_categoria']); ?>
-
-	<?php echo $this->template->cargar_textarea(lang('form_description'), 'descripcion', '', form_error('descripcion'), ($this->input->post('descripcion') ? $this->input->post('descripcion') : $docente['descripcion'])); ?>
+<?php echo form_open('abm/cvar/edit/'.$docente['id'],array("class"=>"form-horizontal")); ?>
 	
-	<?php echo $this->template->cargar_submit(); ?>
+	<div class="container">    
+        <div class="jumbotron">
+          	<div class="row">
+		        <div class="col-md-8 col-xs-12 col-sm-6 col-lg-10">
+		            <div class="container" style="border-bottom:1px solid black">
+		            	<h2><?= $docente['apellido'].', '.$docente['nombre'].' '.$docente['nombre_2']; ?></h2>
+		            </div>
+		            
+		            <ul class="container details">
+		            	<li><p><span class="glyphicon glyphicon-education one" style="width:50px;"></span><?= $this->template->get_item($categorias, $docente['id_docente_categoria'], 'nombre');?></p></li>
+		            	<li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span><?= $docente['email1']; ?></p></li>
+		                <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span><?= $docente['email2']; ?></p></li>
+		                
+		                <li><p>
+		                	<span class="glyphicon glyphicon-pencil one" style="width:50px;"></span>
+		                	<?php echo anchor("abm/docente/edit/".$docente['id'], '<span class="btn btn-primary btn-xs">Editar</span>') ;?>
+		                	</p>
+		                </li>
+		            </ul>
+		        </div>
+	        </div>
+        </div>
+    	
+    	<?php echo $this->template->cargar_textarea(lang('form_area'), 'areas', '', form_error('areas'), ($this->input->post('areas') ? $this->input->post('areas') : $cvar['areas'])); ?>
+
+		<?php echo $this->template->cargar_textarea(lang('form_expertes'), 'experticia', '', form_error('experticia'), ($this->input->post('experticia') ? $this->input->post('experticia') : $cvar['experticia'])); ?>
+		
+		<?php echo $this->template->cargar_textarea(lang('form_grade'), 'grado', '', form_error('grado'), ($this->input->post('grado') ? $this->input->post('grado') : $cvar['grado'])); ?>
+		
+		<?php echo $this->template->cargar_textarea(lang('form_specialization'), 'especializacion', '', form_error('especializacion'), ($this->input->post('especializacion') ? $this->input->post('especializacion') : $cvar['especializacion'])); ?>
+		
+		<?php echo $this->template->cargar_textarea(lang('form_master'), 'maestria', '', form_error('maestria'), ($this->input->post('maestria') ? $this->input->post('maestria') : $cvar['maestria'])); ?>
+		
+		<?php echo $this->template->cargar_textarea(lang('form_doctorate'), 'doctorado', '', form_error('doctorado'), ($this->input->post('doctorado') ? $this->input->post('doctorado') : $cvar['doctorado'])); ?>
+		
+		<?php echo $this->template->cargar_submit(); ?>
+
+    </div>
+
+	
 	
 <?php echo form_close(); ?>

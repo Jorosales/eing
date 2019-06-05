@@ -227,6 +227,16 @@ class Template extends MX_Controller
     }
 
 
+    public function get_item($array, $id, $value)
+    {
+    	$seleccion=null;
+		foreach ($array as $item) {
+			if($item->id == $id){
+				$seleccion = $item->$value;
+			}
+		}
+		return($seleccion);
+    }
 
 
 	
