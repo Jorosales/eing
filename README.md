@@ -3,17 +3,25 @@ Desarrollo de sistema de gestión de información de la Escuela de Ingeniería (
 
 ## Installation
 
-> 1. ...
-> 2. ...
-> 3. ...
-> 4. ...
-> 5. ...
+> 1. Descargar el paquete y copiar en la carpeta del servidor correspondiente /var/www/html/eing (linux)
+> 2. Crear base de datos en el motor de mysql e importar el archivo que se encuentra en /database/eing.sql
+> 3. Modificar el archivo /application/config/database.php con los valores que correspondan
+		'hostname' => 'localhost',
+		'username' => 'user_name',
+		'password' => 'user_password',
+		'database' => 'database_name',
+> 4. Modificar el archivo /application/config/config.php con los valores que correspondan
+		$config['base_url'] = 'http://localhost/eing/';
     
+
+
+### Usuarios
+
 ### Admin Login
-Username: admin@admin.com Password: password
+Username: admin Password: 12345678
 
 ### User Login
-Username: amit@filliptechnologies.com Password: password
+Username: user Password: 12345678
 
 ## For Help
 smacoweb@gmail.com

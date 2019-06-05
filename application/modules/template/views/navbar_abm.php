@@ -10,13 +10,14 @@
 	<ul class="treeview-menu">
 		<li><a href="<?php echo base_url();?>abm/carrera/">Carreras</a></li>
 		<li><a href="<?php echo base_url();?>abm/planes/">Planes</a></li>
-		<li><a href="<?php echo base_url();?>abm/ciclo">Ciclos</a></li>
-		<li><a href="<?php echo base_url();?>abm/materia">Materias</a></li>
-		<li><a href="<?php echo base_url();?>abm/ciclo_materia">Ciclo - Materia</a></li>
 		<li><a href="<?php echo base_url();?>abm/orientaciones">Orientaciones</a></li>
-		<li><a href="<?php echo base_url();?>abm/titulo">Títulos</a></li>
+		<li><a href="<?php echo base_url();?>abm/ciclo">Ciclos</a></li>
+		<li><a href="<?php echo base_url();?>abm/ciclo_materia">Ciclo - Materia</a></li>
+		
+		<li><a href="<?php echo base_url();?>abm/materia">Materias</a></li>
 		<li><a href="<?php echo base_url();?>abm/tipo_materia">Tipo Materia</a></li>
 		<li><a href="<?php echo base_url();?>abm/regimen">Regimén</a></li>
+		<li><a href="<?php echo base_url();?>abm/titulo">Títulos</a></li>
 	</ul>
 </li>
 
@@ -31,6 +32,5 @@
 	<ul class="treeview-menu">
 		<li><a href="<?php echo base_url();?>abm/docente">Docentes</a></li>
 		<li><a href="<?php echo base_url();?>abm/categoria">Categoría</a></li>
-		<li><a href="<?php echo base_url();?>abm/cvar">CVAR</a></li>
 	</ul>
 </li>
