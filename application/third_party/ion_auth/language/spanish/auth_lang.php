@@ -241,7 +241,7 @@ $lang['form_duration']    		= 'Duración';
 $lang['form_course']  			= 'Materia';
 $lang['form_course_type']  		= 'Tipo Materia';
 $lang['form_cycle']  			= 'Ciclo';
-$lang['form_regimen']  			= 'Regimén';
+$lang['form_regimen']  			= 'Régimen';
 $lang['form_hours']  			= 'Horas';
 $lang['form_total_hours']  		= 'Horas Total';
 $lang['form_program']  			= 'Programa';
@@ -256,7 +256,7 @@ $lang['form_area']  			= 'Áreas';
 $lang['form_expertes']  		= 'Experticia';
 $lang['form_grade']  			= 'Grado';
 $lang['form_specialization']  	= 'Especialización';
-$lang['form_master']  	= 'Maestria';
+$lang['form_master']  			= 'Maestria';
 $lang['form_doctorate']  		= 'Doctorado';
 
 
