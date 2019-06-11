@@ -101,6 +101,12 @@ class Docente_model extends CI_Model
         return $this->db->get()->result();
     }
 
+    function add_cvar($params)
+    {
+        $this->db->insert('cvar',$params);
+        return $this->db->insert_id();
+    }
+
     /*
      * function to update cvar
      */
@@ -108,5 +114,42 @@ class Docente_model extends CI_Model
     {
         $this->db->where('id_docente',$id);
         return $this->db->update('cvar',$params);
+    }
+
+
+    //MATERIAS ASIGNADAS
+
+    function get_materias_asignadas($id)
+    {
+        $this->db->select('materia_docente.id as id, carrera.nombre as carrera, planes.nombre as plan, ciclos.nombre as ciclo, orientaciones.nombre as orientacion, materias.nombre as materia');    
+        $this->db->from('materia_docente');
+        $this->db->join('docentes', 'docentes.id = materia_docente.id_docente');
+        $this->db->join('ciclo_materia', 'ciclo_materia.id = materia_docente.id_ciclo_materia');
+        $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
+        $this->db->join('ciclos', 'ciclos.id = ciclo_materia.id_ciclo');
+        $this->db->join('orientaciones', 'orientaciones.id = ciclos.id_orientacion', 'left');
+        $this->db->join('planes', 'planes.id = ciclos.id_plan');
+        $this->db->join('carrera', 'carrera.id = planes.id_carrera');
+        $this->db->where('materia_docente.id_docente', $id); 
+
+        $this->db->order_by('carrera, plan, ciclo', 'desc');
+
+        return $this->db->get()->result();
+    }
+
+    function add_materia_docente($params)
+    {
+        $this->db->insert('materia_docente',$params);
+        return $this->db->insert_id();
+    }
+
+    function delete_materia_docente($id)
+    {
+        return $this->db->delete('materia_docente',array('id'=>$id));
+    }
+
+    function get_materia_asignada($id)
+    {
+        return $this->db->get_where('materia_docente',array('id'=>$id))->row_array();
     }
 }

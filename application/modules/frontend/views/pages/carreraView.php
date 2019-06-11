@@ -15,7 +15,7 @@
 
 
 		<div class="container tab-content card">
-		<a href="<?= base_url('data/'.$carrera[0]->plan_pdf)?>">Descargar Plan</a>
+		<a href="<?= base_url(PDFS_UPLOAD.'carreras/'.$carrera[0]->plan_pdf)?>">Descargar Plan</a>
 			<div class="tab-pane fade" id="panel1" role="tabpanel">
 				<?=$carrera[0]->presentacion;?>
             </div>
@@ -70,7 +70,7 @@
 								<?php foreach ($orientacion[$value->id] as $row) {?>
 									<tr>
 										<td>
-										<a href="<?= base_url('/materia/verMateria/'.$row->id)?>">
+										<a href="<?= base_url('/materia/'.$row->id)?>">
 											<i class="fas fa-search-plus"></i>
 										</a>
 										</td>

@@ -8,6 +8,8 @@ class Docente extends MX_Controller{
         $this->load->module('template');
         $this->load->model('Docente_model');
         $this->load->model('Persona_model');
+        $this->load->model('Ciclo_model');
+        $this->load->model('Ciclo_materia_model');
         $this->load->model('Docente_categoria_model');
         $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
         $this->load->library(array('ion_auth', 'form_validation'));
@@ -73,11 +75,24 @@ class Docente extends MX_Controller{
                 'id_docente_categoria' => $this->input->post('id_docente_categoria'),
                 'descripcion' => $this->input->post('descripcion')
             );
-
             
             $docente_id = $this->Docente_model->add_docente($params_docente);
+
+            $params_cvar = array(
+                'id_docente' => $docente_id,
+                'areas' => '',
+                'experticia' => '',
+                'grado' => '',
+                'especializacion' => '',
+                'maestria' => '',
+                'doctorado' => '',
+            );
+
+            $cvar_id = $this->Docente_model->add_cvar($params_cvar);
+
+
             
-            if ($persona_id && $docente_id)
+            if ($persona_id && $docente_id && $cvar_id)
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                 sprintf(lang('record_add_success_text'), $this->name));    
             else   
@@ -182,54 +197,36 @@ class Docente extends MX_Controller{
 
     function asignar_materia($id)
     {   
-    $data['docente'] = $this->Docente_model->get_docente($id);
-        $data['persona'] = $this->Persona_model->get_persona($data['docente']['id']);
+        $data['docente'] = $this->Docente_model->get_docente($id);
+        $data['persona'] = $this->Persona_model->get_persona($data['docente']['persona_id']);
 
-        $data['docente']=array_merge($data['docente'], $data['persona']); 
+        $data['docente']=array_merge($data['persona'], $data['docente']); 
+        $data['materias_asignadas'] =$this->Docente_model->get_materias_asignadas($data['docente']['id']);
         
         if(isset($data['docente']['id']))
         {
-            $this->form_validation->set_rules('apellido',lang('form_last_name'),'required');
-            $this->form_validation->set_rules('nombre','1º Nombre','required');
-            $this->form_validation->set_rules('cuit',lang('form_cuit'),'alpha_numeric');
-            $this->form_validation->set_rules('email1',sprintf(lang('form_email'),'1'),'required|valid_email');
-            $this->form_validation->set_rules('email2',sprintf(lang('form_email'),'2'),'valid_email');
+            $this->form_validation->set_rules('id_ciclo_materia',lang('form_last_name'),'required');
         
             if($this->form_validation->run())     
             {   
 
-                $params_persona = array(
-                    'apellido' => $this->input->post('apellido'),
-                    'nombre' => $this->input->post('nombre'),
-                    'nombre_2' => $this->input->post('nombre_2'),
-                    'dni' => $this->input->post('dni'),
-                    'cuit' => $this->input->post('cuit'),
-                    'email1' => $this->input->post('email1'),
-                    'email2' => $this->input->post('email2')
-                );
+                $params = array(
+                    'id_ciclo_materia' => $this->input->post('id_ciclo_materia'),
+                    'id_docente' => $data['docente']['id']
+                );          
 
-                $persona_id = $this->Persona_model->update_persona($id, $params_persona);
-
-                $params_docente = array(
-                    'persona_id' => $data['persona']['id'],
-                    'id_docente_categoria' => $this->input->post('categoria'),
-                    'descripcion' => $this->input->post('descripcion'),
-                );
-
-                $docente_id = $this->Docente_model->update_docente($id,$params_docente);            
-
-                if ($persona_id && $docente_id)
+                if ($this->Docente_model->add_materia_docente($params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                     sprintf(lang('record_edit_success_text'), $this->name));    
                 else   
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                     sprintf(lang('record_edit_error_text'), $this->name));    
                     
-                $this->index($mensaje);
+                redirect('abm/docente/asignar_materia/'.$data['docente']['id'], 'refresh');
             }
             else
             {
-                $data['categorias'] = $this->Docente_categoria_model->get_all_categoria(); 
+                $data['ciclos_materias'] = $this->Ciclo_materia_model->get_ciclos_materias();
                 $data['user'] = $this->ion_auth->user()->row(); 
         
                 $this->template->cargar_vista('abm/docente/asignar_materia', $data);
@@ -238,4 +235,26 @@ class Docente extends MX_Controller{
         else
             show_error(sprintf(lang('no_existe'), $this->name));
     }
+
+
+    function remove_materia_docente($id)
+    {
+        $materia = $this->Docente_model->get_materia_asignada($id);
+
+        if(isset($materia['id']))
+        {
+            if ($this->Docente_model->delete_materia_docente($id))
+                $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('record_remove_success_text'), $this->name));    
+            else   
+                $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('record_remove_error_text'), $this->name));    
+                
+            redirect('abm/docente/asignar_materia/'.$materia['id_docente'], 'refresh');
+        }
+        else
+            show_error(sprintf(lang('no_existe'), $this->name));
+    }
+
+
 }

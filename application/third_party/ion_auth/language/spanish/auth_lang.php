@@ -242,6 +242,7 @@ $lang['form_duration']    		= 'Duración';
 $lang['form_course']  			= 'Materia';
 $lang['form_course_type']  		= 'Tipo Materia';
 $lang['form_cycle']  			= 'Ciclo';
+$lang['form_cycle_course']  	= 'Ciclo-Materia';
 $lang['form_regimen']  			= 'Régimen';
 $lang['form_hours']  			= 'Horas';
 $lang['form_total_hours']  		= 'Horas Total';

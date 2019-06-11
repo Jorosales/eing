@@ -23,7 +23,7 @@
 					{?>
 						<tr>
 							<td colspan="6">
-								<a href="<?= base_url('/materia/verMateria/'.$row->id_materia)?>">
+								<a href="<?= base_url('/materia/'.$row->id_materia)?>">
 									<?=$row->optativa;?>
 								</a>
 							</td>
@@ -69,7 +69,7 @@
 								else 
 								{ 
 								?>	
-									<a href="<?= base_url($row->programa); ?>" target="blank">
+									<a href="<?= base_url(PDFS_UPLOAD.'programas/'.$row->programa); ?>" target="blank">
 										Ver Programa
 									</a>
 							<?php } ?>
@@ -102,7 +102,7 @@
 				<?php foreach ($equipo as $row) {?>
 					<tr> 
 						<td colspan="2">
-							<a href="<?= base_url('/docente/verDocente/'.$row->id_docente)?>">
+							<a href="<?= base_url('/docente/'.$row->id_docente)?>">
 								<?=strtoupper($row->apellido);?>, <?=strtoupper($row->nombre);?>
 							</a>
 						</td>
@@ -151,7 +151,7 @@
 						{?>
 							<tr>
 								<td colspan="6">
-									<a href="<?= base_url('/materia/verMateria/'.$row->id_materia)?>">
+									<a href="<?= base_url('/materia/'.$row->id_materia)?>">
 										<?=$row->id_materia;?> - <?=$row->correlativa;?>
 									</a>
 								</td>
@@ -177,7 +177,7 @@
 						{?>
 							<tr>
 								<td colspan="6">
-									<a href="<?= base_url('/materia/verMateria/'.$row->id_materia)?>">
+									<a href="<?= base_url('/materia/'.$row->id_materia)?>">
 										<?=$row->id_materia;?> - <?=$row->correlativa;?>
 									</a>
 								</td>
@@ -203,7 +203,7 @@
 						{?>
 							<tr>
 								<td colspan="6">
-									<a href="<?= base_url('/materia/verMateria/'.$row->id_materia)?>">
+									<a href="<?= base_url('/materia/'.$row->id_materia)?>">
 										<?=$row->id_materia;?> - <?=$row->correlativa;?>
 									</a>
 								</td>
