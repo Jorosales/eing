@@ -16,6 +16,7 @@
 		
 		<li><a href="<?php echo base_url();?>abm/materia">Materias</a></li>
 		<li><a href="<?php echo base_url();?>abm/materia_tipo">Tipo Materia</a></li>
+		<li><a href="<?php echo base_url();?>abm/correlatividad_tipo">Tipo Correlatividad</a></li>
 		<li><a href="<?php echo base_url();?>abm/regimen">Régimen</a></li>
 		<li><a href="<?php echo base_url();?>abm/titulo">Títulos</a></li>
 	</ul>
