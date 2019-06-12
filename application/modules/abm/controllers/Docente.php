@@ -130,7 +130,6 @@ class Docente extends MX_Controller{
         
             if($this->form_validation->run())     
             {   
-
                 $params_persona = array(
                     'apellido' => $this->input->post('apellido'),
                     'nombre' => $this->input->post('nombre'),
@@ -145,7 +144,7 @@ class Docente extends MX_Controller{
 
                 $params_docente = array(
                     'persona_id' => $data['persona']['id'],
-                    'id_docente_categoria' => $this->input->post('categoria'),
+                    'id_docente_categoria' => $this->input->post('id_docente_categoria'),
                     'descripcion' => $this->input->post('descripcion'),
                 );
 

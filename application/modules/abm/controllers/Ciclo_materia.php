@@ -10,6 +10,7 @@ class Ciclo_materia extends MX_Controller{
         $this->load->model('Ciclo_materia_model');
         $this->load->model('Ciclo_model');
         $this->load->model('Materia_model');
+        $this->load->model('Materias_tipo_model');
         $this->load->model('Regimen_model');
         $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
         $this->load->library(array('ion_auth', 'form_validation'));
@@ -179,4 +180,64 @@ class Ciclo_materia extends MX_Controller{
         return $this->template->pdf_file_check($str, $nombre);
     }
     
+
+    function asignar_correlativa($id)
+    {   
+        $data['ciclo_materia'] = $this->Ciclo_materia_model->get_ciclo_materia($id);
+
+        if(isset($data['ciclo_materia']['id']))
+        {
+            $this->form_validation->set_rules('id_correlativa',lang('form_last_name'),'required');
+            $this->form_validation->set_rules('id_correlativa_tipo',lang('form_last_name'),'required');
+        
+            if($this->form_validation->run())     
+            {   
+                $params = array(
+                    'id_ciclo_materia' => $data['ciclo_materia']['id'],
+                    'id_correlativa' => $this->input->post('id_correlativa'),
+                    'id_correlativa_tipo' => $this->input->post('id_correlativa_tipo')
+                );          
+
+                if ($this->Ciclo_materia_model->add_correlativa($params))
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                    sprintf(lang('record_edit_success_text'), $this->name));    
+                else   
+                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                    sprintf(lang('record_edit_error_text'), $this->name));    
+                    
+                redirect('abm/ciclo_materia/asignar_correlativa/'.$data['ciclo_materia']['id'], 'refresh');
+            }
+            else
+            {
+                $data['ciclos_materias'] = $this->Ciclo_materia_model->get_ciclos_materias();
+                $data['tipos'] = $this->Ciclo_materia_model->get_all_correlativas_tipo();
+                $data['correlativas'] = $this->Ciclo_materia_model->get_correlativas($id);
+                $data['user'] = $this->ion_auth->user()->row(); 
+        
+                $this->template->cargar_vista('abm/ciclo_materia/asignar_correlativa', $data);
+            }
+        }
+        else
+            show_error(sprintf(lang('no_existe'), $this->name));
+    }
+
+    function remove_correlativa($id)
+    {
+        $correlativa = $this->Ciclo_materia_model->get_correlativa($id);
+
+        if(isset($correlativa['id']))
+        {
+            if ($this->Ciclo_materia_model->delete_correlativa($id))
+                $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('record_remove_success_text'), $this->name));    
+            else   
+                $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('record_remove_error_text'), $this->name));    
+                
+            redirect('abm/ciclo_materia/asignar_correlativa/'.$correlativa['id_ciclo_materia'], 'refresh');
+        }
+        else
+            show_error(sprintf(lang('no_existe'), $this->name));
+    
+    }
 }

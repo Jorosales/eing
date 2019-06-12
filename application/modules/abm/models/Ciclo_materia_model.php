@@ -88,4 +88,44 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->query($query)->result();
     }
 
+
+    //CORRELATIVAS
+
+    function get_correlativas($id)
+    {
+        $this->db->select('correlativas.id as id, materias.nombre as materia, correlativas_tipo.descripcion as descripcion');    
+        $this->db->from('correlativas');
+        $this->db->join('ciclo_materia', 'ciclo_materia.id = correlativas.id_correlativa');
+        $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
+        $this->db->join('correlativas_tipo', 'correlativas_tipo.id = correlativas.id_correlativa_tipo');
+        $this->db->where('correlativas.id_ciclo_materia', $id); 
+
+        $this->db->order_by('descripcion, id', 'desc');
+
+        return $this->db->get()->result();
+    }
+
+
+    function get_all_correlativas_tipo()
+    {
+        $this->db->select('correlativas_tipo.id as id, correlativas_tipo.descripcion as nombre');
+        return $this->db->get('correlativas_tipo')->result();
+    }
+
+    function add_correlativa($params)
+    {
+        $this->db->insert('correlativas',$params);
+        return $this->db->insert_id();
+    }
+
+    function delete_correlativa($id)
+    {
+        return $this->db->delete('correlativas',array('id'=>$id));
+    }
+
+    function get_correlativa($id)
+    {
+        return $this->db->get_where('correlativas',array('id'=>$id))->row_array();
+    }
+
 }

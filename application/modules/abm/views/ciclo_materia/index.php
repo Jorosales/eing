@@ -45,8 +45,12 @@
 						<td><?php echo htmlspecialchars($cm->programa,ENT_QUOTES,'UTF-8');?></td>
 						<td><?php echo htmlspecialchars($cm->anio,ENT_QUOTES,'UTF-8');?></td>
 						<td><?php echo htmlspecialchars($cm->codigo,ENT_QUOTES,'UTF-8');?></td>
-						<td><?php echo anchor("abm/ciclo_materia/edit/".$cm->id, '<span class="btn btn-primary btn-xs">Editar</span>') ;?>
-					 	<?php echo anchor("abm/ciclo_materia/remove/".$cm->id, '<span class="btn btn-danger btn-xs">Eliminar</span>') ;?></td>
+						<td>
+							<?php echo anchor("abm/ciclo_materia/asignar_correlativa/".$cm->id, '<span class="btn btn-success btn-xs glyphicon glyphicon-list-alt"> CORRELATIVAS</span>') ;?>
+							<br><br>
+							<?php echo anchor("abm/ciclo_materia/edit/".$cm->id, '<span class="btn btn-primary btn-xs">Editar</span>') ;?>
+					 		<?php echo anchor("abm/ciclo_materia/remove/".$cm->id, '<span class="btn btn-danger btn-xs">Eliminar</span>') ;?>		
+					 	</td>
 					 </tr>
 					 <?php endforeach;?>
 				</tbody>

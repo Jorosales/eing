@@ -250,5 +250,20 @@ class Template extends MX_Controller
 		return $this->load->view('docente-profile',$data, true);
 	}
 
-	
+	public function get_perfil_materia($id)
+	{
+        $this->load->model('Ciclo_materia_model');
+        $this->load->model('Materia_model');
+        $this->load->model('Materias_tipo_model');
+        $this->load->model('Regimen_model');
+        $this->load->model('Ciclo_model');
+		$data['ciclo_materia'] = $this->Ciclo_materia_model->get_ciclo_materia($id);
+		$materia = $this->Materia_model->get_materia($id);
+		$data['ciclo_materia']= array_merge($materia, $data['ciclo_materia']);
+		$data['regimenes']= $this->Regimen_model->get_all_regimen();;
+		$data['tipos']= $this->Materias_tipo_model->get_all_materias_tipo();
+		$data['ciclos']= $this->Ciclo_model->get_all_ciclos();;
+		//var_dump($data); exit();
+		return $this->load->view('materia-profile',$data, true);
+	}	
 }

@@ -33,9 +33,10 @@ class Ciclo_model extends CI_Model
      */
     function get_all_ciclos($params = array())
     {
-        $query = "SELECT c.*, p.nombre as plan, o.nombre as orientacion
+        $query = "SELECT c.*, p.nombre as plan, o.nombre as orientacion, ca.nombre as carrera
                   FROM ciclos c
                   INNER JOIN planes p on c.id_plan = p.id
+                  INNER JOIN carrera ca on ca.id = p.id_carrera
                   LEFT JOIN orientaciones o on c.id_orientacion = o.id 
                   ORDER BY c.id desc ";
 
