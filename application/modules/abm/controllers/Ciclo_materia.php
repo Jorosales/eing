@@ -240,4 +240,65 @@ class Ciclo_materia extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     
     }
+
+
+    function asignar_optativas($id)
+    {   
+        $data['ciclo_materia'] = $this->Ciclo_materia_model->get_ciclo_materia($id);
+
+        if(isset($data['ciclo_materia']['id']))
+        {
+            $this->form_validation->set_rules('id_optativa',lang('form_optional'),'required');
+        
+            if($this->form_validation->run())     
+            {   
+                $params = array(
+                    'id_origen' => $data['ciclo_materia']['id'],
+                    'id_optativa' => $this->input->post('id_optativa')
+                );          
+
+                if ($this->Ciclo_materia_model->add_optativa($params))
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                    sprintf(lang('record_edit_success_text'), $this->name));    
+                else   
+                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                    sprintf(lang('record_edit_error_text'), $this->name));    
+                    
+                redirect('abm/ciclo_materia/asignar_optativas/'.$data['ciclo_materia']['id'], 'refresh');
+            }
+            else
+            {
+                $data['ciclos_materias'] = $this->Ciclo_materia_model->get_ciclos_materias();
+                $data['optativas'] = $this->Ciclo_materia_model->get_all_optativas();
+                $data['optativas_materia'] = $this->Ciclo_materia_model->get_optativas_by_materia($id);
+
+                $data['user'] = $this->ion_auth->user()->row(); 
+        
+                $this->template->cargar_vista('abm/ciclo_materia/asignar_optativa', $data);
+            }
+        }
+        else
+            show_error(sprintf(lang('no_existe'), $this->name));
+    }
+
+
+    function remove_optativa($id)
+    {
+        $optativa = $this->Ciclo_materia_model->get_optativa($id);
+
+        if(isset($optativa['id']))
+        {
+            if ($this->Ciclo_materia_model->delete_optativa($id))
+                $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('record_remove_success_text'), $this->name));    
+            else   
+                $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('record_remove_error_text'), $this->name));    
+                
+            redirect('abm/ciclo_materia/asignar_optativas/'.$optativa['id_origen'], 'refresh');
+        }
+        else
+            show_error(sprintf(lang('no_existe'), $this->name));
+    
+    }
 }

@@ -29,7 +29,7 @@ class Ciclo_materia_model extends CI_Model
      */
     function get_all_ciclo_materia($params = array())
     {
-        $query = "SELECT cm.*, c.nombre as nombre_ciclo, m.nombre as nombre_materia, r.nombre as nombre_regimen
+        $query = "SELECT cm.*, c.nombre as nombre_ciclo, m.nombre as nombre_materia, r.nombre as nombre_regimen, m.id_tipo as tipo
                                   FROM ciclo_materia cm
                                   INNER JOIN ciclos c ON cm.id_ciclo = c.id
                                   INNER JOIN materias m ON cm.id_materia = m.id
@@ -126,6 +126,56 @@ class Ciclo_materia_model extends CI_Model
     function get_correlativa($id)
     {
         return $this->db->get_where('correlativas',array('id'=>$id))->row_array();
+    }
+
+
+    //OPTATIVAS
+
+    function get_optativas_by_materia($id)
+    {
+        $this->db->select('optativas.id as id, materias.nombre as nombre');    
+        $this->db->from('optativas');
+        $this->db->join('ciclo_materia', 'ciclo_materia.id = optativas.id_optativa');
+        $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
+        $this->db->where('optativas.id_origen', $id); 
+        $this->db->order_by('nombre, id', 'desc');
+
+        return $this->db->get()->result();
+    }
+
+
+    function get_all_genericas()
+    {
+        $this->db->select('ciclo_materia.id as id, materias.nombre as nombre');
+        $this->db->from('ciclo_materia');
+        $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
+        $this->db->where('materias.id_tipo', 2); 
+        return $this->db->get()->result();
+    }
+
+    function get_all_optativas()
+    {
+        $this->db->select('ciclo_materia.id as id, materias.nombre as nombre');
+        $this->db->from('ciclo_materia');
+        $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
+        $this->db->where('materias.id_tipo', 3); 
+        return $this->db->get()->result();
+    }
+
+    function add_optativa($params)
+    {
+        $this->db->insert('optativas',$params);
+        return $this->db->insert_id();
+    }
+
+    function get_optativa($id)
+    {
+        return $this->db->get_where('optativas',array('id'=>$id))->row_array();
+    }
+
+    function delete_optativa($id)
+    {
+        return $this->db->delete('optativas',array('id'=>$id));
     }
 
 }

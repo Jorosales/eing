@@ -261,4 +261,7 @@ $lang['form_specialization']  	= 'Especialización';
 $lang['form_master']  			= 'Maestria';
 $lang['form_doctorate']  		= 'Doctorado';
 
+$lang['form_generic']  			= 'Materia Generica';
+$lang['form_optional']  		= 'Materia Optativa';
+
 

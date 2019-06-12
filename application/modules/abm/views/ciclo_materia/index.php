@@ -36,6 +36,7 @@
 				<tbody>
 					<?php foreach($ciclo_materia as $cm):?>
 					<tr>
+						<?php //var_dump($cm); exit(); ?>
 						<td><?php echo htmlspecialchars($cm->id,ENT_QUOTES,'UTF-8');?></td>
 						<td><?php echo htmlspecialchars($cm->nombre_ciclo,ENT_QUOTES,'UTF-8');?></td>
 						<td><?php echo htmlspecialchars($cm->nombre_materia,ENT_QUOTES,'UTF-8');?></td>
@@ -46,7 +47,14 @@
 						<td><?php echo htmlspecialchars($cm->anio,ENT_QUOTES,'UTF-8');?></td>
 						<td><?php echo htmlspecialchars($cm->codigo,ENT_QUOTES,'UTF-8');?></td>
 						<td>
-							<?php echo anchor("abm/ciclo_materia/asignar_correlativa/".$cm->id, '<span class="btn btn-success btn-xs glyphicon glyphicon-list-alt"> CORRELATIVAS</span>') ;?>
+							<?php 
+								if ($cm->tipo == 2) {
+									echo anchor("abm/ciclo_materia/asignar_optativas/".$cm->id, '<span class="btn btn-warning btn-xs glyphicon glyphicon-list-alt"> OPTATIVAS</span>');
+								}else{
+									echo anchor("abm/ciclo_materia/asignar_correlativa/".$cm->id, '<span class="btn btn-success btn-xs glyphicon glyphicon-list-alt"> CORRELATIVAS</span>') ;
+								}
+								
+							?>
 							<br><br>
 							<?php echo anchor("abm/ciclo_materia/edit/".$cm->id, '<span class="btn btn-primary btn-xs">Editar</span>') ;?>
 					 		<?php echo anchor("abm/ciclo_materia/remove/".$cm->id, '<span class="btn btn-danger btn-xs">Eliminar</span>') ;?>		
