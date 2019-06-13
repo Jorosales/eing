@@ -29,19 +29,15 @@ class Ciclo_materia_model extends CI_Model
      */
     function get_all_ciclo_materia($params = array())
     {
-        $query = "SELECT cm.*, c.nombre as nombre_ciclo, m.nombre as nombre_materia, r.nombre as nombre_regimen, m.id_tipo as tipo
-                                  FROM ciclo_materia cm
-                                  INNER JOIN ciclos c ON cm.id_ciclo = c.id
-                                  INNER JOIN materias m ON cm.id_materia = m.id
-                                  INNER JOIN regimen r ON cm.id_regimen = r.id
-                                  ORDER BY id desc ";
-
+        $this->db->select('ciclo_materia.*, ciclos.nombre as nombre_ciclo, materias.nombre as nombre_materia, regimen.nombre as nombre_regimen, materias.id_tipo as tipo');    
+        $this->db->from('ciclo_materia');
+        $this->db->join('ciclos', 'ciclos.id = ciclo_materia.id_ciclo');
+        $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
+        $this->db->join('regimen', 'regimen.id = ciclo_materia.id_regimen');
+        $this->db->order_by('id', 'desc');
         if(isset($params) && !empty($params))
-        {
-            $query.="LIMIT ".$params['limit']." OFFSET ".$params['offset']."";
-        }
-        
-        return $this->db->query($query)->result();
+            $this->db->limit($params['limit'], $params['offset']);
+        return $this->db->get()->result();
     }
         
     /*
@@ -73,19 +69,15 @@ class Ciclo_materia_model extends CI_Model
 
     function get_ciclos_materias($params = array())
     {
-        $query = "SELECT cm.id as id, CONCAT(c.nombre, ' - ' , m.nombre) as nombre
-                                  FROM ciclo_materia cm
-                                  INNER JOIN ciclos c ON cm.id_ciclo = c.id
-                                  INNER JOIN materias m ON cm.id_materia = m.id
-                                  INNER JOIN regimen r ON cm.id_regimen = r.id
-                                  ORDER BY id desc ";
-
+        $this->db->select('ciclo_materia.id as id, CONCAT(ciclos.nombre, " - " , materias.nombre) as nombre');    
+        $this->db->from('ciclo_materia');
+        $this->db->join('ciclos', 'ciclos.id = ciclo_materia.id_ciclo');
+        $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
+        $this->db->join('regimen', 'regimen.id = ciclo_materia.id_regimen');
+        $this->db->order_by('id', 'desc');
         if(isset($params) && !empty($params))
-        {
-            $query.="LIMIT ".$params['limit']." OFFSET ".$params['offset']."";
-        }
-        
-        return $this->db->query($query)->result();
+            $this->db->limit($params['limit'], $params['offset']);
+        return $this->db->get()->result();
     }
 
 
@@ -93,13 +85,12 @@ class Ciclo_materia_model extends CI_Model
 
     function get_correlativas($id)
     {
-        $this->db->select('correlativas.id as id, materias.nombre as materia, correlativas_tipo.descripcion as descripcion');    
+        $this->db->select('correlativas.id as id, materias.nombre as materia, correlativas_tipo.descripcion as descripcion');   
         $this->db->from('correlativas');
         $this->db->join('ciclo_materia', 'ciclo_materia.id = correlativas.id_correlativa');
         $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
         $this->db->join('correlativas_tipo', 'correlativas_tipo.id = correlativas.id_correlativa_tipo');
         $this->db->where('correlativas.id_ciclo_materia', $id); 
-
         $this->db->order_by('descripcion, id', 'desc');
 
         return $this->db->get()->result();

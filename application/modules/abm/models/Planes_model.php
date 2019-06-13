@@ -28,18 +28,15 @@ class Planes_model extends CI_Model
      * Get all planes
      */
     function get_all_planes($params = array())
-    {
-        $query = "SELECT p.*, c.nombre as carrera
-                  FROM planes p
-                  LEFT JOIN carrera c on p.id_carrera = c.id
-                  ORDER BY id desc ";
-
+    {    
+        $this->db->select('planes.*, carrera.nombre as carrera');    
+        $this->db->from('planes');
+        $this->db->join('carrera', 'carrera.id = planes.id_carrera', 'LEFT');
         if(isset($params) && !empty($params))
-        {
-            $query.="LIMIT ".$params['limit']." OFFSET ".$params['offset']."";
-        }
-                
-        return $this->db->query($query)->result();
+            $this->db->limit($params['limit'], $params['offset']);
+        $this->db->order_by('planes.id', 'desc');
+
+        return $this->db->get()->result();
     }
         
     /*
@@ -76,11 +73,13 @@ class Planes_model extends CI_Model
 
     function existe_plan_carrera($plan)
     {
-        $query = $this->db->query('
-            SELECT COUNT(id) as cantidad
-            FROM planes
-            WHERE id_carrera = (SELECT id_carrera FROM planes WHERE id = '.$plan.') AND vigente = 1'
-        );
-          return $query->result();
+        $subQuery = $this->db->get_where('planes', array('id' => $plan))->result();
+
+        $this->db->select('COUNT(id) as cantidad');    
+        $this->db->from('planes');
+        $this->db->where('planes.id_carrera', $subQuery[0]->id_carrera); 
+        $this->db->where('planes.vigente', 1); 
+
+        return $this->db->get()->result();
     }
 }

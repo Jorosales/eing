@@ -22,7 +22,6 @@ class Docente_categoria_model extends CI_Model
     function get_all_categoria()
     {
         $this->db->order_by('id', 'desc');
-        //var_dump($this->db->get('docente_categoria')->result()); exit();
         return $this->db->get('docente_categoria')->result();
     }
         

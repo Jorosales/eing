@@ -263,7 +263,6 @@ class Template extends MX_Controller
 		$data['regimenes']= $this->Regimen_model->get_all_regimen();;
 		$data['tipos']= $this->Materias_tipo_model->get_all_materias_tipo();
 		$data['ciclos']= $this->Ciclo_model->get_all_ciclos();;
-		//var_dump($data); exit();
 		return $this->load->view('materia-profile',$data, true);
 	}	
 }

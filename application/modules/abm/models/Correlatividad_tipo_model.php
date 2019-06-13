@@ -33,9 +33,7 @@ class Correlatividad_tipo_model extends CI_Model
         $this->db->select('correlativas_tipo.id as id, correlativas_tipo.descripcion as nombre');
         $this->db->order_by('id', 'desc');
         if(isset($params) && !empty($params))
-        {
             $this->db->limit($params['limit'], $params['offset']);
-        }
         return $this->db->get('correlativas_tipo')->result();
     }
         

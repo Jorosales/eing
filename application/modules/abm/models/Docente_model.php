@@ -29,15 +29,14 @@ class Docente_model extends CI_Model
      */
     function get_all_docente($params = array())
     {
-        $this->db->order_by('id', 'desc');
-        if(isset($params) && !empty($params))
-        {
-            $this->db->limit($params['limit'], $params['offset']);
-        }
         $this->db->select('docentes.id, CONCAT(persona.apellido, ", ",  persona.nombre) as docente, docente_categoria.nombre AS categoria, docentes.descripcion');    
         $this->db->from('docentes');
         $this->db->join('persona', 'docentes.persona_id = persona.id');
         $this->db->join('docente_categoria', 'docentes.id_docente_categoria = docente_categoria.id', 'left');
+        if(isset($params) && !empty($params))
+            $this->db->limit($params['limit'], $params['offset']);   
+        $this->db->order_by('id', 'desc');
+
         return $this->db->get()->result();
     }
         
@@ -69,9 +68,6 @@ class Docente_model extends CI_Model
 
 
 
-
-
-
     //CVAR
 
     /*
@@ -88,16 +84,15 @@ class Docente_model extends CI_Model
      */
     function get_all_cvar_docente($params = array())
     {
-        $this->db->order_by('id', 'desc');
-        if(isset($params) && !empty($params))
-        {
-            $this->db->limit($params['limit'], $params['offset']);
-        }
         $this->db->select('docentes.id, CONCAT(persona.apellido, ", ",  persona.nombre) as docente, docente_categoria.nombre AS categoria, cvar.areas');    
         $this->db->from('docentes');
         $this->db->join('persona', 'docentes.persona_id = persona.id');
         $this->db->join('docente_categoria', 'docentes.id_docente_categoria = docente_categoria.id', 'left');
         $this->db->join('cvar', 'docentes.id = cvar.id_docente');
+        if(isset($params) && !empty($params))
+            $this->db->limit($params['limit'], $params['offset']);
+        $this->db->order_by('id', 'desc');
+
         return $this->db->get()->result();
     }
 
@@ -131,7 +126,6 @@ class Docente_model extends CI_Model
         $this->db->join('planes', 'planes.id = ciclos.id_plan');
         $this->db->join('carrera', 'carrera.id = planes.id_carrera');
         $this->db->where('materia_docente.id_docente', $id); 
-
         $this->db->order_by('carrera, plan, ciclo', 'desc');
 
         return $this->db->get()->result();

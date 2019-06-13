@@ -29,19 +29,15 @@ class Titulo_model extends CI_Model
      */
     function get_all_titulos($params = array())
     {
-
-        $query = "SELECT t.*, p.nombre as plan, o.nombre as orientacion
-                  FROM titulos t
-                  INNER JOIN planes p on p.id = t.id_plan
-                  INNER JOIN orientaciones o on o.id = t.id_orientacion
-                  ORDER BY id desc ";
-
+        $this->db->select('titulos.*, planes.nombre as plan, orientaciones.nombre as orientacion');    
+        $this->db->from('titulos');
+        $this->db->join('planes', 'planes.id = titulos.id_plan');
+        $this->db->join('orientaciones', 'orientaciones.id = titulos.id_orientacion', 'LEFT');
         if(isset($params) && !empty($params))
-        {
-            $query.="LIMIT ".$params['limit']." OFFSET ".$params['offset']."";
-        }
-                
-        return $this->db->query($query)->result();
+            $this->db->limit($params['limit'], $params['offset']);
+        $this->db->order_by('titulos.id', 'desc');
+
+        return $this->db->get()->result();
     }
         
     /*
