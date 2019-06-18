@@ -15,7 +15,7 @@ class Carrera extends MX_Controller {
     }
 
 	function index($mensaje=null)
-    {
+    {    
         if (!$this->ion_auth->logged_in())
         {
             redirect('login', 'refresh');
@@ -218,6 +218,32 @@ class Carrera extends MX_Controller {
     public function image_file_check($str, $nombre)
     {
         return $this->template->image_file_check($str, $nombre);
+    }
+
+    public function carrera_completa($id_carrera)
+    {        
+        if (!$this->ion_auth->logged_in())
+        {
+            redirect('login', 'refresh');
+        }else {
+            
+            $data['carrera'] = $this->Carrera_model->get_carrera_completa($id_carrera);
+            $data['user'] = $this->ion_auth->user()->row();
+            
+            //var_dump(); exit();
+            
+            if (count($data['carrera']['data']) == 0){
+                $data['alerta'] = 'Esta carrera no tiene un plan definido';
+                $this->template->cargar_vista('abm/404', $data);
+            }
+            else{
+
+                if (isset($mensaje)) {
+                    $data['alerta'] = $mensaje;
+                }
+                $this->template->cargar_vista('abm/carrera/carrera_completa', $data);
+            }            
+        }
     }
 
 }

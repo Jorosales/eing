@@ -14,7 +14,7 @@ class Carrera_model  extends CI_Model  {
 	public function getPlan($idCarrera) 
 	{
 		$query = $this->db->query(
-				'SELECT m.id, cm.codigo, m.nombre as nombre, r.id as regid, r.nombre as regimen, cm.horas, cm.hs_total, cm.anio, cm.id_materia
+				'SELECT cm.id, cm.codigo, m.nombre as nombre, r.id as regid, r.nombre as regimen, cm.horas, cm.hs_total, cm.anio, cm.id_materia
 				FROM ciclos c
 				INNER JOIN ciclo_materia cm ON id_ciclo = c.id
 				INNER JOIN materias m ON m.id = cm.id_materia
@@ -37,7 +37,7 @@ class Carrera_model  extends CI_Model  {
 	public function getPlanPorOrientacion($idOrientacion) 
 	{
 		$query = $this->db->query(
-				'SELECT m.id, cm.codigo, m.nombre as nombre, r.id as regid, r.nombre as regimen, cm.horas, cm.hs_total, cm.anio, cm.id_materia
+				'SELECT cm.id, cm.codigo, m.nombre as nombre, r.id as regid, r.nombre as regimen, cm.horas, cm.hs_total, cm.anio, cm.id_materia
 				FROM ciclos c
 				INNER JOIN ciclo_materia cm ON id_ciclo = c.id
 				INNER JOIN materias m ON m.id = cm.id_materia

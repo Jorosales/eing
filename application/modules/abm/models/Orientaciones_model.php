@@ -31,7 +31,7 @@ class Orientaciones_model extends CI_Model
     {
         $this->db->select('orientaciones.*, planes.nombre as plan');    
         $this->db->from('orientaciones');
-        $this->db->join('planes', 'planes.id = orientaciones.id_plan');
+        $this->db->join('planes', 'planes.id = orientaciones.id_plan', 'LEFT');
         if(isset($params) && !empty($params))
             $this->db->limit($params['limit'], $params['offset']);
         $this->db->order_by('orientaciones.id', 'desc');

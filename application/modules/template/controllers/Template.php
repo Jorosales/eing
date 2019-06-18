@@ -258,8 +258,9 @@ class Template extends MX_Controller
         $this->load->model('Regimen_model');
         $this->load->model('Ciclo_model');
 		$data['ciclo_materia'] = $this->Ciclo_materia_model->get_ciclo_materia($id);
-		$materia = $this->Materia_model->get_materia($id);
+		$materia = $this->Materia_model->get_materia($data['ciclo_materia']['id_materia']);
 		$data['ciclo_materia']= array_merge($materia, $data['ciclo_materia']);
+		
 		$data['regimenes']= $this->Regimen_model->get_all_regimen();;
 		$data['tipos']= $this->Materias_tipo_model->get_all_materias_tipo();
 		$data['ciclos']= $this->Ciclo_model->get_all_ciclos();;
