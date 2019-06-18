@@ -86,7 +86,7 @@ class Ciclo_materia extends MX_Controller{
         {
             $data['user'] = $this->ion_auth->user()->row();
             $data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
-            $data['materias'] = $this->Materia_model->get_all_materias_en_ciclos();
+            $data['materias'] = $this->Materia_model->get_all_materias();
             $data['regimenes'] = $this->Regimen_model->get_all_regimen();
             
             $this->template->cargar_vista('abm/ciclo_materia/add', $data);

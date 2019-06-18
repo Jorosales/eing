@@ -55,7 +55,7 @@
 							</tr>
 						<?php } ?>
 
-						<?php if(isset($orientaciones)){ ?>
+						<?php if(!empty($orientaciones)){ ?>
 							<tr><td colspan="8" align="center"><b>ORIENTACIONES</b></td></tr>
 						<?php } ?>
 						
