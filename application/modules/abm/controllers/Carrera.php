@@ -231,7 +231,7 @@ class Carrera extends MX_Controller {
             $data['user'] = $this->ion_auth->user()->row();
             
             if (count($data['carrera']['data']) == 0){
-                $data['alerta'] = 'Esta carrera no tiene un plan definido';
+                $data['alerta'] = lang('undefined_plan');
                 $this->template->cargar_vista('abm/404', $data);
             }
             else{

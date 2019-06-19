@@ -265,3 +265,4 @@ $lang['form_generic']  			= 'Materia Generica';
 $lang['form_optional']  		= 'Materia Optativa';
 
 
+$lang['undefined_plan']    		= 'Esta carrera no tiene un plan definido.';
