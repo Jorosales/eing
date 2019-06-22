@@ -224,6 +224,10 @@ $lang['table_description_th']   = 'Descripción';
 $lang['table_cvar_th']   		= 'CVAR';
 $lang['table_asignation_th']   	= 'Asignar Materia';
 
+//Escuelas
+$lang['table_university_th']    = 'Universidad';
+$lang['table_director_th']    	= 'Director';
+$lang['table_color_th']    		= 'Color';
 
 //TITULOS DE FORMULARIOS
 $lang['form_name']    			= 'Nombre';
@@ -263,6 +267,10 @@ $lang['form_doctorate']  		= 'Doctorado';
 
 $lang['form_generic']  			= 'Materia Generica';
 $lang['form_optional']  		= 'Materia Optativa';
+
+$lang['form_university']  		= 'Universidad';
+$lang['form_director']  		= 'Director';
+$lang['form_color']  			= 'Color';
 
 
 $lang['undefined_plan']    		= 'Esta carrera no tiene un plan definido.';

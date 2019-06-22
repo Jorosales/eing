@@ -1,4 +1,4 @@
 <hr><hr>
-<footer id="footer">
-	<p class="text-center">Dirección de Escuela de Ingeniería - UNdeC</p>
+<footer id="footer" style="background-color: <?= $escuela['color'] ?>" >
+	<p class="text-center"><?= $escuela['nombre'] ?> - <?= $escuela['universidad'] ?></p>
 </footer>

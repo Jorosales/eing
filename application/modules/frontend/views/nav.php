@@ -6,7 +6,7 @@
         $carreras= $ci->Carrera_model->getAllActivates();
     ?>
     
-    <nav class="navbar navbar-escuela bg-escuela navbar-expand-lg margen-inf">
+    <nav class="navbar navbar-escuela bg-escuela navbar-expand-lg margen-inf" style="background-color: <?= $escuela['color'] ?>">
 		
 		<a class="navbar-brand" href="<?= base_url('') ?>">
             <img src="<?= base_url('assets/images/logo.png') ?>" alt="logo">

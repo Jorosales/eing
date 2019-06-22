@@ -13,30 +13,18 @@ class Docente extends CI_Controller {
 
 	public function index()
 	{	
-		//Se carga el head y barra
-		$this->load->view('head');
-		$this->load->view('nav');
-
-		//Se obtienen datos del modelo
 		$data['listado'] = $this->Docente_model->datosLista();
 
-		//Se cargan datos en la vista
-		$this->load->view('pages/docentesList', $data);
-		$this->load->view('footer');
+		$data['_view'] = 'pages/docentesList';
+		$this->load->view('layouts/main',$data);
 	}
 
 	public function verDocente($idDocente)
 	{
-		$this->load->helper('html');
-		$this->load->view('head');
-		$this->load->view('nav');
-		
-		//Se obtienen datos del modelo
 		$data['docente'] = $this->Docente_model->getPerfil($idDocente);
 
-		//Se cargan datos en la vista
-		$this->load->view('pages/docenteView', $data);
-		$this->load->view('footer');
+		$data['_view'] = 'pages/docenteView';
+		$this->load->view('layouts/main',$data);
 	}
 
 }

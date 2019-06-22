@@ -10,7 +10,7 @@
 	<?php if($materia[0]->id_tipo == '2'){ ?>
 		<div class="container tab-content card" >
 		<table class="table table-striped sombreado">
-			<thead>
+			<thead class="thead-escuela" style="background-color: <?= $escuela['claro'] ?>">
 				<tr>
                     <th colspan="6"><h3>Optativas</h3></th>
                 	<th>Orientación</th>
@@ -43,7 +43,7 @@
 	<div class="container tab-content card" >
 		<table class="table table-striped sombreado">
 			<tr><h3><?= $materia[0]->nombre; ?></h3></tr>
-			<thead class="thead-escuela">
+			<thead class="thead-escuela" style="background-color: <?= $escuela['claro'] ?>">
 				<tr>
 					<th><a >Carrera</a></th>
 					<?php if(isset($pr[0]->orientacion)) { ?><th><a>Orientación</a></th> <?php } ?>
@@ -91,7 +91,7 @@
 	<!-- Tabla Equipo -->
 	<div class="container tab-content card" >
 		<table class="table table-hover sombreado">
-			<thead class="thead-escuela">
+			<thead class="thead-escuela" style="background-color: <?= $escuela['claro'] ?>">
 				<tr>
                     <th colspan="6"><h3>EQUIPO</h3></th>
                 </tr>
@@ -128,90 +128,110 @@
 	<!-- Tabla Correlatividades -->
 	<div class="container tab-content card" >
 		<table class="table table-striped sombreado">
-			<thead class="thead-escuela">
+			<thead class="thead-escuela" style="background-color: <?= $escuela['claro'] ?>">
 				<tr>
 					<th><h3>CORRELATIVIDADES</h3></th>
 				</tr>
 			</thead>
-        </table>
+        
+	
 
-		<table class="table table-striped sombreado">
-			<thead>
-				<tr>
-                    <th colspan="6"><h3>Regularizada para Cursar</h3></th>
-                </tr>
-			</thead>
+		<?php if (empty($regulCursar) && empty($aprobadaCursar) && empty($aprobadaRendir)) { ?>
+				<tbody>
+					<tr>
+						<td>SIN CORRELATIVAS</td>
+					</tr>
+				</tbody>
+			<?php } else { ?>	
 
-            <tbody>
-				<?php 
-					if(empty($regulCursar)) {echo "<tr><td colspan='6'><hr></td></tr>";}
-					else
-					{
-						foreach ($regulCursar as $row) 
-						{?>
+				<?php if(!empty($regulCursar)) { ?>				
+					<table class="table table-striped sombreado">
+						<thead>
 							<tr>
-								<td colspan="6">
-									<a href="<?= base_url('/materia/'.$row->id_materia)?>">
-										<?=$row->id_materia;?> - <?=$row->correlativa;?>
-									</a>
-								</td>
-							</tr>	
-				  <?php }
-					} ?>
-			</tbody>
-        </table>
+			                    <th colspan="6"><h3>Regularizada para Cursar</h3></th>
+			                </tr>
+						</thead>
 
-		<table class="table table-striped sombreado">
-			<thead>
-				<tr>
-                    <th colspan="6"><h3>Aprobada para Cursar</h3></th>
-                </tr>
-			</thead>
+			            <tbody>
+							<?php 
+								if(empty($regulCursar)) {echo "<tr><td colspan='6'><hr></td></tr>";}
+								else
+								{
+									foreach ($regulCursar as $row) 
+									{?>
+										<tr>
+											<td colspan="6">
+												<a href="<?= base_url('/materia/'.$row->id_materia)?>">
+													<?=$row->id_materia;?> - <?=$row->correlativa;?>
+												</a>
+											</td>
+										</tr>	
+							  <?php }
+								} ?>
+						</tbody>
+			        </table>
+		        <?php } ?> 
 
-            <tbody>
-				<?php 
-					if(empty($aprobadaCursar)) {echo "<tr><td colspan='6'><hr></td></tr>";}
-					else
-					{
-						foreach ($aprobadaCursar as $row) 
-						{?>
+
+		        <?php if(!empty($aprobadaCursar)) { ?>
+		        	<table class="table table-striped sombreado">
+						<thead>
 							<tr>
-								<td colspan="6">
-									<a href="<?= base_url('/materia/'.$row->id_materia)?>">
-										<?=$row->id_materia;?> - <?=$row->correlativa;?>
-									</a>
-								</td>
-							</tr>	
-				  <?php }
-					} ?>
-			</tbody>
-        </table> 
+			                    <th colspan="6"><h3>Aprobada para Cursar</h3></th>
+			                </tr>
+						</thead>
 
-		<table class="table table-striped sombreado">
-			<thead>
-				<tr>
-                    <th colspan="6"><h3>Aprobada para Rendir</h3></th>
-                </tr>
-			</thead>
+			            <tbody>
+							<?php 
+								if(empty($aprobadaCursar)) {echo "<tr><td colspan='6'><hr></td></tr>";}
+								else
+								{
+									foreach ($aprobadaCursar as $row) 
+									{?>
+										<tr>
+											<td colspan="6">
+												<a href="<?= base_url('/materia/'.$row->id_materia)?>">
+													<?=$row->id_materia;?> - <?=$row->correlativa;?>
+												</a>
+											</td>
+										</tr>	
+							  <?php }
+								} ?>
+						</tbody>
+			        </table>
+		        <?php } ?> 
 
-            <tbody>
-				<?php 
-					if(empty($aprobadaRendir)) {echo "<tr><td colspan='6'><hr></td></tr>";}
-					else
-					{
-						foreach ($aprobadaRendir as $row) 
-						{?>
+				
+
+		        <?php if(!empty($aprobadaRendir)) { ?>
+					<table class="table table-striped sombreado">
+						<thead>
 							<tr>
-								<td colspan="6">
-									<a href="<?= base_url('/materia/'.$row->id_materia)?>">
-										<?=$row->id_materia;?> - <?=$row->correlativa;?>
-									</a>
-								</td>
-							</tr>	
-				  <?php }
-					} ?>
-			</tbody>
-        </table>
+			                    <th colspan="6"><h3>Aprobada para Rendir</h3></th>
+			                </tr>
+						</thead>
+
+			            <tbody>
+							<?php 
+								if(empty($aprobadaRendir)) {echo "<tr><td colspan='6'><hr></td></tr>";}
+								else
+								{
+									foreach ($aprobadaRendir as $row) 
+									{?>
+										<tr>
+											<td colspan="6">
+												<a href="<?= base_url('/materia/'.$row->id_materia)?>">
+													<?=$row->id_materia;?> - <?=$row->correlativa;?>
+												</a>
+											</td>
+										</tr>	
+							  <?php }
+								} ?>
+						</tbody>
+			        </table>
+		        <?php } ?> 
+	    	<?php } ?> 
+    	</table>
     </div>
 	<!-- Fin Tabla Correlatividades -->
 	<?php } ?>

@@ -10,7 +10,9 @@
 		<script src="<?= base_url('assets/bootstrap/js/bootstrap4.min.js') ?>"></script>
 		<script src="<?= base_url('assets/plugins/script.js') ?>"></script>
 		<script src="<?= base_url('assets/plugins/ckeditor/ckeditor.js') ?>"></script>
+		
 	</head>
+
 	
 		
 	

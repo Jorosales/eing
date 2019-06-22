@@ -4,7 +4,8 @@ class Carrera extends MX_Controller {
 
 	function __construct(){
 		parent::__construct();
-		$this->load->model('Carrera_model');
+        $this->load->model('Carrera_model');
+		$this->load->model('Escuela_model');
 		$this->load->add_package_path(APPPATH.'third_party/ion_auth/');
         $this->load->helper(array('language'));
         $this->lang->load('auth');
@@ -12,7 +13,7 @@ class Carrera extends MX_Controller {
 
 	public function index()
 	{
-		$data['carreras'] = $this->Carrera_model->getAllActivates();
+        $data['carreras'] = $this->Carrera_model->getAllActivates();
 		
 		$data['_view'] = 'pages/index_carrera';
 		$this->load->view('layouts/main',$data);

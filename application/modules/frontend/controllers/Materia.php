@@ -11,9 +11,6 @@ class Materia extends CI_Controller {
 
 	public function verMateria($idMateria)
 	{
-		$this->load->view('head');
-		$this->load->view('nav');
-		
 		$data['materia'] = $this->Materia_model->getMateria($idMateria);
 		
 		if($data['materia'][0]->id_tipo == '2')
@@ -30,8 +27,8 @@ class Materia extends CI_Controller {
 			$data['aprobadaRendir'] = $this->Materia_model->getCorrelatividades($idMateria, 3);	
 		}
 
-		$this->load->view('pages/materiaView', $data);
-		$this->load->view('footer');
+		$data['_view'] = 'pages/materiaView';
+		$this->load->view('layouts/main',$data);
 	}
 	
 }
