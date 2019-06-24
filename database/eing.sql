@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 24-06-2019 a las 04:22:31
--- Versión del servidor: 5.7.23
--- Versión de PHP: 7.2.10
+-- Servidor: localhost:3306
+-- Tiempo de generación: 24-06-2019 a las 13:06:25
+-- Versión del servidor: 5.7.26-0ubuntu0.18.04.1
+-- Versión de PHP: 7.2.19-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,17 +26,15 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `carrera`
 --
 
-DROP TABLE IF EXISTS `carrera`;
-CREATE TABLE IF NOT EXISTS `carrera` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `carrera` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(80) DEFAULT NULL,
   `presentacion` blob,
   `perfil` blob,
   `plan_pdf` varchar(50) DEFAULT NULL,
   `imagen` varchar(100) DEFAULT NULL,
-  `activo` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
+  `activo` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
 
 --
 -- Volcado de datos para la tabla `carrera`
@@ -58,23 +54,24 @@ INSERT INTO `carrera` (`id`, `nombre`, `presentacion`, `perfil`, `plan_pdf`, `im
 -- Estructura de tabla para la tabla `ciclos`
 --
 
-DROP TABLE IF EXISTS `ciclos`;
-CREATE TABLE IF NOT EXISTS `ciclos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ciclos` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(80) NOT NULL,
   `id_plan` int(11) NOT NULL,
-  `id_orientacion` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_plan` (`id_plan`),
-  KEY `id_orientacion` (`id_orientacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `id_orientacion` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ciclos`
 --
 
 INSERT INTO `ciclos` (`id`, `nombre`, `id_plan`, `id_orientacion`) VALUES
-(1, 'Básico', 1, NULL);
+(1, 'LS Básico', 1, NULL),
+(2, 'IS Básico', 2, NULL),
+(3, 'tudaw Básico', 3, NULL),
+(4, 'IA Básico', 4, NULL),
+(5, 'IM Básico', 5, NULL),
+(6, 'TUT Básico', 6, NULL);
 
 -- --------------------------------------------------------
 
@@ -82,9 +79,8 @@ INSERT INTO `ciclos` (`id`, `nombre`, `id_plan`, `id_orientacion`) VALUES
 -- Estructura de tabla para la tabla `ciclo_materia`
 --
 
-DROP TABLE IF EXISTS `ciclo_materia`;
-CREATE TABLE IF NOT EXISTS `ciclo_materia` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ciclo_materia` (
+  `id` int(11) NOT NULL,
   `id_ciclo` int(11) NOT NULL,
   `id_materia` int(11) NOT NULL,
   `id_regimen` int(11) NOT NULL,
@@ -92,12 +88,8 @@ CREATE TABLE IF NOT EXISTS `ciclo_materia` (
   `hs_total` int(11) NOT NULL,
   `programa` varchar(100) DEFAULT NULL,
   `anio` int(11) NOT NULL,
-  `codigo` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_ciclo` (`id_ciclo`),
-  KEY `id_materia` (`id_materia`),
-  KEY `id_regimen` (`id_regimen`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+  `codigo` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ciclo_materia`
@@ -147,7 +139,195 @@ INSERT INTO `ciclo_materia` (`id`, `id_ciclo`, `id_materia`, `id_regimen`, `hora
 (41, 1, 43, 3, 4, 60, NULL, 5, '523'),
 (42, 1, 44, 3, 4, 60, NULL, 5, '524'),
 (43, 1, 6, 3, 4, 60, NULL, 1, '121'),
-(44, 1, 7, 3, 4, 60, NULL, 1, '122');
+(44, 1, 7, 3, 4, 60, NULL, 1, '122'),
+(45, 2, 1, 1, 5, 150, NULL, 1, '101'),
+(46, 2, 2, 1, 5, 150, NULL, 1, '102'),
+(47, 2, 45, 2, 5, 75, NULL, 1, '111'),
+(48, 2, 3, 2, 4, 60, NULL, 1, '112'),
+(49, 2, 4, 2, 4, 60, NULL, 1, '113'),
+(50, 2, 5, 2, 3, 45, NULL, 1, '114'),
+(51, 2, 6, 3, 4, 60, NULL, 1, '121'),
+(52, 2, 46, 3, 5, 75, NULL, 1, '122'),
+(53, 2, 7, 3, 4, 60, NULL, 1, '123'),
+(54, 2, 47, 3, 4, 60, NULL, 1, '124'),
+(55, 2, 8, 1, 4, 120, NULL, 2, '201'),
+(56, 2, 9, 1, 4, 120, NULL, 2, '202'),
+(57, 2, 10, 1, 4, 120, NULL, 2, '203'),
+(58, 2, 48, 2, 5, 75, NULL, 2, '211'),
+(59, 2, 11, 2, 4, 60, NULL, 2, '212'),
+(60, 2, 12, 2, 4, 60, NULL, 2, '213'),
+(61, 2, 49, 3, 5, 75, NULL, 2, '221'),
+(62, 2, 13, 3, 4, 60, NULL, 2, '222'),
+(63, 2, 14, 3, 4, 60, NULL, 2, '223'),
+(64, 2, 15, 3, 4, 60, NULL, 2, '224'),
+(65, 2, 16, 1, 3, 90, NULL, 3, '301'),
+(66, 2, 17, 1, 4, 120, NULL, 3, '302'),
+(67, 2, 18, 1, 4, 120, NULL, 3, '303'),
+(68, 2, 19, 1, 4, 120, NULL, 3, '304'),
+(69, 2, 50, 2, 4, 60, NULL, 3, '311'),
+(70, 2, 51, 2, 3, 45, NULL, 3, '312'),
+(71, 2, 52, 2, 4, 60, NULL, 3, '313'),
+(72, 2, 22, 3, 4, 60, NULL, 3, '321'),
+(73, 2, 53, 3, 4, 60, NULL, 3, '322'),
+(74, 2, 23, 3, 3, 45, NULL, 3, '323'),
+(75, 2, 24, 1, 4, 120, NULL, 4, '401'),
+(76, 2, 25, 1, 4, 120, NULL, 4, '402'),
+(77, 2, 26, 2, 4, 60, NULL, 4, '411'),
+(78, 2, 27, 2, 4, 60, NULL, 4, '412'),
+(79, 2, 28, 2, 3, 45, NULL, 4, '413'),
+(80, 2, 29, 2, 4, 60, NULL, 4, '414'),
+(81, 2, 21, 2, 3, 45, NULL, 4, '415'),
+(82, 2, 30, 3, 4, 60, NULL, 4, '421'),
+(83, 2, 34, 3, 4, 60, NULL, 4, '422'),
+(84, 2, 54, 3, 4, 60, NULL, 4, '423'),
+(85, 2, 31, 3, 4, 60, NULL, 4, '424'),
+(86, 2, 32, 3, 3, 45, NULL, 4, '425'),
+(87, 2, 35, 1, 4, 120, NULL, 5, '501'),
+(88, 2, 36, 2, 3, 45, NULL, 5, '511'),
+(89, 2, 37, 2, 4, 60, NULL, 5, '512'),
+(90, 2, 38, 2, 4, 60, NULL, 5, '513'),
+(91, 2, 39, 2, 4, 60, NULL, 5, '514'),
+(92, 2, 55, 2, 4, 60, NULL, 5, '515'),
+(93, 2, 43, 3, 4, 60, NULL, 5, '521'),
+(94, 2, 56, 3, 4, 60, NULL, 5, '522'),
+(95, 2, 41, 3, 4, 60, NULL, 5, '523'),
+(96, 2, 57, 3, 3, 45, NULL, 5, '524'),
+(97, 2, 42, 3, 4, 60, NULL, 5, '525'),
+(98, 3, 58, 2, 5, 75, NULL, 1, '1'),
+(99, 3, 4, 2, 4, 60, NULL, 1, '2'),
+(100, 3, 61, 2, 4, 60, NULL, 1, '3'),
+(101, 3, 59, 2, 4, 60, NULL, 1, '4'),
+(102, 3, 10, 2, 5, 75, NULL, 1, '5'),
+(103, 3, 60, 2, 4, 60, NULL, 1, '6'),
+(104, 3, 62, 3, 5, 75, NULL, 1, '7'),
+(105, 3, 63, 3, 4, 60, NULL, 1, '8'),
+(106, 3, 64, 3, 5, 75, NULL, 1, '9'),
+(107, 3, 65, 3, 4, 60, NULL, 1, '10'),
+(108, 3, 66, 3, 4, 60, NULL, 1, '11'),
+(109, 3, 67, 3, 5, 75, NULL, 1, '12'),
+(110, 3, 68, 2, 4, 60, NULL, 2, '13'),
+(111, 3, 18, 2, 4, 60, NULL, 2, '14'),
+(112, 3, 69, 2, 5, 75, NULL, 2, '15'),
+(113, 3, 70, 2, 4, 60, NULL, 2, '16'),
+(114, 3, 71, 2, 5, 75, NULL, 2, '17'),
+(115, 3, 19, 2, 5, 75, NULL, 2, '18'),
+(116, 3, 24, 3, 5, 75, NULL, 2, '19'),
+(117, 3, 13, 3, 3, 45, NULL, 2, '20'),
+(118, 3, 72, 3, 5, 75, NULL, 2, '21'),
+(119, 3, 73, 3, 5, 75, NULL, 2, '22'),
+(120, 3, 16, 3, 5, 75, NULL, 2, '23'),
+(121, 3, 74, 3, 5, 75, NULL, 2, '24'),
+(122, 3, 75, 2, 6, 90, NULL, 3, '25'),
+(123, 3, 76, 2, 5, 75, NULL, 3, '26'),
+(124, 3, 77, 2, 4, 60, NULL, 3, '27'),
+(125, 3, 78, 2, 5, 75, NULL, 3, '28'),
+(126, 3, 79, 2, 4, 60, NULL, 3, '29'),
+(127, 3, 35, 2, 5, 75, NULL, 3, '30'),
+(128, 4, 1, 1, 6, 180, NULL, 1, '1'),
+(129, 4, 80, 2, 4, 60, NULL, 1, '2'),
+(130, 4, 81, 1, 4, 120, NULL, 1, '3'),
+(131, 4, 46, 1, 6, 180, NULL, 1, '4'),
+(132, 4, 45, 1, 4, 120, NULL, 1, '5'),
+(133, 4, 82, 3, 4, 60, NULL, 1, '6'),
+(134, 4, 83, 3, 6, 90, NULL, 1, '7'),
+(135, 4, 8, 2, 5, 75, NULL, 2, '8'),
+(136, 4, 84, 2, 4, 60, NULL, 2, '9'),
+(137, 4, 48, 2, 6, 90, NULL, 2, '10'),
+(138, 4, 85, 2, 4, 60, NULL, 2, '11'),
+(139, 4, 86, 2, 5, 75, NULL, 2, '12'),
+(140, 4, 87, 2, 6, 90, NULL, 2, '13'),
+(141, 4, 13, 3, 6, 90, NULL, 2, '14'),
+(142, 4, 88, 3, 4, 60, NULL, 2, '15'),
+(143, 4, 49, 3, 4, 60, NULL, 2, '16'),
+(144, 4, 89, 3, 5, 75, NULL, 2, '17'),
+(145, 4, 90, 3, 4, 60, NULL, 2, '18'),
+(146, 4, 91, 3, 5, 75, NULL, 2, '19'),
+(147, 4, 92, 2, 5, 75, NULL, 3, '20'),
+(148, 4, 93, 2, 4, 60, NULL, 3, '21'),
+(149, 4, 94, 2, 8, 120, NULL, 3, '22'),
+(150, 4, 95, 1, 8, 240, NULL, 3, '23'),
+(151, 4, 96, 1, 6, 90, NULL, 3, '24'),
+(152, 4, 97, 3, 6, 90, NULL, 3, '25'),
+(153, 4, 98, 3, 4, 60, NULL, 3, '26'),
+(154, 4, 99, 3, 6, 90, NULL, 3, '27'),
+(155, 4, 100, 2, 4, 60, NULL, 4, '28'),
+(156, 4, 101, 2, 5, 75, NULL, 4, '29'),
+(157, 4, 102, 2, 4, 60, NULL, 4, '30'),
+(158, 4, 103, 2, 6, 90, NULL, 4, '31'),
+(159, 4, 104, 2, 6, 90, NULL, 4, '32'),
+(160, 4, 105, 3, 6, 90, NULL, 4, '33'),
+(161, 4, 106, 3, 8, 120, NULL, 4, '34'),
+(162, 4, 107, 3, 5, 75, NULL, 4, '35'),
+(163, 4, 108, 3, 6, 90, NULL, 4, '36'),
+(164, 4, 109, 2, 6, 90, NULL, 5, '37'),
+(165, 4, 110, 2, 6, 90, NULL, 5, '38'),
+(166, 4, 111, 2, 6, 90, NULL, 5, '39'),
+(167, 4, 112, 3, 6, 90, NULL, 5, '40'),
+(168, 4, 113, 3, 6, 90, NULL, 5, '41'),
+(169, 4, 35, 3, 0, 500, NULL, 5, '42'),
+(170, 5, 1, 2, 6, 90, NULL, 1, '111'),
+(171, 5, 114, 2, 5, 75, NULL, 1, '112'),
+(172, 5, 3, 2, 5, 75, NULL, 1, '113'),
+(173, 5, 115, 2, 4, 60, NULL, 1, '114'),
+(174, 5, 8, 3, 6, 90, NULL, 1, '121'),
+(175, 5, 116, 3, 5, 75, NULL, 1, '122'),
+(176, 5, 7, 3, 4, 60, NULL, 1, '123'),
+(177, 5, 47, 3, 5, 75, NULL, 1, '124'),
+(178, 5, 117, 3, 3, 45, NULL, 1, '125'),
+(179, 5, 50, 2, 4, 60, NULL, 2, '211'),
+(180, 5, 9, 2, 5, 75, NULL, 2, '212'),
+(181, 5, 46, 2, 8, 120, NULL, 2, '213'),
+(182, 5, 45, 2, 6, 90, NULL, 2, '214'),
+(183, 5, 118, 2, 3, 45, NULL, 2, '215'),
+(184, 5, 48, 3, 7, 105, NULL, 2, '221'),
+(185, 5, 17, 3, 5, 75, NULL, 2, '222'),
+(186, 5, 119, 3, 6, 90, NULL, 2, '223'),
+(187, 5, 120, 3, 4, 60, NULL, 2, '224'),
+(188, 5, 121, 3, 3, 45, NULL, 2, '225'),
+(189, 5, 13, 2, 6, 90, NULL, 3, '311'),
+(190, 5, 51, 2, 6, 90, NULL, 3, '312'),
+(191, 5, 122, 2, 6, 90, NULL, 3, '313'),
+(192, 5, 123, 2, 6, 90, NULL, 3, '314'),
+(193, 5, 124, 3, 5, 75, NULL, 3, '321'),
+(194, 5, 125, 3, 6, 90, NULL, 3, '322'),
+(195, 5, 126, 3, 6, 90, NULL, 3, '323'),
+(196, 5, 127, 3, 7, 105, NULL, 3, '324'),
+(197, 5, 128, 2, 6, 90, NULL, 4, '411'),
+(198, 5, 129, 2, 6, 90, NULL, 4, '412'),
+(199, 5, 130, 2, 6, 90, NULL, 4, '413'),
+(200, 5, 131, 2, 7, 105, NULL, 4, '414'),
+(201, 5, 132, 3, 6, 90, NULL, 4, '421'),
+(202, 5, 133, 3, 5, 75, NULL, 4, '422'),
+(203, 5, 134, 3, 5, 75, NULL, 4, '423'),
+(204, 5, 135, 3, 6, 90, NULL, 4, '424'),
+(205, 5, 136, 3, 4, 60, NULL, 4, '425'),
+(206, 5, 137, 2, 4, 60, NULL, 5, '511'),
+(207, 5, 138, 2, 5, 75, NULL, 5, '512'),
+(208, 5, 139, 2, 4, 60, NULL, 5, '513'),
+(209, 5, 140, 2, 5, 75, NULL, 5, '514'),
+(210, 5, 141, 2, 4, 60, NULL, 5, '515'),
+(211, 5, 42, 3, 3, 45, NULL, 5, '521'),
+(212, 5, 142, 3, 4, 60, NULL, 5, '522'),
+(213, 5, 143, 3, 12, 180, NULL, 5, '523'),
+(214, 5, 144, 3, 4, 60, NULL, 5, '524'),
+(215, 6, 58, 2, 6, 90, NULL, 1, '1'),
+(216, 6, 46, 2, 4, 60, NULL, 1, '2'),
+(217, 6, 82, 2, 4, 60, NULL, 1, '3'),
+(218, 6, 84, 1, 5, 150, NULL, 1, '4'),
+(219, 6, 45, 2, 6, 90, NULL, 1, '5'),
+(220, 6, 62, 3, 6, 90, NULL, 1, '6'),
+(221, 6, 48, 3, 4, 60, NULL, 1, '7'),
+(222, 6, 86, 3, 6, 90, NULL, 1, '8'),
+(223, 6, 87, 3, 6, 90, NULL, 1, '9'),
+(224, 6, 95, 1, 10, 300, NULL, 2, '10'),
+(225, 6, 89, 1, 3, 90, NULL, 2, '11'),
+(226, 6, 13, 2, 4, 60, NULL, 2, '12'),
+(227, 6, 96, 3, 4, 60, NULL, 2, '13'),
+(228, 6, 91, 3, 4, 60, NULL, 2, '14'),
+(229, 6, 93, 3, 5, 75, NULL, 2, '15'),
+(230, 6, 108, 2, 8, 120, NULL, 3, '16'),
+(231, 6, 90, 2, 4, 60, NULL, 3, '17'),
+(232, 6, 145, 2, 4, 60, NULL, 3, '18');
 
 -- --------------------------------------------------------
 
@@ -155,16 +335,11 @@ INSERT INTO `ciclo_materia` (`id`, `id_ciclo`, `id_materia`, `id_regimen`, `hora
 -- Estructura de tabla para la tabla `correlativas`
 --
 
-DROP TABLE IF EXISTS `correlativas`;
-CREATE TABLE IF NOT EXISTS `correlativas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `correlativas` (
+  `id` int(11) NOT NULL,
   `id_ciclo_materia` int(11) NOT NULL,
   `id_correlativa` int(11) NOT NULL,
-  `id_correlativa_tipo` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_correlativa` (`id_correlativa`),
-  KEY `id_ciclo` (`id_ciclo_materia`),
-  KEY `id_correlativa_tipo` (`id_correlativa_tipo`)
+  `id_correlativa_tipo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -173,12 +348,10 @@ CREATE TABLE IF NOT EXISTS `correlativas` (
 -- Estructura de tabla para la tabla `correlativas_tipo`
 --
 
-DROP TABLE IF EXISTS `correlativas_tipo`;
-CREATE TABLE IF NOT EXISTS `correlativas_tipo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
+CREATE TABLE `correlativas_tipo` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
 
 --
 -- Volcado de datos para la tabla `correlativas_tipo`
@@ -195,18 +368,15 @@ INSERT INTO `correlativas_tipo` (`id`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `cvar`
 --
 
-DROP TABLE IF EXISTS `cvar`;
-CREATE TABLE IF NOT EXISTS `cvar` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cvar` (
+  `id` int(11) NOT NULL,
   `id_docente` int(11) NOT NULL,
   `areas` varchar(500) DEFAULT NULL,
   `experticia` varchar(500) DEFAULT NULL,
   `grado` varchar(500) DEFAULT NULL,
   `especializacion` varchar(500) DEFAULT NULL,
   `maestria` varchar(500) DEFAULT NULL,
-  `doctorado` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_docente` (`id_docente`)
+  `doctorado` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -215,15 +385,11 @@ CREATE TABLE IF NOT EXISTS `cvar` (
 -- Estructura de tabla para la tabla `docentes`
 --
 
-DROP TABLE IF EXISTS `docentes`;
-CREATE TABLE IF NOT EXISTS `docentes` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `docentes` (
+  `id` int(10) NOT NULL,
   `persona_id` bigint(20) NOT NULL,
   `id_docente_categoria` int(11) DEFAULT NULL,
-  `descripcion` blob,
-  PRIMARY KEY (`id`),
-  KEY `docente_categoria_idx` (`id_docente_categoria`),
-  KEY `persona_id` (`persona_id`)
+  `descripcion` blob
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
 
 -- --------------------------------------------------------
@@ -232,11 +398,9 @@ CREATE TABLE IF NOT EXISTS `docentes` (
 -- Estructura de tabla para la tabla `docente_categoria`
 --
 
-DROP TABLE IF EXISTS `docente_categoria`;
-CREATE TABLE IF NOT EXISTS `docente_categoria` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `docente_categoria` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
 
 -- --------------------------------------------------------
@@ -245,15 +409,13 @@ CREATE TABLE IF NOT EXISTS `docente_categoria` (
 -- Estructura de tabla para la tabla `escuela`
 --
 
-DROP TABLE IF EXISTS `escuela`;
-CREATE TABLE IF NOT EXISTS `escuela` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `escuela` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
   `universidad` varchar(60) NOT NULL,
   `director` varchar(80) NOT NULL,
-  `color` char(7) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `color` char(7) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `escuela`
@@ -268,13 +430,11 @@ INSERT INTO `escuela` (`id`, `nombre`, `universidad`, `director`, `color`) VALUE
 -- Estructura de tabla para la tabla `estudiantes`
 --
 
-DROP TABLE IF EXISTS `estudiantes`;
-CREATE TABLE IF NOT EXISTS `estudiantes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `estudiantes` (
+  `id` int(11) NOT NULL,
   `persona_id` bigint(20) NOT NULL,
   `legajo` varchar(50) NOT NULL,
-  `plan_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `plan_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -283,13 +443,11 @@ CREATE TABLE IF NOT EXISTS `estudiantes` (
 -- Estructura de tabla para la tabla `groups`
 --
 
-DROP TABLE IF EXISTS `groups`;
-CREATE TABLE IF NOT EXISTS `groups` (
-  `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `groups` (
+  `id` mediumint(8) UNSIGNED NOT NULL,
   `name` varchar(20) NOT NULL,
-  `description` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `description` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `groups`
@@ -305,13 +463,11 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 -- Estructura de tabla para la tabla `login_attempts`
 --
 
-DROP TABLE IF EXISTS `login_attempts`;
-CREATE TABLE IF NOT EXISTS `login_attempts` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `login_attempts` (
+  `id` int(11) UNSIGNED NOT NULL,
   `ip_address` varchar(45) NOT NULL,
   `login` varchar(100) NOT NULL,
-  `time` int(11) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `time` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -320,14 +476,11 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
 -- Estructura de tabla para la tabla `materias`
 --
 
-DROP TABLE IF EXISTS `materias`;
-CREATE TABLE IF NOT EXISTS `materias` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) DEFAULT NULL,
-  `id_tipo` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `tipo_id` (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
+CREATE TABLE `materias` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `id_tipo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
 
 --
 -- Volcado de datos para la tabla `materias`
@@ -377,7 +530,108 @@ INSERT INTO `materias` (`id`, `nombre`, `id_tipo`) VALUES
 (41, 'Auditoria de Sistemas', 1),
 (42, 'Gestión de la Calidad', 1),
 (43, 'Pericias Informáticas y de Comunicaciones', 1),
-(44, 'Herramientas de Ingeniería de Software', 1);
+(44, 'Herramientas de Ingeniería de Software', 1),
+(45, 'Sistema de Representación', 1),
+(46, 'Física I', 1),
+(47, 'Química General', 1),
+(48, 'Física II', 1),
+(49, 'Física III', 1),
+(50, 'Análisis Matemático III', 1),
+(51, 'Electrotecnia', 1),
+(52, 'Arquitecturas Paralelas', 1),
+(53, 'Teoría de Control', 1),
+(54, 'Redes de Datos II', 1),
+(55, 'Comunicaciones Inalámbricas', 1),
+(56, 'Criptografía y Seguridad Informática', 1),
+(57, 'Higiene y Seguridad en el Trabajo y el Medio Ambiente', 1),
+(58, 'Matemática I', 1),
+(59, 'Taller de Computación', 1),
+(60, 'Inglés Técnico', 1),
+(61, 'Estructura de Datos y Algoritmos I', 1),
+(62, 'Matemática II', 1),
+(63, 'Estructura de Datos y Algoritmos II', 1),
+(64, 'Arquitectura de Computadores', 1),
+(65, 'Lenguaje de Programación I', 1),
+(66, 'Taller de Programación I', 1),
+(67, 'Diseño Gráfico', 1),
+(68, 'Sistemas Operativos', 1),
+(69, 'Introducción al Diseño de Aplicaciones Web', 1),
+(70, 'Lenguaje de Programación II', 1),
+(71, 'Taller de Programación II', 1),
+(72, 'Diseño de Aplicaciones Web I', 1),
+(73, 'Taller de Programación III', 1),
+(74, 'Seguridad en Aplicaciones Web', 1),
+(75, 'Diseño de Aplicaciones Web II', 1),
+(76, 'Taller de Programación IV', 1),
+(77, 'Legislación y Ética Profesional', 1),
+(78, 'Redes de Datos', 1),
+(79, 'Taller de Diseño de Aplicaciones Web', 1),
+(80, 'Geometría Analítica', 1),
+(81, 'Algebra', 1),
+(82, 'Fundamentos de Informática', 1),
+(83, 'Química', 1),
+(84, 'Trigonometría', 1),
+(85, 'Introducción a la Agrimensura', 1),
+(86, 'Informática', 1),
+(87, 'Topografía I', 1),
+(88, 'Cálculo Avanzado', 1),
+(89, 'Dibujo Topográfico y Cartográfico', 1),
+(90, 'Elementos de Edificios', 1),
+(91, 'Geografía Física y Geomorfología', 1),
+(92, 'Introducción al Derecho', 1),
+(93, 'Cálculo de Compensación', 1),
+(94, 'Fotogrametría y Fotointerpretación', 1),
+(95, 'Topografía II', 1),
+(96, 'Cartografía', 1),
+(97, 'Teledetección Satelital', 1),
+(98, 'Información Rural y Agrología', 1),
+(99, 'Derechos Reales y Registral', 1),
+(100, 'Economía y Gestión Empresarial', 1),
+(101, 'Catastro Territorial', 1),
+(102, 'Ordenamiento Territorial y Planeamiento', 1),
+(103, 'Geodesia Física y Geométrica', 1),
+(104, 'Astronomía Geodésica', 1),
+(105, 'Agrimensura Legal', 1),
+(106, 'Geodesia Espacial', 1),
+(107, 'Valuaciones Inmobiliarias', 1),
+(108, 'Mediciones para Obras de Ingeniería', 1),
+(109, 'Sistema de Información Territorial', 1),
+(110, 'Mensura', 1),
+(111, 'Introducción a la Metodología de la Investigación Científica', 1),
+(112, 'Electiva 1', 2),
+(113, 'Electiva 2', 2),
+(114, 'Algoritmos', 1),
+(115, 'Introducción a la Ingeniería', 1),
+(116, 'Estructura de Datos', 1),
+(117, 'Economía y Sociedad', 1),
+(118, 'Ética y Legislación', 1),
+(119, 'Estática y Resistencia de Materiales', 1),
+(120, 'Matemáticas Especiales', 1),
+(121, 'Organización Industrial', 1),
+(122, 'Termodinámica y Máquinas Térmicas', 1),
+(123, 'Ciencia de los Materiales', 1),
+(124, 'Cálculo Numérico', 1),
+(125, 'Mediciones Mecánicas. Eléctricas y Electrónicas', 1),
+(126, 'Máquinas Eléctricas Industriales', 1),
+(127, 'Mecánica Racional', 1),
+(128, 'Sistemas de Control', 1),
+(129, 'Electrónica Básica y Digital', 1),
+(130, 'Robótica Industrial I', 1),
+(131, 'Mecanismos y Elementos de Máquinas', 1),
+(132, 'Instalaciones Elétricas Industriales', 1),
+(133, 'Automatización Industrial', 1),
+(134, 'Computadores Digitales', 1),
+(135, 'Tecnología Industrial', 1),
+(136, 'Control de Accionamientos Mecatrónicos', 1),
+(137, 'Diseño de Sistemas Mecatrónicos', 1),
+(138, 'Redes de Comunicación Industriales', 1),
+(139, 'Robótica Industrial II', 1),
+(140, 'Tecnología de Control de Sistemas Mecatrónicos', 1),
+(141, 'Optativa I', 2),
+(142, 'Seguridad, Higiene y Medio Ambiente', 1),
+(143, 'Proyecto de Ingeniería Mecatrónica', 1),
+(144, 'Optativa II', 2),
+(145, 'Sensores Remotos', 1);
 
 -- --------------------------------------------------------
 
@@ -385,12 +639,10 @@ INSERT INTO `materias` (`id`, `nombre`, `id_tipo`) VALUES
 -- Estructura de tabla para la tabla `materias_tipo`
 --
 
-DROP TABLE IF EXISTS `materias_tipo`;
-CREATE TABLE IF NOT EXISTS `materias_tipo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(80) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+CREATE TABLE `materias_tipo` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(80) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `materias_tipo`
@@ -407,14 +659,10 @@ INSERT INTO `materias_tipo` (`id`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `materia_docente`
 --
 
-DROP TABLE IF EXISTS `materia_docente`;
-CREATE TABLE IF NOT EXISTS `materia_docente` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `materia_docente` (
+  `id` int(11) NOT NULL,
   `id_ciclo_materia` int(11) NOT NULL,
-  `id_docente` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_ciclo` (`id_ciclo_materia`,`id_docente`),
-  KEY `cm_materia_docente` (`id_docente`)
+  `id_docente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -423,13 +671,11 @@ CREATE TABLE IF NOT EXISTS `materia_docente` (
 -- Estructura de tabla para la tabla `operaciones`
 --
 
-DROP TABLE IF EXISTS `operaciones`;
-CREATE TABLE IF NOT EXISTS `operaciones` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `operaciones` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `url` varchar(100) NOT NULL,
-  `imagen` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+  `imagen` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -438,15 +684,10 @@ CREATE TABLE IF NOT EXISTS `operaciones` (
 -- Estructura de tabla para la tabla `optativas`
 --
 
-DROP TABLE IF EXISTS `optativas`;
-CREATE TABLE IF NOT EXISTS `optativas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `optativas` (
+  `id` int(11) NOT NULL,
   `id_origen` int(11) NOT NULL,
-  `id_optativa` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_origen` (`id_origen`),
-  KEY `id_origen_2` (`id_origen`),
-  KEY `optativa_cm` (`id_optativa`)
+  `id_optativa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -455,13 +696,10 @@ CREATE TABLE IF NOT EXISTS `optativas` (
 -- Estructura de tabla para la tabla `orientaciones`
 --
 
-DROP TABLE IF EXISTS `orientaciones`;
-CREATE TABLE IF NOT EXISTS `orientaciones` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `orientaciones` (
+  `id` int(11) NOT NULL,
   `id_plan` int(11) NOT NULL,
-  `nombre` varchar(80) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_plan` (`id_plan`)
+  `nombre` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -470,17 +708,15 @@ CREATE TABLE IF NOT EXISTS `orientaciones` (
 -- Estructura de tabla para la tabla `persona`
 --
 
-DROP TABLE IF EXISTS `persona`;
-CREATE TABLE IF NOT EXISTS `persona` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `persona` (
+  `id` bigint(20) NOT NULL,
   `apellido` varchar(50) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `nombre_2` varchar(50) DEFAULT NULL,
   `dni` varchar(50) DEFAULT NULL,
   `cuit` varchar(50) DEFAULT NULL,
   `email1` varchar(50) DEFAULT NULL,
-  `email2` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `email2` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -489,23 +725,25 @@ CREATE TABLE IF NOT EXISTS `persona` (
 -- Estructura de tabla para la tabla `planes`
 --
 
-DROP TABLE IF EXISTS `planes`;
-CREATE TABLE IF NOT EXISTS `planes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `planes` (
+  `id` int(11) NOT NULL,
   `id_carrera` int(11) NOT NULL,
   `nombre` varchar(80) NOT NULL,
   `duracion` int(11) NOT NULL,
-  `vigente` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `id_carrera` (`id_carrera`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `vigente` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `planes`
 --
 
 INSERT INTO `planes` (`id`, `id_carrera`, `nombre`, `duracion`, `vigente`) VALUES
-(1, 1, '07108', 5, 1);
+(1, 1, '07108', 5, 1),
+(2, 2, '003-11', 5, 1),
+(3, 3, '033-09', 3, 1),
+(4, 5, '021-17', 5, 1),
+(5, 4, '023-17', 5, 1),
+(6, 6, '022-17', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -513,12 +751,10 @@ INSERT INTO `planes` (`id`, `id_carrera`, `nombre`, `duracion`, `vigente`) VALUE
 -- Estructura de tabla para la tabla `regimen`
 --
 
-DROP TABLE IF EXISTS `regimen`;
-CREATE TABLE IF NOT EXISTS `regimen` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+CREATE TABLE `regimen` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `regimen`
@@ -535,23 +771,24 @@ INSERT INTO `regimen` (`id`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `titulos`
 --
 
-DROP TABLE IF EXISTS `titulos`;
-CREATE TABLE IF NOT EXISTS `titulos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `titulos` (
+  `id` int(11) NOT NULL,
   `id_plan` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `id_orientacion` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_plan` (`id_plan`),
-  KEY `id_orientacion` (`id_orientacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `nombre` varchar(100) NOT NULL,
+  `id_orientacion` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `titulos`
 --
 
 INSERT INTO `titulos` (`id`, `id_plan`, `nombre`, `id_orientacion`) VALUES
-(1, 1, 'Licenciado en Sistemas', NULL);
+(1, 1, 'Licenciado en Sistemas', NULL),
+(2, 2, 'Ingeniero en Sistemas', NULL),
+(3, 3, 'Técnico Universitario en Desarrollo de Aplicaciones Web', NULL),
+(4, 5, 'Ingeniero Mecatrónico', NULL),
+(5, 4, 'Ingeniero Agrimensor', NULL),
+(6, 6, 'Técnico Universitario en Topografía', NULL);
 
 -- --------------------------------------------------------
 
@@ -559,9 +796,8 @@ INSERT INTO `titulos` (`id`, `id_plan`, `nombre`, `id_orientacion`) VALUES
 -- Estructura de tabla para la tabla `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id` int(11) UNSIGNED NOT NULL,
   `ip_address` varchar(45) NOT NULL,
   `username` varchar(100) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
@@ -577,9 +813,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
   `company` varchar(100) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `phone` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `users`
@@ -595,16 +830,11 @@ INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`
 -- Estructura de tabla para la tabla `users_groups`
 --
 
-DROP TABLE IF EXISTS `users_groups`;
-CREATE TABLE IF NOT EXISTS `users_groups` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users_groups` (
+  `id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
-  `group_id` mediumint(8) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uc_users_groups` (`user_id`,`group_id`),
-  KEY `fk_users_groups_users1_idx` (`user_id`),
-  KEY `fk_users_groups_groups1_idx` (`group_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+  `group_id` mediumint(8) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `users_groups`
@@ -615,6 +845,302 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (13, 1, 2),
 (18, 2, 2);
 
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `carrera`
+--
+ALTER TABLE `carrera`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `ciclos`
+--
+ALTER TABLE `ciclos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_plan` (`id_plan`),
+  ADD KEY `id_orientacion` (`id_orientacion`);
+
+--
+-- Indices de la tabla `ciclo_materia`
+--
+ALTER TABLE `ciclo_materia`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_ciclo` (`id_ciclo`),
+  ADD KEY `id_materia` (`id_materia`),
+  ADD KEY `id_regimen` (`id_regimen`);
+
+--
+-- Indices de la tabla `correlativas`
+--
+ALTER TABLE `correlativas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_correlativa` (`id_correlativa`),
+  ADD KEY `id_ciclo` (`id_ciclo_materia`),
+  ADD KEY `id_correlativa_tipo` (`id_correlativa_tipo`);
+
+--
+-- Indices de la tabla `correlativas_tipo`
+--
+ALTER TABLE `correlativas_tipo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `cvar`
+--
+ALTER TABLE `cvar`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_docente` (`id_docente`);
+
+--
+-- Indices de la tabla `docentes`
+--
+ALTER TABLE `docentes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `docente_categoria_idx` (`id_docente_categoria`),
+  ADD KEY `persona_id` (`persona_id`);
+
+--
+-- Indices de la tabla `docente_categoria`
+--
+ALTER TABLE `docente_categoria`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `escuela`
+--
+ALTER TABLE `escuela`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `estudiantes`
+--
+ALTER TABLE `estudiantes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `login_attempts`
+--
+ALTER TABLE `login_attempts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `materias`
+--
+ALTER TABLE `materias`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tipo_id` (`id_tipo`);
+
+--
+-- Indices de la tabla `materias_tipo`
+--
+ALTER TABLE `materias_tipo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `materia_docente`
+--
+ALTER TABLE `materia_docente`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_ciclo` (`id_ciclo_materia`,`id_docente`),
+  ADD KEY `cm_materia_docente` (`id_docente`);
+
+--
+-- Indices de la tabla `operaciones`
+--
+ALTER TABLE `operaciones`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `optativas`
+--
+ALTER TABLE `optativas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_origen` (`id_origen`),
+  ADD KEY `id_origen_2` (`id_origen`),
+  ADD KEY `optativa_cm` (`id_optativa`);
+
+--
+-- Indices de la tabla `orientaciones`
+--
+ALTER TABLE `orientaciones`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_plan` (`id_plan`);
+
+--
+-- Indices de la tabla `persona`
+--
+ALTER TABLE `persona`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `planes`
+--
+ALTER TABLE `planes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_carrera` (`id_carrera`);
+
+--
+-- Indices de la tabla `regimen`
+--
+ALTER TABLE `regimen`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `titulos`
+--
+ALTER TABLE `titulos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_plan` (`id_plan`),
+  ADD KEY `id_orientacion` (`id_orientacion`);
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `users_groups`
+--
+ALTER TABLE `users_groups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uc_users_groups` (`user_id`,`group_id`),
+  ADD KEY `fk_users_groups_users1_idx` (`user_id`),
+  ADD KEY `fk_users_groups_groups1_idx` (`group_id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `carrera`
+--
+ALTER TABLE `carrera`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `ciclos`
+--
+ALTER TABLE `ciclos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `ciclo_materia`
+--
+ALTER TABLE `ciclo_materia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
+--
+-- AUTO_INCREMENT de la tabla `correlativas`
+--
+ALTER TABLE `correlativas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `correlativas_tipo`
+--
+ALTER TABLE `correlativas_tipo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `cvar`
+--
+ALTER TABLE `cvar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `docentes`
+--
+ALTER TABLE `docentes`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `docente_categoria`
+--
+ALTER TABLE `docente_categoria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `escuela`
+--
+ALTER TABLE `escuela`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `estudiantes`
+--
+ALTER TABLE `estudiantes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `login_attempts`
+--
+ALTER TABLE `login_attempts`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `materias`
+--
+ALTER TABLE `materias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+--
+-- AUTO_INCREMENT de la tabla `materias_tipo`
+--
+ALTER TABLE `materias_tipo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `materia_docente`
+--
+ALTER TABLE `materia_docente`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `operaciones`
+--
+ALTER TABLE `operaciones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `optativas`
+--
+ALTER TABLE `optativas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `orientaciones`
+--
+ALTER TABLE `orientaciones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `persona`
+--
+ALTER TABLE `persona`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `planes`
+--
+ALTER TABLE `planes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `regimen`
+--
+ALTER TABLE `regimen`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `titulos`
+--
+ALTER TABLE `titulos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `users_groups`
+--
+ALTER TABLE `users_groups`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- Restricciones para tablas volcadas
 --
@@ -672,7 +1198,6 @@ ALTER TABLE `titulos`
 ALTER TABLE `users_groups`
   ADD CONSTRAINT `fk_users_groups_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_users_groups_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

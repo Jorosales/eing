@@ -146,6 +146,8 @@ class Ciclo_materia extends MX_Controller{
 				$data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
 				$data['materias'] = $this->Materia_model->get_all_materias();
 				$data['regimenes'] = $this->Regimen_model->get_all_regimen();
+                $data['anios'] = $this->template->get_anios($data['ciclos'][0]->duracion);
+
 
                 $this->template->cargar_vista('abm/ciclo_materia/edit', $data);
             }
