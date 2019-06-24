@@ -11,8 +11,8 @@
 	<?php echo $this->template->cargar_input(lang('form_total_hours'), 'hs_total', 'text', '', form_error('hs_total'), $this->input->post('hs_total')); ?>
 
 	<?php echo $this->template->cargar_input(lang('form_program'), 'programa', 'file', '', form_error('programa'), $this->input->post('programa')); ?>
-
-	<?php echo $this->template->cargar_input(lang('form_year'), 'anio', 'text', '*', form_error('anio'), $this->input->post('anio')); ?>
+	
+	<?php echo $this->template->cargar_select(lang('form_year'), 'anio', '*', form_error('anio'), $anios, $this->input->post('anio')); ?>
 
 	<?php echo $this->template->cargar_input(lang('form_code'), 'codigo', 'text', '', form_error('codigo'), $this->input->post('codigo')); ?>
 	

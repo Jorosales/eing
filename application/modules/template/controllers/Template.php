@@ -266,4 +266,16 @@ class Template extends MX_Controller
 		$data['ciclos']= $this->Ciclo_model->get_all_ciclos();;
 		return $this->load->view('materia-profile',$data, true);
 	}	
+
+	public function get_anios($years)
+    {
+    	$anios = null;
+    	for ($i=1; $i <= $years; $i++) { 
+    		$anios[$i] = new stdClass();
+    		$anios[$i]->id = $i;
+    		$anios[$i]->nombre = $i;
+    	}
+		return($anios);
+    }
+
 }

@@ -27,9 +27,8 @@
                     <thead>
 						<tr>
 							<th></th>
-							<th>Codigo</th>
+							<th>Código</th>
 							<th>Asignatura</th>
-							<th>Año</th>
 							<th>Regimen</th>
 							<th>Hs Cuat 1</th>
 							<th>Hs Cuat 2</th>
@@ -38,7 +37,13 @@
                     </thead>
 
                     <tbody>
-						<?php foreach ($plan as $row) {?>
+                    	<tr> <td colspan="8" style="text-align: center; background-color: <?= $escuela['claro'] ?>"><b>1º AÑO</b></td></tr>
+						<?php foreach ($plan as $c => $row) {?>
+							
+							<?php if (isset($plan[$c-1]) && $plan[$c-1]->anio != $row->anio): ?>
+									<tr> <td colspan="8" style="text-align: center; background-color: <?= $escuela['claro'] ?>"><b><?=$row->anio;?>º AÑO</b></td></tr>
+							<?php endif ?>
+
 							<tr> 
 								<td>
 									<a href="<?= base_url('/materia/'.$row->id)?>">
@@ -47,10 +52,9 @@
 								</td>
 								<td><?=$row->codigo;?></td>
 								<td><?=$row->nombre;?></td>
-								<td><?=$row->anio;?></td>
 								<td><?=$row->regimen;?></td>
-								<td><?php if ($row->regid == 2) echo $row->horas; else echo '-'?></td>
-								<td><?php if ($row->regid == 3) echo $row->horas; else echo '-'?></td>
+								<td><?php if ($row->regid == 2 || $row->regid == 1) echo $row->horas; else echo '-'?></td>
+								<td><?php if ($row->regid == 3 || $row->regid == 1) echo $row->horas; else echo '-'?></td>
 								<td><?=$row->hs_total;?></td>
 							</tr>
 						<?php } ?>

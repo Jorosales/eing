@@ -2,50 +2,51 @@
  
 class Ciclo_materia extends MX_Controller{
 
-    public $name = 'El ciclo-materia';
+    private $name = 'El ciclo-materia';
     function __construct()
     {
-        parent::__construct();
-        $this->load->module('template');
-        $this->load->model('Ciclo_materia_model');
-        $this->load->model('Ciclo_model');
-        $this->load->model('Materia_model');
-        $this->load->model('Materias_tipo_model');
-        $this->load->model('Regimen_model');
+        parent::__construct();    
         $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
         $this->load->library(array('ion_auth', 'form_validation'));
-        $this->load->helper(array('language'));
-        $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
-        $this->lang->load('auth');
+        
+        if (!$this->ion_auth->logged_in())
+        {
+            redirect('login', 'refresh');
+        }else {
+            $this->load->module('template');
+            $this->load->model('Ciclo_materia_model');
+            $this->load->model('Ciclo_model');
+            $this->load->model('Materia_model');
+            $this->load->model('Materias_tipo_model');
+            $this->load->model('Regimen_model');
+            $this->load->helper(array('language'));
+            $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
+            $this->lang->load('auth');
+        }
     } 
 
     /*
      * Listing of ciclo_materia
      */
-    function index($mensaje=null)
+    public function index($mensaje=null)
     {
-        if (!$this->ion_auth->logged_in())
-        {
-            redirect('login', 'refresh');
-        }else {
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/ciclo_materia/index?', $this->Ciclo_materia_model->get_all_ciclo_materia_count($params));
-            $this->pagination->initialize($config);
+        $params = $this->template->get_params();
+        $config = $this->template->get_config('abm/ciclo_materia/index?', $this->Ciclo_materia_model->get_all_ciclo_materia_count($params));
+        $this->pagination->initialize($config);
 
-            $data['ciclo_materia'] = $this->Ciclo_materia_model->get_all_ciclo_materia($params);
-            $data['user'] = $this->ion_auth->user()->row();
-            if (isset($mensaje)) {
-                $data['alerta'] = $mensaje;
-            }
-
-            $this->template->cargar_vista('abm/ciclo_materia/index', $data);
+        $data['ciclo_materia'] = $this->Ciclo_materia_model->get_all_ciclo_materia($params);
+        $data['user'] = $this->ion_auth->user()->row();
+        if (isset($mensaje)) {
+            $data['alerta'] = $mensaje;
         }
+
+        $this->template->cargar_vista('abm/ciclo_materia/index', $data);
     }
 
     /*
      * Adding a new ciclo_materia
      */
-    function add()
+    public function add()
     {   
         $this->form_validation->set_rules('anio',lang('form_year'),'integer|required');
         $this->form_validation->set_rules('codigo',lang('form_code'),'alpha_numeric');
@@ -88,7 +89,8 @@ class Ciclo_materia extends MX_Controller{
             $data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
             $data['materias'] = $this->Materia_model->get_all_materias();
             $data['regimenes'] = $this->Regimen_model->get_all_regimen();
-            
+            $data['anios'] = $this->template->get_anios($data['ciclos'][0]->duracion);
+
             $this->template->cargar_vista('abm/ciclo_materia/add', $data);
         }
 
@@ -97,7 +99,7 @@ class Ciclo_materia extends MX_Controller{
     /*
      * Editing a ciclo_materia
      */
-    function edit($id)
+    public function edit($id)
     {   
         $data['ciclo_materia'] = $this->Ciclo_materia_model->get_ciclo_materia($id);
         
@@ -155,7 +157,7 @@ class Ciclo_materia extends MX_Controller{
     /*
      * Deleting ciclo_materia
      */
-    function remove($id)
+    public function remove($id)
     {
         $ciclo_materia = $this->Ciclo_materia_model->get_ciclo_materia($id);
 
@@ -181,7 +183,7 @@ class Ciclo_materia extends MX_Controller{
     }
     
 
-    function asignar_correlativa($id)
+    public function asignar_correlativa($id)
     {   
         $data['ciclo_materia'] = $this->Ciclo_materia_model->get_ciclo_materia($id);
 
@@ -221,7 +223,7 @@ class Ciclo_materia extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     }
 
-    function remove_correlativa($id)
+    public function remove_correlativa($id)
     {
         $correlativa = $this->Ciclo_materia_model->get_correlativa($id);
 
@@ -242,7 +244,7 @@ class Ciclo_materia extends MX_Controller{
     }
 
 
-    function asignar_optativas($id)
+    public function asignar_optativas($id)
     {   
         $data['ciclo_materia'] = $this->Ciclo_materia_model->get_ciclo_materia($id);
 
@@ -282,7 +284,7 @@ class Ciclo_materia extends MX_Controller{
     }
 
 
-    function remove_optativa($id)
+    public function remove_optativa($id)
     {
         $optativa = $this->Ciclo_materia_model->get_optativa($id);
 

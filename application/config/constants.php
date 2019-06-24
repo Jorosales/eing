@@ -86,6 +86,6 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 define('RECORDS_PER_PAGE', 10);
 
-define('CARRERAS_UPLOAD', 'assets/uploads/carreras/');
+define('CARRERAS_UPLOAD', 'assets/uploads/pdfs/carreras/');
 define('PDFS_UPLOAD', 'assets/uploads/pdfs/');
 define('IMAGES_UPLOAD', 'assets/uploads/images/');

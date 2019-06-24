@@ -29,7 +29,7 @@ class Ciclo_model extends CI_Model
      */
     function get_all_ciclos($params = array())
     {
-        $this->db->select('ciclos.*, planes.nombre as plan, orientaciones.nombre as orientacion, carrera.nombre as carrera');   
+        $this->db->select('ciclos.*, planes.nombre as plan, orientaciones.nombre as orientacion, carrera.nombre as carrera, planes.duracion as duracion');   
         $this->db->from('ciclos');
         $this->db->join('planes', 'planes.id = ciclos.id_plan');
         $this->db->join('carrera', 'carrera.id = planes.id_carrera');

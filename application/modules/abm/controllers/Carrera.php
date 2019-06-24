@@ -4,141 +4,130 @@ class Carrera extends MX_Controller {
 
     public $name = 'La carrera';
 	function __construct(){
-		parent::__construct();
-        $this->load->module('template');
-        $this->load->model('Carrera_model');
+		parent::__construct();    
         $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
         $this->load->library(array('ion_auth', 'form_validation'));
-        $this->load->helper(array('language'));
-        $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
-        $this->lang->load('auth');
-    }
-
-	function index($mensaje=null)
-    {    
+        
         if (!$this->ion_auth->logged_in())
         {
             redirect('login', 'refresh');
         }else {
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/carrera/index?', $this->Carrera_model->get_all_carrera_count());
-            $this->pagination->initialize($config);
-
-            $data['carreras'] = $this->Carrera_model->get_all_carrera($params);
-            $data['user'] = $this->ion_auth->user()->row();
-            if (isset($mensaje)) {
-                $data['alerta'] = $mensaje;
-            }
-
-            $this->template->cargar_vista('abm/carrera/index', $data);
+            $this->load->module('template');
+            $this->load->model('Carrera_model');
+            $this->load->helper(array('language'));
+            $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
+            $this->lang->load('auth');
         }
+    }
+
+	public function index($mensaje=null)
+    {    
+        $params = $this->template->get_params();
+        $config = $this->template->get_config('abm/carrera/index?', $this->Carrera_model->get_all_carrera_count());
+        $this->pagination->initialize($config);
+
+        $data['carreras'] = $this->Carrera_model->get_all_carrera($params);
+        $data['user'] = $this->ion_auth->user()->row();
+        if (isset($mensaje)) {
+            $data['alerta'] = $mensaje;
+        }
+
+        $this->template->cargar_vista('abm/carrera/index', $data);
     }
 
     /*
      * Adding a new carrera
      */
-    function add()
+    public function add()
     {   
-        if (!$this->ion_auth->logged_in())
-        {
-            redirect('login', 'refresh');
-        }else {
+        $this->form_validation->set_rules('nombre',lang('form_name'),'required');
+        $this->form_validation->set_rules('plan_pdf',lang('form_plan_pdf'),'callback_pdf_file_check[plan_pdf]');
+        $this->form_validation->set_rules('imagen',lang('form_image'),'callback_image_file_check[imagen]');
 
-            $this->form_validation->set_rules('nombre',lang('form_name'),'required');
-            $this->form_validation->set_rules('plan_pdf',lang('form_plan_pdf'),'callback_pdf_file_check[plan_pdf]');
-            $this->form_validation->set_rules('imagen',lang('form_image'),'callback_image_file_check[imagen]');
+        if($this->form_validation->run($this))     
+        {   
+            $params = array(
+                'nombre' => $this->input->post('nombre'),
+                'imagen' => $_FILES['imagen']['name'],
+                'plan_pdf' => $_FILES['plan_pdf']['name'],
+                'presentacion' => $this->input->post('presentacion'),
+                'perfil' => $this->input->post('perfil'),
+            );
 
-            if($this->form_validation->run($this))     
-            {   
-                $params = array(
-                    'nombre' => $this->input->post('nombre'),
-                    'imagen' => $_FILES['imagen']['name'],
-                    'plan_pdf' => $_FILES['plan_pdf']['name'],
-                    'presentacion' => $this->input->post('presentacion'),
-                    'perfil' => $this->input->post('perfil'),
-                );
+            $pdf = $this->template->subir_archivo(CARRERAS_UPLOAD, 'pdf', 'plan_pdf');
+            $imagen = $this->template->subir_archivo(IMAGES_UPLOAD, 'jpg|png', 'imagen');
+         
+            if ($this->Carrera_model->add_carrera($params))
+                $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('record_edit_success_text'), $this->name));    
+            else   
+                $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('record_edit_error_text'), $this->name));  
 
-                $pdf = $this->template->subir_archivo(PDFS_UPLOAD, 'pdf', 'plan_pdf');
-                $imagen = $this->template->subir_archivo(IMAGES_UPLOAD, 'jpg|png', 'imagen');
-             
-                if ($this->Carrera_model->add_carrera($params))
-                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
-                                    sprintf(lang('record_edit_success_text'), $this->name));    
-                else   
-                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
-                                    sprintf(lang('record_edit_error_text'), $this->name));  
+            $this->index($mensaje);
+        }
+        else
+        {            
+            $data['user'] = $this->ion_auth->user()->row();
 
-                $this->index($mensaje);
-            }
-            else
-            {            
-                $data['user'] = $this->ion_auth->user()->row();
-
-                $this->template->cargar_vista('abm/carrera/add', $data);
-            }
+            $this->template->cargar_vista('abm/carrera/add', $data);
         }
     }  
 
     /*
      * Editing a carrera
      */
-    function edit($id)
-    {   
-        if (!$this->ion_auth->logged_in())
+    public function edit($id)
+    {       
+        $data['carrera'] = $this->Carrera_model->get_carrera($id);
+        
+        if(isset($data['carrera']['id']))
         {
-            redirect('login', 'refresh');
-        }else {
+            $this->form_validation->set_rules('nombre',lang('form_name'),'required');
+            $this->form_validation->set_rules('plan_pdf',lang('form_plan_pdf'),'callback_pdf_file_check[plan_pdf]');
+            $this->form_validation->set_rules('imagen',lang('form_image'),'callback_image_file_check[imagen]');
             
-            $data['carrera'] = $this->Carrera_model->get_carrera($id);
-            
-            if(isset($data['carrera']['id']))
-            {
-                $this->form_validation->set_rules('nombre',lang('form_name'),'required');
-                $this->form_validation->set_rules('plan_pdf',lang('form_plan_pdf'),'callback_pdf_file_check[plan_pdf]');
-                $this->form_validation->set_rules('imagen',lang('form_image'),'callback_image_file_check[imagen]');
+            if($this->form_validation->run($this))     
+            {                       
+                $params = array(
+                    'nombre' => $this->input->post('nombre'),
+                    'presentacion' => $this->input->post('presentacion'),
+                    'perfil' => $this->input->post('perfil'),
+                );
+
+                if($_FILES['plan_pdf']['name'] != ''){
+                    $pdf = $this->template->subir_archivo(CARRERAS_UPLOAD, 'pdf', 'plan_pdf');
+                    $params['plan_pdf'] = $pdf['file_name'];
+                }
                 
-                if($this->form_validation->run($this))     
-                {                       
-                    $params = array(
-                        'nombre' => $this->input->post('nombre'),
-                        'presentacion' => $this->input->post('presentacion'),
-                        'perfil' => $this->input->post('perfil'),
-                    );
-
-                    if($_FILES['plan_pdf']['name'] != ''){
-                        $pdf = $this->template->subir_archivo(PDFS_UPLOAD, 'pdf', 'plan_pdf');
-                        $params['plan_pdf'] = $pdf['file_name'];
-                    }
-                    
-                    if($_FILES['imagen']['name'] != ''){
-                        $imagen = $this->template->subir_archivo(IMAGES_UPLOAD, 'jpg|png', 'imagen');
-                        $params['imagen']= $imagen['file_name'];
-                    }
-
-                    if ($this->Carrera_model->update_carrera($id, $params))
-                        $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
-                                        sprintf(lang('record_edit_success_text'), $this->name));    
-                    else   
-                            $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
-                                        sprintf(lang('record_edit_error_text'), $this->name));  
-
-                    $this->index($mensaje);
+                if($_FILES['imagen']['name'] != ''){
+                    $imagen = $this->template->subir_archivo(IMAGES_UPLOAD, 'jpg|png', 'imagen');
+                    $params['imagen']= $imagen['file_name'];
                 }
-                else
-                {
-                    $data['user'] = $this->ion_auth->user()->row();
-                    $this->template->cargar_vista('abm/carrera/edit', $data);
-                }
+
+                if ($this->Carrera_model->update_carrera($id, $params))
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                    sprintf(lang('record_edit_success_text'), $this->name));    
+                else   
+                        $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                    sprintf(lang('record_edit_error_text'), $this->name));  
+
+                $this->index($mensaje);
             }
             else
-                show_error(sprintf(lang('no_existe'), $this->name));
+            {
+                $data['user'] = $this->ion_auth->user()->row();
+                $this->template->cargar_vista('abm/carrera/edit', $data);
+            }
         }
+        else
+            show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
     /*
      * Deleting carrera
      */
-    function remove($id)
+    public function remove($id)
     {
         $carrera = $this->Carrera_model->get_carrera($id);
 
@@ -221,54 +210,40 @@ class Carrera extends MX_Controller {
     }
 
     public function carrera_completa($id_carrera)
-    {        
-        if (!$this->ion_auth->logged_in())
-        {
-            redirect('login', 'refresh');
-        }else {
-            
-            $data['carrera'] = $this->Carrera_model->get_carrera_completa($id_carrera);
-            $data['user'] = $this->ion_auth->user()->row();
-            
-            if (count($data['carrera']['data']) == 0){
-                $data['alerta'] = lang('undefined_plan');
-                $this->template->cargar_vista('abm/404', $data);
-            }
-            else{
-
-                if (isset($mensaje)) {
-                    $data['alerta'] = $mensaje;
-                }
-                $this->template->cargar_vista('abm/carrera/carrera_completa', $data);
-            }            
+    {       
+        $data['carrera'] = $this->Carrera_model->get_carrera_completa($id_carrera);
+        $data['user'] = $this->ion_auth->user()->row();
+        
+        if (count($data['carrera']['data']) == 0){
+            $data['alerta'] = lang('undefined_plan');
+            $this->template->cargar_vista('abm/404', $data);
         }
+        else{
+
+            if (isset($mensaje)) {
+                $data['alerta'] = $mensaje;
+            }
+            $this->template->cargar_vista('abm/carrera/carrera_completa', $data);
+        }            
     }
 
 
     public function crear_carrera()
-    {        
-        if (!$this->ion_auth->logged_in())
-        {
-            redirect('login', 'refresh');
-        }else {
-
-
-            
-            //$data['carrera'] = $this->Carrera_model->get_carrera_completa($id_carrera);
-            $data['user'] = $this->ion_auth->user()->row();
-            $this->template->cargar_vista('abm/carrera/crear_carrera', $data);
-            /*if (count($data['carrera']['data']) == 0){
-                $data['alerta'] = 'Esta carrera no tiene un plan definido';
-                $this->template->cargar_vista('abm/404', $data);
-            }
-            else{
-
-                if (isset($mensaje)) {
-                    $data['alerta'] = $mensaje;
-                }
-                $this->template->cargar_vista('abm/carrera/carrera_completa', $data);
-            }*/            
+    {            
+        //$data['carrera'] = $this->Carrera_model->get_carrera_completa($id_carrera);
+        $data['user'] = $this->ion_auth->user()->row();
+        $this->template->cargar_vista('abm/carrera/crear_carrera', $data);
+        /*if (count($data['carrera']['data']) == 0){
+            $data['alerta'] = 'Esta carrera no tiene un plan definido';
+            $this->template->cargar_vista('abm/404', $data);
         }
+        else{
+
+            if (isset($mensaje)) {
+                $data['alerta'] = $mensaje;
+            }
+            $this->template->cargar_vista('abm/carrera/carrera_completa', $data);
+        }*/            
     }
 
 }
