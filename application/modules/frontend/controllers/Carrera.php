@@ -23,7 +23,7 @@ class Carrera extends MX_Controller {
 	{
 		$data['carrera'] = $this->Carrera_model->getCarrera($idCarrera);
 		$data['plan'] = $this->Carrera_model->getPlan($idCarrera);	
-
+        
 		if (count($data['plan']) == 0){
             $data['alerta'] = lang('undefined_plan');
             $data['_view'] = '404';
@@ -33,8 +33,8 @@ class Carrera extends MX_Controller {
             if (isset($mensaje)) {
                 $data['alerta'] = $mensaje;
             }
-            $data['orientaciones'] = $this->Carrera_model->getOrientaciones($data['plan'][0]->id);
-		
+            $data['orientaciones'] = $this->Carrera_model->getOrientaciones($data['plan'][0]->plan_id);
+		  
 			if(!empty($data['orientaciones']))
 			{
 				foreach ($data['orientaciones'] as $orientacion)

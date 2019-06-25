@@ -9,23 +9,25 @@
 	
 <?php echo form_close(); ?>
 
-<div class="col-xs-12">
+<br><br><br>
+
+<div class="col-lg-11">
 	<div class="box">
-
 		<div class="box-header">
-			<h3 class="box-title">Materias optativas</h3>
+		  <h3 class="box-title"><?php echo lang('title_optative');?></h3>
 		</div>
-
+		<!-- /.box-header -->
 		<div class="box-body">
-			<table id="example2" class="table table-bordered table-striped">
-				<thead>
-					<tr>
+		  	<table id="tabla" class="table table-bordered table-striped">
+			    <thead>
+				    <tr>
 						<th><?php echo lang('table_id_th');?></th>
 						<th><?php echo lang('table_course_th');?></th>
-						<th colspan="2"><?php echo lang('table_actions_th');?></th>
+						<th><?php echo lang('table_actions_th');?></th>
 					</tr>
-				</thead>
-				<tbody>
+			    </thead>
+		    
+			    <tbody>
 					<?php foreach($optativas_materia as $c):?>
 					<tr>
 						<td><?php echo htmlspecialchars($c->id,ENT_QUOTES,'UTF-8');?></td>
@@ -36,19 +38,17 @@
 					 </tr>
 					 <?php endforeach;?>
 				</tbody>
-				<tfoot>
-					<tr>
+
+			    <tfoot>
+				    <tr>
 						<th><?php echo lang('table_id_th');?></th>
 						<th><?php echo lang('table_course_th');?></th>
-						<th colspan="2"><?php echo lang('table_actions_th');?></th>
+						<th><?php echo lang('table_actions_th');?></th>
 					</tr>
-				</tfoot>
-			</table>
-
-		</div>
-
+			    </tfoot>
+		  	</table>
+	   	</div>
+		<!-- /.box-body -->
 	</div>
 	<!-- /.box -->
-</div>
-<!-- /.col -->
-
+</div> 

@@ -129,11 +129,9 @@ class Template extends MX_Controller
 
 	public function boton_nuevo($url, $titulo)
 	{
-		$boton = '<div class="clearfix">
-					<div class="float-right">
-						<a href='.site_url($url).' class="btn btn-success">'.$titulo.'</a> 
-					</div>
-				</div>';
+		$boton = '<div class="col-md-3 col-md-offset-8">
+					<a href='.site_url($url).' class="btn btn-block btn-success btn-lg">'.$titulo.'</a> 
+				  </div> <br>';
 		return $boton;
 	}
 
@@ -186,7 +184,11 @@ class Template extends MX_Controller
 
 	public function cargar_submit()
 	{
-		return $this->load->view('form_button');
+		$submit = '	
+					<div class="col-md-3 col-md-offset-7">
+						<button type="submit" class="btn btn-block btn-success btn-md">Guardar</button>
+					</div>';
+		return $submit;
 	}
 
 

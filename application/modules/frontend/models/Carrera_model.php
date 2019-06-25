@@ -4,57 +4,78 @@ class Carrera_model  extends CI_Model  {
 	
 	public function getCarrera($idCarrera) 
 	{
-		$query = $this->db->query('	SELECT c.*, p.nombre AS plan 
-									FROM carrera c
-									INNER JOIN planes p ON p.id_carrera = c.id
-									WHERE c.id = '.$idCarrera.' LIMIT 1');
-		return $query->result();
+		$this->db->select('carrera.*, planes.nombre as plan');
+      	$this->db->from('carrera');
+      	$this->db->join('planes', 'planes.id_carrera = carrera.id');
+      	$this->db->where('carrera.id', $idCarrera);
+      	$this->db->limit('1');
+
+	    return $this->db->get()->result();
 	}
 
 	public function getPlan($idCarrera) 
 	{
-		$query = $this->db->query(
-				'SELECT cm.id, cm.codigo, m.nombre as nombre, r.id as regid, r.nombre as regimen, cm.horas, cm.hs_total, cm.anio, cm.id_materia
-				FROM ciclos c
-				INNER JOIN ciclo_materia cm ON id_ciclo = c.id
-				INNER JOIN materias m ON m.id = cm.id_materia
-				LEFT JOIN orientaciones o ON o.id = c.id_orientacion
-				INNER JOIN planes p ON p.id = c.id_plan
-				INNER JOIN carrera ca ON ca.id = p.id_carrera
-				INNER JOIN regimen r ON r.id = cm.id_regimen
-				INNER JOIN materias_tipo mt ON mt.id = m.id_tipo
-				WHERE ca.id = '. $idCarrera .' AND ISNULL(c.id_orientacion) AND p.vigente = 1
-				ORDER BY CAST(cm.codigo as UNSIGNED INTEGER), cm.anio, cm.id_regimen');
-		return $query->result(); 
+		$this->db->select('	ciclo_materia.id, ciclo_materia.codigo, ciclo_materia.id_materia, ciclo_materia.horas, 	
+							ciclo_materia.hs_total, ciclo_materia.anio, 
+							materias.nombre as nombre,
+							regimen.id as regid, regimen.nombre as regimen, 
+							planes.id as plan_id ');
+      	$this->db->from('ciclos');
+      	$this->db->join('ciclo_materia', 'ciclo_materia.id_ciclo = ciclos.id');
+      	$this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
+      	$this->db->join('orientaciones', 'orientaciones.id = ciclos.id_orientacion', 'LEFT');
+      	$this->db->join('planes', 'planes.id = ciclos.id_plan');
+      	$this->db->join('carrera', 'carrera.id = planes.id_carrera');
+      	$this->db->join('regimen', 'regimen.id = ciclo_materia.id_regimen');
+      	$this->db->join('materias_tipo', 'materias_tipo.id = materias.id_tipo');
+
+      	$this->db->where('carrera.id', $idCarrera);
+      	$this->db->where('ciclos.id_orientacion', null);
+      	$this->db->where('planes.vigente', 1);
+      	$this->db->order_by('CAST(ciclo_materia.codigo as UNSIGNED INTEGER), ciclo_materia.anio, ciclo_materia.id_regimen');
+
+      	return $this->db->get()->result();
 	}
 
 	public function getOrientaciones($idPlan) 
 	{
-		$query = $this->db->query('SELECT o.id, o.nombre FROM orientaciones o WHERE id_plan = '.$idPlan);
-		return $query->result();
+		$this->db->select('orientaciones.id, orientaciones.nombre');
+      	$this->db->from('orientaciones');
+      	$this->db->where('orientaciones.id_plan', $idPlan);
+
+	    return $this->db->get()->result();
 	}
 
 	public function getPlanPorOrientacion($idOrientacion) 
 	{
-		$query = $this->db->query(
-				'SELECT cm.id, cm.codigo, m.nombre as nombre, r.id as regid, r.nombre as regimen, cm.horas, cm.hs_total, cm.anio, cm.id_materia
-				FROM ciclos c
-				INNER JOIN ciclo_materia cm ON id_ciclo = c.id
-				INNER JOIN materias m ON m.id = cm.id_materia
-				LEFT JOIN orientaciones o ON o.id = c.id_orientacion
-				INNER JOIN planes p ON p.id = c.id_plan
-				INNER JOIN carrera ca ON ca.id = p.id_carrera
-				INNER JOIN regimen r ON r.id = cm.id_regimen
-				INNER JOIN materias_tipo mt ON mt.id = m.id_tipo
-				WHERE o.id = '. $idOrientacion .' AND NOT ISNULL(c.id_orientacion)
-				ORDER BY cm.anio, cm.codigo, cm.id_regimen');
-		return $query->result();
+		$this->db->select('	ciclo_materia.id, ciclo_materia.codigo, ciclo_materia.horas, ciclo_materia.hs_total, ciclo_materia.anio, 
+							ciclo_materia.id_materia, 
+							materias.nombre as nombre, 
+							regimen.id as regid, regimen.nombre as regimen');
+      	$this->db->from('ciclos');
+      	$this->db->join('ciclo_materia', 'ciclo_materia.id_ciclo = ciclos.id');
+      	$this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
+      	$this->db->join('orientaciones', 'orientaciones.id = ciclos.id_orientacion', 'LEFT');
+      	$this->db->join('planes', 'planes.id = ciclos.id_plan');
+      	$this->db->join('carrera', 'carrera.id = planes.id_carrera');
+      	$this->db->join('regimen', 'regimen.id = ciclo_materia.id_regimen');
+      	$this->db->join('materias_tipo', 'materias_tipo.id = materias.id_tipo');
+
+      	$this->db->where('orientaciones.id', $idOrientacion);
+      	$this->db->where('ciclos.id_orientacion IS NOT NULL');
+
+      	$this->db->order_by('ciclo_materia.anio, ciclo_materia.codigo, ciclo_materia.id_regimen');
+
+	    return $this->db->get()->result();
 	}
 
 	public function getAllActivates() 
 	{
-		$query = $this->db->query('SELECT * FROM carrera where activo = 1');
-		return $query->result();
+		$this->db->select('*');
+      	$this->db->from('carrera');
+      	$this->db->where('carrera.activo', 1);
+
+	    return $this->db->get()->result();
 	}
 
 	function get_carrera($id)

@@ -200,6 +200,9 @@ $lang['title_orientation']		= 'Orientaciones';
 $lang['title_plan']				= 'Planes';
 $lang['title_regimen']			= 'Régimen';
 $lang['title_title']			= 'Títulos';
+$lang['title_designated']		= 'Correlativas Asignadas';
+$lang['title_optative']			= 'Optativas Asignadas';
+$lang['title_designated_course']= 'Materias Asignadas';
 
 $lang['table_id_th']    		= 'ID';
 $lang['table_name_th']    		= 'Nombre';
