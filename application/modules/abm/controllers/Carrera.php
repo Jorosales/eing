@@ -22,11 +22,7 @@ class Carrera extends MX_Controller {
 
 	public function index($mensaje=null)
     {    
-        $params = $this->template->get_params();
-        $config = $this->template->get_config('abm/carrera/index?', $this->Carrera_model->get_all_carrera_count());
-        $this->pagination->initialize($config);
-
-        $data['carreras'] = $this->Carrera_model->get_all_carrera($params);
+        $data['carreras'] = $this->Carrera_model->get_all_carrera();
         $data['user'] = $this->ion_auth->user()->row();
         if (isset($mensaje)) {
             $data['alerta'] = $mensaje;

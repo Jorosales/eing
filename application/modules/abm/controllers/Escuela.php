@@ -20,11 +20,7 @@ class Escuela extends MX_Controller {
         {
             redirect('login', 'refresh');
         }else {
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/escuela/index?', $this->Escuela_model->get_all_escuela_count());
-            $this->pagination->initialize($config);
-
-            $data['escuelas'] = $this->Escuela_model->get_all_escuela($params);
+            $data['escuelas'] = $this->Escuela_model->get_all_escuela();
             $data['user'] = $this->ion_auth->user()->row();
             if (isset($mensaje)) {
                 $data['alerta'] = $mensaje;

@@ -21,11 +21,7 @@ class Materia_tipo extends MX_Controller {
         {
             redirect('login', 'refresh');
         }else {
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/materia_tipo/index?', $this->Materias_tipo_model->get_all_materias_tipo_count());
-            $this->pagination->initialize($config);
-
-            $data['tipos'] = $this->Materias_tipo_model->get_all_materias_tipo($params); 
+            $data['tipos'] = $this->Materias_tipo_model->get_all_materias_tipo(); 
             $data['user'] = $this->ion_auth->user()->row();
             if (isset($mensaje)) {
                 $data['alerta'] = $mensaje;

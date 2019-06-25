@@ -24,11 +24,7 @@ class Orientaciones extends MX_Controller{
         {
             redirect('login', 'refresh');
         }else {
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/orientaciones/index?', $this->Orientaciones_model->get_all_orientaciones_count($params));
-            $this->pagination->initialize($config);
-
-            $data['orientaciones'] = $this->Orientaciones_model->get_all_orientaciones($params);
+            $data['orientaciones'] = $this->Orientaciones_model->get_all_orientaciones();
             $data['user'] = $this->ion_auth->user()->row();
             if (isset($mensaje)) {
                 $data['alerta'] = $mensaje;

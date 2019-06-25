@@ -28,11 +28,7 @@ class Docente extends MX_Controller{
         {
             redirect('login', 'refresh');
         }else {
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/docente/index?', $this->Docente_model->get_all_docente_count());
-            $this->pagination->initialize($config);
-
-            $data['docentes'] = $this->Docente_model->get_all_docente($params);
+            $data['docentes'] = $this->Docente_model->get_all_docente();
             $data['user'] = $this->ion_auth->user()->row();
 
             if (isset($mensaje)) {

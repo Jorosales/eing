@@ -1,6 +1,6 @@
 <!-- Common Pages -->
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<div class="col-md-7 col-md-offset-2">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>Desactivar Plan Vigente</h1>
@@ -16,7 +16,7 @@
 			<!-- /.box-header -->
 			<?php echo form_open("abm/planes/deactivate/".$planes['id']."");?>
 				<div class="box-body">
-					<div class="form-group">
+					<div class="form-group col-md-offset-4">
 						<?php echo 'SI';?>
 						<input type="radio" name="confirm" value="yes" checked="checked" /> 
 						&nbsp;
@@ -27,7 +27,7 @@
 					<?php echo form_hidden(array('id'=>$planes['id'])); ?>
 				</div>
 				<div class="box-footer">
-					<button type="submit" class="btn btn-primary">Guardar</button>
+					<button type="submit" class="btn btn-primary col-md-offset-10">Guardar</button>
 				</div>
 			<?php echo form_close();?>
 		</div>

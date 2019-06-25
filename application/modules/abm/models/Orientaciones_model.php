@@ -27,13 +27,12 @@ class Orientaciones_model extends CI_Model
     /*
      * Get all orientaciones
      */
-    function get_all_orientaciones($params = array())
+    function get_all_orientaciones()
     {
         $this->db->select('orientaciones.*, planes.nombre as plan');    
         $this->db->from('orientaciones');
         $this->db->join('planes', 'planes.id = orientaciones.id_plan', 'LEFT');
-        if(isset($params) && !empty($params))
-            $this->db->limit($params['limit'], $params['offset']);
+
         $this->db->order_by('orientaciones.id', 'desc');
 
         return $this->db->get()->result();

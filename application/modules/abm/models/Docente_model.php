@@ -27,14 +27,13 @@ class Docente_model extends CI_Model
     /*
      * Get all docente
      */
-    function get_all_docente($params = array())
+    function get_all_docente()
     {
         $this->db->select('docentes.id, CONCAT(persona.apellido, ", ",  persona.nombre) as docente, docente_categoria.nombre AS categoria, docentes.descripcion');    
         $this->db->from('docentes');
         $this->db->join('persona', 'docentes.persona_id = persona.id');
         $this->db->join('docente_categoria', 'docentes.id_docente_categoria = docente_categoria.id', 'left');
-        if(isset($params) && !empty($params))
-            $this->db->limit($params['limit'], $params['offset']);   
+  
         $this->db->order_by('id', 'desc');
 
         return $this->db->get()->result();

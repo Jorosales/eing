@@ -7,26 +7,24 @@
 
 <hr>
 
-<?php echo $this->template->get_links(); ?>
-
-<div class="col-xs-12">
+<div class="col-lg-11">
 	<div class="box">
-
 		<div class="box-header">
-			<h3 class="box-title">Docentes</h3>
+		  <h3 class="box-title"><?php echo lang('title_teacher');?></h3>
 		</div>
-
+		<!-- /.box-header -->
 		<div class="box-body">
-			<table id="example2" class="table table-bordered table-striped">
-				<thead>
-					<tr>
+		  	<table id="tabla" class="table table-bordered table-striped">
+			    <thead>
+				    <tr>
 						<th><?php echo lang('table_id_th');?></th>
 						<th><?php echo lang('table_teacher_th');?></th>
 						<th><?php echo lang('table_category_th');?></th>
-						<th colspan="2"><?php echo lang('table_actions_th');?></th>
+						<th><?php echo lang('table_actions_th');?></th>
 					</tr>
-				</thead>
-				<tbody>
+			    </thead>
+		    
+			    <tbody>
 					<?php foreach($docentes as $d):?>
 					<tr>
 						<td><?php echo htmlspecialchars($d->id,ENT_QUOTES,'UTF-8');?></td>
@@ -44,21 +42,20 @@
 					 </tr>
 					 <?php endforeach;?>
 				</tbody>
-				<tfoot>
-					<tr>
+
+			    <tfoot>
+				    <tr>
 						<th><?php echo lang('table_id_th');?></th>
 						<th><?php echo lang('table_teacher_th');?></th>
 						<th><?php echo lang('table_category_th');?></th>
-						<th colspan="2"><?php echo lang('table_actions_th');?></th>
+						<th><?php echo lang('table_actions_th');?></th>
 					</tr>
-				</tfoot>
-			</table>
-
-		</div>
-
+			    </tfoot>
+		  	</table>
+	   	</div>
+		<!-- /.box-body -->
 	</div>
 	<!-- /.box -->
-</div>
-<!-- /.col -->
+</div>    
 
-<?php echo $this->template->get_links(); ?>
+<hr>

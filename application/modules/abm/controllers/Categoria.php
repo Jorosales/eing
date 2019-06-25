@@ -21,21 +21,15 @@ class Categoria extends MX_Controller{
      */
     function index($mensaje=null)
     {
-
         if (!$this->ion_auth->logged_in())
         {
             redirect('login', 'refresh');
         }else {
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/categoría/index?', $this->Categoria_model->get_all_categoria_count($params));
-            $this->pagination->initialize($config);
-
-            $data['categorias'] = $this->Categoria_model->get_all_categoria($params);
+            $data['categorias'] = $this->Categoria_model->get_all_categoria();
             $data['user'] = $this->ion_auth->user()->row();
             if (isset($mensaje)) {
                 $data['alerta'] = $mensaje;
             }
-
             $this->template->cargar_vista('abm/categoria/index', $data);
         }
     }

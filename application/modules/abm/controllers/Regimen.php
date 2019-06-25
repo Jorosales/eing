@@ -26,11 +26,7 @@ class Regimen extends MX_Controller{
         {
             redirect('login', 'refresh');
         }else {
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/regimen/index?', $this->Regimen_model->get_all_regimen_count($params));
-            $this->pagination->initialize($config);
-
-            $data['regimenes'] = $this->Regimen_model->get_all_regimen($params);
+            $data['regimenes'] = $this->Regimen_model->get_all_regimen();
             $data['user'] = $this->ion_auth->user()->row();
             if (isset($mensaje)) {
                 $data['alerta'] = $mensaje;

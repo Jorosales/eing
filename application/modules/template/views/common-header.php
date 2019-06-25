@@ -14,6 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	 	<!-- jQuery 2.2.3 -->
 		<script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/plugins/ckeditor/ckeditor.js"></script>
+		<script src="<?php echo base_url(); ?>assets/plugins/script.js"></script>
 	 	<!-- Bootstrap 3.3.6 -->
 	 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">
 	 	<!-- Font Awesome 

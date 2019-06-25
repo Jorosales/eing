@@ -31,13 +31,9 @@ class Materias_tipo_model extends CI_Model
     /*
      * Get all materias_tipo
      */
-    function get_all_materias_tipo($params = array())
+    function get_all_materias_tipo()
     {
         $this->db->order_by('id', 'asc');
-        if(isset($params) && !empty($params))
-        {
-            $this->db->limit($params['limit'], $params['offset']);
-        }
         return $this->db->get('materias_tipo')->result();
     }
         

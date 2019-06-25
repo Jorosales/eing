@@ -19,13 +19,9 @@ class Carrera_model  extends CI_Model  {
     /*
      * Get all carrera
      */
-    function get_all_carrera($params = array())
+    function get_all_carrera()
     {
         $this->db->order_by('id', 'desc');
-        if(isset($params) && !empty($params))
-        {
-            $this->db->limit($params['limit'], $params['offset']);
-        }
         return $this->db->get('carrera')->result();
     }
         

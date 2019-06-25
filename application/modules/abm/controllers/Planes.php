@@ -25,16 +25,12 @@ class Planes extends MX_Controller{
         {
             redirect('login', 'refresh');
         }else {
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/planes/index?', $this->Planes_model->get_all_planes_count());
-            $this->pagination->initialize($config);
-
-            $data['planes'] = $this->Planes_model->get_all_planes($params);
+            $data['planes'] = $this->Planes_model->get_all_planes();
             $data['user'] = $this->ion_auth->user()->row();
             
             if (isset($mensaje)) {
                 $data['alerta'] = $mensaje;
-            } //var_dump($mensaje); exit();
+            }
             
             $this->template->cargar_vista('abm/planes/index', $data);
         }

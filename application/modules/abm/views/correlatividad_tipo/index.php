@@ -3,27 +3,26 @@
 } 
 ?>
 <?php echo $this->template->boton_nuevo('abm/correlatividad_tipo/add', 'Nuevo Tipo'); ?>
+
 <hr>
-<?php echo $this->template->get_links(); ?>
 
-
-<div class="col-xs-12">
+<div class="col-lg-11">
 	<div class="box">
-
 		<div class="box-header">
-			<h3 class="box-title">Tipo de Correlatividad</h3>
+		  <h3 class="box-title"><?php echo lang('title_correlativity');?></h3>
 		</div>
-
+		<!-- /.box-header -->
 		<div class="box-body">
-			<table id="example2" class="table table-bordered table-striped">
-				<thead>
-					<tr>
+		  	<table id="tabla" class="table table-bordered table-striped">
+			    <thead>
+				    <tr>
 						<th><?php echo lang('table_id_th');?></th>
 						<th><?php echo lang('table_name_th');?></th>
-						<th colspan="2"><?php echo lang('table_actions_th');?></th>
+						<th><?php echo lang('table_actions_th');?></th>
 					</tr>
-				</thead>
-				<tbody>
+			    </thead>
+		    
+			    <tbody>
 					<?php foreach($tipos as $t):?>
 					<tr>
 						<td><?php echo htmlspecialchars($t->id,ENT_QUOTES,'UTF-8');?></td>
@@ -34,19 +33,20 @@
 					 </tr>
 					 <?php endforeach;?>
 				</tbody>
-				<tfoot>
-					<tr>
+
+			    <tfoot>
+				    <tr>
 						<th><?php echo lang('table_id_th');?></th>
 						<th><?php echo lang('table_name_th');?></th>
-						<th colspan="2"><?php echo lang('table_actions_th');?></th>
+						<th><?php echo lang('table_actions_th');?></th>
 					</tr>
-				</tfoot>
-			</table>
-		</div>
-
+			    </thead>
+			    </tfoot>
+		  	</table>
+	   	</div>
+		<!-- /.box-body -->
 	</div>
 	<!-- /.box -->
-</div>
-<!-- /.col -->
+</div>    
 
-<?php echo $this->template->get_links(); ?>
+<hr>

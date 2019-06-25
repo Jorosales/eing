@@ -7,56 +7,49 @@
 
 <hr>
 
-<?php echo $this->template->get_links(); ?>
-   
-
-<div class="col-xs-12">
+<div class="col-lg-11">
 	<div class="box">
-
 		<div class="box-header">
-			<h3 class="box-title">Materias</h3>
+		  <h3 class="box-title"><?php echo lang('title_course');?></h3>
 		</div>
-
+		<!-- /.box-header -->
 		<div class="box-body">
-			<table id="example2" class="table table-bordered table-striped">
-				<thead>
-					<tr>
+		  	<table id="tabla" class="table table-bordered table-striped">
+			    <thead>
+				    <tr>
 						<th><?php echo lang('table_id_th');?></th>
 						<th><?php echo lang('table_name_th');?></th>
 						<th><?php echo lang('table_type_th');?></th>
-						<th colspan="2"><?php echo lang('table_actions_th');?></th>
+						<th><?php echo lang('table_actions_th');?></th>
 					</tr>
-				</thead>
-				<tbody>
+			    </thead>
+		    
+			    <tbody>
 					<?php foreach($materias as $m):?>
-					<tr>
-						<td><?php echo htmlspecialchars($m->id,ENT_QUOTES,'UTF-8');?></td>
-						<td><?php echo htmlspecialchars($m->nombre,ENT_QUOTES,'UTF-8');?></td>
-						<td><?php echo htmlspecialchars($m->tipo,ENT_QUOTES,'UTF-8');?></td>
-						<td><?php echo anchor("abm/materia/edit/".$m->id, '<span class="btn btn-primary btn-xs">Editar</span>') ;?>
-					 	<?php echo anchor("abm/materia/remove/".$m->id, '<span class="btn btn-danger btn-xs">Eliminar</span>') ;?></td>
-					 </tr>
+						<tr>
+							<td><?php echo htmlspecialchars($m->id,ENT_QUOTES,'UTF-8');?></td>
+							<td><?php echo htmlspecialchars($m->nombre,ENT_QUOTES,'UTF-8');?></td>
+							<td><?php echo htmlspecialchars($m->tipo,ENT_QUOTES,'UTF-8');?></td>
+							<td><?php echo anchor("abm/materia/edit/".$m->id, '<span class="btn btn-primary btn-xs">Editar</span>') ;?>
+						 	<?php echo anchor("abm/materia/remove/".$m->id, '<span class="btn btn-danger btn-xs">Eliminar</span>') ;?></td>
+						 </tr>
 					 <?php endforeach;?>
 				</tbody>
-				<tfoot>
-					<tr>
+
+			    <tfoot>
+				    <tr>
 						<th><?php echo lang('table_id_th');?></th>
 						<th><?php echo lang('table_name_th');?></th>
 						<th><?php echo lang('table_type_th');?></th>
-						<th colspan="2"><?php echo lang('table_actions_th');?></th>
+						<th><?php echo lang('table_actions_th');?></th>
 					</tr>
-				</tfoot>
-			</table>
-		</div>
-
+			    </tfoot>
+		  	</table>
+	   	</div>
+		<!-- /.box-body -->
 	</div>
 	<!-- /.box -->
-</div>
-<!-- /.col -->
+</div>    
 
-<?php echo $this->template->get_links(); ?>
-
-
-
-	
+<hr>
 

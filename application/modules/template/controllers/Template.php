@@ -66,7 +66,7 @@ class Template extends MX_Controller
 	}
 
 
-	//Links
+/*	//Links
 
 	public function get_params()
 	{
@@ -96,7 +96,7 @@ class Template extends MX_Controller
         return $links;
 	}
 
-	//Fin Links
+	//Fin Links*/
 
 
 	public function subir_archivo($path, $type, $name)

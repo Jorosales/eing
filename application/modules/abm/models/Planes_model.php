@@ -27,13 +27,12 @@ class Planes_model extends CI_Model
     /*
      * Get all planes
      */
-    function get_all_planes($params = array())
+    function get_all_planes()
     {    
         $this->db->select('planes.*, carrera.nombre as carrera');    
         $this->db->from('planes');
         $this->db->join('carrera', 'carrera.id = planes.id_carrera', 'LEFT');
-        if(isset($params) && !empty($params))
-            $this->db->limit($params['limit'], $params['offset']);
+
         $this->db->order_by('planes.id', 'desc');
 
         return $this->db->get()->result();

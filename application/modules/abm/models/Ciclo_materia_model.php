@@ -27,7 +27,7 @@ class Ciclo_materia_model extends CI_Model
     /*
      * Get all ciclo_materia
      */
-    function get_all_ciclo_materia($params = array())
+    function get_all_ciclo_materia()
     {
         $this->db->select('ciclo_materia.*, ciclos.nombre as nombre_ciclo, materias.nombre as nombre_materia, regimen.nombre as nombre_regimen, materias.id_tipo as tipo');    
         $this->db->from('ciclo_materia');
@@ -35,8 +35,7 @@ class Ciclo_materia_model extends CI_Model
         $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
         $this->db->join('regimen', 'regimen.id = ciclo_materia.id_regimen');
         $this->db->order_by('id', 'desc');
-        if(isset($params) && !empty($params))
-            $this->db->limit($params['limit'], $params['offset']);
+
         return $this->db->get()->result();
     }
         

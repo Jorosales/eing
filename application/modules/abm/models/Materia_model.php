@@ -20,14 +20,13 @@ class Materia_model  extends CI_Model  {
     /*
      * Get all materias
      */
-    function get_all_materias($params = array())
+    function get_all_materias()
     {
         $this->db->select('materias.*, materias_tipo.nombre as tipo');    
         $this->db->from('materias');
         $this->db->join('materias_tipo', 'materias_tipo.id = materias.id_tipo');
         $this->db->order_by('materias.nombre', 'asc');
-        if(isset($params) && !empty($params))
-            $this->db->limit($params['limit'], $params['offset']);
+
         return $this->db->get()->result();
     }
 

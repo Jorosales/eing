@@ -27,14 +27,13 @@ class Titulo_model extends CI_Model
     /*
      * Get all titulos
      */
-    function get_all_titulos($params = array())
+    function get_all_titulos()
     {
         $this->db->select('titulos.*, planes.nombre as plan, orientaciones.nombre as orientacion');    
         $this->db->from('titulos');
         $this->db->join('planes', 'planes.id = titulos.id_plan');
         $this->db->join('orientaciones', 'orientaciones.id = titulos.id_orientacion', 'LEFT');
-        if(isset($params) && !empty($params))
-            $this->db->limit($params['limit'], $params['offset']);
+
         $this->db->order_by('titulos.id', 'desc');
 
         return $this->db->get()->result();

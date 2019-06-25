@@ -26,11 +26,7 @@ class Ciclo extends MX_Controller{
         {
             redirect('login', 'refresh');
         }else {
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/ciclo/index?', $this->Ciclo_model->get_all_ciclos_count($params));
-            $this->pagination->initialize($config);
-
-            $data['ciclos'] = $this->Ciclo_model->get_all_ciclos($params);
+            $data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
             $data['user'] = $this->ion_auth->user()->row();
             
             if (isset($mensaje)) {

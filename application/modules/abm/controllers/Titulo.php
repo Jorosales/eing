@@ -27,11 +27,7 @@ class Titulo extends MX_Controller{
         {
             redirect('login', 'refresh');
         }else {
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/titulo/index?', $this->Titulo_model->get_all_titulos_count());
-            $this->pagination->initialize($config);
-
-            $data['titulos'] = $this->Titulo_model->get_all_titulos($params);
+            $data['titulos'] = $this->Titulo_model->get_all_titulos();
             $data['user'] = $this->ion_auth->user()->row();
             
             if (isset($mensaje)) {

@@ -187,6 +187,20 @@ $lang['plan_activate_error']    		= 'El plan no se pudo activar, debido a que la
 $lang['plan_deactivate_success']    	= 'El plan se desactivo correctamente.';
 $lang['plan_deactivate_error']    		= 'El plan no se pudo desactivar.';
 
+$lang['title_cycle_course']  	= 'Ciclo-Materias';
+$lang['title_category']  		= 'Categorías';
+$lang['title_correlativity']  	= 'Tipo de Correlatividad';
+$lang['title_cycle']  			= 'Ciclos';
+$lang['title_course']  			= 'Materias';
+$lang['title_course_type']  	= 'Tipo de Materias';
+$lang['title_career']  			= 'Carreras';
+$lang['title_teacher']  		= 'Docentes';
+$lang['title_school']  			= 'Escuelas';
+$lang['title_orientation']		= 'Orientaciones';
+$lang['title_plan']				= 'Planes';
+$lang['title_regimen']			= 'Régimen';
+$lang['title_title']			= 'Títulos';
+
 $lang['table_id_th']    		= 'ID';
 $lang['table_name_th']    		= 'Nombre';
 $lang['table_type_th']    		= 'Tipo';

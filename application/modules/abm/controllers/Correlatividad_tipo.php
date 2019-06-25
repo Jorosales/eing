@@ -21,11 +21,7 @@ class Correlatividad_tipo extends MX_Controller {
         {
             redirect('login', 'refresh');
         }else {
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/correlatividad_tipo/index?', $this->Correlatividad_tipo_model->get_all_correlativas_tipo_count());
-            $this->pagination->initialize($config);
-
-            $data['tipos'] = $this->Correlatividad_tipo_model->get_all_correlativas_tipo($params); 
+            $data['tipos'] = $this->Correlatividad_tipo_model->get_all_correlativas_tipo(); 
             $data['user'] = $this->ion_auth->user()->row();
             if (isset($mensaje)) {
                 $data['alerta'] = $mensaje;

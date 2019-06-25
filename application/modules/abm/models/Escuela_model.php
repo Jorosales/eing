@@ -19,13 +19,9 @@ class Escuela_model  extends CI_Model  {
     /*
      * Get all escuela
      */
-    function get_all_escuela($params = array())
+    function get_all_escuela()
     {
         $this->db->order_by('id', 'desc');
-        if(isset($params) && !empty($params))
-        {
-            $this->db->limit($params['limit'], $params['offset']);
-        }
         return $this->db->get('escuela')->result();
     }
         

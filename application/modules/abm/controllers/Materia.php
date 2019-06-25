@@ -21,11 +21,7 @@ class Materia extends MX_Controller {
         {
             redirect('login', 'refresh');
         }else {
-            $params = $this->template->get_params();
-            $config = $this->template->get_config('abm/materia/index?', $this->Materia_model->get_all_materias_count());
-            $this->pagination->initialize($config);
-
-            $data['materias'] = $this->Materia_model->get_all_materias($params); 
+            $data['materias'] = $this->Materia_model->get_all_materias(); 
             $data['user'] = $this->ion_auth->user()->row();
             if (isset($mensaje)) {
                 $data['alerta'] = $mensaje;
