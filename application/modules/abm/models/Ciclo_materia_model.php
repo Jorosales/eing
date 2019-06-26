@@ -12,7 +12,9 @@ class Ciclo_materia_model extends CI_Model
      */
     function get_ciclo_materia($id)
     {
-        return $this->db->get_where('ciclo_materia',array('id'=>$id))->row_array();
+        $this->db->select('ciclo_materia.*, ciclos.id_plan');
+        $this->db->join('ciclos', 'ciclos.id = ciclo_materia.id_ciclo');
+        return $this->db->get_where('ciclo_materia',array('ciclo_materia.id'=>$id))->row_array();
     }
     
     /*
@@ -76,6 +78,20 @@ class Ciclo_materia_model extends CI_Model
         $this->db->order_by('id', 'desc');
         if(isset($params) && !empty($params))
             $this->db->limit($params['limit'], $params['offset']);
+        return $this->db->get()->result();
+    }
+
+    function get_ciclos_materias_by_plan($idPlan, $codigo)
+    {
+        $this->db->select('ciclo_materia.id as id, ciclo_materia.codigo, CONCAT(ciclo_materia.codigo, " - ",ciclos.nombre, " - " , materias.nombre) as nombre');    
+        $this->db->from('ciclo_materia');
+        $this->db->join('ciclos', 'ciclos.id = ciclo_materia.id_ciclo');
+        $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
+        $this->db->join('regimen', 'regimen.id = ciclo_materia.id_regimen');
+        $this->db->where('ciclos.id_plan', $idPlan); 
+        $this->db->where('ciclo_materia.codigo <', $codigo); 
+        $this->db->order_by('ciclo_materia.codigo', 'asc');
+        
         return $this->db->get()->result();
     }
 

@@ -2,7 +2,7 @@
 <div class="col-lg-11">
     <div class="panel panel-default">
       <div class="panel-heading">
-      <h4 class="panel-title"><strong><?= $ciclo_materia['nombre']; ?></strong></h4>
+      <h4 class="panel-title"><strong><?= $ciclo_materia['codigo'].' - '.$ciclo_materia['nombre']; ?></strong></h4>
       </div>
       <div class="panel-body">
         <table class="table profile__table">
@@ -24,7 +24,10 @@
                 </td>
             </tr>
             <tr>
-                <td>Régimen: &nbsp;
+                <td>Año: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <b><?= $ciclo_materia['anio'] ?></b>
+                    <br>
+                    Régimen: &nbsp;
                     <b><?= $this->template->get_item($regimenes, $ciclo_materia['id_regimen'], 'nombre');?> </b>
                 </td>
                 <td>Tipo: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

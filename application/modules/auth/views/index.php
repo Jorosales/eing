@@ -16,14 +16,11 @@
 		</div>
 		<?php } ?>
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-md-11">
 				<div class="box">
-					<div class="box-header">
-						<h3 class="box-title"><?php echo lang('index_subheading');?></h3>
-					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
-						<table id="example1" class="table table-bordered table-striped">
+						<table id="tabla" class="table table-bordered table-striped">
 							<thead>
 								<tr>
 									<th><?php echo lang('username');?></th>
@@ -46,7 +43,7 @@
 										<?php echo anchor("auth/edit_group/".$group->id, htmlspecialchars($group->name,ENT_QUOTES,'UTF-8')) ;?><br />
 										<?php endforeach?></td>
 									<td><?php echo ($user->active) ? anchor("auth/deactivate/".$user->id, lang('index_active_link'), array('class'=>'btn btn-success btn-xs')) : anchor("auth/activate/". $user->id, lang('index_inactive_link'), array('class'=>'btn btn-danger btn-xs'));?></td>
-									<td><?php echo anchor("auth/edit_user/".$user->id, '<span class="btn btn-primary btn-xs">Edit</span>') ;?></td>
+									<td><?php echo anchor("auth/edit_user/".$user->id, '<span class="btn btn-primary btn-xs">Editar</span>') ;?></td>
 								 </tr>
 								 <?php endforeach;?>
 							</tbody>
