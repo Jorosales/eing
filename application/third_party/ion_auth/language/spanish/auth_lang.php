@@ -58,10 +58,10 @@ $lang['deactivate_validation_user_id_label'] = 'ID de usuario';
 
 // Create User
 $lang['create_user_heading']                           = 'Crear Usuario';
-$lang['create_user_subheading']                        = 'Por favor, introduzce la información del usuario.';
+$lang['create_user_subheading']                        = 'Por favor, introduzca la información del usuario.';
 $lang['create_user_fname_label']                       = 'Nombre:';
 $lang['create_user_lname_label']                       = 'Apellidos:';
-$lang['create_user_identity_label']                    = 'Identity:';
+$lang['create_user_identity_label']                    = 'Identidad:';
 $lang['create_user_company_label']                     = 'Compañía:';
 $lang['create_user_email_label']                       = 'Email:';
 $lang['create_user_phone_label']                       = 'Teléfono:';
@@ -165,6 +165,36 @@ $lang['email_new_password_subheading'] = 'Tu contraseña ha sido restablecida a:
 
 
 //TITULOS DE TABLAS
+
+$lang['create_career_heading']    					= 'Crear carrera';
+$lang['edit_career_heading']    					= 'Editar carrera';
+$lang['create_category_heading']    				= 'Crear categoría';
+$lang['edit_category_heading']    					= 'Editar categoría';
+$lang['create_cycle_heading']    					= 'Crear ciclo';
+$lang['edit_cycle_heading']    						= 'Editar ciclo';
+$lang['create_cycle_course_heading']    			= 'Crear ciclo-materia';
+$lang['edit_cycle_course_heading']    				= 'Editar ciclo-materia';
+$lang['designate_optative_heading']    				= 'Asignar optativa';
+$lang['designate_correlative_heading']    			= 'Asignar correlativa';
+$lang['create_correlative_type_heading']    		= 'Crear tipo de correlativa';
+$lang['edit_correlative_type_heading']    			= 'Editar tipo de correlativa';
+$lang['create_cvar_heading']    					= 'Crear CVAR';
+$lang['edit_cvar_heading']    						= 'Editar CVAR';
+$lang['create_teacher_heading']    					= 'Crear docente';
+$lang['edit_teacher_heading']    					= 'Editar docente';
+$lang['designate_course_heading']    				= 'Asignar materias';
+$lang['create_course_heading']    					= 'Crear materia';
+$lang['edit_course_heading']    					= 'Editar materia';
+$lang['create_course_type_heading']    				= 'Crear tipo de materia';
+$lang['edit_course_type_heading']    				= 'Editar tipo de materia';
+$lang['create_orientation_heading']    				= 'Crear orientación';
+$lang['edit_orientation_heading']    				= 'Editar orientación';
+$lang['create_plan_heading']    					= 'Crear plan';
+$lang['edit_plan_heading']    						= 'Editar plan';
+$lang['create_regimen_heading']    					= 'Crear régimen';
+$lang['edit_regimen_heading']    					= 'Editar régimen';
+$lang['create_title_heading']    					= 'Crear título';
+$lang['edit_title_heading'] 	   					= 'Editar título';
 
 //Comunes
 $lang['no_existe']    					= '%s no existe.';

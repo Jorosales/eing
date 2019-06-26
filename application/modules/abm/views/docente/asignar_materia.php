@@ -1,13 +1,23 @@
 <?php echo $this->template->get_perfil_docente($docente['id']); ?>
 
-<?php echo form_open('abm/docente/asignar_materia/'.$docente['id'],array("class"=>"form-horizontal")); ?>
-	
-	<?php echo $this->template->cargar_select(lang('form_cycle_course'), 'id_ciclo_materia', '*', form_error('id_ciclo_materia'), $ciclos_materias, $this->input->post('id_ciclo_materia')); ?>	
-	
-	<?php echo $this->template->cargar_submit(); ?>
-	
-<?php echo form_close(); ?>
+<div class="col-lg-11">
+	<div class="box box-success">
 
+		<div class="box-header with-border">
+		  	<h3 class="box-title"><?php echo lang('designate_course_heading');?></h3>
+		</div>
+
+		<?php echo form_open('abm/docente/asignar_materia/'.$docente['id'],array("class"=>"form-horizontal")); ?>
+			
+			<?php echo $this->template->cargar_select(lang('form_cycle_course'), 'id_ciclo_materia', '*', form_error('id_ciclo_materia'), $ciclos_materias, $this->input->post('id_ciclo_materia')); ?>	
+			
+			<?php echo $this->template->cargar_submit(); ?>
+			
+		<?php echo form_close(); ?>		
+
+		<br><br>
+	</div>
+</div>
 
 <br><br><br>
 

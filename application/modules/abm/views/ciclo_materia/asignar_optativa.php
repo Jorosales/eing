@@ -1,13 +1,24 @@
 <?php echo $this->template->get_perfil_materia($ciclo_materia['id']); ?>
 
-<?php echo form_open('abm/ciclo_materia/asignar_optativas/'.$ciclo_materia['id'],array("class"=>"form-horizontal")); ?>
-	
-	<?php echo $this->template->cargar_select(lang('form_optional'), 'id_optativa', '*', form_error('id_optativa'), $optativas, $this->input->post('id_optativa')); ?>	
+<div class="col-lg-11">
+	<div class="box box-success">
 
+		<div class="box-header with-border">
+		  	<h3 class="box-title"><?php echo lang('designate_optative_heading');?></h3>
+		</div>
+
+		<?php echo form_open('abm/ciclo_materia/asignar_optativas/'.$ciclo_materia['id'],array("class"=>"form-horizontal")); ?>
 	
-	<?php echo $this->template->cargar_submit(); ?>
-	
-<?php echo form_close(); ?>
+			<?php echo $this->template->cargar_select(lang('form_optional'), 'id_optativa', '*', form_error('id_optativa'), $optativas, $this->input->post('id_optativa')); ?>	
+
+			
+			<?php echo $this->template->cargar_submit(); ?>
+			
+		<?php echo form_close(); ?>
+
+		<br><br>
+	</div>
+</div>
 
 <br><br><br>
 

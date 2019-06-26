@@ -1,14 +1,25 @@
 <?php echo $this->template->get_perfil_materia($ciclo_materia['id']); ?>
 
-<?php echo form_open('abm/ciclo_materia/asignar_correlativa/'.$ciclo_materia['id'],array("class"=>"form-horizontal")); ?>
-	
-	<?php echo $this->template->cargar_select(lang('form_cycle_course'), 'id_correlativa', '*', form_error('id_correlativa'), $ciclos_materias, $this->input->post('id_correlativa')); ?>	
+<div class="col-lg-11">
+	<div class="box box-success">
 
-	<?php echo $this->template->cargar_select(lang('form_course_type'), 'id_correlativa_tipo', '*', form_error('id_correlativa_tipo'), $tipos, $this->input->post('id_correlativa_tipo')); ?>	
+		<div class="box-header with-border">
+		  	<h3 class="box-title"><?php echo lang('designate_correlative_heading');?></h3>
+		</div>
+
+		<?php echo form_open('abm/ciclo_materia/asignar_correlativa/'.$ciclo_materia['id'],array("class"=>"form-horizontal")); ?>
 	
-	<?php echo $this->template->cargar_submit(); ?>
-	
-<?php echo form_close(); ?>
+			<?php echo $this->template->cargar_select(lang('form_cycle_course'), 'id_correlativa', '*', form_error('id_correlativa'), $ciclos_materias, $this->input->post('id_correlativa')); ?>	
+
+			<?php echo $this->template->cargar_select(lang('form_course_type'), 'id_correlativa_tipo', '*', form_error('id_correlativa_tipo'), $tipos, $this->input->post('id_correlativa_tipo')); ?>	
+			
+			<?php echo $this->template->cargar_submit(); ?>
+			
+		<?php echo form_close(); ?>		
+
+		<br><br>
+	</div>
+</div>
 
 <br><br><br>
 
