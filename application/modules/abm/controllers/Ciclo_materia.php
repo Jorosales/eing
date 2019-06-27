@@ -92,6 +92,24 @@ class Ciclo_materia extends MX_Controller{
 
     }  
 
+    function fetch_materias()
+    {
+        if($this->input->post('ciclo_id'))
+        {
+            echo $this->Ciclo_materia_model->fetch_materias($this->input->post('ciclo_id'));
+        }
+    }
+
+    function fetch_anios()
+    {
+        if($this->input->post('ciclo_id'))
+        {
+            echo $this->Ciclo_materia_model->fetch_anios($this->input->post('ciclo_id'));
+        }
+    }
+
+    
+
     /*
      * Editing a ciclo_materia
      */

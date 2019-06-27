@@ -184,4 +184,40 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->delete('optativas',array('id'=>$id));
     }
 
+
+    function fetch_materias($ciclo_id)
+    {
+        $this->db->select('ciclo_materia.codigo as id, CONCAT(ciclos.nombre, " - " , materias.nombre) as nombre'); 
+        $this->db->from('ciclo_materia');
+        $this->db->join('ciclos', 'ciclos.id = ciclo_materia.id_ciclo');
+        $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
+        $this->db->join('regimen', 'regimen.id = ciclo_materia.id_regimen');
+        $this->db->where('ciclo_materia.id_ciclo', $ciclo_id);
+        $this->db->order_by('id', 'asc');
+        $query = $this->db->get()->result();
+          
+        $output = '';
+        foreach($query as $row)
+        {
+            $output .= '<option value="'.$row->id.'">'.$row->nombre.'</option>';
+        }
+        return $output;
+    }
+
+    function fetch_anios($ciclo_id)
+    {
+        $this->db->select('planes.duracion as id, planes.duracion as nombre'); 
+        $this->db->from('ciclos');
+        $this->db->join('planes', 'planes.id = ciclos.id_plan');
+        $this->db->where('ciclos.id', $ciclo_id);
+        $query = $this->db->get()->result();
+
+        $output = '';
+        for ($i=1; $i <= $query[0]->id; $i++) 
+        { 
+            $output .= '<option value="'.$i.'">'.$i.'</option>';
+        }
+        return $output;
+    }
+
 }
