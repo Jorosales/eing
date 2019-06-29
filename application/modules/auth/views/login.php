@@ -5,7 +5,7 @@
 			</div>
 			<!-- /.login-logo -->
 			<div class="login-box-body">
-				<p class="login-box-msg">Sign in to start your session</p>
+				<p class="login-box-msg"><?php echo lang('login');?></p>
 
 				<div id="infoMessage"><?php echo $message;?></div>
 
@@ -38,7 +38,11 @@
 				</div>
 				<?php echo form_close();?>
 				<hr/>
-				<a href="<?php echo base_url();?>auth/forgot_password">I forgot my password</a>
+					
+				<?php /* 
+				<a href="<?php echo base_url();?>auth/forgot_password"><?php echo lang('forgot_my_password');?></a>
+				*/	?>
+
 			</div>
 			<!-- /.login-box-body -->
 		</div>

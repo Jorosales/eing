@@ -321,3 +321,5 @@ $lang['form_color']  			= 'Color';
 
 
 $lang['undefined_plan']    		= 'Esta carrera no tiene un plan definido.';
+$lang['login']    				= 'Iniciar sesión';
+$lang['forgot_my_password']    	= 'Olvidé mi contraseña';
