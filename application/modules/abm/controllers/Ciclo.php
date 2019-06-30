@@ -51,7 +51,7 @@ class Ciclo extends MX_Controller{
         {   
             $params = array(
 				'id_plan' => $this->input->post('id_plan'),
-				'id_orientacion' => $this->input->post('id_orientacion'),
+				'id_orientacion' => ($this->input->post('id_orientacion')=='')?NULL:$this->input->post('id_orientacion'),
 				'nombre' => $this->input->post('nombre'),
             );
             

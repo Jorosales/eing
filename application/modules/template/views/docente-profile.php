@@ -18,7 +18,7 @@
             <tr>
                 <td>
                 </td>
-                <td>E-Mail 2: &nbsp;&nbsp;
+                <td>E-Mail 2: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <b><?= (empty($docente['email2']))?'': $docente['email2']; ?></b>
                 </td>
             </tr>

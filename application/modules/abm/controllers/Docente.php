@@ -200,16 +200,16 @@ class Docente extends MX_Controller{
         
         if(isset($data['docente']['id']))
         {
-            $this->form_validation->set_rules('id_ciclo_materia',lang('form_last_name'),'required');
+            $this->form_validation->set_rules('id_materia',lang('form_last_name'),'required');
         
             if($this->form_validation->run())     
             {   
 
                 $params = array(
-                    'id_ciclo_materia' => $this->input->post('id_ciclo_materia'),
+                    'id_ciclo_materia' => $this->input->post('id_materia'),
                     'id_docente' => $data['docente']['id']
                 );          
-
+                
                 if ($this->Docente_model->add_materia_docente($params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                     sprintf(lang('record_edit_success_text'), $this->name));    
@@ -221,7 +221,7 @@ class Docente extends MX_Controller{
             }
             else
             {
-                $data['ciclos_materias'] = $this->Ciclo_materia_model->get_ciclos_materias();
+                $data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
                 $data['user'] = $this->ion_auth->user()->row(); 
         
                 $this->template->cargar_vista('abm/docente/asignar_materia', $data);

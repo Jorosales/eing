@@ -9,7 +9,11 @@
 
 		<?php echo form_open('abm/docente/asignar_materia/'.$docente['id'],array("class"=>"form-horizontal")); ?>
 			
-			<?php echo $this->template->cargar_select(lang('form_cycle_course'), 'id_ciclo_materia', '*', form_error('id_ciclo_materia'), $ciclos_materias, $this->input->post('id_ciclo_materia')); ?>	
+			<?php //echo $this->template->cargar_select(lang('form_cycle_course'), 'id_ciclo_materia', '*', form_error('id_ciclo_materia'), $ciclos_materias, $this->input->post('id_ciclo_materia')); ?>
+
+			<?php echo $this->template->cargar_select(lang('form_cycle'), 'id_ciclo', '*', form_error('id_ciclo'), $ciclos, $this->input->post('id_ciclo')); ?>
+
+			<?php echo $this->template->cargar_select(lang('form_cycle_course'), 'id_materia', '*', form_error('id_materia'), $vacio='', $this->input->post('id_materia')); ?>	
 			
 			<?php echo $this->template->cargar_submit(); ?>
 			
@@ -70,3 +74,41 @@
 	</div>
 	<!-- /.box -->
 </div> 
+
+
+<script>
+	
+$(document).ready(function(){
+	$('#id_ciclo').change(function(){
+		var ciclo = $('#id_ciclo').val();
+		if(ciclo != '')
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>abm/ciclo_materia/fetch_materias",
+				method:"POST",
+				data:{ciclo_id:ciclo},
+				success:function(data)
+				{
+					$('#id_materia').html(data);
+				}
+			});
+		}
+	});
+
+	$('#id_ciclo').change(function(){
+		var ciclo = $('#id_ciclo').val();
+		if(ciclo != '')
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>abm/ciclo_materia/fetch_anios",
+				method:"POST",
+				data:{ciclo_id:ciclo},
+				success:function(data)
+				{
+					$('#anio').html(data);
+				}
+			});
+		}
+	});
+});
+</script>

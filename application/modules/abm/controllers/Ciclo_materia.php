@@ -45,7 +45,7 @@ class Ciclo_materia extends MX_Controller{
     public function add()
     {   
         $this->form_validation->set_rules('anio',lang('form_year'),'integer|required');
-        $this->form_validation->set_rules('codigo',lang('form_code'),'alpha_numeric');
+        $this->form_validation->set_rules('codigo',lang('form_code'),'integer');
         $this->form_validation->set_rules('horas',lang('form_hours'),'numeric');
         $this->form_validation->set_rules('hs_total',lang('form_total_hours'),'numeric');
         $this->form_validation->set_rules('id_ciclo',lang('form_cycle'),'required');
@@ -83,6 +83,7 @@ class Ciclo_materia extends MX_Controller{
         {
             $data['user'] = $this->ion_auth->user()->row();
             $data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
+            $data['materias'] = $this->Materia_model->get_all_materias();
             $data['regimenes'] = $this->Regimen_model->get_all_regimen();
 
             $this->template->cargar_vista('abm/ciclo_materia/add', $data);
@@ -156,8 +157,7 @@ class Ciclo_materia extends MX_Controller{
             {
                 $data['user'] = $this->ion_auth->user()->row();
 				$data['ciclos'] = $this->Ciclo_model->get_all_ciclos(); 
-				$data['materias'] = $this->Ciclo_materia_model->fetch_materias($data['ciclo_materia']['id_ciclo']);
-                $data['mat_select'] = $this->Materia_model->get_materia($data['ciclo_materia']['id_materia']);
+				$data['materias'] = $this->Materia_model->get_all_materias();
 				$data['regimenes'] = $this->Regimen_model->get_all_regimen();
                 
                 foreach ($data['ciclos'] as $ciclo) {
@@ -210,7 +210,7 @@ class Ciclo_materia extends MX_Controller{
         {
             $this->form_validation->set_rules('id_correlativa',lang('form_last_name'),'required');
             $this->form_validation->set_rules('id_correlativa_tipo',lang('form_last_name'),'required');
-            //var_dump($this->input->post('id_correlativa')); exit();
+            
             if($this->form_validation->run())     
             {   
                 $params = array(

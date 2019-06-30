@@ -63,4 +63,22 @@ class Orientaciones_model extends CI_Model
     {
         return $this->db->delete('orientaciones',array('id'=>$id));
     }
-}
+
+    /*
+     * Get orientaciones by plan
+     */
+    function fetch_orientaciones_by_plan($plan_id)
+    {
+        $this->db->select('orientaciones.id as id, orientaciones.nombre as nombre'); 
+        $this->db->from('orientaciones');
+        $this->db->join('planes', 'planes.id = orientaciones.id_plan');
+        $this->db->where('planes.id', $plan_id);
+        $query = $this->db->get()->result();
+        
+        $output = '<option value=""></option>';
+        for ($i=0; $i < count($query); $i++) 
+        { 
+            $output .= '<option value="'.$query[$i]->id.'">'.$query[$i]->nombre.'</option>';
+        }
+        return $output;
+    }}

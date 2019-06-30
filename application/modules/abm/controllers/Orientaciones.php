@@ -132,5 +132,13 @@ class Orientaciones extends MX_Controller{
         else
             show_error(sprintf(lang('no_existe'), $this->name));
     }
+
+    function fetch_orientaciones()
+    {
+        if($this->input->post('plan_id'))
+        {
+            echo $this->Orientaciones_model->fetch_orientaciones_by_plan($this->input->post('plan_id'));
+        }
+    }
     
 }
