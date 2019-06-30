@@ -83,9 +83,7 @@ class Ciclo_materia extends MX_Controller{
         {
             $data['user'] = $this->ion_auth->user()->row();
             $data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
-            $data['materias'] = $this->Materia_model->get_all_materias();
             $data['regimenes'] = $this->Regimen_model->get_all_regimen();
-            $data['anios'] = $this->template->get_anios($data['ciclos'][0]->duracion);
 
             $this->template->cargar_vista('abm/ciclo_materia/add', $data);
         }
@@ -157,11 +155,16 @@ class Ciclo_materia extends MX_Controller{
             else
             {
                 $data['user'] = $this->ion_auth->user()->row();
-				$data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
-				$data['materias'] = $this->Materia_model->get_all_materias();
+				$data['ciclos'] = $this->Ciclo_model->get_all_ciclos(); 
+				$data['materias'] = $this->Ciclo_materia_model->fetch_materias($data['ciclo_materia']['id_ciclo']);
+                $data['mat_select'] = $this->Materia_model->get_materia($data['ciclo_materia']['id_materia']);
 				$data['regimenes'] = $this->Regimen_model->get_all_regimen();
-                $data['anios'] = $this->template->get_anios($data['ciclos'][0]->duracion);
-
+                
+                foreach ($data['ciclos'] as $ciclo) {
+                    if ($ciclo->id == $data['ciclo_materia']['id_ciclo']) {
+                        $data['anios'] = $this->template->get_anios($ciclo->duracion);
+                    }
+                }
 
                 $this->template->cargar_vista('abm/ciclo_materia/edit', $data);
             }
@@ -207,7 +210,7 @@ class Ciclo_materia extends MX_Controller{
         {
             $this->form_validation->set_rules('id_correlativa',lang('form_last_name'),'required');
             $this->form_validation->set_rules('id_correlativa_tipo',lang('form_last_name'),'required');
-        
+            //var_dump($this->input->post('id_correlativa')); exit();
             if($this->form_validation->run())     
             {   
                 $params = array(
@@ -215,7 +218,7 @@ class Ciclo_materia extends MX_Controller{
                     'id_correlativa' => $this->input->post('id_correlativa'),
                     'id_correlativa_tipo' => $this->input->post('id_correlativa_tipo')
                 );          
-
+                //var_dump($params); exit();
                 if ($this->Ciclo_materia_model->add_correlativa($params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                     sprintf(lang('record_edit_success_text'), $this->name));    

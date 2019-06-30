@@ -8,8 +8,19 @@
 		<?php echo form_open_multipart('abm/ciclo_materia/edit/'.$ciclo_materia['id'],array("class"=>"form-horizontal")); ?>
 
 			<?php echo $this->template->cargar_select(lang('form_cycle'), 'id_ciclo', '*', form_error('id_ciclo'), $ciclos, $ciclo_materia['id_ciclo']); ?>
-
-			<?php echo $this->template->cargar_select(lang('form_course'), 'id_materia', '*', form_error('id_materia'), $materias, $ciclo_materia['id_materia']); ?>
+			
+			<div class="form-group">
+				<label for="id_materia" class="col-md-2 control-label">
+					<span class="text-danger">*</span>
+					Materia</label>
+				<div class="col-md-8">
+					<select id="id_materia" name="id_materia" class="form-control">
+						 
+						<option value="<?= $ciclo_materia['id']  ?>" selected="selected"><?= $mat_select['nombre'] ?></option>
+						<?= $materias ?>
+					</select>
+				</div>
+			</div>
 
 			<?php echo $this->template->cargar_select(lang('form_regimen'), 'id_regimen', '*', form_error('id_regimen'), $regimenes, $ciclo_materia['id_regimen']); ?>
 
@@ -17,7 +28,7 @@
 
 			<?php echo $this->template->cargar_input(lang('form_total_hours'), 'hs_total', 'text', '', form_error('horas'), ($this->input->post('hs_total') ? $this->input->post('hs_total') : $ciclo_materia['hs_total'])); ?>
 
-			<?php echo $this->template->cargar_select(lang('form_year'), 'anio', '*', form_error('anio'), $anios, $this->input->post('anio')); ?>
+			<?php echo $this->template->cargar_select(lang('form_year'), 'anio', '*', form_error('anio'), $anios, $ciclo_materia['anio']); ?>
 
 			<?php echo $this->template->cargar_input(lang('form_code'), 'codigo', 'text', '', form_error('codigo'), ($this->input->post('codigo') ? $this->input->post('codigo') : $ciclo_materia['codigo'])); ?>
 
@@ -42,3 +53,42 @@
 		<br><br>
 	</div>
 </div>
+
+
+
+<script>
+	
+$(document).ready(function(){
+	$('#id_ciclo').change(function(){
+		var ciclo = $('#id_ciclo').val();
+		if(ciclo != '')
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>abm/ciclo_materia/fetch_materias",
+				method:"POST",
+				data:{ciclo_id:ciclo},
+				success:function(data)
+				{
+					$('#id_materia').html(data);
+				}
+			});
+		}
+	});
+
+	$('#id_ciclo').change(function(){
+		var ciclo = $('#id_ciclo').val();
+		if(ciclo != '')
+		{
+			$.ajax({
+				url:"<?php echo base_url(); ?>abm/ciclo_materia/fetch_anios",
+				method:"POST",
+				data:{ciclo_id:ciclo},
+				success:function(data)
+				{
+					$('#anio').html(data);
+				}
+			});
+		}
+	});
+});
+</script>

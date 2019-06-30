@@ -1,3 +1,4 @@
+<?php //var_dump($ciclo_materia);  exit(); ?>
 <?php echo $this->template->get_perfil_materia($ciclo_materia['id']); ?>
 
 <div class="col-lg-11">

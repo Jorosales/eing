@@ -4,7 +4,7 @@ class Materia_model  extends CI_Model  {
 
 	public function getMateria($idMateria)
     {
-      $this->db->select('materias.id, materias.nombre, materias.id_tipo, carrera.id AS id_carrera, carrera.nombre AS nom_carrera');
+      $this->db->select('ciclo_materia.id, materias.nombre, materias.id_tipo, carrera.id AS id_carrera, carrera.nombre AS nom_carrera');
       $this->db->from('carrera');
       $this->db->join('planes', 'planes.id_carrera = carrera.id');
       $this->db->join('ciclos', 'ciclos.id_plan = planes.id');
@@ -27,7 +27,7 @@ class Materia_model  extends CI_Model  {
       $this->db->join('carrera', 'carrera.id = planes.id_carrera');
       $this->db->join('regimen', 'regimen.id = ciclo_materia.id_regimen');
       $this->db->join('orientaciones', 'orientaciones.id = ciclos.id_orientacion', 'LEFT');
-      $this->db->where('ciclo_materia.id_materia', $idMateria); 
+      $this->db->where('ciclo_materia.id', $idMateria); 
       $this->db->order_by('planes.id', 'desc');
       return $this->db->get()->result();
   }
@@ -40,17 +40,18 @@ class Materia_model  extends CI_Model  {
     $this->db->join('persona', 'persona.id = docentes.persona_id');
     $this->db->join('materia_docente', 'materia_docente.id_docente = docentes.id');
     $this->db->join('ciclo_materia', 'ciclo_materia.id = materia_docente.id_ciclo_materia');
-    $this->db->where('ciclo_materia.id_materia', $idMateria); 
+    $this->db->where('ciclo_materia.id', $idMateria); 
     return $this->db->get()->result();
 	}
 
 	public function getCorrelatividades($idMateria, $tipo)
 	{
-    $this->db->select('ciclo_materia.codigo, materias.nombre as correlativa, materias.id as id_materia');
+    $this->db->select('destino.codigo, materias.nombre as correlativa, materias.id as id_materia');
     $this->db->from('correlativas');
-    $this->db->join('ciclo_materia', 'ciclo_materia.id = correlativas.id_ciclo_materia');
-    $this->db->join('materias', 'materias.id = correlativas.id_correlativa');
-    $this->db->where('ciclo_materia.id_materia', $idMateria); 
+    $this->db->join('ciclo_materia as origen', 'origen.id = correlativas.id_ciclo_materia');
+    $this->db->join('ciclo_materia as destino', 'destino.id = correlativas.id_correlativa');
+    $this->db->join('materias', 'materias.id = destino.id_materia');
+    $this->db->where('origen.id', $idMateria); 
     $this->db->where('correlativas.id_correlativa_tipo', $tipo); 
     return $this->db->get()->result();
 	}

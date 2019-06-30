@@ -11,17 +11,17 @@
 			</div>
 			<b>Email de contacto:</b> <br>
 			<?php 
-				if(isset($docente[0]->email1) && isset($docente[0]->email2)) 
+				if(!empty($docente[0]->email1) && !empty($docente[0]->email2)) 
 					 $tam = "col-sm-6";
 				else $tam = "col-sm-12"; 
 			?>
 			<div class="row">
-				<?php if(isset($docente[0]->email1)){ ?>
+				<?php if(!empty($docente[0]->email1)){ ?>
 				<div class="<?php echo $tam; ?>"> 
 						<?=$docente[0]->email1;?>
 				</div>
 				<?php } ?>
-				<?php if(isset($docente[0]->email2)){ ?>
+				<?php if(!empty($docente[0]->email2)){ ?>
 				<div class="<?php echo $tam; ?>">	
 						<?=$docente[0]->email2;?>
 				</div>
@@ -30,7 +30,7 @@
 
 			<br>
 			
-			<?php if(isset($docente[0]->descripcion)){ ?>
+			<?php if(!empty($docente[0]->descripcion)){ ?>
 			<div class="row">
 				<div class="col-sm-12">
 					<h5>Descripción</h5>
@@ -38,7 +38,7 @@
 				</div>
 			</div>
 			<?php } ?>
-			<?php if(isset($docente[0]->areas)){ ?>
+			<?php if(!empty($docente[0]->areas)){ ?>
 			<div class="row">
 				<div class="col-sm-12">
 					<h5><b>Área de actuación</b></h5>
@@ -46,15 +46,15 @@
 				</div>
 			</div>
 			<?php } ?>
-			<?php if(isset($docente[0]->experticia)){ ?>
+			<?php if(!empty($docente[0]->experticia)){ ?>
 			<div class="row">
 				<div class="col-sm-12">
 					<h5><b>Experticia</b></h5>
-					<p align="justify"><?=$docente[0]->experticia;?></p>
+					<p><?=$docente[0]->experticia;?></p>
 				</div>
 			</div>
 			<?php } ?>
-			<?php if(isset($docente[0]->grado)){ ?>
+			<?php if(!empty($docente[0]->grado)){ ?>
 			<div class="row">
 				<div class="col-sm-12">
 					<h5><b>Grado</b></h5>
@@ -62,7 +62,7 @@
 				</div>
 			</div>
 			<?php } ?>
-			<?php if(isset($docente[0]->especializacion)){ ?>
+			<?php if(!empty($docente[0]->especializacion)){ ?>
 			<div class="row">
 				<div class="col-sm-12">
 					<h5><b>Especialización</b></h5>
@@ -70,7 +70,7 @@
 				</div>
 			</div>
 			<?php } ?>
-			<?php if(isset($docente[0]->maestria)){ ?>
+			<?php if(!empty($docente[0]->maestria)){ ?>
 			<div class="row">
 				<div class="col-sm-12">
 					<h5><b>Maestria</b></h5>
@@ -78,7 +78,7 @@
 				</div>
 			</div>
 			<?php } ?>
-			<?php if(isset($docente[0]->doctorado)){ ?>
+			<?php if(!empty($docente[0]->doctorado)){ ?>
 			<div class="row">
 				<div class="col-sm-12">
 					<h5><b>Doctorado</b></h5>

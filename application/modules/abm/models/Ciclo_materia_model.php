@@ -187,13 +187,13 @@ class Ciclo_materia_model extends CI_Model
 
     function fetch_materias($ciclo_id)
     {
-        $this->db->select('ciclo_materia.codigo as id, CONCAT(ciclos.nombre, " - " , materias.nombre) as nombre'); 
+        $this->db->select('ciclo_materia.codigo as codigo, ciclo_materia.id as id, CONCAT(ciclo_materia.codigo, " - ",ciclos.nombre, " - " , materias.nombre) as nombre'); 
         $this->db->from('ciclo_materia');
         $this->db->join('ciclos', 'ciclos.id = ciclo_materia.id_ciclo');
         $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
         $this->db->join('regimen', 'regimen.id = ciclo_materia.id_regimen');
         $this->db->where('ciclo_materia.id_ciclo', $ciclo_id);
-        $this->db->order_by('id', 'asc');
+        $this->db->order_by('ciclo_materia.codigo', 'asc');
         $query = $this->db->get()->result();
           
         $output = '';
