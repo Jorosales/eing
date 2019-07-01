@@ -46,7 +46,7 @@ class Materia_model  extends CI_Model  {
 
 	public function getCorrelatividades($idMateria, $tipo)
 	{
-    $this->db->select('destino.codigo, materias.nombre as correlativa, materias.id as id_materia');
+    $this->db->select('destino.codigo, materias.nombre as correlativa, destino.id as id_materia');
     $this->db->from('correlativas');
     $this->db->join('ciclo_materia as origen', 'origen.id = correlativas.id_ciclo_materia');
     $this->db->join('ciclo_materia as destino', 'destino.id = correlativas.id_correlativa');

@@ -218,7 +218,7 @@ class Ciclo_materia extends MX_Controller{
                     'id_correlativa' => $this->input->post('id_correlativa'),
                     'id_correlativa_tipo' => $this->input->post('id_correlativa_tipo')
                 );          
-                //var_dump($params); exit();
+                
                 if ($this->Ciclo_materia_model->add_correlativa($params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                     sprintf(lang('record_edit_success_text'), $this->name));    
@@ -233,7 +233,7 @@ class Ciclo_materia extends MX_Controller{
                 $data['ciclos_materias'] = $this->Ciclo_materia_model->get_ciclos_materias_by_plan($data['ciclo_materia']['id_plan'], $data['ciclo_materia']['codigo']);
                 $data['tipos'] = $this->Ciclo_materia_model->get_all_correlativas_tipo();
                 $data['correlativas'] = $this->Ciclo_materia_model->get_correlativas($id);
-
+                
                 $data['user'] = $this->ion_auth->user()->row(); 
         
                 $this->template->cargar_vista('abm/ciclo_materia/asignar_correlativa', $data);

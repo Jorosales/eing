@@ -100,7 +100,7 @@ class Ciclo_materia_model extends CI_Model
 
     function get_correlativas($id)
     {
-        $this->db->select('correlativas.id as id, materias.nombre as materia, correlativas_tipo.descripcion as descripcion');   
+        $this->db->select('correlativas.id as id, CONCAT(ciclo_materia.codigo, " - " ,materias.nombre) as materia, correlativas_tipo.descripcion as descripcion');   
         $this->db->from('correlativas');
         $this->db->join('ciclo_materia', 'ciclo_materia.id = correlativas.id_correlativa');
         $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
