@@ -3,19 +3,26 @@
 class Docente extends MX_Controller{
     
     public $name = 'El docente';
-    function __construct(){
-        parent::__construct();
-        $this->load->module('template');
-        $this->load->model('Docente_model');
-        $this->load->model('Persona_model');
-        $this->load->model('Ciclo_model');
-        $this->load->model('Ciclo_materia_model');
-        $this->load->model('Docente_categoria_model');
+    function __construct()
+    {
+        parent::__construct();    
         $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
         $this->load->library(array('ion_auth', 'form_validation'));
-        $this->load->helper(array('language'));
-        $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
-        $this->lang->load('auth');
+        
+        if (!$this->ion_auth->logged_in())
+        {
+            redirect('login', 'refresh');
+        }else {
+            $this->load->module('template');
+            $this->load->model('Docente_model');
+            $this->load->model('Persona_model');
+            $this->load->model('Ciclo_model');
+            $this->load->model('Ciclo_materia_model');
+            $this->load->model('Docente_categoria_model');
+            $this->load->helper(array('language'));
+            $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
+            $this->lang->load('auth');
+        }
     } 
 
     /*

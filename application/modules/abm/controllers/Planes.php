@@ -5,15 +5,21 @@ class Planes extends MX_Controller{
     public $name = 'El plan';
     function __construct()
     {
-        parent::__construct();
-        $this->load->module('template');
-        $this->load->model('Planes_model');
-        $this->load->model('Carrera_model');
+        parent::__construct();    
         $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
         $this->load->library(array('ion_auth', 'form_validation'));
-        $this->load->helper(array('language'));
-        $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
-        $this->lang->load('auth');
+        
+        if (!$this->ion_auth->logged_in())
+        {
+            redirect('login', 'refresh');
+        }else {
+            $this->load->module('template');
+            $this->load->model('Planes_model');
+            $this->load->model('Carrera_model');
+            $this->load->helper(array('language'));
+            $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
+            $this->lang->load('auth');
+        }
     } 
 
     /*

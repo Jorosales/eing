@@ -162,7 +162,7 @@
 										<tr>
 											<td colspan="6">
 												<a href="<?= base_url('/materia/'.$row->id_materia)?>">
-													<?=$row->id_materia;?> - <?=$row->correlativa;?>
+													<?=$row->codigo;?> - <?=$row->correlativa;?>
 												</a>
 											</td>
 										</tr>	
@@ -191,7 +191,7 @@
 										<tr>
 											<td colspan="6">
 												<a href="<?= base_url('/materia/'.$row->id_materia)?>">
-													<?=$row->id_materia;?> - <?=$row->correlativa;?>
+													<?=$row->codigo;?> - <?=$row->correlativa;?>
 												</a>
 											</td>
 										</tr>	
@@ -221,7 +221,7 @@
 										<tr>
 											<td colspan="6">
 												<a href="<?= base_url('/materia/'.$row->id_materia)?>">
-													<?=$row->id_materia;?> - <?=$row->correlativa;?>
+													<?=$row->codigo;?> - <?=$row->correlativa;?>
 												</a>
 											</td>
 										</tr>	
