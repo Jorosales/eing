@@ -33,7 +33,8 @@
             					
             					echo "<ul>";
             					foreach ($ciclos->materias as $materia) {
-            						echo '<li><a href="#">'.$materia->materia.'</a>';
+
+            						echo '<li><a target="_blank" href="'.base_url().'materia/'.$materia->materia_id.'">'.$materia->materia.'</a>';
             						if(isset($materia->orientaciones)){
             							echo "<ul>";
 		            					foreach ($materia->orientaciones as $mo) {

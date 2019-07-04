@@ -168,29 +168,27 @@ class Carrera_model  extends CI_Model  {
 
     function get_carrera_completa($id_carrera){
         $carrera['data'] = $this->get_data_carrera($id_carrera);
-        //var_dump(count($carrera['data'])); exit();
+        
         if (count($carrera['data']) > 0) {
             $carrera['orientaciones'] = $this->existe_orientacion($carrera['data'][0]->plan_id);
             $carrera['ciclos'] = $this->get_ciclos_plan($carrera['data'][0]->plan_id);
             
             foreach ($carrera['ciclos'] as $ciclo) {
                 $ciclo->materias = $this->get_materias_ciclo($ciclo->id);
-        
+                
                 foreach ($ciclo->materias as $materia) {
-                    if ($materia->tipo_id == 2) {
+                    
+                    if ($materia->tipo_id == 2) { //si es generica
                         
-                        if ($carrera['orientaciones']) {
+                        if ($carrera['orientaciones']) { //si existen orientaciones
                             $materia->orientaciones = $this->get_orientaciones($carrera['data'][0]->plan_id);
 
-                            foreach ($materia->orientaciones as $orientacion) {
+                            foreach ($materia->orientaciones as $orientacion) { //recorre las orientaciones
                                 $orientacion->materias = $this->get_materias_orientacion($materia->materia_id, $orientacion->id);
                             }
                             
-                        }else{
-                            foreach ($materia as $mat) {
-                                if ($mat->tipo_id == 2)
-                                    $mat->optativas = $this->get_materia_optativas($mat->materia_id);
-                            }
+                        }else{ //si no existen orientaciones
+                                $materia->optativas = $this->get_optativas_materia($materia->materia_id);
                         }
                     }
                 }

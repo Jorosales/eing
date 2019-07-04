@@ -15,7 +15,7 @@
 
 
 		<div class="container tab-content card">
-		<a href="<?= base_url(PDFS_UPLOAD.'carreras/'.$carrera[0]->plan_pdf)?>">Descargar Plan</a>
+		<a target='_blank' href="<?= base_url(PDFS_UPLOAD.'carreras/'.$carrera[0]->plan_pdf)?>">Descargar Plan</a>
 			<div class="tab-pane fade" id="panel1" role="tabpanel">
 				<?=$carrera[0]->presentacion;?>
             </div>

@@ -1,14 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Docente extends CI_Controller {
+class Docente extends MX_Controller {
 
 	function __construct(){
 		parent::__construct();
-		$this->load->library(array('session'));
-        $this->load->helper('url');
 		$this->load->library('table');
 		$this->load->model('Docente_model');
+		$this->load->add_package_path(APPPATH.'third_party/ion_auth/');
+        $this->load->helper(array('language'));
+        $this->lang->load('auth');
 	}
 
 	public function index()
@@ -23,8 +24,16 @@ class Docente extends CI_Controller {
 	{
 		$data['docente'] = $this->Docente_model->getPerfil($idDocente);
 
-		$data['_view'] = 'pages/docenteView';
-		$this->load->view('layouts/main',$data);
+		if (count($data['docente']) == 0){
+            $data['alerta'] = lang('undefined_teacher');
+            $data['_view'] = '404';
+			$this->load->view('layouts/main',$data);
+        }
+        else{
+
+			$data['_view'] = 'pages/docenteView';
+			$this->load->view('layouts/main',$data);
+		}	
 	}
 
 }
