@@ -195,6 +195,8 @@ $lang['create_regimen_heading']    					= 'Crear régimen';
 $lang['edit_regimen_heading']    					= 'Editar régimen';
 $lang['create_title_heading']    					= 'Crear título';
 $lang['edit_title_heading'] 	   					= 'Editar título';
+$lang['create_publication_heading']    				= 'Crear Publicación';
+$lang['edit_publication_heading'] 	   				= 'Editar Publicación';
 
 //Comunes
 $lang['no_existe']    					= '%s no existe.';
@@ -233,7 +235,10 @@ $lang['title_title']			= 'Títulos';
 $lang['title_designated']		= 'Correlativas Asignadas';
 $lang['title_optative']			= 'Optativas Asignadas';
 $lang['title_designated_course']= 'Materias Asignadas';
+$lang['title_publication']= 'Publicaciones';
 
+
+//TITULOS DE TABLAS
 $lang['table_id_th']    		= 'ID';
 $lang['table_name_th']    		= 'Nombre';
 $lang['table_type_th']    		= 'Tipo';
@@ -275,6 +280,14 @@ $lang['table_asignation_th']   	= 'Asignar Materia';
 $lang['table_university_th']    = 'Universidad';
 $lang['table_director_th']    	= 'Director';
 $lang['table_color_th']    		= 'Color';
+
+//Publicaciones
+$lang['table_creator_th']    	= 'Creador';
+$lang['table_modifier_th']    	= 'Modificador';
+$lang['table_title_th']    	    = 'Título';
+$lang['table_created_date_th']  = 'Creado';
+$lang['table_modified_date_th'] = 'Modificado';
+$lang['table_published_th']    	= 'Publicado';
 
 //TITULOS DE FORMULARIOS
 $lang['form_name']    			= 'Nombre';
