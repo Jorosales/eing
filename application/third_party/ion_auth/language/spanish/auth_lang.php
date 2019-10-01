@@ -235,7 +235,7 @@ $lang['title_title']			= 'Títulos';
 $lang['title_designated']		= 'Correlativas Asignadas';
 $lang['title_optative']			= 'Optativas Asignadas';
 $lang['title_designated_course']= 'Materias Asignadas';
-$lang['title_publication']= 'Publicaciones';
+$lang['title_publication']      = 'Publicaciones';
 
 
 //TITULOS DE TABLAS
@@ -331,6 +331,9 @@ $lang['form_optional']  		= 'Materia Optativa';
 $lang['form_university']  		= 'Universidad';
 $lang['form_director']  		= 'Director';
 $lang['form_color']  			= 'Color';
+
+$lang['form_title']  			= 'Título';
+$lang['form_content']  			= 'Contenido';
 
 
 $lang['undefined_course']    	= 'La materia no existe.';

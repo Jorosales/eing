@@ -68,7 +68,6 @@ class Publicaciones extends MX_Controller{
         }
         else
         {
-	        $data['all_users'] = $this->Publicaciones_model->get_users_by_publicacion(1);
             $data['user'] = $this->ion_auth->user()->row();
             $this->template->cargar_vista('abm/publicaciones/add', $data);
         }
@@ -80,9 +79,9 @@ class Publicaciones extends MX_Controller{
     function edit($id)
     {   
         // check if the publicaciones exists before trying to edit it
-        $data['publicaciones'] = $this->Publicaciones_model->get_publicaciones($id);
+        $data['publicacion'] = $this->Publicaciones_model->get_publicaciones($id);
         
-        if(isset($data['publicaciones']['id']))
+        if(isset($data['publicacion']['id']))
         {
             $this->load->library('form_validation');
 
@@ -101,21 +100,25 @@ class Publicaciones extends MX_Controller{
 					'contenido' => $this->input->post('contenido'),
                 );
 
-                $this->Publicaciones_model->update_publicaciones($id,$params);            
-                redirect('publicacione/index');
+                if ($this->Publicaciones_model->update_publicaciones($id,$params))
+                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                    sprintf(lang('record_edit_success_text'), $this->name));    
+                else   
+                        $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                    sprintf(lang('record_edit_error_text'), $this->name));    
+                    
+                $this->index($mensaje);
             }
             else
             {
-				$this->load->model('User_model');
-				$data['all_users'] = $this->User_model->get_all_users();
-				$data['all_users'] = $this->User_model->get_all_users();
+                $data['all_users'] = $this->Publicaciones_model->get_users_by_publicacion($id);
+				$data['publicacion'] = $this->Publicaciones_model->get_publicaciones($id);
 
-                $data['_view'] = 'publicaciones/edit';
-                $this->load->view('layouts/main',$data);
+                $this->template->cargar_vista('abm/publicaciones/edit', $data);
             }
         }
         else
-            show_error('The publicaciones you are trying to edit does not exist.');
+            show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
     /*
@@ -125,14 +128,19 @@ class Publicaciones extends MX_Controller{
     {
         $publicaciones = $this->Publicaciones_model->get_publicaciones($id);
 
-        // check if the publicaciones exists before trying to delete it
         if(isset($publicaciones['id']))
         {
-            $this->Publicaciones_model->delete_publicaciones($id);
-            redirect('publicacione/index');
+            if ($this->Publicaciones_model->delete_publicaciones($id))
+                $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('record_remove_success_text'), $this->name));    
+            else   
+                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('record_remove_error_text'), $this->name));    
+                
+            $this->index($mensaje);
         }
         else
-            show_error('The publicaciones you are trying to delete does not exist.');
+            show_error(sprintf(lang('no_existe'), $this->name));
     }
     
 }

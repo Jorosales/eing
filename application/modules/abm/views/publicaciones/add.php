@@ -1,74 +1,29 @@
-<?php echo form_open('publicacione/add',array("class"=>"form-horizontal")); ?>
+<div class="col-lg-12">
+	<div class="box box-success">
 
-	<div class="form-group">
-		<label for="esta_publicado" class="col-md-4 control-label"><span class="text-danger">*</span>Esta Publicado</label>
-		<div class="col-md-8">
-			<input type="checkbox" name="esta_publicado" value="1" id="esta_publicado" />
-			<span class="text-danger"><?php echo form_error('esta_publicado');?></span>
+		<div class="box-header with-border">
+		  	<h3 class="box-title"><?php echo lang('create_publication_heading');?></h3>
 		</div>
-	</div>
-	<div class="form-group">
-		<label for="creador_id" class="col-md-4 control-label">User</label>
-		<div class="col-md-8">
-			<select name="creador_id" class="form-control">
-				<option value="">select user</option>
-				<?php 
-				foreach($all_users as $user)
-				{
-					$selected = ($user['id'] == $this->input->post('creador_id')) ? ' selected="selected"' : "";
 
-					echo '<option value="'.$user['id'].'" '.$selected.'>'.$user['id'].'</option>';
-				} 
-				?>
-			</select>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="modificador_id" class="col-md-4 control-label">User</label>
-		<div class="col-md-8">
-			<select name="modificador_id" class="form-control">
-				<option value="">select user</option>
-				<?php 
-				foreach($all_users as $user)
-				{
-					$selected = ($user['id'] == $this->input->post('modificador_id')) ? ' selected="selected"' : "";
+		<?php echo form_open('abm/publicaciones/add',array("class"=>"form-horizontal")); ?>
 
-					echo '<option value="'.$user['id'].'" '.$selected.'>'.$user['id'].'</option>';
-				} 
-				?>
-			</select>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="titulo" class="col-md-4 control-label"><span class="text-danger">*</span>Titulo</label>
-		<div class="col-md-8">
-			<input type="text" name="titulo" value="<?php echo $this->input->post('titulo'); ?>" class="form-control" id="titulo" />
-			<span class="text-danger"><?php echo form_error('titulo');?></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="fecha_creacion" class="col-md-4 control-label">Fecha Creacion</label>
-		<div class="col-md-8">
-			<input type="text" name="fecha_creacion" value="<?php echo $this->input->post('fecha_creacion'); ?>" class="form-control" id="fecha_creacion" />
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="ultima_modificacion" class="col-md-4 control-label">Ultima Modificacion</label>
-		<div class="col-md-8">
-			<input type="text" name="ultima_modificacion" value="<?php echo $this->input->post('ultima_modificacion'); ?>" class="form-control" id="ultima_modificacion" />
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="contenido" class="col-md-4 control-label">Contenido</label>
-		<div class="col-md-8">
-			<textarea name="contenido" class="form-control" id="contenido"><?php echo $this->input->post('contenido'); ?></textarea>
-		</div>
-	</div>
-	
-	<div class="form-group">
-		<div class="col-sm-offset-4 col-sm-8">
-			<button type="submit" class="btn btn-success">Save</button>
-        </div>
-	</div>
+			<?php echo $this->template->cargar_input(lang('form_title'), 'titulo', 'text', '*', form_error('titulo'), $this->input->post('titulo')); ?>
 
-<?php echo form_close(); ?>
+			<?php echo $this->template->cargar_textarea(lang('form_content'), 'contenido', '', form_error('contenido'), $this->input->post('contenido')); ?>
+
+			<div class="form-group">
+				<label for="esta_publicado" class="col-md-3 control-label"><span class="text-danger">*</span>Publicar</label>
+				<input type="checkbox" id="esta_publicado" value="1">
+			</div>
+			
+			<?php echo $this->template->cargar_submit(); ?>
+
+		<?php echo form_close(); ?>		
+
+		<br><br>
+	</div>
+</div>
+
+<script>
+    CKEDITOR.replace( 'contenido' );
+</script>
