@@ -21,6 +21,7 @@
 						<th><?php echo lang('table_creator_th');?></th>
 						<th><?php echo lang('table_modifier_th');?></th>
 						<th><?php echo lang('table_title_th');?></th>
+						<th><?php echo lang('table_date_th');?></th>
 						<th><?php echo lang('table_created_date_th');?></th>
 						<th><?php echo lang('table_modified_date_th');?></th>
 						<th><?php echo lang('table_published_th');?></th>
@@ -35,6 +36,7 @@
 							<td><?php echo $p['creador']; ?></td>
 							<td><?php echo $p['modificador']; ?></td>
 							<td><?php echo $p['titulo']; ?></td>
+							<td><?php echo $p['fecha']; ?></td>
 							<td><?php echo $p['fecha_creacion']; ?></td>
 							<td><?php echo $p['ultima_modificacion']; ?></td>
 							<td align="center"><?php echo ($p['esta_publicado']==1)?"<i class=\"far fa-check-square\"></i>": "<i class=\"far fa-square\"></i>"; ?></td>
@@ -52,6 +54,7 @@
 						<th><?php echo lang('table_creator_th');?></th>
 						<th><?php echo lang('table_modifier_th');?></th>
 						<th><?php echo lang('table_title_th');?></th>
+						<th><?php echo lang('table_date_th');?></th>
 						<th><?php echo lang('table_created_date_th');?></th>
 						<th><?php echo lang('table_modified_date_th');?></th>
 						<th><?php echo lang('table_published_th');?></th>

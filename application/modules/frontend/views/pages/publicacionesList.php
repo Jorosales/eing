@@ -1,40 +1,42 @@
     <main>
-
         <div class="container">
-            <h1>Publicaciones</h1>
+            <h1><?= (isset($listado[0]->tipo_nombre))?$listado[0]->tipo_nombre:"Publicaciones"?></h1>
+            <hr>
+            <div class="row">
+                <div class="[ col-xs-12 col-sm-offset-2 col-sm-12 ]">
+                    <ul class="event-list">
+                        <?php foreach ($listado as $row) {?>
+                            
+                            <li onclick="location.href='<?= base_url('/publicacion/'.$row->id)?>';">
 
-            <div class="row">    
-                <input type="text" class="form-control" placeholder="Buscar..." id="entradafilter">
+                                <?php if($row->fecha!=0){ ?>
+                                <time datetime="<?=$row->fecha;?>">
+                                    <span class="day"><?= date("d", strtotime($row->fecha)); ?></span>
+                                    <span class="month"><?= date("M", strtotime($row->fecha)); ?></span>
+                                    <span class="year"><?= date("Y", strtotime($row->fecha)); ?></span>
+                                </time>
+                                <?php }else{ ?>
+                                    <img src="<?= base_url('assets/images/arrow.png')?>" alt="">
+                                <?php } ?>
+                                <div class="info">
+                                    <h2 class="title"><?= $row->titulo; ?></h2>
+                                    
+                                    <?php if($row->fecha!=0){ ?>
+                                        <p class="fecha">Fecha: <?= date("d-m-Y", strtotime($row->fecha)); ?> 
+                                                <b><span style='margin-left:10px'>Inicio: <?=date("H:i", strtotime($row->comienzo));?></span></b>
+                                                <b><span style='margin-left:10px'>Fin: <?=date("H:i", strtotime($row->fin));?></span></b>
+                                        </p>
+                                    <?php } ?>
+
+                                    <p class="lugar">Lugar: <?=$row->lugar;?></p>
+                                    <p class="autor">Autor: <?=$row->creador;?></p>
+                                </div>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
             </div>
-
-            <table class="table table-hover" id="myTable">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th><a>Fecha</a></th>
-                        <th><a>Título<a/></th>
-                        <th><a>Creador</a></th>
-                    </tr>
-                </thead>
-                
-				<tbody class="contenidobusqueda">
-					<?php foreach ($listado as $row) {?>
-						<tr> 
-							<td> 
-								<a href="<?= base_url('/publicacion/'.$row->id)?>">
-									<i class="fas fa-search-plus"></i>
-								</a>
-							</td>
-							<td><?=$row->fecha_creacion;?></td>
-							<td><?=$row->titulo;?></td>
-							<td><?=$row->creador;?></td>
-						</tr>
-					<?php } ?>
-				</tbody>
-            </table>
-    
         </div>
-
-		<hr>
-
+        
+        <hr>
     </main>

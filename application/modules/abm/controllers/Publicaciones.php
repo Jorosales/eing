@@ -38,10 +38,10 @@ class Publicaciones extends MX_Controller{
      */
     function add()
     {   
-        $this->load->library('form_validation');
         $data['user'] = $this->ion_auth->user()->row();
 
-		$this->form_validation->set_rules('titulo','Titulo','required|max_length[100]');
+        $this->form_validation->set_rules('titulo','Titulo','required|max_length[100]');
+        //$this->form_validation->set_rules('fecha','Fecha','required');
 		
 		if($this->form_validation->run())     
         {   
@@ -54,6 +54,11 @@ class Publicaciones extends MX_Controller{
 				'ultima_modificacion' => $f['year']."-".$f['mon']."-".$f['mday'],
 				'contenido' => $this->input->post('contenido'),
                 'esta_publicado' => ($this->input->post('esta_publicado')==1)? 1 : 0,
+                'fecha' => $this->input->post('fecha'),
+                'lugar' => $this->input->post('lugar'),
+                'comienzo' => $this->input->post('comienzo'),
+                'fin' => $this->input->post('fin'),
+                'tipo' => $this->input->post('tipo'),
             );
             
             if ($this->Publicaciones_model->add_publicaciones($params))
@@ -67,7 +72,7 @@ class Publicaciones extends MX_Controller{
         }
         else
         {
-            
+			$data['tipos'] = $this->Publicaciones_model->getTipos();
             $this->template->cargar_vista('abm/publicaciones/add', $data);
         }
     }  
@@ -83,12 +88,12 @@ class Publicaciones extends MX_Controller{
         
         if(isset($data['publicacion']['id']))
         {
-            $this->load->library('form_validation');
-
 			$this->form_validation->set_rules('titulo','Titulo','required|max_length[100]');
+			//$this->form_validation->set_rules('fecha','Fecha','required');
 		
 			if($this->form_validation->run())     
             {   
+               
                 $f = getdate();
                 $params = array(
 					'creador_id' => $data['publicacion']['creador_id'],
@@ -98,8 +103,13 @@ class Publicaciones extends MX_Controller{
 					'ultima_modificacion' => $f['year']."-".$f['mon']."-".$f['mday'],
 					'contenido' => $this->input->post('contenido'),
                     'esta_publicado' => ($this->input->post('esta_publicado')==1)? 1 : 0,
+                    'fecha' => ($this->input->post('fecha')==NULL)?0:$this->input->post('fecha'),
+                    'lugar' => $this->input->post('lugar'),
+                    'comienzo' => ($this->input->post('comienzo')==NULL)?0:$this->input->post('comienzo'),
+                    'fin' => ($this->input->post('fin')==NULL)?0:$this->input->post('fin'),
+                    'tipo' => $this->input->post('tipo'),  
                 );
-
+                
                 if ($this->Publicaciones_model->update_publicaciones($id,$params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                     sprintf(lang('record_edit_success_text'), $this->name));    
@@ -112,6 +122,7 @@ class Publicaciones extends MX_Controller{
             else
             {
                 $data['all_users'] = $this->Publicaciones_model->get_users_by_publicacion($id);
+                $data['tipos'] = $this->Publicaciones_model->getTipos();
 				$data['publicacion'] = $this->Publicaciones_model->get_publicaciones($id);
 
                 $this->template->cargar_vista('abm/publicaciones/edit', $data);

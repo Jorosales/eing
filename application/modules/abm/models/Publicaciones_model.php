@@ -72,5 +72,12 @@ class Publicaciones_model extends CI_Model
         return $this->db->get()->result();
     }
 
+    function getTipos()
+	{
+		$this->db->select('*');
+      	$this->db->from('tipo_publicacion');
+	    return $this->db->get()->result();
+    }
+
 
 }

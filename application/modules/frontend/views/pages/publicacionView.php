@@ -4,6 +4,7 @@
 		<div class="jumbotron col-sm-12 align-center sombreado" style="border-radius: 20px;">
 			<h1><?php echo $publicacion[0]->titulo;?></h1>	
 			<hr>
+			<?php echo $publicacion[0]->fecha;?>	
 			<?php echo $publicacion[0]->contenido;?>	
 			<hr>
 			Creador por: <?php echo $publicacion[0]->creador;?>	

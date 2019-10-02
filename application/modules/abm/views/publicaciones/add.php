@@ -8,8 +8,17 @@
 		<?php echo form_open('abm/publicaciones/add',array("class"=>"form-horizontal")); ?>
 
 			<?php echo $this->template->cargar_input(lang('form_title'), 'titulo', 'text', '*', form_error('titulo'), $this->input->post('titulo')); ?>
+			
+			<?php echo $this->template->cargar_input(lang('form_date'), 'fecha', 'date', '*', form_error('fecha'), $this->input->post('fecha')); ?>
+
+			<?php echo $this->template->cargar_input(lang('form_start'), 'comienzo', 'time', '', form_error('time'), $this->input->post('time')); ?>
+			<?php echo $this->template->cargar_input(lang('form_end'), 'fin', 'time', '', form_error('time'), $this->input->post('time')); ?>
+
+			<?php echo $this->template->cargar_input(lang('form_place'), 'lugar', 'text', '', form_error('lugar'), $this->input->post('lugar')); ?>
 
 			<?php echo $this->template->cargar_textarea(lang('form_content'), 'contenido', '', form_error('contenido'), $this->input->post('contenido')); ?>
+
+			<?php echo $this->template->cargar_select(lang('form_type'), 'tipo', '*', form_error('tipo'), $tipos, $this->input->post('tipo')); ?>
 
 			<div class="form-group">
 				<label for="esta_publicado" class="col-md-3 control-label"><span class="text-danger">*</span>Publicar</label>

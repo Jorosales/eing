@@ -2,8 +2,11 @@
     <?php  
         $ci = &get_instance();
         $ci->load->model("Carrera_model");
-
         $carreras= $ci->Carrera_model->getAllActivates();
+
+        $ci2 = &get_instance();
+        $ci2->load->model("Publicaciones_model");
+        $tipo_publicaciones = $ci2->Publicaciones_model->getTipos();
     ?>
     
     <nav class="navbar navbar-escuela bg-escuela navbar-expand-lg margen-inf" style="background-color: <?= $escuela['color'] ?>">
@@ -33,11 +36,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('docentes') ?>">Docentes</a>
 				</li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('publicacion') ?>">Publicaciones</a>
-                </li>
                 
+                <?php foreach ($tipo_publicaciones as $tipo) {?>
+                        <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url("/publicaciones/".$tipo->id) ?>"><?=$tipo->nombre;?></a>
+                        </li>
+                <?php } ?> 
+
             </ul>              
 		</div>
 	</nav>

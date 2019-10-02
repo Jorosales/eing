@@ -12,10 +12,9 @@ class Publicaciones extends MX_Controller {
         $this->lang->load('auth');
 	}
 
-	public function index()
+	public function index($tipo)
 	{	
-		$data['listado'] = $this->Publicaciones_model->datosLista();
-
+		$data['listado'] = $this->Publicaciones_model->datosLista($tipo);
 		$data['_view'] = 'pages/publicacionesList';
 		$this->load->view('layouts/main',$data);
 	}

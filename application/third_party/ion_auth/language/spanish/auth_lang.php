@@ -288,6 +288,7 @@ $lang['table_title_th']    	    = 'Título';
 $lang['table_created_date_th']  = 'Creado';
 $lang['table_modified_date_th'] = 'Modificado';
 $lang['table_published_th']    	= 'Publicado';
+$lang['table_date_th']    	= 'Fecha';
 
 //TITULOS DE FORMULARIOS
 $lang['form_name']    			= 'Nombre';
@@ -334,6 +335,11 @@ $lang['form_color']  			= 'Color';
 
 $lang['form_title']  			= 'Título';
 $lang['form_content']  			= 'Contenido';
+$lang['form_date']  			= 'Fecha';
+$lang['form_start']  			= 'Comienzo';
+$lang['form_end']    			= 'Fin';
+$lang['form_place']  			= 'Lugar';
+$lang['form_type']  			= 'Tipo';
 
 
 $lang['undefined_course']    	= 'La materia no existe.';
