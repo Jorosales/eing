@@ -62,3 +62,6 @@ $route['carrera/(:num)'] = "frontend/carrera/verCarrera/$1";
 $route['docente/(:num)'] = "frontend/docente/verDocente/$1";
 $route['materia/(:num)'] = "frontend/materia/verMateria/$1";
 $route['docentes'] = "frontend/docente/index";
+
+$route['publicacion'] = "frontend/publicaciones/index";
+$route['publicacion/(:num)'] = "frontend/publicaciones/verPublicacion/$1";

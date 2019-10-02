@@ -33,6 +33,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('docentes') ?>">Docentes</a>
 				</li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('publicacion') ?>">Publicaciones</a>
+                </li>
                 
             </ul>              
 		</div>

@@ -339,6 +339,7 @@ $lang['form_content']  			= 'Contenido';
 $lang['undefined_course']    	= 'La materia no existe.';
 $lang['undefined_plan']    		= 'La carrera no tiene un plan definido.';
 $lang['undefined_teacher']    	= 'El docente no existe.';
+$lang['undefined_publication']  = 'La publicación no existe.';
 $lang['undefined_page']    		= 'Usted está intentando acceder a una página que no existe.';
 $lang['login']    				= 'Iniciar sesión';
 $lang['forgot_my_password']    	= 'Olvidé mi contraseña'; 
