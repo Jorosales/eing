@@ -27,11 +27,9 @@ class Publicaciones extends MX_Controller{
     public function index($mensaje=null)
     {
         $data['publicaciones'] = $this->Publicaciones_model->get_all_publicaciones();
-        
         if (isset($mensaje)) {
             $data['alerta'] = $mensaje;
         }
-
         $this->template->cargar_vista('abm/publicaciones/index', $data);
     }
 
@@ -41,20 +39,21 @@ class Publicaciones extends MX_Controller{
     function add()
     {   
         $this->load->library('form_validation');
+        $data['user'] = $this->ion_auth->user()->row();
 
-		$this->form_validation->set_rules('esta_publicado','Publicado','required');
 		$this->form_validation->set_rules('titulo','Titulo','required|max_length[100]');
 		
 		if($this->form_validation->run())     
         {   
+            $f = getdate();
             $params = array(
-				'esta_publicado' => $this->input->post('esta_publicado'),
-				'creador_id' => $this->input->post('creador_id'),
-				'modificador_id' => $this->input->post('modificador_id'),
+				'creador_id' => $data['user']->user_id,
+				'modificador_id' => $data['user']->user_id,
 				'titulo' => $this->input->post('titulo'),
-				'fecha_creacion' => $this->input->post('fecha_creacion'),
-				'ultima_modificacion' => $this->input->post('ultima_modificacion'),
+				'fecha_creacion' => $f['year']."-".$f['mon']."-".$f['mday'],
+				'ultima_modificacion' => $f['year']."-".$f['mon']."-".$f['mday'],
 				'contenido' => $this->input->post('contenido'),
+                'esta_publicado' => ($this->input->post('esta_publicado')==1)? 1 : 0,
             );
             
             if ($this->Publicaciones_model->add_publicaciones($params))
@@ -68,7 +67,7 @@ class Publicaciones extends MX_Controller{
         }
         else
         {
-            $data['user'] = $this->ion_auth->user()->row();
+            
             $this->template->cargar_vista('abm/publicaciones/add', $data);
         }
     }  
@@ -80,24 +79,25 @@ class Publicaciones extends MX_Controller{
     {   
         // check if the publicaciones exists before trying to edit it
         $data['publicacion'] = $this->Publicaciones_model->get_publicaciones($id);
+        $data['user'] = $this->ion_auth->user()->row();
         
         if(isset($data['publicacion']['id']))
         {
             $this->load->library('form_validation');
 
-			$this->form_validation->set_rules('esta_publicado','Esta Publicado','required');
 			$this->form_validation->set_rules('titulo','Titulo','required|max_length[100]');
 		
 			if($this->form_validation->run())     
             {   
+                $f = getdate();
                 $params = array(
-					'esta_publicado' => $this->input->post('esta_publicado'),
-					'creador_id' => $this->input->post('creador_id'),
-					'modificador_id' => $this->input->post('modificador_id'),
+					'creador_id' => $data['publicacion']['creador_id'],
+					'modificador_id' => $data['user']->user_id,
 					'titulo' => $this->input->post('titulo'),
-					'fecha_creacion' => $this->input->post('fecha_creacion'),
-					'ultima_modificacion' => $this->input->post('ultima_modificacion'),
+					'fecha_creacion' => $data['publicacion']['fecha_creacion'],
+					'ultima_modificacion' => $f['year']."-".$f['mon']."-".$f['mday'],
 					'contenido' => $this->input->post('contenido'),
+                    'esta_publicado' => ($this->input->post('esta_publicado')==1)? 1 : 0,
                 );
 
                 if ($this->Publicaciones_model->update_publicaciones($id,$params))
@@ -134,7 +134,7 @@ class Publicaciones extends MX_Controller{
                 $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                 sprintf(lang('record_remove_success_text'), $this->name));    
             else   
-                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_remove_error_text'), $this->name));    
                 
             $this->index($mensaje);

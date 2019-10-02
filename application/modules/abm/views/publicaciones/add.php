@@ -13,7 +13,7 @@
 
 			<div class="form-group">
 				<label for="esta_publicado" class="col-md-3 control-label"><span class="text-danger">*</span>Publicar</label>
-				<input type="checkbox" id="esta_publicado" value="1">
+				<input type="checkbox" name="esta_publicado" id="esta_publicado" value="1">
 			</div>
 			
 			<?php echo $this->template->cargar_submit(); ?>
