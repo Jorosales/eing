@@ -3,7 +3,7 @@
 		<div class="col-sm-3"></div>
 		<div class="jumbotron col-sm-12 align-center sombreado" style="border-radius: 20px; text-align: justify;">
 			<h1 style="text-align: center;"><?php echo $publicacion[0]->titulo;?></h1>	
-			<hr>
+			<hr style="border:4px solid;">
 			
 			<?php if($publicacion[0]->fecha!=0){ ?>
                     <p style='margin-left:10px' class="fecha">Fecha: <b><?= date("d-m-Y", strtotime($publicacion[0]->fecha)); ?></b></p>
@@ -17,7 +17,7 @@
 			
 			<br>
 			<?php echo $publicacion[0]->contenido;?>	
-			<hr>
+			<hr style="border:2px solid;">
 			<p style="text-align: right;">Autor: <?php echo $publicacion[0]->creador;?></p>
 		</div>
 		<div class="col-sm-3"></div>
