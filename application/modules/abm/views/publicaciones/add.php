@@ -34,5 +34,10 @@
 </div>
 
 <script>
-    CKEDITOR.replace( 'contenido' );
+    //CKEDITOR.replace( 'contenido' );
+  	window.onload = function()
+	{
+		editor = CKEDITOR.replace('contenido');
+		CKFinder.setupCKEditor( editor, '/ckfinder/' );
+	}
 </script>
