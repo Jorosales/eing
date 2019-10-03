@@ -23,13 +23,20 @@
                                     
                                     <?php if($row->fecha!=0){ ?>
                                         <p class="fecha">Fecha: <?= date("d-m-Y", strtotime($row->fecha)); ?> 
-                                                <b><span style='margin-left:10px'>Inicio: <?=date("H:i", strtotime($row->comienzo));?></span></b>
-                                                <b><span style='margin-left:10px'>Fin: <?=date("H:i", strtotime($row->fin));?></span></b>
+                                                <?php if($row->comienzo!=0){ ?>
+                                                    <span style='margin-left:10px'>Inicio: <b><?=date("H:i", strtotime($row->comienzo));?></b></span>
+                                                <?php } ?>
+                                                <?php if($row->fin!=0){ ?>
+                                                    <span style='margin-left:10px'>Fin: <b><?=date("H:i", strtotime($row->fin));?></b></span>
+                                                <?php } ?>
                                         </p>
                                     <?php } ?>
 
-                                    <p class="lugar">Lugar: <?=$row->lugar;?></p>
-                                    <p class="autor">Autor: <?=$row->creador;?></p>
+                                    <?php if(!empty($row->lugar)){ ?>
+                                        <p class="lugar">Lugar: <?=$row->lugar;?></p>
+                                    <?php } ?>
+                                    
+                                   
                                 </div>
                             </li>
                         <?php } ?>

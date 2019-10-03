@@ -12,7 +12,7 @@
 			<?php echo $this->template->cargar_input(lang('form_date'), 'fecha', 'date', '*', form_error('fecha'), ($this->input->post('fecha') ? $this->input->post('fecha') : $publicacion['fecha'])); ?>
 
 			<?php echo $this->template->cargar_input(lang('form_start'), 'comienzo', 'time', '', form_error('comienzo'), ($this->input->post('comienzo') ? $this->input->post('comienzo') : $publicacion['comienzo'])); ?>
-			<?php echo $this->template->cargar_input(lang('form_end'), 'fecha', 'time', '', form_error('fin'), ($this->input->post('fin') ? $this->input->post('fin') : $publicacion['fin'])); ?>
+			<?php echo $this->template->cargar_input(lang('form_end'), 'fin', 'time', '', form_error('fin'), ($this->input->post('fin') ? $this->input->post('fin') : $publicacion['fin'])); ?>
 	
 			<?php echo $this->template->cargar_input(lang('form_place'), 'lugar', 'text', '', form_error('lugar'), ($this->input->post('lugar') ? $this->input->post('lugar') : $publicacion['lugar'])); ?>
 			

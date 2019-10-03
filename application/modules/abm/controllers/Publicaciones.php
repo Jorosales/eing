@@ -90,7 +90,7 @@ class Publicaciones extends MX_Controller{
         {
 			$this->form_validation->set_rules('titulo','Titulo','required|max_length[100]');
 			//$this->form_validation->set_rules('fecha','Fecha','required');
-		
+		    
 			if($this->form_validation->run())     
             {   
                

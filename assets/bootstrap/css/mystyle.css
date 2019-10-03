@@ -356,16 +356,16 @@ margin: 0px;
   font-size: 10pt;
   font-weight: 300;
   margin-left: 90px;
-  margin-bottom: 0px;
+  margin-top: 3px;
 }
 .event-list > li > .info > .lugar {
   font-size: 15pt;
 }
 .event-list > li > .info > .autor {
-  font-size: 12pt;
+  font-size: 10pt;
   font-weight: 300;
   text-align: right;
-  margin-bottom: 2px;
+  margin-top: 5px;
 }
 .event-list > li > .info > ul{
 display: table;

@@ -17,7 +17,7 @@ class Publicaciones_model  extends CI_Model  {
 	
     public function getPublicacion($idPublicacion)
 	{
-		$this->db->select('publicaciones.*, CONCAT(users.last_name,", ", users.first_name) AS creador');
+		$this->db->select('publicaciones.*, CONCAT(users.first_name," ", users.last_name) AS creador');
       	$this->db->from('publicaciones');
         $this->db->join('users', 'users.id = publicaciones.creador_id');
         $this->db->where('publicaciones.id', $idPublicacion);
