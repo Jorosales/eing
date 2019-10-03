@@ -89,4 +89,3 @@ define('RECORDS_PER_PAGE', 25);
 define('CARRERAS_UPLOAD', 'assets/uploads/pdfs/carreras/');
 define('PDFS_UPLOAD', 'assets/uploads/pdfs/');
 define('IMAGES_UPLOAD', 'assets/uploads/images/');
-define('CKFINDER_UPLOAD', '/eing/assets/uploads/servidor/');

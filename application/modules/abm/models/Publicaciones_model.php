@@ -24,7 +24,7 @@ class Publicaciones_model extends CI_Model
         $this->db->from('publicaciones');
         $this->db->join('users as u_creador', 'u_creador.id = publicaciones.creador_id');
         $this->db->join('users as u_modificador', 'u_modificador.id = publicaciones.modificador_id');
-        $this->db->order_by('id', 'desc');
+        $this->db->order_by('publicaciones.id', 'desc');
         return $this->db->get()->result_array();
 
 
