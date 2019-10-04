@@ -200,6 +200,8 @@ $lang['edit_publication_heading'] 	   				= 'Editar Publicación';
 $lang['edit_school_heading'] 	   				= 'Editar Escuela';
 $lang['create_student_heading']    					= 'Crear Estudiante';
 $lang['edit_student_heading'] 	   					= 'Editar Estudiante';
+$lang['create_institution_heading']    					= 'Crear Institución';
+$lang['edit_institution_heading'] 	   					= 'Editar Institución';
 
 //Comunes
 $lang['no_existe']    					= '%s no existe.';
@@ -245,6 +247,7 @@ $lang['title_designated']		= 'Correlativas Asignadas';
 $lang['title_optative']			= 'Optativas Asignadas';
 $lang['title_designated_course']= 'Materias Asignadas';
 $lang['title_publication']      = 'Publicaciones';
+$lang['title_institution']      = 'Instituciones';
 
 
 //TITULOS DE TABLAS
@@ -304,6 +307,11 @@ $lang['table_mat_th']    		= 'Matrícula';
 $lang['table_last_name_th']    		= 'Apellido';
 $lang['table_identification_number_th']    		= 'DNI';
 
+//Instituciones
+$lang['table_cuit_th']    		= 'CUIT';
+$lang['table_address_th']    	= 'Dirección';
+
+
 
 //TITULOS DE FORMULARIOS
 $lang['form_name']    			= 'Nombre';
@@ -356,7 +364,9 @@ $lang['form_end']    			= 'Fin';
 $lang['form_place']  			= 'Lugar';
 $lang['form_type']  			= 'Tipo';
 
-$lang['form_mat']  			= 'Legajo';
+$lang['form_mat']  				= 'Legajo';
+
+$lang['form_address']  			= 'Dirección';
 
 
 $lang['undefined_course']    	= 'La materia no existe.';
