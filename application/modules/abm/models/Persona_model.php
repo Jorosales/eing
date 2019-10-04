@@ -14,6 +14,12 @@ class Persona_model extends CI_Model
     {
         return $this->db->get_where('persona',array('id'=>$id))->row_array();
     }
+
+    function get_persona_by_dni($dni)
+    {
+        $query = $this->db->get_where('persona',array('dni'=>$dni))->row_array();
+        return $query['id'];
+    }
         
     /*
      * Get all persona

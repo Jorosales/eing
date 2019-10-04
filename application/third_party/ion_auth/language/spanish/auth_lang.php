@@ -197,6 +197,8 @@ $lang['create_title_heading']    					= 'Crear título';
 $lang['edit_title_heading'] 	   					= 'Editar título';
 $lang['create_publication_heading']    				= 'Crear Publicación';
 $lang['edit_publication_heading'] 	   				= 'Editar Publicación';
+$lang['create_student_heading']    					= 'Crear Estudiante';
+$lang['edit_student_heading'] 	   					= 'Editar Estudiante';
 
 //Comunes
 $lang['no_existe']    					= '%s no existe.';
@@ -204,8 +206,13 @@ $lang['no_existe']    					= '%s no existe.';
 $lang['record_success']    				= 'Datos Registrados';
 $lang['record_error']    				= 'Error';
 
+$lang['record_duplicated']    			= 'Registro duplicado.';
+
 $lang['record_add_success_text']    	= '%s se registró correctamente.';
+
 $lang['record_add_error_text']    		= 'Hubo un error, %s no se pudo registrar.';
+
+$lang['record_duplicated_text']    		= 'Hubo un error, %s no se pudo registrar.';
 
 $lang['record_edit_success_text']   	= '%s se actualizó correctamente';
 $lang['record_edit_error_text']   		= 'Hubo un error, %s no se pudo modificar.';
@@ -218,6 +225,7 @@ $lang['plan_activate_error']    		= 'El plan no se pudo activar, debido a que la
 
 $lang['plan_deactivate_success']    	= 'El plan se desactivo correctamente.';
 $lang['plan_deactivate_error']    		= 'El plan no se pudo desactivar.';
+
 
 $lang['title_cycle_course']  	= 'Ciclo-Materias';
 $lang['title_category']  		= 'Categorías';
@@ -288,7 +296,13 @@ $lang['table_title_th']    	    = 'Título';
 $lang['table_created_date_th']  = 'Creado';
 $lang['table_modified_date_th'] = 'Modificado';
 $lang['table_published_th']    	= 'Publicado';
-$lang['table_date_th']    	= 'Fecha';
+$lang['table_date_th']    		= 'Fecha';
+
+//Estudiantes
+$lang['table_mat_th']    		= 'Matrícula';
+$lang['table_last_name_th']    		= 'Apellido';
+$lang['table_identification_number_th']    		= 'DNI';
+
 
 //TITULOS DE FORMULARIOS
 $lang['form_name']    			= 'Nombre';
@@ -340,6 +354,8 @@ $lang['form_start']  			= 'Comienzo';
 $lang['form_end']    			= 'Fin';
 $lang['form_place']  			= 'Lugar';
 $lang['form_type']  			= 'Tipo';
+
+$lang['form_mat']  			= 'Legajo';
 
 
 $lang['undefined_course']    	= 'La materia no existe.';
