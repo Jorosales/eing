@@ -18,7 +18,7 @@
 
 			<?php echo $this->template->cargar_input(lang('form_dni'), 'dni', 'text', '', form_error('dni'), ($this->input->post('dni') ? $this->input->post('dni') : $docente['dni'])); ?>
 
-			<?php echo $this->template->cargar_input(lang('form_cuit'), 'cuit', 'text', '', form_error('cuit'), ($this->input->post('dni') ? $this->input->post('cuit') : $docente['cuit'])); ?>
+			<?php echo $this->template->cargar_input(lang('form_cuit'), 'cuit', 'text', '', form_error('cuit'), ($this->input->post('cuit') ? $this->input->post('cuit') : $docente['cuit'])); ?>
 
 			<?php echo $this->template->cargar_input(sprintf(lang('form_email'),'1'), 'email1', 'text', '*', form_error('email1'), ($this->input->post('email1') ? $this->input->post('email1') : $docente['email1'])); ?>
 
