@@ -64,10 +64,11 @@
 		</span>
 	</a>
 
-	<ul class="treeview-menu">
+	<ul class="treeview-menu"> 
+		<li><a href="<?php echo base_url();?>abm/tf">Trabajos Finales</a></li> 
+		<li><a href="<?php echo base_url();?>abm/ppp">Prácticas Pre-Profesionales</a></li> 
 		<li><a href="<?php echo base_url();?>abm/estudiante">Estudiantes</a></li>
-	</ul>
-	<ul class="treeview-menu">
 		<li><a href="<?php echo base_url();?>abm/tutor">Tutores</a></li>
+		<li><a href="<?php echo base_url();?>abm/institucion">Instituciones</a></li>
 	</ul>
 </li>
