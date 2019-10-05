@@ -244,6 +244,9 @@ class Template extends MX_Controller
     public function get_perfil_docente($id)
 	{
         $this->load->model('Categoria_model');
+        $this->load->model('Docente_categoria_model');
+        $this->load->model('Docente_model');
+        $this->load->model('Persona_model');
 		$data['categorias'] = $this->Docente_categoria_model->get_all_categoria();
 		$data['docente'] = $this->Docente_model->get_docente($id);
         $data['persona'] = $this->Persona_model->get_persona($data['docente']['persona_id']);
