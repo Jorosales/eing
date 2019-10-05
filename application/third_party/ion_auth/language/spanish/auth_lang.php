@@ -247,7 +247,11 @@ $lang['title_designated']		= 'Correlativas Asignadas';
 $lang['title_optative']			= 'Optativas Asignadas';
 $lang['title_designated_course']= 'Materias Asignadas';
 $lang['title_publication']      = 'Publicaciones';
-$lang['title_institution']      = 'Instituciones';
+$lang['title_tutor']      		= 'Tutores';
+$lang['title_institution']      		= 'Instituciones';
+$lang['title_student']      		= 'Estudiantes';
+$lang['title_projects']      		= 'Proyectos';
+
 
 
 //TITULOS DE TABLAS
@@ -311,6 +315,8 @@ $lang['table_identification_number_th']    		= 'DNI';
 $lang['table_cuit_th']    		= 'CUIT';
 $lang['table_address_th']    	= 'Dirección';
 
+//Proyectos
+$lang['table_active_project_th']= 'Proyectos Activos';
 
 
 //TITULOS DE FORMULARIOS
