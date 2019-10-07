@@ -200,8 +200,10 @@ $lang['edit_publication_heading'] 	   				= 'Editar Publicación';
 $lang['edit_school_heading'] 	   				= 'Editar Escuela';
 $lang['create_student_heading']    					= 'Crear Estudiante';
 $lang['edit_student_heading'] 	   					= 'Editar Estudiante';
-$lang['create_institution_heading']    					= 'Crear Institución';
-$lang['edit_institution_heading'] 	   					= 'Editar Institución';
+$lang['create_institution_heading']    				= 'Crear Institución';
+$lang['edit_institution_heading'] 	   				= 'Editar Institución';
+$lang['create_project_heading']    					= 'Crear Proyecto';
+$lang['edit_project_heading'] 	   					= 'Editar Proyecto';
 
 //Comunes
 $lang['no_existe']    					= '%s no existe.';
@@ -317,6 +319,10 @@ $lang['table_address_th']    	= 'Dirección';
 
 //Proyectos
 $lang['table_active_project_th']= 'Proyectos Activos';
+$lang['table_institution_th']   = 'Insitución';
+$lang['table_tutor_th']    		= 'Tutor';
+$lang['table_active_th']    	= 'Activo';
+
 
 
 //TITULOS DE FORMULARIOS
@@ -373,6 +379,12 @@ $lang['form_type']  			= 'Tipo';
 $lang['form_mat']  				= 'Legajo';
 
 $lang['form_address']  			= 'Dirección';
+
+$lang['form_institution']  		= 'Institución';
+$lang['form_tutor'] 	 		= 'Tutor';
+$lang['form_project_type']		= 'Tipo Proyecto';
+$lang['form_observations']		= 'Observaciones';
+$lang['form_student']		= 'Estudiante';
 
 
 $lang['undefined_course']    	= 'La materia no existe.';

@@ -14,15 +14,6 @@ class Tutor_model extends CI_Model
     {
         return $this->db->get_where('tutor',array('id'=>$id))->row_array();
     }
-    
-    /*
-     * Get all tutor count
-     */
-    function get_all_tutor_count()
-    {
-        $this->db->from('tutor');
-        return $this->db->count_all_results();
-    }
         
     /*
      * Get all tutor
@@ -63,30 +54,14 @@ class Tutor_model extends CI_Model
         $this->db->from('tipo_proyecto');
         return $this->db->get()->result();
     }
-        
-    /*
-     * function to add new tutor
-     */
-    function add_tutor($params)
+
+
+    function get_tutores_disponibles()
     {
-        $this->db->insert('tutor',$params);
-        return $this->db->insert_id();
-    }
-    
-    /*
-     * function to update tutor
-     */
-    function update_tutor($id,$params)
-    {
-        $this->db->where('id',$id);
-        return $this->db->update('tutor',$params);
-    }
-    
-    /*
-     * function to delete tutor
-     */
-    function delete_tutor($id)
-    {
-        return $this->db->delete('tutor',array('id'=>$id));
+        $this->db->select('docentes.id, CONCAT(persona.apellido, ", ",  persona.nombre) as nombre');    
+        $this->db->from('docentes');
+        $this->db->join('persona', 'docentes.persona_id = persona.id');
+        $this->db->order_by('id', 'desc');
+        return $this->db->get()->result();
     }
 }
