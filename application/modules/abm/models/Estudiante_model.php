@@ -35,24 +35,26 @@ class Estudiante_model extends CI_Model
      */
     function get_all_estudiantes($params = array())
     {
-        /*$this->db->order_by('id', 'desc');
-        if(isset($params) && !empty($params))
-        {
-            $this->db->limit($params['limit'], $params['offset']);
-        }
-        return $this->db->get('estudiantes')->result_array();*/
-
         $this->db->select('estudiantes.*, persona.apellido, persona.nombre, persona.dni, persona.email1, carrera.nombre AS carrera ');    
         $this->db->from('estudiantes');
         $this->db->join('persona', 'persona.id = estudiantes.persona_id');
         $this->db->join('planes', 'planes.id = estudiantes.id_plan');
         $this->db->join('carrera', 'carrera.id = planes.id_carrera ');
-  
         $this->db->order_by('persona.apellido', 'asc');
-
         return $this->db->get()->result();
     }
-        
+     
+
+    function get_estudiantes_disponibles()
+    {
+        $this->db->select('estudiantes.id, CONCAT(persona.apellido,", ", persona.nombre) as nombre');    
+        $this->db->from('estudiantes');
+        $this->db->join('persona', 'persona.id = estudiantes.persona_id');
+        $this->db->join('planes', 'planes.id = estudiantes.id_plan');
+        $this->db->order_by('persona.apellido', 'asc');
+        return $this->db->get()->result();
+    }
+
     /*
      * function to add new estudiante
      */
