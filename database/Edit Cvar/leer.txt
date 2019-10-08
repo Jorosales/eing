@@ -1,0 +1,5 @@
+Error: no graba datos en la edicion de cvar.
+
+Solucion: Cargar cvar.sql en la base para actualizar la tabla, con los docentes que se habian cargado en la version 1.0.
+
+

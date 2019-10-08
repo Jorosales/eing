@@ -178,8 +178,8 @@ $lang['designate_optative_heading']    				= 'Asignar optativa';
 $lang['designate_correlative_heading']    			= 'Asignar correlativa';
 $lang['create_correlative_type_heading']    		= 'Crear tipo de correlativa';
 $lang['edit_correlative_type_heading']    			= 'Editar tipo de correlativa';
-$lang['create_cvar_heading']    					= 'Crear CVAR';
-$lang['edit_cvar_heading']    						= 'Editar CVAR';
+$lang['create_cvar_heading']    					= 'Crear Resumido';
+$lang['edit_cvar_heading']    						= 'Editar CV Resumido';
 $lang['create_teacher_heading']    					= 'Crear docente';
 $lang['edit_teacher_heading']    					= 'Editar docente';
 $lang['designate_course_heading']    				= 'Asignar materias';
@@ -273,7 +273,7 @@ $lang['table_code_th']    		= 'Código';
 $lang['table_teacher_th']    	= 'Docente';
 $lang['table_category_th']    	= 'Categoria';
 $lang['table_description_th']   = 'Descripción';
-$lang['table_cvar_th']   		= 'CVAR';
+$lang['table_cvar_th']   		= 'CV Resumido';
 $lang['table_asignation_th']   	= 'Asignar Materia';
 
 //Escuelas

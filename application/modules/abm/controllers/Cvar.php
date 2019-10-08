@@ -33,14 +33,11 @@ class Cvar extends MX_Controller{
         $data['cvar'] = $this->Docente_model->get_cvar_by_docente($id);
 
         $data['docente']=array_merge($data['docente'], $data['persona']); 
-        
+        //var_dump($data); exit();
         if(isset($data['docente']['id']))
         {
-            $this->form_validation->set_rules('areas','areas','required');
-
-            if($this->form_validation->run() && is_null($mensaje))     
+            if(is_null($mensaje))     
             {   
-
                 $params = array(
                     'areas' => $this->input->post('areas'),
                     'experticia' => $this->input->post('experticia'),
@@ -49,7 +46,7 @@ class Cvar extends MX_Controller{
                     'maestria' => $this->input->post('maestria'),
                     'doctorado' => $this->input->post('doctorado')
                 );            
-
+				
                 if ($this->Docente_model->update_cvar($id,$params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                     sprintf(lang('record_edit_success_text'), $this->name));    
