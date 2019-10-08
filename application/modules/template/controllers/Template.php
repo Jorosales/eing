@@ -130,8 +130,20 @@ class Template extends MX_Controller
 	public function boton_nuevo($url, $titulo)
 	{
 		$boton = '<div class="col-md-3 col-md-offset-8">
-					<a href='.site_url($url).' class="btn btn-block btn-success btn-lg">'.$titulo.'</a> 
+					<a href='.site_url($url).' style="border: 1px solid rgba(0,0,0,0.1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);" class="btn btn-block btn-success btn-lg">'.$titulo.'</a> 
 				  </div> <br>';
+		return $boton;
+	}
+	
+	public function boton_link($url, $titulo)
+	{
+		$boton = ' 
+					<div class="btn-group demoPadder col-md-offset-10" role="group" aria-label="Basic example" style="margin-right:0px">
+						<a href="'.$url.'"> 
+							<button type="button" class="btn btn-success btn-md" style="border: 1px solid rgba(0,0,0,0.1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);">'.$titulo.'</button>
+						</a>
+					</div>
+					';
 		return $boton;
 	}
 
@@ -186,7 +198,7 @@ class Template extends MX_Controller
 	{
 		$submit = '	
 					<div class="col-md-3 col-md-offset-7">
-						<button type="submit" class="btn btn-block btn-success btn-md">Guardar</button>
+						<button style="border: 1px solid rgba(0,0,0,0.1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);" type="submit" class="btn btn-block btn-success btn-md">Guardar</button>
 					</div>';
 		return $submit;
 	}

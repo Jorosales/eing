@@ -5,6 +5,8 @@
 
 <?php echo $this->template->boton_nuevo('abm/docente/add', 'Nuevo Docente'); ?>
 
+
+
 <hr>
 
 <div class="col-lg-11">
@@ -12,6 +14,12 @@
 		<div class="box-header">
 		  <h3 class="box-title"><?php echo lang('title_teacher');?></h3>
 		</div>
+		
+		<div class="box-title">
+			<?php echo $this->template->boton_link('categoria', 'Ver categorías'); ?>
+		</div>
+		
+		
 		<!-- /.box-header -->
 		<div class="box-body">
 		  	<table id="tabla" class="table table-bordered table-striped">
