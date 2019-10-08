@@ -40,14 +40,9 @@
 </li>
 
 <li class="treeview">
-	<a href="#"><i class="fa fa-link"></i> <span>PUBLICACIONES</span>
+	<a href="<?php echo base_url();?>abm/publicaciones"><i class="fa fa-link"></i> <span>PUBLICACIONES</span>
 		<span class="pull-right-container">
 			<i class="fa fa-angle-left pull-right"></i>
 		</span>
 	</a>
-
-	<ul class="treeview-menu">
-		<li><a href="<?php echo base_url();?>abm/publicaciones">Listado</a></li>
-		<li><a href="<?php echo base_url();?>abm/publicaciones/add">Nueva</a></li>
-	</ul>
 </li>
