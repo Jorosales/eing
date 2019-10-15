@@ -81,8 +81,16 @@ footer {
 }
 
 .nav-link {
-  color: #fff;
+  color: #grey;
   font-weight: bold;
+}
+
+.menu{
+  color: #fff;
+}
+
+ul.nav-link > li > a:active:before {
+    background-color: blue;
 }
 
 .nav-item {
@@ -145,6 +153,13 @@ footer {
 }
 
 
+.eventos{
+  margin-right: 15px;
+}
+
+.articulos{
+  margin-left: 15px;
+}
 
 /* cards admin*/
 

@@ -28,19 +28,19 @@
                     </a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                     <?php foreach ($carreras as $row) {?>
-                        <a class="dropdown-item" href="<?= base_url("/carrera/".$row->id) ?>"><?=$row->nombre;?></a>
+                        <a class="nav-link dropdown-item" href="<?= base_url("/carrera/".$row->id) ?>"><?=$row->nombre;?></a>
                     <?php } ?>    
                     </div>
 				</li>
 				
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('docentes') ?>">Docentes</a>
+                    <a class="nav-link menu" href="<?= base_url('docentes') ?>">Docentes</a>
 				</li>
                 
                 <?php foreach ($tipo_publicaciones as $tipo) {?>
-                        <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url("/publicaciones/".$tipo->id) ?>"><?=$tipo->nombre;?></a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu" href="<?= base_url("/publicaciones/".$tipo->id) ?>"><?=$tipo->nombre;?></a>
+                    </li>
                 <?php } ?> 
 
             </ul>              
