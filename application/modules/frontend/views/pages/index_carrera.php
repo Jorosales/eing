@@ -26,35 +26,68 @@
 <div class="container-fluid text-center">    
   	<div class="row content">
     
-	    <div class="col-lg-2 sidenav eventos">
-	      <div class="well">
-        		<h2 class="text-info">Economy</h2>
-        		<p><span class="label label-info">BUDGET</span></p>
-        		<ul>
-        			<li>10 users</li>
-        			<li>5TB of space</li>
-        		</ul>          
-        		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.</p>
-        		<hr>
-        		<h3>$8.99 / month</h3>
-        		<hr>
-              <p><a class="btn btn-default btn-lg" href="#"><i class="icon-ok"></i> Select plan</a></p>
-        	</div>
-	      <div class="well">
-        		<h2 class="text-info">Economy</h2>
-        		<p><span class="label label-info">BUDGET</span></p>
-        		<ul>
-        			<li>10 users</li>
-        			<li>5TB of space</li>
-        		</ul>          
-        		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.</p>
-        		<hr>
-        		<h3>$8.99 / month</h3>
-        		<hr>
-              <p><a class="btn btn-default btn-lg" href="#"><i class="icon-ok"></i> Select plan</a></p>
-        	</div>
+	    <!-- Eventos -->
+	    <div class="container col-lg-2 sidenav eventos" id="tourpackages-carousel">
+        	<div class="row">
+	        	<div class="thumbnail">
+	             	<div class="caption">
+		                <div class='col-lg-12'>
+		                    <span class="glyphicon glyphicon-credit-card"></span>
+		                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
+		                </div>
+		                <div class='col-lg-12 well well-add-card'>
+		                    <h4>Publicacion de articulo actualizada</h4>
+		                </div>
+		                <div class='col-lg-12'>
+		                    <p>kjhkj/p>
+		                    <p class"text-muted">Fecha: 12-08</p>
+		                </div>
+	            	</div>
+	        	</div>
+	        	
+
+		      	<div class="thumbnail">
+	             	<div class="caption">
+		                <div class='col-lg-12'>
+		                    <span class="glyphicon glyphicon-credit-card"></span>
+		                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
+		                </div>
+		                <div class='col-lg-12 well well-add-card'>
+		                    <h4>John Deo Mobileldddd</h4>
+		                </div>
+		                <div class='col-lg-12'>
+		                    <p>4111xxxxxxxx3265</p>
+		                    <p class"text-muted">Exp: 12-08</p>
+		                </div>
+		                <button type="button" class="btn btn-primary btn-xs btn-update btn-add-card">Update</button>
+		                <button type="button" class="btn btn-danger btn-xs btn-update btn-add-card">Vrify Now</button>
+		                <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
+	            	</div>
+	        	</div>
+
+	        	<div class="thumbnail">
+	             	<div class="caption">
+		                <div class='col-lg-12'>
+		                    <span class="glyphicon glyphicon-credit-card"></span>
+		                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
+		                </div>
+		                <div class='col-lg-12 well well-add-card'>
+		                    <h4>John Deo Mobileldddd</h4>
+		                </div>
+		                <div class='col-lg-12'>
+		                    <p>4111xxxxxxxx3265</p>
+		                    <p class"text-muted">Exp: 12-08</p>
+		                </div>
+		                <button type="button" class="btn btn-primary btn-xs btn-update btn-add-card">Update</button>
+		                <button type="button" class="btn btn-danger btn-xs btn-update btn-add-card">Vrify Now</button>
+		                <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
+	            	</div>
+	        	</div>
+	    	</div>
 	    </div>
-	    
+	    <!-- Eventos -->
+
+	    <!-- Carreras -->
 	    <div class="col-lg-8 row align-content-center"> 
 	      <?php foreach ($carreras as $row) {?>
 				<a href="<?= base_url("/carrera/".$row->id) ?>">
@@ -71,37 +104,69 @@
 				</a>
 			<?php } ?> 
 	    </div>
+	    <!-- Carreras -->
 	    
-	    <div class="col-lg-2 sidenav articulos">
-        	<div class="well">
-        		<h2 class="text-info">Economy</h2>
-        		<p><span class="label label-info">BUDGET</span></p>
-        		<ul>
-        			<li>10 users</li>
-        			<li>5TB of space</li>
-        		</ul>          
-        		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.</p>
-        		<hr>
-        		<h3>$8.99 / month</h3>
-        		<hr>
-              <p><a class="btn btn-default btn-lg" href="#"><i class="icon-ok"></i> Select plan</a></p>
-        	</div>
 
-	      <div class="well">
-        		<h2 class="text-info">Economy</h2>
-        		<p><span class="label label-info">BUDGET</span></p>
-        		<ul>
-        			<li>10 users</li>
-        			<li>5TB of space</li>
-        		</ul>          
-        		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.</p>
-        		<hr>
-        		<h3>$8.99 / month</h3>
-        		<hr>
-              <p><a class="btn btn-default btn-lg" href="#"><i class="icon-ok"></i> Select plan</a></p>
-        	</div>
-	    
+	    <!-- Articulos -->
+	    <div class="container col-lg-2 sidenav articulos" id="tourpackages-carousel">
+        	<div class="row">
+	        	<div class="thumbnail">
+	             	<div class="caption">
+		                <div class='col-lg-12'>
+		                    <span class="glyphicon glyphicon-credit-card"></span>
+		                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
+		                </div>
+		                <div class='col-lg-12 well well-add-card'>
+		                    <h4>Publicacion de articulo actualizada</h4>
+		                </div>
+		                <div class='col-lg-12'>
+		                    <p>kjhkj/p>
+		                    <p class"text-muted">Fecha: 12-08</p>
+		                </div>
+	            	</div>
+	        	</div>
+	        	
+
+		      	<div class="thumbnail">
+	             	<div class="caption">
+		                <div class='col-lg-12'>
+		                    <span class="glyphicon glyphicon-credit-card"></span>
+		                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
+		                </div>
+		                <div class='col-lg-12 well well-add-card'>
+		                    <h4>John Deo Mobileldddd</h4>
+		                </div>
+		                <div class='col-lg-12'>
+		                    <p>4111xxxxxxxx3265</p>
+		                    <p class"text-muted">Exp: 12-08</p>
+		                </div>
+		                <button type="button" class="btn btn-primary btn-xs btn-update btn-add-card">Update</button>
+		                <button type="button" class="btn btn-danger btn-xs btn-update btn-add-card">Vrify Now</button>
+		                <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
+	            	</div>
+	        	</div>
+
+	        	<div class="thumbnail">
+	             	<div class="caption">
+		                <div class='col-lg-12'>
+		                    <span class="glyphicon glyphicon-credit-card"></span>
+		                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
+		                </div>
+		                <div class='col-lg-12 well well-add-card'>
+		                    <h4>John Deo Mobileldddd</h4>
+		                </div>
+		                <div class='col-lg-12'>
+		                    <p>4111xxxxxxxx3265</p>
+		                    <p class"text-muted">Exp: 12-08</p>
+		                </div>
+		                <button type="button" class="btn btn-primary btn-xs btn-update btn-add-card">Update</button>
+		                <button type="button" class="btn btn-danger btn-xs btn-update btn-add-card">Vrify Now</button>
+		                <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
+	            	</div>
+	        	</div>
+	    	</div>
 	    </div>
+	    <!-- Articulos -->
 
   	</div>
 </div>
