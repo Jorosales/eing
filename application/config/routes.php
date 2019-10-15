@@ -59,6 +59,7 @@ $route['logout'] = "auth/logout";
 
 //Frontend
 $route['carrera/(:num)'] = "frontend/carrera/verCarrera/$1";
+$route['calendar/(:num)/(:num)'] = "frontend/carrera/index/$1/$2";
 $route['docente/(:num)'] = "frontend/docente/verDocente/$1";
 $route['materia/(:num)'] = "frontend/materia/verMateria/$1";
 $route['docentes'] = "frontend/docente/index";

@@ -5,18 +5,31 @@ class Carrera extends MX_Controller {
 	function __construct(){
 		parent::__construct();
         $this->load->model('Carrera_model');
-		$this->load->model('Escuela_model');
+        $this->load->model('Escuela_model');
+		$this->load->model('Publicaciones_model');
 		$this->load->add_package_path(APPPATH.'third_party/ion_auth/');
         $this->load->helper(array('language'));
         $this->lang->load('auth');
     }
 
-	public function index()
+	public function index($anio=null, $mes=null)
 	{
-        $data['carreras'] = $this->Carrera_model->getAllActivates();
-        $this->load->library('calendar', $this->_setting());
-        $data['calendario'] = $this->calendar->generate();
+        $prefs = array(
+            'show_next_prev' => TRUE,
+            'next_prev_url' => 'http://localhost/eing/calendar'
+        );
+        $publicaciones = $this->Publicaciones_model->datosLista(1);
 
+        foreach ($publicaciones as $p) {
+            $fechas[date('d', strtotime($p->fecha))] = base_url('publicacion/'.$p->id);
+        }
+        var_dump($fechas); exit();
+
+        $this->load->library('calendar', $prefs);
+        $data['calendario'] = $this->calendar->generate($anio, $mes, $publicaciones);
+
+        $data['carreras'] = $this->Carrera_model->getAllActivates();
+        
 		$data['_view'] = 'pages/index_carrera';
 		$this->load->view('layouts/main',$data);
 	}
