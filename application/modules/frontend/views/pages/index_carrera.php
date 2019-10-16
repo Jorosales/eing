@@ -4,56 +4,56 @@
 	    <!-- Eventos -->
 	    <div class="container col-lg-2 sidenav eventos" id="tourpackages-carousel">
         	<div class="row">
-	        	<div class="thumbnail">
-	             	<div class="container" style="min-height: 250px;">
+	        	<div class="container card border-primary mb-3 text-center" style="width: 250px;">
 		                <?php echo $calendario ?>
-		            </div>
 	        	</div>
+
+	        	<?php foreach ($prox_even as $e) { ?>
+	        		<div class="card border-success mb-3 text-center" style="width: 250px;">
+					  <div class="card-header">
+					    <a class="collapsed card-link text-center" data-toggle="collapse" href="#<?= $e->id ?>">
+							<h5 class="card-title text-dark"><?= $e->titulo ?></h5>
+							<h6 class="card-subtitle mb-2 text-muted"><?= $e->fecha ?></h6>
+						</a>
+					  </div>
+					  <div id="<?= $e->id ?>" class="collapse" data-parent="#accordion">
+					    <div class="card-body text-left">
+					    
+						  <table class="table table-hover group table-striped">
+						  	<tbody>   
+						  	  <tr>
+						  		<td>Inicio:</td>
+						  		<td><?= $e->comienzo ?></td>
+						  	 </tr>
+						  			
+						  		<tr>
+						  		<td>Fin:</td>
+						  		<td><?= $e->fin ?></td>
+						  	 </tr>
+						  
+						  		<tr>
+						  		<td>Lugar:</td>
+						  		<td><?= $e->lugar ?></td>
+						  	 </tr>
+						  	</tbody>
+						  	</table>
+					    </div>
+						
+						<div class="card-footer text-muted">
+							<a role="button" target="_BLANK" href="<?= base_url('publicacion/'.$e->id) ?>" class="btn btn-sm btn-info"><font style="font-size: 12px;">Ver Más</font></a>
+						</div>
+						
+					   </div>
+					</div>
+
+	        	<?php } ?>
 	        	
-
-		      	<div class="thumbnail">
-	             	<div class="caption">
-		                <div class='col-lg-12'>
-		                    <span class="glyphicon glyphicon-credit-card"></span>
-		                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
-		                </div>
-		                <div class='col-lg-12 well well-add-card'>
-		                    <h4>John Deo Mobileldddd</h4>
-		                </div>
-		                <div class='col-lg-12'>
-		                    <p>4111xxxxxxxx3265</p>
-		                    <p class"text-muted">Exp: 12-08</p>
-		                </div>
-		                <button type="button" class="btn btn-primary btn-xs btn-update btn-add-card">Update</button>
-		                <button type="button" class="btn btn-danger btn-xs btn-update btn-add-card">Vrify Now</button>
-		                <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
-	            	</div>
-	        	</div>
-
-	        	<div class="thumbnail">
-	             	<div class="caption">
-		                <div class='col-lg-12'>
-		                    <span class="glyphicon glyphicon-credit-card"></span>
-		                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
-		                </div>
-		                <div class='col-lg-12 well well-add-card'>
-		                    <h4>John Deo Mobileldddd</h4>
-		                </div>
-		                <div class='col-lg-12'>
-		                    <p>4111xxxxxxxx3265</p>
-		                    <p class"text-muted">Exp: 12-08</p>
-		                </div>
-		                <button type="button" class="btn btn-primary btn-xs btn-update btn-add-card">Update</button>
-		                <button type="button" class="btn btn-danger btn-xs btn-update btn-add-card">Vrify Now</button>
-		                <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
-	            	</div>
-	        	</div>
 	    	</div>
 	    </div>
 	    <!-- Eventos -->
 
 	    <!-- Carreras -->
-	    <div class="col-lg-8 row align-content-center"> 
+	    <div class="container col-lg-8 row align-content-center"> 
 	      <?php foreach ($carreras as $row) {?>
 				<a href="<?= base_url("/carrera/".$row->id) ?>">
 					<div class="card" style="width: 20rem; border-radius: 20px;">
@@ -75,60 +75,26 @@
 	    <!-- Articulos -->
 	    <div class="container col-lg-2 sidenav articulos" id="tourpackages-carousel">
         	<div class="row">
-	        	<div class="thumbnail">
-	             	<div class="caption">
-		                <div class='col-lg-12'>
-		                    <span class="glyphicon glyphicon-credit-card"></span>
-		                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
-		                </div>
-		                <div class='col-lg-12 well well-add-card'>
-		                    <h4>Publicacion de articulo actualizada</h4>
-		                </div>
-		                <div class='col-lg-12'>
-		                    <p>kjhkj/p>
-		                    <p class"text-muted">Fecha: 12-08</p>
-		                </div>
-	            	</div>
-	        	</div>
-	        	
 
-		      	<div class="thumbnail">
-	             	<div class="caption">
-		                <div class='col-lg-12'>
-		                    <span class="glyphicon glyphicon-credit-card"></span>
-		                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
-		                </div>
-		                <div class='col-lg-12 well well-add-card'>
-		                    <h4>John Deo Mobileldddd</h4>
-		                </div>
-		                <div class='col-lg-12'>
-		                    <p>4111xxxxxxxx3265</p>
-		                    <p class"text-muted">Exp: 12-08</p>
-		                </div>
-		                <button type="button" class="btn btn-primary btn-xs btn-update btn-add-card">Update</button>
-		                <button type="button" class="btn btn-danger btn-xs btn-update btn-add-card">Vrify Now</button>
-		                <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
-	            	</div>
-	        	</div>
+        		<?php foreach ($ult_art as $a) { ?>
+        			<div class="thumbnail">
+		             	<div class="caption">
+			                <div class='col-lg-12'>
+			                    <span class="glyphicon glyphicon-credit-card"></span>
+			                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
+			                </div>
+			                <div class='col-lg-12 well well-add-card'>
+			                    <h4><?= $a->titulo ?></h4>
+			                </div>
+			                <div class='col-lg-12'>
+			                    <p>4111xxxxxxxx3265</p>
+			                    <p class= "text-muted">Exp: 12-08</p>
+			                </div>
+			                <a target="_BLANK" href="<?= base_url('publicacion/'.$a->id) ?>" type="button" class="btn btn-primary btn-xs btn-update btn-add-card">Ver Más</a>
+		            	</div>
+		        	</div>
+        		<?php } ?>
 
-	        	<div class="thumbnail">
-	             	<div class="caption">
-		                <div class='col-lg-12'>
-		                    <span class="glyphicon glyphicon-credit-card"></span>
-		                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
-		                </div>
-		                <div class='col-lg-12 well well-add-card'>
-		                    <h4>John Deo Mobileldddd</h4>
-		                </div>
-		                <div class='col-lg-12'>
-		                    <p>4111xxxxxxxx3265</p>
-		                    <p class"text-muted">Exp: 12-08</p>
-		                </div>
-		                <button type="button" class="btn btn-primary btn-xs btn-update btn-add-card">Update</button>
-		                <button type="button" class="btn btn-danger btn-xs btn-update btn-add-card">Vrify Now</button>
-		                <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
-	            	</div>
-	        	</div>
 	    	</div>
 	    </div>
 	    <!-- Articulos -->

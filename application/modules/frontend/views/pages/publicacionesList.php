@@ -15,7 +15,7 @@
                                     }
                             ?>
 
-                            <li onclick="location.href='<?= base_url('/publicacion/'.$row->id)?>';">
+                            <li onclick="location.href='<?= base_url('/publicacion/'.$row->id)?>';" class="pointer">
 
                                 <?php if($row->fecha!=0){ ?>
                                 <time datetime="<?=$row->fecha;?>">

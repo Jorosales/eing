@@ -13,21 +13,40 @@ class Carrera extends MX_Controller {
     }
 
 	public function index($anio=null, $mes=null)
-	{
+	{  
+        //Calendario
+        if(is_null($anio) || is_null($mes)){
+            $anio=date('Y');
+            $mes=date('m');
+        }
         $prefs = array(
             'show_next_prev' => TRUE,
             'next_prev_url' => 'http://localhost/eing/calendar'
         );
-        $publicaciones = $this->Publicaciones_model->datosLista(1);
-
-        foreach ($publicaciones as $p) {
-            $fechas[date('d', strtotime($p->fecha))] = base_url('publicacion/'.$p->id);
-        }
-        var_dump($fechas); exit();
-
         $this->load->library('calendar', $prefs);
-        $data['calendario'] = $this->calendar->generate($anio, $mes, $publicaciones);
+        $publicaciones = $this->Publicaciones_model->getEventosPorMes($mes, $anio);
 
+        if (!empty($publicaciones)) {
+            foreach ($publicaciones as $p) {
+                if ($p->cantidad == 1) {
+                     $fechas[date('d', strtotime($p->fecha))] = base_url('publicacion/'.$p->id);
+                 }
+                 else{
+                    $fechas[date('d', strtotime($p->fecha))] = base_url('publicacion/'.$anio.'/'.$mes.'/'.date('d', strtotime($p->fecha)));
+                 }
+                //$fechas[date('d', strtotime($p->fecha))] = base_url('publicacion/'.$p->id);
+            }
+            $data['calendario'] = $this->calendar->generate($anio, $mes, $fechas);
+        }
+        else{
+            $data['calendario'] = $this->calendar->generate($anio, $mes);
+        }
+
+        //Eventos y Articulos
+        $data['prox_even'] = $this->Publicaciones_model->getEventosProximos(3);
+        $data['ult_art'] = $this->Publicaciones_model->getUltimosArticulos(3);
+
+        //Carreras
         $data['carreras'] = $this->Carrera_model->getAllActivates();
         
 		$data['_view'] = 'pages/index_carrera';
@@ -89,7 +108,7 @@ class Carrera extends MX_Controller {
     }
 
 
-    function _setting(){
+    private function _setting(){
       return array(
        'start_day'   => 'monday',
        'show_next_prev'  => true,

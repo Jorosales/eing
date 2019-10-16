@@ -525,13 +525,10 @@ background-color: rgb(200, 200, 200);
     margin-top:20px;
 }
 .thumbnail {
-    max-width: 275px;
-    min-width: 275px;
-    min-height: 300px;
-    max-height: 300px;
+    width: 210px;
     display: block;
     padding: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     line-height: 1.42857143;
     background-color: #fff;
     border: 2px solid #2673b9;

@@ -34,6 +34,13 @@ class Publicaciones extends MX_Controller {
 		}	
 	}
 
+	public function verPublicacionesPorDia($anio, $mes, $dia)
+	{
+		$data['listado'] = $this->Publicaciones_model->getPublicacionesPorDia($anio, $mes, $dia);
+		$data['_view'] = 'pages/publicacionesList';
+		$this->load->view('layouts/main',$data);	
+	}
+
 }
 
 ?>
