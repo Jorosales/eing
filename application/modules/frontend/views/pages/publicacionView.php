@@ -5,7 +5,7 @@
                 <div class="col-lg-10 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="intro">
                         <h1 class="text-center"><?php echo $publicacion[0]->titulo;?></h1>
-                        <p class="text-center"><span class="by">por</span> <a href="#"><?php echo $publicacion[0]->creador;?></a><span class="date"> <?php echo date("d.m.Y", strtotime($publicacion[0]->fecha_creacion));?> </span></p>
+                        <p class="text-center"><span class="by">| por</span> <a href="#"><?php echo $publicacion[0]->creador;?></a> | <span class="date"> <?php echo date("d.m.Y", strtotime($publicacion[0]->fecha_creacion));?> |</span></p>
                     </div>
                     <div class="text">
                     	<?php if($publicacion[0]->fecha!=0){ ?>

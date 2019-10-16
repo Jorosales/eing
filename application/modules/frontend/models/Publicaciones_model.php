@@ -77,8 +77,9 @@ class Publicaciones_model  extends CI_Model  {
 
 	public function getUltimosArticulos($limit)
 	{
-		$this->db->select('publicaciones.*');
+		$this->db->select('publicaciones.*, CONCAT(users.last_name,", ", users.first_name) AS creador');
       	$this->db->from('publicaciones');
+      	$this->db->join('users', 'users.id = publicaciones.creador_id');
         $this->db->where('publicaciones.esta_publicado', 1);
         $this->db->where('publicaciones.tipo', 2);
         $this->db->order_by('publicaciones.fecha_creacion', 'desc');

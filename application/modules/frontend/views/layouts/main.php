@@ -21,6 +21,8 @@
 		?>
 		</div>
 	
+
+		<hr>
 		<?php 
 			$this->load->view('footer', $data);
 		?>

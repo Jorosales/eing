@@ -44,7 +44,7 @@ class Carrera extends MX_Controller {
 
         //Eventos y Articulos
         $data['prox_even'] = $this->Publicaciones_model->getEventosProximos(3);
-        $data['ult_art'] = $this->Publicaciones_model->getUltimosArticulos(3);
+        $data['ult_art'] = $this->Publicaciones_model->getUltimosArticulos(4);
 
         //Carreras
         $data['carreras'] = $this->Carrera_model->getAllActivates();

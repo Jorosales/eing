@@ -159,6 +159,7 @@ ul.nav-link > li > a:active:before {
 
 .articulos{
   margin-left: 15px;
+  margin-top: 100px;
 }
 
 /* cards admin*/
@@ -468,11 +469,10 @@ background-color: rgb(200, 200, 200);
 
 }
 
-
 /*Event List*/
 
 
-
+/*
 .demoPadder {
     padding-top:15px;
     }
@@ -487,6 +487,8 @@ background-color: rgb(200, 200, 200);
   background-color: #007aff;
   border-color: #007aff;
     }
+*/
+
 
 
 /*articulos*/
@@ -550,87 +552,220 @@ background-color: rgb(200, 200, 200);
 
 
 
-/*Articulos y eventos*/
-.article-clean {
-  color: #56585b;
-  background-color: #fff;
-  font-family: 'Lora', serif;
-  font-size: 18px;
-}
+/*Articulos index*/
 
-.article-clean .intro {
-  font-size: 16px;
-  margin: 0 auto 30px;
+.thumbnail-title {
+  font-size: 20px;
+  margin-top: 5px;
 }
-
-.article-clean .intro h1 {
-  font-size: 32px;
-  margin-bottom: 15px;
-  padding-top: 20px;
-  line-height: 1.5;
-  color: inherit;
+.img-thumb-bg {
+  padding: 0;
+  overflow: hidden;
+  min-height: 200px;
+  position: relative;
+  border-radius: 3px;
+  background-position: center;
+  background-color: transparent;
 }
-
-.article-clean .intro p {
-  color: #929292;
+.img-thumb-bg p {
+  color: #fff;
+  margin-bottom: 0;
+  line-height: 16px;
+}
+.img-thumb-bg .overlay {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+  background: rgba(0, 0, 0, 0);
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 50%, #000000 100%);
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 50%, #000000 100%);
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 50%, #000000 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #000000 100%);
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 50%, #000000 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(50%, rgba(0, 0, 0, 0)), color-stop(100%, #000000));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#000000', GradientType=0);
+}
+.img-thumb-bg .caption {
+  bottom: -5px;
+  height: 100px;
   font-size: 12px;
+  position: absolute;
+  padding: 0 20px 20px;
+  transition: all 0.3s ease-in-out;
 }
-
-.article-clean .intro p .by {
-  font-style: italic;
-}
-
-.article-clean .intro p .date {
+.img-thumb-bg .caption .tag a {
+  color: #fff;
+  padding: 0 5px;
+  font-size: 12px;
+  border-radius: 2px;
+  display: inline-block;
   text-transform: uppercase;
-  padding: 4px 0 4px 10px;
-  margin-left: 10px;
-  border-left: 1px solid #ddd;
+  background-color: #2980B9;
 }
-
-.article-clean .intro p a {
-  color: #333;
-  text-transform: uppercase;
-  padding-left: 3px;
-}
-
-.article-clean .intro img {
-  margin-top: 40px;
-}
-
-.article-clean .text p {
-  margin-bottom: 20px;
-  line-height: 1.45;
-}
-
-@media (min-width:768px) {
-  .article-clean .text p {
-    font-size: 16px;
-  }
-}
-
-.article-clean .text h2 {
-  margin-top: 28px;
-  margin-bottom: 20px;
-  line-height: 1.45;
-  font-size: 16px;
+.img-thumb-bg .caption .title {
+  margin-top: 5px;
+  font-size: 18px;
+  line-height: 20px;
   font-weight: bold;
-  color: #333;
+  background-color:  #fff;
+  text-transform: uppercase;
+}
+.img-thumb-bg .caption .title a {
+  color: #000;
+}
+.img-thumb-bg .caption .title a:hover {
+  color: #2980B9;
+}
+.img-thumb-bg .caption .meta-data {
+  display: none;
+  color: #000;
+  font-size: 12px;
+  line-height: 12px;
+  margin-top: 10px;
+}
+.img-thumb-bg .caption .meta-data a {
+  color: #000;
+}
+.img-thumb-bg .caption .meta-data a .fa {
+  color: #2980B9;
+}
+.img-thumb-bg .caption .meta-data a:hover {
+  color: #2980B9;
+}
+.img-thumb-bg .caption .content {
+  display: none;
+}
+.img-thumb-bg:hover .overlay {
+  background: rgba(46, 49, 58, 0.8);
+}
+.img-thumb-bg:hover .caption {
+  bottom: 60px;
+}
+.img-thumb-bg:hover .caption .meta-data {
+  display: block;
+}
+.img-thumb-bg:hover .caption .content {
+  display: block;
 }
 
-@media (min-width:768px) {
-  .article-clean .text h2 {
-    font-size: 20px;
+
+
+
+/*eventos index*/
+img {
+  display: inline-block;
+  max-width: 100%;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1300px;
   }
 }
-
-.article-clean .text figure {
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 20px;
+.box{
+    margin-bottom: 30px;
+}
+.heading{
+     text-align: center;
+    position: relative;
+    font-size: 3.3rem;
+    font-weight: bold;
+    margin: 3rem 0;
+    
+}
+.box figure {
+  -webkit-transition: 1s all;
+  transition: 1s all;
+  position: relative;
 }
 
-.article-clean .text figure img {
-  margin-bottom: 12px;
-  max-width: 100%;
+.box figure img {
+  height: 223px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-transition: .0s all;
+  transition: .0s all;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.box figure figcaption {
+  position: absolute;
+  bottom: -30px;
+  left: 8%;
+  right: 8%;
+  background: #fff;
+  color: #000;
+  padding: 20px 15px;
+  -webkit-box-shadow: 0 5px 10px #00000033;
+          box-shadow: 0 5px 10px #00000033;
+  -webkit-transition: .1s all;
+  transition: .1s all;
+}
+
+.box figure figcaption::after {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  bottom: 0;
+  height: 2px;
+  background: #fc5546;
+  content: '';
+  width: 0;
+  position: absolute;
+  -webkit-transition: .1s all;
+  transition: .1s all;
+}
+
+.box figure figcaption h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  -webkit-transition: .1s all;
+  transition: .1s all;
+}
+
+.box figure figcaption h3 {
+  font-size: 2.1rem;
+  font-weight: 500;
+}
+
+.box figure:hover {
+  -webkit-transform: translateY(5px);
+          transform: translateY(5px);
+}
+
+.box figure:hover h5 {
+  color: #fc5546;
+}
+
+.box figure:hover img {
+  -webkit-box-shadow: 0px 0px 6px #0000004f, -10px -10px 1px #f97955;
+          box-shadow: 0px 0px 6px #0000004f, -10px -10px 1px #f97955;
+}
+
+.box2 figure:hover figcaption {
+  -webkit-transform: translateY(-7px);
+          transform: translateY(-7px);
+  -webkit-box-shadow: 0 10px 10px #0000004f;
+          box-shadow: 0 10px 10px #0000004f;
+}
+
+.box figure:hover figcaption::after {
+  width: 100%;
+}
+.box h3 {
+  font-size: 3rem;
+  font-family: inherit;
+  font-weight: bold;
+  line-height: 4rem;
+}
+
+.box p {
+  font-size: 2rem;
+  font-family: "helveticaregular";
+  color: rgba(255, 255, 255, 0.7);
 }
 

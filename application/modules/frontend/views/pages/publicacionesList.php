@@ -1,5 +1,7 @@
     <main>
-        <?php echo "Hoy es ".date('d - m - Y', time()); $ban=0;?>
+        <button class="btn btn-default" type="button">
+          <?php echo "Hoy es ".date('d - M - Y', time()); $ban=0;?>
+        </button>
         <div class="container">
             <h1><?= (isset($listado[0]->tipo_nombre))?$listado[0]->tipo_nombre:"Publicaciones"?></h1>
             <hr>
@@ -43,8 +45,6 @@
                                     <?php if(!empty($row->lugar)){ ?>
                                         <p class="lugar">Lugar: <?=$row->lugar;?></p>
                                     <?php } ?>
-                                    
-                                   
                                 </div>
                             </li>
                         <?php } ?>

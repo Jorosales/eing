@@ -9,43 +9,24 @@
 	        	</div>
 
 	        	<?php foreach ($prox_even as $e) { ?>
-	        		<div class="card border-success mb-3 text-center" style="width: 250px;">
-					  <div class="card-header">
-					    <a class="collapsed card-link text-center" data-toggle="collapse" href="#<?= $e->id ?>">
-							<h5 class="card-title text-dark"><?= $e->titulo ?></h5>
-							<h6 class="card-subtitle mb-2 text-muted"><?= $e->fecha ?></h6>
-						</a>
-					  </div>
-					  <div id="<?= $e->id ?>" class="collapse" data-parent="#accordion">
-					    <div class="card-body text-left">
-					    
-						  <table class="table table-hover group table-striped">
-						  	<tbody>   
-						  	  <tr>
-						  		<td>Inicio:</td>
-						  		<td><?= $e->comienzo ?></td>
-						  	 </tr>
-						  			
-						  		<tr>
-						  		<td>Fin:</td>
-						  		<td><?= $e->fin ?></td>
-						  	 </tr>
-						  
-						  		<tr>
-						  		<td>Lugar:</td>
-						  		<td><?= $e->lugar ?></td>
-						  	 </tr>
-						  	</tbody>
-						  	</table>
-					    </div>
-						
-						<div class="card-footer text-muted">
-							<a role="button" target="_BLANK" href="<?= base_url('publicacion/'.$e->id) ?>" class="btn btn-sm btn-info"><font style="font-size: 12px;">Ver Más</font></a>
-						</div>
-						
-					   </div>
-					</div>
-
+	        		<div class="box">
+	                <div class="container">
+	                    <div class="row">
+	                        <div class="col-md-12">
+	                            <a target="_BLANK" href="<?= base_url('publicacion/'.$e->id) ?>">
+		                            <figure class="text-center">
+		                                <img src="<?= base_url('assets/images/undec.jpg') ?>" alt="img1">
+		                                <figcaption>
+		                                    <h5><?= $e->titulo ?></h5>
+		                                    <h6><?= date("d.m.Y", strtotime($e->fecha)) ?></h6>
+		                                </figcaption>
+		                            </figure>
+	                            </a>
+	                        </div>
+	                    </div>
+	                    
+	                </div>
+	            </div>
 	        	<?php } ?>
 	        	
 	    	</div>
@@ -73,26 +54,25 @@
 	    
 
 	    <!-- Articulos -->
-	    <div class="container col-lg-2 sidenav articulos" id="tourpackages-carousel">
+	    <div class="container col-lg-2 sidenav articulos">
         	<div class="row">
 
         		<?php foreach ($ult_art as $a) { ?>
-        			<div class="thumbnail">
-		             	<div class="caption">
-			                <div class='col-lg-12'>
-			                    <span class="glyphicon glyphicon-credit-card"></span>
-			                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
-			                </div>
-			                <div class='col-lg-12 well well-add-card'>
-			                    <h4><?= $a->titulo ?></h4>
-			                </div>
-			                <div class='col-lg-12'>
-			                    <p>4111xxxxxxxx3265</p>
-			                    <p class= "text-muted">Exp: 12-08</p>
-			                </div>
-			                <a target="_BLANK" href="<?= base_url('publicacion/'.$a->id) ?>" type="button" class="btn btn-primary btn-xs btn-update btn-add-card">Ver Más</a>
-		            	</div>
-		        	</div>
+
+        			<div class="col-lg-12">
+			           <div class="thumbnail img-thumb-bg">
+			               <div class="overlay"><?= $a->contenido ?></div>
+			               <div class="caption">
+			                   <div class="tag"><a href="#">UNdeC</a></div>
+			                   <div class="title"><a target="_BLANK" href="<?= base_url('publicacion/'.$a->id) ?>"><?= $a->titulo ?></a></div>
+			                   <div class="clearfix">
+			                       <span class="meta-data">Por <a href=""><?= $a->creador ?></a> el <?= date("d.m.Y", strtotime($a->fecha_creacion)) ?></span>
+			                   </div>
+			               </div>
+			           </div>
+			        </div>
+
+        			
         		<?php } ?>
 
 	    	</div>
