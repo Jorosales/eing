@@ -2,7 +2,7 @@
  
 class Cvar extends MX_Controller{
     
-    public $name = 'CVAR';
+    public $name = 'CV resumido';
     function __construct()
     {   
         parent::__construct();    
