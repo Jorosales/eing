@@ -712,7 +712,7 @@ img {
           transform: translateX(-50%);
   bottom: 0;
   height: 2px;
-  background: #fc5546;
+  background: #0080ff;
   content: '';
   width: 0;
   position: absolute;
@@ -738,12 +738,12 @@ img {
 }
 
 .box figure:hover h5 {
-  color: #fc5546;
+  color: #0080ff;
 }
 
 .box figure:hover img {
-  -webkit-box-shadow: 0px 0px 6px #0000004f, -10px -10px 1px #f97955;
-          box-shadow: 0px 0px 6px #0000004f, -10px -10px 1px #f97955;
+  -webkit-box-shadow: 0px 0px 6px #0000004f, -10px -10px 1px #0080ff;
+          box-shadow: 0px 0px 6px #0000004f, -10px -10px 1px #0080ff;
 }
 
 .box2 figure:hover figcaption {
