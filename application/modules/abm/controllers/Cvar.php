@@ -26,17 +26,25 @@ class Cvar extends MX_Controller{
     /*
      * Editing a docente
      */
-    function edit($id, $mensaje=null)
+    function edit($id)
     {   
         $data['docente'] = $this->Docente_model->get_docente($id);
         $data['persona'] = $this->Persona_model->get_persona($data['docente']['id']);
         $data['cvar'] = $this->Docente_model->get_cvar_by_docente($id);
 
         $data['docente']=array_merge($data['docente'], $data['persona']); 
-        //var_dump($data); exit();
+        
         if(isset($data['docente']['id']))
-        {
-            if(is_null($mensaje))     
+        {   
+
+            $this->form_validation->set_rules('areas','Áreas de actuación','max_length[1000]');
+            $this->form_validation->set_rules('experticia','Experticia','max_length[1000]');
+            $this->form_validation->set_rules('grado','Grado','max_length[1000]');
+            $this->form_validation->set_rules('especializacion','Especialización','max_length[1000]');
+            $this->form_validation->set_rules('maestria','Maestria','max_length[1000]');
+            $this->form_validation->set_rules('doctorado','Doctorado','max_length[1000]');
+
+            if($this->form_validation->run())     
             {   
                 $params = array(
                     'areas' => $this->input->post('areas'),
@@ -53,14 +61,16 @@ class Cvar extends MX_Controller{
                 else   
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                     sprintf(lang('record_edit_error_text'), $this->name));    
-                    
-                $this->edit($id, $mensaje);
+                
+                $data['docentes'] = $this->Docente_model->get_all_docente();
+                $data['alerta'] = $mensaje;
+                $this->template->cargar_vista('abm/docente/index', $data);
             }
             else
             {
                 $data['categorias'] = $this->Docente_categoria_model->get_all_categoria(); 
                 $data['user'] = $this->ion_auth->user()->row(); 
-                $data['alerta'] = $mensaje;
+                
                 $this->template->cargar_vista('abm/cvar/edit', $data);
             }
         }
