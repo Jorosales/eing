@@ -1,6 +1,7 @@
 <main>
-
-		<a class="btn btn-primary btn-lg" target='_blank' href="<?= base_url(PDFS_UPLOAD.'carreras/'.$carrera[0]->plan_pdf)?>">Descargar Plan</a>
+		<?php if (!empty($carrera[0]->plan_pdf)) { ?>
+			<a class="btn btn-primary btn-lg" target='_blank' href="<?= base_url(PDFS_UPLOAD.'carreras/'.$carrera[0]->plan_pdf)?>">Descargar Plan</a>
+		<?php } ?>
 
 		<div class="container">
 	        <h1 style="text-align: center; "> <?=$carrera[0]->plan;?> - <?=$carrera[0]->nombre;?></h1>
