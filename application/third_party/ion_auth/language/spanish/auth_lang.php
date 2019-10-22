@@ -197,6 +197,7 @@ $lang['create_title_heading']    					= 'Crear título';
 $lang['edit_title_heading'] 	   					= 'Editar título';
 $lang['create_publication_heading']    				= 'Crear Publicación';
 $lang['edit_publication_heading'] 	   				= 'Editar Publicación';
+$lang['edit_school_heading'] 	   				= 'Editar Escuela';
 
 //Comunes
 $lang['no_existe']    					= '%s no existe.';

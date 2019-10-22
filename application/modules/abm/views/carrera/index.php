@@ -10,7 +10,7 @@
 <div class="col-lg-11">
 	<div class="box">
 		<div class="box-header">
-		  <h3 class="box-title"><?php echo lang('title_category');?></h3>
+		  <h3 class="box-title"><?php echo lang('title_career');?></h3>
 		</div>
 		<!-- /.box-header -->
 		<div class="box-body">

@@ -18,7 +18,7 @@
 		</div>
 		<?php } ?>
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-11">
 			<div class="box">
 				<div class="box box-success">
 					<div class="box-header with-border">

@@ -1,7 +1,7 @@
 <li class="header">ABMs</li>
 
 <li class="treeview">
-	<a href="<?php echo base_url();?>abm/escuela/"><i class="fa fa-link"></i> <span>ESCUELA</span>
+	<a href="<?php echo base_url();?>abm/escuela/edit/1"><i class="fa fa-link"></i> <span>ESCUELA</span>
 		<span class="pull-right-container">
 			<i class="fa fa-angle-left pull-right"></i>
 		</span>

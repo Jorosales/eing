@@ -33,7 +33,7 @@ class Escuela extends MX_Controller {
                 $data['alerta'] = $mensaje;
             }
 
-            $this->template->cargar_vista('abm/escuela/index', $data);
+            $this->template->cargar_vista('abm/escuela/edit/1', $data);
         }
     }
 

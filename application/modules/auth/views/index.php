@@ -15,8 +15,11 @@
 			<p><?php echo $message;?></p>
 		</div>
 		<?php } ?>
+
+		<?php echo $this->template->boton_nuevo('auth/create_user', 'Nuevo Usuario'); ?>
+		<br><br>
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-11">
 				<div class="box">
 					<div class="box-header">
 						<h3 class="box-title"><?php echo lang('index_heading');?></h3>

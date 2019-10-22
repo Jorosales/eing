@@ -7,7 +7,7 @@
 	<div class="box box-success">
 
 		<div class="box-header with-border">
-		  	<h3 class="box-title"><?php echo lang('create_career_heading');?></h3>
+		  	<h3 class="box-title"><?php echo lang('edit_school_heading');?></h3>
 		</div>
 
 		<?php echo form_open_multipart('abm/escuela/edit/'.$escuela['id'],array("class"=>"form-horizontal")); ?>

@@ -6,7 +6,7 @@
 					<div class="receipt-header receipt-header-mid">
 						<div class="col-xs-12 col-sm-12 col-md-12">
 							<div class="receipt-left">
-								<h1 style="text-decoration: underline"><?=$docente[0]->nombre.' '.$docente[0]->nombre_2;?> <?=$docente[0]->apellido;?></h1>
+								<h1 style="text-decoration: underline; text-align: left;"><?=$docente[0]->nombre.' '.$docente[0]->nombre_2;?> <?=$docente[0]->apellido;?></h1>
 							</div>
 						</div>
 						<div class="col-xs-8 col-sm-8 col-md-8 text-left">
@@ -21,20 +21,20 @@
 							</div>
 						</div>
 					</div>
+	            </div>
 
-					<div class="receipt-header receipt-header-mid">
-						<div class="col-xs-12 col-sm-12 col-md-12">
-							<div class="receipt-left">
-								<?php if(!empty($docente[0]->descripcion)){ ?>	
-										<p><?=$docente[0]->descripcion;?></p>
-								<?php } ?>
-							</div>
+	            <div class="receipt-header receipt-header-mid">
+					<div class="col-xs-12 col-sm-12 col-md-12">
+						<div class="receipt-left">
+							<?php if(!empty($docente[0]->descripcion)){ ?>	
+									<p><?=$docente[0]->descripcion;?></p>
+							<?php } ?>
 						</div>
 					</div>
-	            </div>
+				</div>
 				
-	            <div>
-	                <table class="table table-bordered">
+				<div class="receipt-header receipt-header-mid">	                
+					<table class="table table-bordered">
 	                    <tbody>
 	                        <?php if(!empty($docente[0]->areas)){ ?>
 	                        <tr>

@@ -16,7 +16,7 @@
 		</div>
 		<?php } ?>
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-11">
 			<div class="box">
 				<div class="box box-success">
 					<div class="box-header with-border">
@@ -60,6 +60,8 @@
 						<?php echo lang('edit_user_password_confirm_label', 'password_confirm');?><br />
 						<?php echo form_input($password_confirm);?>
 					</div>
+					
+					<?php /* ?>
 					<div class="form-group">
 						<?php if ($this->ion_auth->is_admin()): ?>
 							<h3><?php echo lang('edit_user_groups_heading');?></h3>
@@ -82,7 +84,8 @@
 							<?php endforeach?>
 						<?php endif ?>
 					</div>
-
+					<?php */ ?>
+					
 					<?php echo form_hidden('id', $user->id);?>
 						<?php echo form_hidden($csrf); ?>
 				</div>
