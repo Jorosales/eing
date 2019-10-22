@@ -3,109 +3,76 @@
     } 
 ?>
 
-
-<hr>
-<div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading"><?=  $carrera['data'][0]->carrera ?></div>
-        <div class="panel-body">
-
-            <!-- TREEVIEW CODE -->
-            <ul class="treeview">
-                <li><a href="#"><?= $carrera['data'][0]->plan  ?></a>
-                	<ul>
-            			<?php 
-            				if($carrera['orientaciones']) {
-            					echo '<li><a href="#">Orientaciones</a>'; 
-            					echo '<ul>';
-            					foreach ($carrera['data'] as $orientacion) {
-            						echo '<li><a href="#">'.$orientacion->orientacion.'</a></li>';
-            					}
-            					echo "</ul>
-            						  </li>";
-            				}
-            			?>
-
-						<?php 
-            				echo '<li><a href="#">Ciclos</a> <ul>';
-            				foreach ($carrera['ciclos'] as $ciclos) {
-            					echo '<li><a href="#">'.$ciclos->nombre.'</a>';
-            					
-            					echo "<ul>";
-            					foreach ($ciclos->materias as $materia) {
-
-            						echo '<li><a target="_blank" href="'.base_url().'materia/'.$materia->materia_id.'">'.$materia->materia.'</a>';
-            						if(isset($materia->orientaciones)){
-            							echo "<ul>";
-		            					foreach ($materia->orientaciones as $mo) {
-		            						echo '<li><a href="#">'.$mo->nombre.'</a>';
-		            						
-											echo "<ul>";
-		            						foreach ($mo->materias as $m) {
-		            							echo '<li><a href="#">'.$m->nombre.'</a></li>';
-		            						}
-		            						echo "</ul></li>";
-		            					}
-		            					echo "</ul></li>";
-		            				}
-            					}
-            					echo "</ul></li>";	
-            				}
-            				echo "</ul></li>";
-            			?>
-            		</ul>
-            	</li>
-            </ul>
-            <!-- TREEVIEW CODE -->
-
-
+<div class="col-md-11">
+    <div class="box">
+        <div class="box-header">
+          <h3 class="box-title"><?php echo $carrera[0]->carrera.' - '.$carrera[0]->plan;?></h3>
         </div>
-    </div>
-
-
-<hr>
-
-							
-<script type="text/javascript">
-
-	 $.fn.extend({
-  treeview: function() {
-    return this.each(function() {
-      var tree = $(this);
-      
-      tree.addClass('treeview-tree');
-      tree.find('li').each(function() {
-        var stick = $(this);
-      });
-      tree.find('li').has("ul").each(function () {
-        var branch = $(this);
-        
-        branch.prepend("<i class='tree-indicator glyphicon glyphicon-chevron-right'></i>");
-        branch.addClass('tree-branch');
-        branch.on('click', function (e) {
-          if (this == e.target) {
-            var icon = $(this).children('i:first');
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="tabla" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th><?php echo lang('table_id_th');?></th>
+                        <th><?php echo lang('table_cicle_th');?></th>
+                        <th><?php echo lang('table_course_th');?></th>
+                        <th><?php echo lang('table_regimen_th');?></th>
+                        <th><?php echo lang('table_hours_th');?></th>
+                        <th><?php echo lang('table_total_hours_th');?></th>
+                        <th><?php echo lang('table_programa_th');?></th>
+                        <th><?php echo lang('table_year_th');?></th>
+                        <th><?php echo lang('table_code_th');?></th>
+                        <th><?php echo lang('table_actions_th');?></th>
+                        
+                    </tr>
+                </thead>
             
-            icon.toggleClass("glyphicon-chevron-down glyphicon-chevron-right");
-            $(this).children().children().toggle();
-          }
-        })
-        branch.children().children().toggle();
-      	
-        branch.children('.tree-indicator, button, a').click(function(e) {
-          branch.click();
-          
-          e.preventDefault();
-        });
-      });
-    });
-  }
-});
+                <tbody>
+                    <?php foreach($ciclo_materia as $cm):?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($cm->id,ENT_QUOTES,'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($cm->nombre_ciclo,ENT_QUOTES,'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($cm->nombre_materia,ENT_QUOTES,'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($cm->nombre_regimen,ENT_QUOTES,'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($cm->horas,ENT_QUOTES,'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($cm->hs_total,ENT_QUOTES,'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($cm->programa,ENT_QUOTES,'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($cm->anio,ENT_QUOTES,'UTF-8');?></td>
+                            <td><?php echo htmlspecialchars($cm->codigo,ENT_QUOTES,'UTF-8');?></td>
+                            <td>
+                                <?php 
+                                    if ($cm->tipo == 2) {
+                                        echo anchor("abm/ciclo_materia/asignar_optativas/".$cm->id, '<span class="btn btn-warning btn-xs glyphicon glyphicon-list-alt"> OPTATIVAS</span>');
+                                    }else{
+                                        echo anchor("abm/ciclo_materia/asignar_correlativa/".$cm->id, '<span class="btn btn-success btn-xs glyphicon glyphicon-list-alt"> CORRELATIVAS</span>') ;
+                                    }
+                                    
+                                ?>
+                                <br><br>
+                                <?php echo anchor("abm/ciclo_materia/edit/".$cm->id, '<span class="btn btn-primary btn-xs">Editar</span>') ;?>
+                                <?php echo anchor("abm/ciclo_materia/remove/".$cm->id, '<span class="btn btn-danger btn-xs">Eliminar</span>') ;?>
+                            </td>
+                         </tr>
+                     <?php endforeach;?>
+                </tbody>
 
-$(window).on('load', function () {
-	$('.treeview').each(function () {
-		var tree = $(this);
-		tree.treeview();
-		})
-	})
-</script>
+                <tfoot>
+                    <tr>
+                        <th><?php echo lang('table_id_th');?></th>
+                        <th><?php echo lang('table_cicle_th');?></th>
+                        <th><?php echo lang('table_course_th');?></th>
+                        <th><?php echo lang('table_regimen_th');?></th>
+                        <th><?php echo lang('table_hours_th');?></th>
+                        <th><?php echo lang('table_total_hours_th');?></th>
+                        <th><?php echo lang('table_programa_th');?></th>
+                        <th><?php echo lang('table_year_th');?></th>
+                        <th><?php echo lang('table_code_th');?></th>
+                        <th><?php echo lang('table_actions_th');?></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+</div>

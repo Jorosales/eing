@@ -14,6 +14,7 @@ class Carrera extends MX_Controller {
         }else {
             $this->load->module('template');
             $this->load->model('Carrera_model');
+            $this->load->model('Ciclo_materia_model');
             $this->load->helper(array('language'));
             $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
             $this->lang->load('auth');
@@ -207,10 +208,12 @@ class Carrera extends MX_Controller {
 
     public function carrera_completa($id_carrera)
     {       
-        $data['carrera'] = $this->Carrera_model->get_carrera_completa($id_carrera);
-        $data['user'] = $this->ion_auth->user()->row();
-        
-        if (count($data['carrera']['data']) == 0){
+        //$data['carrera'] = $this->Carrera_model->get_carrera_completa($id_carrera);
+        //$data['user'] = $this->ion_auth->user()->row();
+        $data['carrera'] = $this->Carrera_model->get_data_carrera($id_carrera);
+        $data['ciclo_materia'] = $this->Ciclo_materia_model->get_all_ciclo_materia_by_plan($data['carrera'][0]->plan_id);
+
+        if (count($data['ciclo_materia']) == 0){
             $data['alerta'] = lang('undefined_plan');
             $this->template->cargar_vista('abm/404', $data);
         }
