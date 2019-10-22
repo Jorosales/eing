@@ -7,6 +7,12 @@
 		  	<h3 class="box-title"><?php echo lang('designate_correlative_heading');?></h3>
 		</div>
 
+		<div class="box-title">
+			<?php echo $this->template->boton_link('abm/correlatividad_tipo', 'Ver tipos correlativas'); ?>
+		</div>
+
+		<br>
+
 		<?php echo form_open('abm/ciclo_materia/asignar_correlativa/'.$ciclo_materia['id'],array("class"=>"form-horizontal")); ?>
 	
 			<?php echo $this->template->cargar_select(lang('form_cycle_course'), 'id_correlativa', '*', form_error('id_correlativa'), $ciclos_materias, $this->input->post('id_correlativa')); ?>	

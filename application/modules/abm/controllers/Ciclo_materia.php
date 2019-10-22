@@ -42,7 +42,7 @@ class Ciclo_materia extends MX_Controller{
     /*
      * Adding a new ciclo_materia
      */
-    public function add()
+    public function add($id_plan=null)
     {   
         $this->form_validation->set_rules('anio',lang('form_year'),'integer|required');
         $this->form_validation->set_rules('codigo',lang('form_code'),'integer');
@@ -81,8 +81,19 @@ class Ciclo_materia extends MX_Controller{
         }
         else
         {
-            $data['user'] = $this->ion_auth->user()->row();
-            $data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
+            if (is_null($id_plan)){
+                $data['ciclos'] = $this->Ciclo_model->get_all_ciclos();    
+            }
+            else{
+                $data['ciclos'] = $this->Ciclo_model->get_ciclos_by_plan($id_plan);
+
+                for ($i=0; $i < $data['ciclos'][0]->duracion ; $i++) { 
+                    $data['anios'][$i] = new stdClass;
+                    $data['anios'][$i]->id = $i+1;
+                    $data['anios'][$i]->nombre = $i+1;
+                }
+            }
+            
             $data['materias'] = $this->Materia_model->get_all_materias();
             $data['regimenes'] = $this->Regimen_model->get_all_regimen();
 
@@ -91,6 +102,7 @@ class Ciclo_materia extends MX_Controller{
 
     }  
 
+ 
     function fetch_materias()
     {
         if($this->input->post('ciclo_id'))

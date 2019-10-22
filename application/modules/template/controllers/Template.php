@@ -139,8 +139,8 @@ class Template extends MX_Controller
 	{
 		$boton = ' 
 					<div class="btn-group demoPadder col-md-offset-10" role="group" aria-label="Basic example" style="margin-right:0px">
-						<a href="'.$url.'"> 
-							<button type="button" class="btn btn-success btn-md" style="border: 1px solid rgba(0,0,0,0.1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);">'.$titulo.'</button>
+						<a href="'.site_url($url).'"> 
+							<button type="button" class="btn btn-success btn-md-3" style="border: 1px solid rgba(0,0,0,0.1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);">'.$titulo.'</button>
 						</a>
 					</div>
 					';

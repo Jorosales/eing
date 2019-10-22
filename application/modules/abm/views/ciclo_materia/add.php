@@ -19,9 +19,10 @@
 
 		<?php echo $this->template->cargar_input(lang('form_program'), 'programa', 'file', '', form_error('programa'), $this->input->post('programa')); ?>
 		
-		<?php echo $this->template->cargar_select(lang('form_year'), 'anio', '*', form_error('anio'), $vacio='', $this->input->post('anio')); ?>
+		<?php echo $this->template->cargar_select(lang('form_year'), 'anio', '*', form_error('anio'), $anios, $this->input->post('anio')); ?>
 
 		<?php echo $this->template->cargar_input(lang('form_code'), 'codigo', 'text', '*', form_error('codigo'), $this->input->post('codigo')); ?>
+		<input type="hidden" name="plan" value="<?= $id_plan ?>" >
 		
 		<?php echo $this->template->cargar_submit(); ?>
 		
@@ -32,23 +33,4 @@
 </div>
 
 
-<script>
-	
-$(document).ready(function(){
-	$('#id_ciclo').change(function(){
-		var ciclo = $('#id_ciclo').val();
-		if(ciclo != '')
-		{
-			$.ajax({
-				url:"<?php echo base_url(); ?>abm/ciclo_materia/fetch_anios",
-				method:"POST",
-				data:{ciclo_id:ciclo},
-				success:function(data)
-				{
-					$('#anio').html(data);
-				}
-			});
-		}
-	});
-});
-</script>
+

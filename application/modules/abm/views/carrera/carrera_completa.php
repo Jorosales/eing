@@ -3,11 +3,20 @@
     } 
 ?>
 
+<?php echo $this->template->boton_nuevo('abm/ciclo_materia/add/'.$carrera[0]->plan_id, 'Nueva Materia'); ?>
+
+<br><br>
+
 <div class="col-md-11">
     <div class="box">
         <div class="box-header">
           <h3 class="box-title"><?php echo $carrera[0]->carrera.' - '.$carrera[0]->plan;?></h3>
         </div>
+
+        <div class="box-title">
+            <?php echo $this->template->boton_link('abm/regimen', 'Ver Tipos de Regimén'); ?>
+        </div>
+
         <!-- /.box-header -->
         <div class="box-body">
             <table id="tabla" class="table table-bordered table-striped">

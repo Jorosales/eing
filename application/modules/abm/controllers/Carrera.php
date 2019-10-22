@@ -208,8 +208,6 @@ class Carrera extends MX_Controller {
 
     public function carrera_completa($id_carrera)
     {       
-        //$data['carrera'] = $this->Carrera_model->get_carrera_completa($id_carrera);
-        //$data['user'] = $this->ion_auth->user()->row();
         $data['carrera'] = $this->Carrera_model->get_data_carrera($id_carrera);
         $data['ciclo_materia'] = $this->Ciclo_materia_model->get_all_ciclo_materia_by_plan($data['carrera'][0]->plan_id);
 

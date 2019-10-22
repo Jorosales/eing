@@ -12,6 +12,9 @@
 		<div class="box-header">
 		  <h3 class="box-title"><?php echo lang('title_course');?></h3>
 		</div>
+		<div class="box-title">
+			<?php echo $this->template->boton_link('materia_tipo', 'Tipos de materias'); ?>
+		</div>
 		<!-- /.box-header -->
 		<div class="box-body">
 		  	<table id="tabla" class="table table-bordered table-striped">

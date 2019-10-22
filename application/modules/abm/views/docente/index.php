@@ -16,9 +16,8 @@
 		</div>
 		
 		<div class="box-title">
-			<?php echo $this->template->boton_link('categoria', 'Ver categorías'); ?>
+			<?php echo $this->template->boton_link('abm/categoria', 'Ver categorías'); ?>
 		</div>
-		
 		
 		<!-- /.box-header -->
 		<div class="box-body">

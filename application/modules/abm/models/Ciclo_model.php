@@ -38,6 +38,19 @@ class Ciclo_model extends CI_Model
 
         return $this->db->get()->result();
     }
+
+    function get_ciclos_by_plan($id_plan)
+    {
+        $this->db->select('ciclos.*, planes.nombre as plan, orientaciones.nombre as orientacion, carrera.nombre as carrera, planes.duracion as duracion');   
+        $this->db->from('ciclos');
+        $this->db->join('planes', 'planes.id = ciclos.id_plan');
+        $this->db->join('carrera', 'carrera.id = planes.id_carrera');
+        $this->db->join('orientaciones', 'orientaciones.id = ciclos.id_orientacion', 'LEFT');
+        $this->db->where('ciclos.id_plan', $id_plan);
+        $this->db->order_by('ciclos.id', 'desc');
+
+        return $this->db->get()->result();
+    }
         
     /*
      * function to add new ciclo
@@ -70,4 +83,5 @@ class Ciclo_model extends CI_Model
     {
         return $this->db->delete('ciclos',array('id'=>$id));
     }
+
 }
