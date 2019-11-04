@@ -38,20 +38,23 @@ class Publicaciones extends MX_Controller{
      */
     function add()
     {   
-        $data['user'] = $this->ion_auth->user()->row();
-
+        //var_dump($_FILES['imagen']); exit();
         $this->form_validation->set_rules('titulo','Titulo','required|max_length[100]');
-        //$this->form_validation->set_rules('fecha','Fecha','required');
-		
+        $this->form_validation->set_rules('imagen',lang('form_image'),'callback_image_file_check[imagen]');
+        
+        var_dump($_FILES); 
+
 		if($this->form_validation->run())     
         {   
+            echo 'aca'; exit();
             $f = getdate();
             $params = array(
 				'creador_id' => $data['user']->user_id,
 				'modificador_id' => $data['user']->user_id,
 				'titulo' => $this->input->post('titulo'),
 				'fecha_creacion' => $f['year']."-".$f['mon']."-".$f['mday'],
-				'ultima_modificacion' => $f['year']."-".$f['mon']."-".$f['mday'],
+                'ultima_modificacion' => $f['year']."-".$f['mon']."-".$f['mday'],
+                'imagen' => $_FILES['imagen']['name'],
 				'contenido' => $this->input->post('contenido'),
                 'esta_publicado' => ($this->input->post('esta_publicado')==1)? 1 : 0,
                 'fecha' => $this->input->post('fecha'),
@@ -60,6 +63,8 @@ class Publicaciones extends MX_Controller{
                 'fin' => $this->input->post('fin'),
                 'tipo' => $this->input->post('tipo'),
             );
+
+            $imagen = $this->template->subir_archivo(IMAGES_UPLOAD, 'jpg|png', 'imagen');
             
             if ($this->Publicaciones_model->add_publicaciones($params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
@@ -152,6 +157,12 @@ class Publicaciones extends MX_Controller{
         }
         else
             show_error(sprintf(lang('no_existe'), $this->name));
+    }
+
+
+    public function image_file_check($str, $nombre)
+    {
+        return $this->template->image_file_check($str, $nombre);
     }
     
 }
