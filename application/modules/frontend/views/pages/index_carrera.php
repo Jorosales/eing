@@ -15,7 +15,8 @@
 	                        <div class="col-md-12">
 	                            <a target="_BLANK" href="<?= base_url('publicacion/'.$e->id) ?>">
 		                            <figure class="text-center">
-		                                <img src="<?= base_url('assets/images/undec.jpg') ?>" alt="img1">
+		                                <!-- <img src="<?= base_url('assets/images/undec.jpg') ?>" alt="img1"> -->
+										<img src="<?= base_url(IMAGES_UPLOAD.'publicaciones/'.$e->imagen) ?>" alt="">
 		                                <figcaption>
 		                                    <h5><?= $e->titulo ?></h5>
 		                                    <h6><?= date("d.m.Y", strtotime($e->fecha)) ?></h6>
@@ -61,7 +62,7 @@
 
         			<div class="col-lg-12">
 			           <div class="thumbnail img-thumb-bg">
-			               <div class="overlay"><?= $a->contenido ?></div>
+			               <div class="overlay">  <img src="<?= base_url(IMAGES_UPLOAD.'publicaciones/'.$a->imagen) ?>" alt=""></div>
 			               <div class="caption">
 			                   <div class="tag"><a href="#">UNdeC</a></div>
 			                   <div class="title"><a target="_BLANK" href="<?= base_url('publicacion/'.$a->id) ?>"><?= $a->titulo ?></a></div>

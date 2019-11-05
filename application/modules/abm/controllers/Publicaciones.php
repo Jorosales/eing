@@ -38,15 +38,12 @@ class Publicaciones extends MX_Controller{
      */
     function add()
     {   
-        //var_dump($_FILES['imagen']); exit();
+        $data['user'] = $this->ion_auth->user()->row();
         $this->form_validation->set_rules('titulo','Titulo','required|max_length[100]');
         $this->form_validation->set_rules('imagen',lang('form_image'),'callback_image_file_check[imagen]');
         
-        var_dump($_FILES); 
-
-		if($this->form_validation->run())     
+		if($this->form_validation->run($this))     
         {   
-            echo 'aca'; exit();
             $f = getdate();
             $params = array(
 				'creador_id' => $data['user']->user_id,
@@ -64,7 +61,7 @@ class Publicaciones extends MX_Controller{
                 'tipo' => $this->input->post('tipo'),
             );
 
-            $imagen = $this->template->subir_archivo(IMAGES_UPLOAD, 'jpg|png', 'imagen');
+            $imagen = $this->template->subir_archivo(IMAGES_UPLOAD.'/publicaciones', 'jpg|png', 'imagen');
             
             if ($this->Publicaciones_model->add_publicaciones($params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 

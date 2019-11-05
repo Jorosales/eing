@@ -26,7 +26,8 @@
                                     <span class="year"><?= date("Y", strtotime($row->fecha)); ?></span>
                                 </time>
                                 <?php }else{ ?>
-                                    <img src="<?= base_url('assets/images/arrow.png')?>" alt="">
+                                    <img src="<?= base_url(IMAGES_UPLOAD.'publicaciones/'.$row->imagen) ?>" alt="">
+                                    <!-- <img src="<?= base_url('assets/images/arrow.png')?>" alt=""> -->
                                 <?php } ?>
                                 <div class="info">
                                     <h2 class="title"><?= $row->titulo; ?></h2>
