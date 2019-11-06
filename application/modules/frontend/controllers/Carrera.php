@@ -34,7 +34,6 @@ class Carrera extends MX_Controller {
                  else{
                     $fechas[date('d', strtotime($p->fecha))] = base_url('publicacion/'.$anio.'/'.$mes.'/'.date('d', strtotime($p->fecha)));
                  }
-                //$fechas[date('d', strtotime($p->fecha))] = base_url('publicacion/'.$p->id);
             }
             $data['calendario'] = $this->calendar->generate($anio, $mes, $fechas);
         }
