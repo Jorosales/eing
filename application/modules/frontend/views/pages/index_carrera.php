@@ -3,6 +3,7 @@
     
 	    <!-- Eventos -->
 	    <div class="container col-lg-2 sidenav eventos" id="tourpackages-carousel">
+			<h4>Calendario de Eventos</h4>
         	<div class="row">
 	        	<div class="container card border-primary mb-3 text-center" style="width: 250px;">
 		                <?php echo $calendario ?>
@@ -15,8 +16,11 @@
 	                        <div class="col-md-12">
 	                            <a target="_BLANK" href="<?= base_url('publicacion/'.$e->id) ?>">
 		                            <figure class="text-center">
-		                                <!-- <img src="<?= base_url('assets/images/undec.jpg') ?>" alt="img1"> -->
-										<img src="<?= base_url(IMAGES_UPLOAD.'publicaciones/'.$e->imagen) ?>" alt="">
+										<?php if($e->imagen == ''){?>
+											<img src="<?= base_url('assets/images/undec.jpg') ?>" alt="UNdeC">
+										<?php }else{ ?>
+											<img src="<?= base_url(IMAGES_UPLOAD.'publicaciones/'.$e->imagen) ?>" alt="<?= $e->imagen ?>">
+										<?php } ?>
 		                                <figcaption>
 		                                    <h5><?= $e->titulo ?></h5>
 		                                    <h6><?= date("d.m.Y", strtotime($e->fecha)) ?></h6>
@@ -56,13 +60,18 @@
 
 	    <!-- Articulos -->
 	    <div class="container col-lg-2 sidenav articulos">
-        	<div class="row">
-
+        	<h4>Artículos de interés</h4>
+			<div class="row">
         		<?php foreach ($ult_art as $a) { ?>
-
         			<div class="col-lg-12">
 			           <div class="thumbnail img-thumb-bg">
-			               <div class="overlay">  <img src="<?= base_url(IMAGES_UPLOAD.'publicaciones/'.$a->imagen) ?>" alt=""></div>
+			               <div class="overlay">  
+						   		   <?php if($a->imagen == ''){?>
+										<img src="<?= base_url('assets/images/undec.jpg') ?>" alt="UNdeC">
+									<?php }else{ ?>
+										<img src="<?= base_url(IMAGES_UPLOAD.'publicaciones/'.$a->imagen) ?>" alt="">
+									<?php } ?>
+							</div>
 			               <div class="caption">
 			                   <div class="tag"><a href="#">UNdeC</a></div>
 			                   <div class="title"><a target="_BLANK" href="<?= base_url('publicacion/'.$a->id) ?>"><?= $a->titulo ?></a></div>
@@ -72,8 +81,6 @@
 			               </div>
 			           </div>
 			        </div>
-
-        			
         		<?php } ?>
 
 	    	</div>
