@@ -91,11 +91,11 @@ class Publicaciones extends MX_Controller{
         if(isset($data['publicacion']['id']))
         {
 			$this->form_validation->set_rules('titulo','Titulo','required|max_length[100]');
-			//$this->form_validation->set_rules('fecha','Fecha','required');
-		    
-			if($this->form_validation->run())     
+            $this->form_validation->set_rules('imagen',lang('form_image'),'callback_image_file_check[imagen]');			
+
+			if($this->form_validation->run($this))     
             {   
-               
+                //var_dump($_FILES['imagen']['name']); exit();
                 $f = getdate();
                 $params = array(
 					'creador_id' => $data['publicacion']['creador_id'],
@@ -111,6 +111,11 @@ class Publicaciones extends MX_Controller{
                     'fin' => ($this->input->post('fin')==NULL)?0:$this->input->post('fin'),
                     'tipo' => $this->input->post('tipo'),  
                 );
+
+                if($_FILES['imagen']['name'] != ''){
+                    $imagen = $this->template->subir_archivo(IMAGES_UPLOAD.'/publicaciones', 'jpg|png', 'imagen');
+                    $params['imagen']= $imagen['file_name'];
+                }
                 
                 if ($this->Publicaciones_model->update_publicaciones($id,$params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 

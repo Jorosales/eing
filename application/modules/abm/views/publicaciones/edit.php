@@ -5,7 +5,7 @@
 		  	<h3 class="box-title"><?php echo lang('edit_publication_heading');?></h3>
 		</div>
 
-		<?php echo form_open('abm/publicaciones/edit/'.$publicacion['id'],array("class"=>"form-horizontal")); ?>
+		<?php echo form_open_multipart('abm/publicaciones/edit/'.$publicacion['id'],array("class"=>"form-horizontal")); ?>
 
 			<?php echo $this->template->cargar_input(lang('form_title'), 'titulo', 'text', '*', form_error('titulo'), ($this->input->post('titulo') ? $this->input->post('titulo') : $publicacion['titulo'])); ?>
 			
@@ -16,6 +16,27 @@
 	
 			<?php echo $this->template->cargar_input(lang('form_place'), 'lugar', 'text', '', form_error('lugar'), ($this->input->post('lugar') ? $this->input->post('lugar') : $publicacion['lugar'])); ?>
 			
+			<div class="form-group">
+				<label for="imagen" class="col-md-2 control-label">Imágen</label>
+				<div class="col-md-6">
+					<input type="file" name="imagen" value="<?php echo ($this->input->post('imagen') ? $this->input->post('imagen') : $publicacion['imagen']); ?>" class="form-control" id="imagen" />
+					<p class="help-block"> <?php echo ($publicacion['imagen'] ? '' : '<b>* La imágen debe estar en formato JPG o PNG.</b>'); ?> </p>
+						
+				</div>
+				<div class="col-md-3">
+					<span class="text-danger"><?php echo form_error('imagen');?></span>
+					
+					<?php if($publicacion['imagen'] != '') echo "<a target='_blank' href='".base_url(IMAGES_UPLOAD.$publicacion['imagen'])."'/>"; ?>
+						
+						<img style="height: 140px; width: 140px;" src="<?=base_url(IMAGES_UPLOAD.'/publicaciones/'.$publicacion['imagen']); ?>" alt="..." class="img-thumbnail">
+						
+						<p class="help-block"><?php echo ($publicacion['imagen'] != '' ? $publicacion['imagen'] : 'SIN IMAGEN'); ?></p>
+					
+					<?php if($publicacion['imagen'] != '') echo "</a>"; ?>
+
+				</div>
+			</div>
+
 			<?php echo $this->template->cargar_textarea(lang('form_content'), 'contenido', '', form_error('contenido'), ($this->input->post('contenido') ? $this->input->post('contenido') : $publicacion['contenido'])); ?>
 
 			<?php echo $this->template->cargar_select(lang('form_type'), 'tipo', '*', form_error('tipo'), $tipos, $publicacion['tipo']); ?>

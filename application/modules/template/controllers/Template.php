@@ -102,7 +102,7 @@ class Template extends MX_Controller
 	public function subir_archivo($path, $type, $name)
 	{
 		$config['upload_path'] = $path;
-        $config['allowed_types'] = $type;
+		$config['allowed_types'] = $type;
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
 
