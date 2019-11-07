@@ -32,9 +32,17 @@ class Orientaciones_model extends CI_Model
         $this->db->select('orientaciones.*, planes.nombre as plan');    
         $this->db->from('orientaciones');
         $this->db->join('planes', 'planes.id = orientaciones.id_plan', 'LEFT');
-
         $this->db->order_by('orientaciones.id', 'desc');
+        return $this->db->get()->result();
+    }
 
+    function get_all_orientaciones_by_carrera($id_carrera)
+    {
+        $this->db->select('orientaciones.*, planes.nombre as plan');    
+        $this->db->from('orientaciones');
+        $this->db->join('planes', 'planes.id = orientaciones.id_plan', 'LEFT');
+        $this->db->where('planes.id_carrera', $id_carrera);
+        $this->db->order_by('orientaciones.id', 'desc');
         return $this->db->get()->result();
     }
         

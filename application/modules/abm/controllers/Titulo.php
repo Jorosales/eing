@@ -26,20 +26,19 @@ class Titulo extends MX_Controller{
     /*
      * Listing of titulos
      */
-    function index()
+    function index($id_carrera, $mensaje=null)
     {
-
         if (!$this->ion_auth->logged_in())
         {
             redirect('login', 'refresh');
         }else {
-            $data['titulos'] = $this->Titulo_model->get_all_titulos();
+            /* $data['titulos'] = $this->Titulo_model->get_all_titulos(); */
+            $data['titulos'] = $this->Titulo_model->get_all_titulos_by_carrera($id_carrera);
             $data['user'] = $this->ion_auth->user()->row();
             
             if (isset($mensaje)) {
                 $data['alerta'] = $mensaje;
-            }
-            
+            }       
             $this->template->cargar_vista('abm/titulo/index', $data);
         }
     }
@@ -65,8 +64,9 @@ class Titulo extends MX_Controller{
             else   
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_add_error_text'), $this->name)); 
-                    
-            $this->index($mensaje);
+            
+            $c = $this->Planes_model->get_carrera_by_plan($this->input->post('id_plan'));
+            $this->index($c->id_carrera, $mensaje);
         }
         else
         {
@@ -104,7 +104,8 @@ class Titulo extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                     sprintf(lang('record_edit_error_text'), $this->name));    
                     
-                $this->index($mensaje);
+                $c = $this->Planes_model->get_carrera_by_plan($this->input->post('id_plan'));
+                $this->index($c->id_carrera, $mensaje);
             }
             else
             {
@@ -135,7 +136,8 @@ class Titulo extends MX_Controller{
                 $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_remove_error_text'), $this->name));    
                 
-            $this->index($mensaje);
+            $c = $this->Planes_model->get_carrera_by_plan($titulo['id_plan']);
+            $this->index($c->id_carrera, $mensaje);
         }
         else
             show_error(sprintf(lang('no_existe'), $this->name));

@@ -33,7 +33,8 @@
 						<td><?php echo htmlspecialchars($c->id,ENT_QUOTES,'UTF-8');?></td>
 						<td><?php echo htmlspecialchars($c->nombre,ENT_QUOTES,'UTF-8');?></td>
 						<td><?php echo htmlspecialchars($c->plan_pdf,ENT_QUOTES,'UTF-8');?></td>
-						<td><a target='_blank' href="<?= base_url('abm/carrera/carrera_completa/'.$c->id) ?>"/>Ver Plan</a></td>
+						<!-- <td><a target='_blank' href="<?= base_url('abm/carrera/carrera_completa/'.$c->id) ?>"/>Ver Plan</a></td> -->
+						<td><a target='_blank' href="<?= base_url('abm/planes/index/'.$c->id) ?>"/>Ver Planes</a></td>
 
 						<?php 	if($c->activo == 1) { 
 								echo '<td>

@@ -25,13 +25,15 @@ class Planes extends MX_Controller{
     /*
      * Listing of planes
      */
-    function index($mensaje=null)
+    function index($id_carrera, $mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
         {
             redirect('login', 'refresh');
         }else {
-            $data['planes'] = $this->Planes_model->get_all_planes();
+            //$data['planes'] = $this->Planes_model->get_all_planes($id_carrera); get_all_planes_by_carrera($id_carrera)
+            $data['planes'] = $this->Planes_model->get_all_planes_by_carrera($id_carrera);
+            $data['id_carrera'] = $id_carrera; 
             $data['user'] = $this->ion_auth->user()->row();
             
             if (isset($mensaje)) {
@@ -65,7 +67,7 @@ class Planes extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_add_error_text'), $this->name)); 
                     
-            $this->index($mensaje);
+            $this->index($this->input->post('id_carrera'), $mensaje);
         }
         else
         {
@@ -104,7 +106,7 @@ class Planes extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                     sprintf(lang('record_edit_error_text'), $this->name));    
                     
-                $this->index($mensaje);
+                $this->index($this->input->post('id_carrera'), $mensaje);
             }
             else
             {
@@ -121,9 +123,9 @@ class Planes extends MX_Controller{
      */
     function remove($id)
     {
-        $plane = $this->Planes_model->get_planes($id);
+        $plan = $this->Planes_model->get_planes($id);
 
-        if(isset($plane['id']))
+        if(isset($plan['id']))
         {
             if ($this->Planes_model->delete_planes($id))
                 $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
@@ -132,7 +134,8 @@ class Planes extends MX_Controller{
                 $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_remove_error_text'), $this->name));    
                 
-            $this->index($mensaje);
+            $c = $this->Planes_model->get_carrera_by_plan($plan['id_plan']);
+            $this->index($c->id_carrera, $mensaje);
         }
         else
             show_error(sprintf(lang('no_existe'), $this->name));
@@ -153,56 +156,26 @@ class Planes extends MX_Controller{
                                 sprintf(lang('plan_activate_success'), $this->name));
             }
 
-            $this->index($mensaje);   
+            $c = $this->Planes_model->get_carrera_by_plan($id);
+            $this->index($c->id_carrera, $mensaje);   
         }
     }
 
 
     public function deactivate($id = NULL)
     {
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-            return show_error('You must be an administrator to view this page.');
-
-        $id = (int)$id;
-
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('confirm', $this->lang->line('deactivate_validation_confirm_label'), 'required');
-        $this->form_validation->set_rules('id', $this->lang->line('deactivate_validation_user_id_label'), 'required|alpha_numeric');
-
-        if ($this->form_validation->run() === FALSE)
+        if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin())
         {
-            $data['planes'] = $this->Planes_model->get_planes($id);
-            $data['user'] = $this->ion_auth->user()->row();
-            $this->template->cargar_vista('abm/planes/deactivate_plan', $data);
-        }
-        else
-        {
-            // do we really want to deactivate?
-            if ($this->input->post('confirm') == 'yes')
-            {
-                // do we have a valid request?
-                if ($id != $this->input->post('id'))
-                {
-                    return show_error($this->lang->line('error_csrf'));
-                }
+            $params['vigente']= false; 
+            if ($this->Planes_model->change_status($id, $params))
+                $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                sprintf(lang('plan_deactivate_success'), $this->name));    
+            else   
+                $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                sprintf(lang('plan_deactivate__error'), $this->name));    
 
-                // do we have the right userlevel?
-                if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin())
-                {
-                    $params['vigente']= false; 
-                    if ($this->Planes_model->change_status($id, $params))
-                        $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
-                                        sprintf(lang('plan_deactivate_success'), $this->name));    
-                    else   
-                        $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
-                                        sprintf(lang('plan_deactivate__error'), $this->name));    
-
-                    $this->index($mensaje);
-                }
-            }else{
-                // redirect them back to the auth page
-                redirect('abm/planes/', 'refresh');
-            }
+            $c = $this->Planes_model->get_carrera_by_plan($id);
+            $this->index($c->id_carrera, $mensaje);
         }
     }
     

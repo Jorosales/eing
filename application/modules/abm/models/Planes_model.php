@@ -14,6 +14,15 @@ class Planes_model extends CI_Model
     {
         return $this->db->get_where('planes',array('id'=>$id))->row_array();
     }
+
+    function get_carrera_by_plan($id_plan)
+    {
+        $this->db->select('planes.id_carrera');
+        $this->db->from('planes');
+        $this->db->where('planes.id', $id_plan);
+        $this->db->limit(1);
+        return $this->db->get()->row();
+    }
     
     /*
      * Get all planes count
@@ -32,9 +41,17 @@ class Planes_model extends CI_Model
         $this->db->select('planes.*, carrera.nombre as carrera');    
         $this->db->from('planes');
         $this->db->join('carrera', 'carrera.id = planes.id_carrera', 'LEFT');
-
         $this->db->order_by('planes.id', 'desc');
+        return $this->db->get()->result();
+    }
 
+    function get_all_planes_by_carrera($id_carrera)
+    {    
+        $this->db->select('planes.*, carrera.nombre as carrera');    
+        $this->db->from('planes');
+        $this->db->join('carrera', 'carrera.id = planes.id_carrera', 'LEFT');
+        $this->db->where('planes.id_carrera', $id_carrera);
+        $this->db->order_by('planes.id', 'desc');
         return $this->db->get()->result();
     }
         
