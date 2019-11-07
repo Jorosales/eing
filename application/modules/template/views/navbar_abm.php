@@ -17,11 +17,11 @@
 
 	<ul class="treeview-menu">
 		<li><a href="<?php echo base_url();?>abm/carrera/">Carreras</a></li>
-		<li><a href="<?php echo base_url();?>abm/planes/">Planes</a></li>
 		<li><a href="<?php echo base_url();?>abm/ciclo">Ciclos</a></li>
 		<li><a href="<?php echo base_url();?>abm/materia">Materias</a></li>
 
 		<?php /*
+		<li><a href="<?php echo base_url();?>abm/planes/">Planes</a></li>
 		<li><a href="<?php echo base_url();?>abm/orientaciones">Orientaciones</a></li>
 		<li><a href="<?php echo base_url();?>abm/ciclo_materia">Ciclo - Materia</a></li>
 		<li><a href="<?php echo base_url();?>abm/materia_tipo">Tipo Materia</a></li>

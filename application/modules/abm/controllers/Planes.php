@@ -14,8 +14,9 @@ class Planes extends MX_Controller{
             redirect('login', 'refresh');
         }else {
             $this->load->module('template');
-            $this->load->model('Planes_model');
             $this->load->model('Carrera_model');
+            $this->load->model('Ciclo_model');
+            $this->load->model('Planes_model');
             $this->load->helper(array('language'));
             $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
             $this->lang->load('auth');
@@ -31,8 +32,14 @@ class Planes extends MX_Controller{
         {
             redirect('login', 'refresh');
         }else {
-            //$data['planes'] = $this->Planes_model->get_all_planes($id_carrera); get_all_planes_by_carrera($id_carrera)
             $data['planes'] = $this->Planes_model->get_all_planes_by_carrera($id_carrera);
+            
+            foreach ($data['planes'] as $key => $plan) {
+                $data['planes'][$key]->ciclos =  new stdClass;
+                $data['planes'][$key]->ciclos = $this->Ciclo_model->get_ciclos_by_plan($plan->id); 
+            }
+
+            //var_dump($data['planes'][1]->ciclos);
             $data['id_carrera'] = $id_carrera; 
             $data['user'] = $this->ion_auth->user()->row();
             
