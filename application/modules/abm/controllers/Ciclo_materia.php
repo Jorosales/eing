@@ -94,6 +94,7 @@ class Ciclo_materia extends MX_Controller{
                 }
             }
             
+            $data['id_plan'] = $id_plan;
             $data['materias'] = $this->Materia_model->get_all_materias();
             $data['regimenes'] = $this->Regimen_model->get_all_regimen();
 

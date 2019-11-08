@@ -14,6 +14,7 @@ class Carrera extends MX_Controller {
         }else {
             $this->load->module('template');
             $this->load->model('Carrera_model');
+            $this->load->model('Planes_model');
             $this->load->model('Ciclo_materia_model');
             $this->load->helper(array('language'));
             $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
@@ -158,42 +159,12 @@ class Carrera extends MX_Controller {
 
     public function deactivate($id = NULL)
 	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin())
 		{
-			return show_error('You must be an administrator to view this page.');
+            $params['activo']= false;
+			$this->Carrera_model->change_status($id, $params);
 		}
-
-        $id = (int)$id;
-
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('confirm', $this->lang->line('deactivate_validation_confirm_label'), 'required');
-		$this->form_validation->set_rules('id', $this->lang->line('deactivate_validation_user_id_label'), 'required|alpha_numeric');
-
-		if ($this->form_validation->run() === FALSE)
-		{
-			$data['carrera'] = $this->Carrera_model->get_carrera($id);
-            $data['user'] = $this->ion_auth->user()->row();
-            $this->template->cargar_vista('abm/carrera/deactivate_carrera', $data);
-		}
-		else
-		{
-
-			if ($this->input->post('confirm') == 'yes')
-			{
-
-				if ($id != $this->input->post('id'))
-				{
-					return show_error($this->lang->line('error_csrf'));
-				}
-
-				if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin())
-				{
-                    $params['activo']= false;
-					$this->Carrera_model->change_status($id, $params);
-				}
-			}
-			redirect('abm/carrera/', 'refresh');
-		}
+	   redirect('abm/carrera/', 'refresh');
 	}
 
     public function pdf_file_check($str, $nombre)
@@ -206,41 +177,17 @@ class Carrera extends MX_Controller {
         return $this->template->image_file_check($str, $nombre);
     }
 
-    public function carrera_completa($id_carrera)
-    {       
-        $data['carrera'] = $this->Carrera_model->get_data_carrera($id_carrera);
-        $data['ciclo_materia'] = $this->Ciclo_materia_model->get_all_ciclo_materia_by_plan($data['carrera'][0]->plan_id);
-
-        if (count($data['ciclo_materia']) == 0){
-            $data['alerta'] = lang('undefined_plan');
-            $this->template->cargar_vista('abm/404', $data);
+    public function carrera_completa($id_plan)
+    {   
+        $data['carrera'] = $this->Carrera_model->get_data_carrera($id_plan);
+        if (!empty($data['carrera'])) {
+            $data['ciclo_materia'] = $this->Ciclo_materia_model->get_all_ciclo_materia_by_plan($data['carrera'][0]->plan_id);
         }
-        else{
 
-            if (isset($mensaje)) {
-                $data['alerta'] = $mensaje;
-            }
-            $this->template->cargar_vista('abm/carrera/carrera_completa', $data);
-        }            
-    }
-
-
-    public function crear_carrera()
-    {            
-        //$data['carrera'] = $this->Carrera_model->get_carrera_completa($id_carrera);
-        $data['user'] = $this->ion_auth->user()->row();
-        $this->template->cargar_vista('abm/carrera/crear_carrera', $data);
-        /*if (count($data['carrera']['data']) == 0){
-            $data['alerta'] = 'Esta carrera no tiene un plan definido';
-            $this->template->cargar_vista('abm/404', $data);
+        if (isset($mensaje)) {
+            $data['alerta'] = $mensaje;
         }
-        else{
-
-            if (isset($mensaje)) {
-                $data['alerta'] = $mensaje;
-            }
-            $this->template->cargar_vista('abm/carrera/carrera_completa', $data);
-        }*/            
+        $this->template->cargar_vista('abm/carrera/carrera_completa', $data);            
     }
 
 }

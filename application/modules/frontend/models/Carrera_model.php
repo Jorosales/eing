@@ -31,7 +31,8 @@ class Carrera_model  extends CI_Model  {
 
       	$this->db->where('carrera.id', $idCarrera);
       	$this->db->where('ciclos.id_orientacion', null);
-      	$this->db->where('planes.vigente', 1);
+        $this->db->where('planes.vigente', 1);
+      	$this->db->where('carrera.activo', 1);
       	$this->db->order_by('CAST(ciclo_materia.codigo as UNSIGNED INTEGER), ciclo_materia.anio, ciclo_materia.id_regimen');
 
       	return $this->db->get()->result();

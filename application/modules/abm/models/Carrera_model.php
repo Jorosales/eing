@@ -61,11 +61,7 @@ class Carrera_model  extends CI_Model  {
     }
 
 
-
-
-
-
-    function get_data_carrera($id_carrera){
+    function get_data_carrera($id_plan){
         $this->db->select(' carrera.nombre AS carrera, 
                             planes.id as plan_id, planes.nombre AS plan, planes.duracion, planes.vigente, 
                             orientaciones.nombre AS orientacion, 
@@ -73,9 +69,10 @@ class Carrera_model  extends CI_Model  {
         $this->db->from('carrera');
         $this->db->join('planes', 'planes.id_carrera = carrera.id');
         $this->db->join('orientaciones', 'orientaciones.id_plan = planes.id', 'LEFT');
-        $this->db->join('titulos', 'titulos.id_plan = planes.id');
-        $this->db->where('carrera.id', $id_carrera);
-        $this->db->where('planes.vigente', 1);
+        $this->db->join('titulos', 'titulos.id_plan = planes.id', 'LEFT');
+        $this->db->where('planes.id', $id_plan);
+        //$this->db->where('carrera.id', $id_carrera);
+        //$this->db->where('planes.vigente', 1);
         return $this->db->get()->result();
     }
 

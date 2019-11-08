@@ -34,6 +34,7 @@
 						<th><?php echo lang('table_name_th');?></th>
 						<th><?php echo lang('table_duration_th');?></th>
 						<th><?php echo lang('table_cicle_th');?></th>
+						<th><?php echo lang('table_course_th');?></th>
 						<th><?php echo lang('table_status_th');?></th>
 						<th><?php echo lang('table_actions_th');?></th>
 					</tr>
@@ -53,6 +54,9 @@
 							<?php
 								 }
 							?>
+						</td>
+						<td>
+							<a href="<?= site_url('abm/carrera/carrera_completa/'.$p->id) ?>" class="btn btn-success btn-xs">Materias</a>
 						</td>
 						<?php 	if($p->vigente == 1) { 
 								echo '<td>
@@ -77,6 +81,7 @@
 						<th><?php echo lang('table_name_th');?></th>
 						<th><?php echo lang('table_duration_th');?></th>
 						<th><?php echo lang('table_cicle_th');?></th>
+						<th><?php echo lang('table_course_th');?></th>
 						<th><?php echo lang('table_status_th');?></th>
 						<th><?php echo lang('table_actions_th');?></th>
 					</tr>
