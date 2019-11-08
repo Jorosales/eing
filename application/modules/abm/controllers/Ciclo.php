@@ -14,6 +14,7 @@ class Ciclo extends MX_Controller{
             redirect('login', 'refresh');
         }else {
             $this->load->module('template');
+            $this->load->model('Carrera_model');
             $this->load->model('Ciclo_model');
             $this->load->model('Planes_model');
             $this->load->model('Orientaciones_model');
@@ -48,8 +49,6 @@ class Ciclo extends MX_Controller{
      */
     function add()
     {   
-        $this->load->library('form_validation');
-
 		$this->form_validation->set_rules('nombre',lang('form_name'),'required');
 		$this->form_validation->set_rules('id_plan',lang('form_plan'),'required');
 		
@@ -68,16 +67,8 @@ class Ciclo extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_add_error_text'), $this->name)); 
                     
-            $this->index($mensaje);
+            redirect(site_url('abm/planes/edit/'.$this->input->post('id_plan')));
         }
-        else
-        {
-            $data['user'] = $this->ion_auth->user()->row();
-            $data['planes'] = $this->Planes_model->get_all_planes();
-            $data['orientaciones'] = $this->Orientaciones_model->get_all_orientaciones();
-            
-            $this->template->cargar_vista('abm/ciclo/add', $data);
-        } 
     }  
 
     /*
@@ -110,7 +101,14 @@ class Ciclo extends MX_Controller{
                         $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                     sprintf(lang('record_edit_error_text'), $this->name));    
                     
-                $this->index($mensaje);
+                //$this->index($mensaje);
+                $data['ciclos'] = $this->Ciclo_model->get_ciclos_by_plan($data['plan']['id']);
+                $data['carreras'] = $this->Carrera_model->get_all_carrera();
+
+                $data['planes'] = $this->Planes_model->get_all_planes();
+				$data['orientaciones'] = $this->Orientaciones_model->get_all_orientaciones(); 
+
+                $this->template->cargar_vista('abm/planes/edit', $data);
             }
             else
             {
@@ -131,7 +129,7 @@ class Ciclo extends MX_Controller{
     function remove($id)
     {
         $ciclo = $this->Ciclo_model->get_ciclo($id);
-
+        
         // check if the ciclo exists before trying to delete it
         if(isset($ciclo['id']))
         {
@@ -142,7 +140,7 @@ class Ciclo extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_remove_error_text'), $this->name));    
                 
-            $this->index($mensaje);
+            redirect(site_url('abm/planes/edit/'.$ciclo['id_plan']));
     }
         else
             show_error(sprintf(lang('no_existe'), $this->name));

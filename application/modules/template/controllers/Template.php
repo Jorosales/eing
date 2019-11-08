@@ -275,11 +275,31 @@ class Template extends MX_Controller
 		$materia = $this->Materia_model->get_materia($data['ciclo_materia']['id_materia']);
 		$data['ciclo_materia']= array_merge($materia, $data['ciclo_materia']);
 		
-		$data['regimenes']= $this->Regimen_model->get_all_regimen();;
+		$data['regimenes']= $this->Regimen_model->get_all_regimen();
 		$data['tipos']= $this->Materias_tipo_model->get_all_materias_tipo();
-		$data['ciclos']= $this->Ciclo_model->get_all_ciclos();;
+		$data['ciclos']= $this->Ciclo_model->get_all_ciclos();
 		return $this->load->view('materia-profile',$data, true);
-	}	
+	}
+	
+	public function get_perfil_plan($id)
+	{
+        $this->load->model('Carrera_model');
+        $this->load->model('Planes_model');
+		$this->load->model('Ciclo_model');
+		
+		$data['plan'] = $this->Planes_model->get_planes($id);		
+		$data['carrera'] = $this->Carrera_model->get_carrera($data['plan']['id_carrera']);		
+		$data['ciclos']= $this->Ciclo_model->get_ciclos_by_plan($id);
+
+		return $this->load->view('plan-profile',$data, true);
+	}
+	
+	public function get_perfil_carrera($id)
+	{
+        $this->load->model('Carrera_model');
+		$data['carrera'] = $this->Carrera_model->get_carrera($id);
+		return $this->load->view('carrera-profile',$data, true);
+	}
 
 	public function get_anios($years)
     {

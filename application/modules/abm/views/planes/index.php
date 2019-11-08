@@ -9,6 +9,10 @@
 <div class="col-lg-11">
 	<div class="box">
 		<div class="box-header">
+			<?= $this->template->get_perfil_carrera($id_carrera); ?>
+		</div>
+		
+		<div class="box-header">
 		  <h3 class="box-title"><?php echo lang('title_plan');?></h3>
 		</div>
 
@@ -29,8 +33,6 @@
 		  	<table id="tabla" class="table table-bordered table-striped">
 			    <thead>
 				    <tr>
-						<th><?php echo lang('table_id_th');?></th>
-						<th><?php echo lang('table_career_th');?></th>
 						<th><?php echo lang('table_name_th');?></th>
 						<th><?php echo lang('table_duration_th');?></th>
 						<th><?php echo lang('table_cicle_th');?></th>
@@ -43,8 +45,6 @@
 			    <tbody>
 					<?php foreach($planes as $p):?>
 					<tr>
-						<td><?php echo htmlspecialchars($p->id,ENT_QUOTES,'UTF-8');?></td>
-						<td><?php echo htmlspecialchars($p->carrera,ENT_QUOTES,'UTF-8');?></td>
 						<td><?php echo htmlspecialchars($p->nombre,ENT_QUOTES,'UTF-8');?></td>
 						<td><?php echo htmlspecialchars($p->duracion,ENT_QUOTES,'UTF-8');?></td>
 						<td><?php
@@ -76,8 +76,6 @@
 
 			    <tfoot>
 				    <tr>
-						<th><?php echo lang('table_id_th');?></th>
-						<th><?php echo lang('table_career_th');?></th>
 						<th><?php echo lang('table_name_th');?></th>
 						<th><?php echo lang('table_duration_th');?></th>
 						<th><?php echo lang('table_cicle_th');?></th>

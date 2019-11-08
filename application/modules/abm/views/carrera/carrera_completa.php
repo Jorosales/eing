@@ -10,8 +10,8 @@
 <div class="col-md-11">
     <div class="box">
         <div class="box-header">
-          <h3 class="box-title"><?php echo $carrera[0]->carrera.' - '.$carrera[0]->plan;?></h3>
-        </div>
+			<?= $this->template->get_perfil_plan($carrera[0]->plan_id); ?>
+		</div>
 
         <div class="box-title">
             <?php echo $this->template->boton_link('abm/regimen', 'Ver Tipos de Regimén'); ?>

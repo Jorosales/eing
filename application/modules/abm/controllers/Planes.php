@@ -17,6 +17,7 @@ class Planes extends MX_Controller{
             $this->load->model('Carrera_model');
             $this->load->model('Ciclo_model');
             $this->load->model('Planes_model');
+            $this->load->model('Orientaciones_model');
             $this->load->helper(array('language'));
             $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
             $this->lang->load('auth');
@@ -39,7 +40,6 @@ class Planes extends MX_Controller{
                 $data['planes'][$key]->ciclos = $this->Ciclo_model->get_ciclos_by_plan($plan->id); 
             }
 
-            //var_dump($data['planes'][1]->ciclos);
             $data['id_carrera'] = $id_carrera; 
             $data['user'] = $this->ion_auth->user()->row();
             
@@ -93,11 +93,9 @@ class Planes extends MX_Controller{
         
         if(isset($data['plan']['id']))
         {
-
             $this->form_validation->set_rules('nombre',lang('form_name'),'required');
             $this->form_validation->set_rules('duracion',lang('form_duration'),'required|integer');
 
-		
 			if($this->form_validation->run())     
             {   
                 $params = array(
@@ -117,7 +115,10 @@ class Planes extends MX_Controller{
             }
             else
             {
-				$data['carreras'] = $this->Carrera_model->get_all_carrera();
+                $data['ciclos'] = $this->Ciclo_model->get_ciclos_by_plan($data['plan']['id']);
+                $data['carreras'] = $this->Carrera_model->get_all_carrera();
+				$data['orientaciones'] = $this->Orientaciones_model->get_all_orientaciones(); 
+
                 $this->template->cargar_vista('abm/planes/edit', $data);
             }
         }
