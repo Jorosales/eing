@@ -65,8 +65,7 @@ class Titulo extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_add_error_text'), $this->name)); 
             
-            $c = $this->Planes_model->get_carrera_by_plan($this->input->post('id_plan'));
-            $this->index($c->id_carrera, $mensaje);
+            redirect(site_url('abm/planes/edit/'.$this->input->post('id_plan')));
         }
         else
         {
@@ -92,7 +91,6 @@ class Titulo extends MX_Controller{
 			if($this->form_validation->run())     
             {   
                 $params = array(
-					'id_plan' => $this->input->post('id_plan'),
 					'id_orientacion' => ($this->input->post('id_orientacion') == '')? null:$this->input->post('id_orientacion'),
 					'nombre' => $this->input->post('nombre'),
                 );
@@ -104,13 +102,12 @@ class Titulo extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                     sprintf(lang('record_edit_error_text'), $this->name));    
                     
-                $c = $this->Planes_model->get_carrera_by_plan($this->input->post('id_plan'));
-                $this->index($c->id_carrera, $mensaje);
+                redirect(site_url('abm/planes/edit/'.$data['titulo']['id_plan']));
             }
             else
             {
-				$data['planes'] = $this->Planes_model->get_all_planes();
-				$data['orientaciones'] = $this->Orientaciones_model->get_all_orientaciones();
+				$data['plan'] = $data['titulo']['id_plan'];
+				$data['orientaciones'] = $this->Orientaciones_model->get_orientaciones_by_plan($data['titulo']['id_plan']);
 
                  $this->template->cargar_vista('abm/titulo/edit', $data);
             }
@@ -136,8 +133,7 @@ class Titulo extends MX_Controller{
                 $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_remove_error_text'), $this->name));    
                 
-            $c = $this->Planes_model->get_carrera_by_plan($titulo['id_plan']);
-            $this->index($c->id_carrera, $mensaje);
+            redirect(site_url('abm/planes/edit/'.$titulo['id_plan']));
         }
         else
             show_error(sprintf(lang('no_existe'), $this->name));

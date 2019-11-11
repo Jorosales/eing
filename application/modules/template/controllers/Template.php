@@ -286,10 +286,12 @@ class Template extends MX_Controller
         $this->load->model('Carrera_model');
         $this->load->model('Planes_model');
 		$this->load->model('Ciclo_model');
+		$this->load->model('Titulo_model');
 		
 		$data['plan'] = $this->Planes_model->get_planes($id);		
 		$data['carrera'] = $this->Carrera_model->get_carrera($data['plan']['id_carrera']);		
 		$data['ciclos']= $this->Ciclo_model->get_ciclos_by_plan($id);
+		$data['titulos']= $this->Titulo_model->get_all_titulos_by_plan($id);
 
 		return $this->load->view('plan-profile',$data, true);
 	}

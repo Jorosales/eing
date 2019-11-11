@@ -71,8 +71,6 @@ class Carrera_model  extends CI_Model  {
         $this->db->join('orientaciones', 'orientaciones.id_plan = planes.id', 'LEFT');
         $this->db->join('titulos', 'titulos.id_plan = planes.id', 'LEFT');
         $this->db->where('planes.id', $id_plan);
-        //$this->db->where('carrera.id', $id_carrera);
-        //$this->db->where('planes.vigente', 1);
         return $this->db->get()->result();
     }
 

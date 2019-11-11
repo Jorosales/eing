@@ -63,9 +63,8 @@ class Orientaciones extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_add_error_text'), $this->name)); 
                     
-            //$this->index($mensaje);
-            $c = $this->Planes_model->get_carrera_by_plan($this->input->post('id_plan'));
-            $this->index($c->id_carrera, $mensaje);
+            redirect(site_url('abm/planes/edit/'.$this->input->post('id_plan')));
+
         }
         else
         {
@@ -104,9 +103,7 @@ class Orientaciones extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                     sprintf(lang('record_edit_error_text'), $this->name));    
                     
-                //$this->index($mensaje);
-                $c = $this->Planes_model->get_carrera_by_plan($this->input->post('id_plan'));
-                $this->index($c->id_carrera, $mensaje);
+                redirect(site_url('abm/planes/edit/'.$this->input->post('id_plan')));
             }
             else
             {
@@ -130,14 +127,12 @@ class Orientaciones extends MX_Controller{
         if(isset($orientaciones['id']))
         {
             if ($this->Orientaciones_model->delete_orientaciones($id))
-                $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
-                                sprintf(lang('record_remove_success_text'), $this->name));    
+                log_message('error', 'alguna_variable no contenía valor.');   
             else   
                 $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_remove_error_text'), $this->name));    
                 
-            $c = $this->Planes_model->get_carrera_by_plan($orientaciones['id_plan']);
-            $this->index($c->id_carrera, $mensaje);
+            redirect(site_url('abm/planes/edit/'.$orientaciones['id_plan']));
         }
         else
             show_error(sprintf(lang('no_existe'), $this->name));

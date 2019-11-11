@@ -28,9 +28,11 @@ class Ciclo_materia extends MX_Controller{
     /*
      * Listing of ciclo_materia
      */
-    public function index($mensaje=null)
+    public function index($id_ciclo, $mensaje=null)
     {
-        $data['ciclo_materia'] = $this->Ciclo_materia_model->get_all_ciclo_materia();
+        //$data['ciclo_materia'] = $this->Ciclo_materia_model->get_all_ciclo_materia();
+        $data['ciclo'] = $this->Ciclo_model->get_ciclo($id_ciclo);
+        $data['ciclo_materia'] = $this->Ciclo_materia_model->get_all_ciclo_materia_by_ciclo($id_ciclo);
         $data['user'] = $this->ion_auth->user()->row();
         if (isset($mensaje)) {
             $data['alerta'] = $mensaje;

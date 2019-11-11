@@ -13,7 +13,7 @@
                     Activo: <b><?= ($plan['vigente']==0)? "No":"Si";?></b>
                 </td>
                 <td>
-                   Duración: <b><?= $plan['duracion']; ?></b>
+                   Duración: <b><?= $plan['duracion']; ?> años</b>
                 </td>
             </tr>
             <tr>
@@ -24,6 +24,17 @@
                             echo '<li>'.$c->nombre.'</li>';
                             if (!is_null($c->orientacion)) {
                                 echo '<ul><li>'.$c->orientacion.'</li></ul>';
+                            }
+                        } ?>
+                    <ul>
+                </td>
+                <td>
+                    Títulos:
+                    <ul>
+                        <?php foreach ($titulos as $t) {
+                            echo '<li>'.$t->nombre.'</li>';
+                            if (!is_null($t->orientacion)) {
+                                echo '<ul><li>'.$t->orientacion.'</li></ul>';
                             }
                         } ?>
                     <ul>

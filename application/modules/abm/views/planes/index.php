@@ -16,16 +16,6 @@
 		  <h3 class="box-title"><?php echo lang('title_plan');?></h3>
 		</div>
 
-		<div class="box-title" style=" float: right !important;">
-			<!-- <a href="<?= site_url('abm/titulo'); ?>">  -->
-			<a href="<?= site_url('abm/titulo/index/'.$id_carrera); ?>"> 
-				<button type="button" class="btn btn-success btn-md-3" style="border: 1px solid rgba(0,0,0,0.1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);">Ver Títulos</button>
-			</a>
-			<a href="<?= site_url('abm/orientaciones/index/'.$id_carrera); ?>"> 
-				<button type="button" class="btn btn-success btn-md-3" style="border: 1px solid rgba(0,0,0,0.1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);">Ver Orientaciones</button>
-			</a>			
-        </div>
-
         <br><br>
 
 		<!-- /.box-header -->
@@ -50,7 +40,7 @@
 						<td><?php
 								 foreach ($p->ciclos as $ciclo) {
 							?>
-								<a href="<?= site_url('abm/ciclo/index/'.$ciclo->id) ?>"><?=$ciclo->nombre?></a><br>
+								<a href="<?= site_url('abm/ciclo_materia/index/'.$ciclo->id) ?>"><?=$ciclo->nombre?></a><br>
 							<?php
 								 }
 							?>

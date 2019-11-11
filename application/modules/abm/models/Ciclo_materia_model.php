@@ -54,6 +54,20 @@ class Ciclo_materia_model extends CI_Model
 
         return $this->db->get()->result();
     }
+
+    function get_all_ciclo_materia_by_ciclo($id_ciclo)
+    {
+        $this->db->select('ciclo_materia.*, ciclos.nombre as nombre_ciclo, materias.nombre as nombre_materia, regimen.nombre as nombre_regimen, materias.id_tipo as tipo');    
+        $this->db->from('ciclo_materia');
+        $this->db->join('ciclos', 'ciclos.id = ciclo_materia.id_ciclo');
+        $this->db->join('planes', 'planes.id = ciclos.id_plan');
+        $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
+        $this->db->join('regimen', 'regimen.id = ciclo_materia.id_regimen');
+        $this->db->where('ciclo_materia.id_ciclo', $id_ciclo);
+        $this->db->order_by('id', 'desc');
+
+        return $this->db->get()->result();
+    }
         
     /*
      * function to add new ciclo_materia

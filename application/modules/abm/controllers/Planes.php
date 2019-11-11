@@ -17,6 +17,7 @@ class Planes extends MX_Controller{
             $this->load->model('Carrera_model');
             $this->load->model('Ciclo_model');
             $this->load->model('Planes_model');
+            $this->load->model('Titulo_model');
             $this->load->model('Orientaciones_model');
             $this->load->helper(array('language'));
             $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
@@ -117,7 +118,8 @@ class Planes extends MX_Controller{
             {
                 $data['ciclos'] = $this->Ciclo_model->get_ciclos_by_plan($data['plan']['id']);
                 $data['carreras'] = $this->Carrera_model->get_all_carrera();
-				$data['orientaciones'] = $this->Orientaciones_model->get_all_orientaciones(); 
+				$data['orientaciones'] = $this->Orientaciones_model->get_orientaciones_by_plan($data['plan']['id']);
+                $data['titulos'] = $this->Titulo_model->get_all_titulos_by_plan($data['plan']['id']); 
 
                 $this->template->cargar_vista('abm/planes/edit', $data);
             }

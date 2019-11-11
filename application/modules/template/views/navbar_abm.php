@@ -9,18 +9,17 @@
 </li>
 
 <li class="treeview">
-	<a href="#"><i class="fa fa-link"></i> <span>CARRERAS</span>
+	<a href="<?php echo base_url();?>abm/carrera/"><i class="fa fa-link"></i> <span>CARRERAS</span>
 		<span class="pull-right-container">
 			<i class="fa fa-angle-left pull-right"></i>
 		</span>
 	</a>
 
+	<?php /*
 	<ul class="treeview-menu">
 		<li><a href="<?php echo base_url();?>abm/carrera/">Carreras</a></li>
 		<li><a href="<?php echo base_url();?>abm/ciclo">Ciclos</a></li>
 		<li><a href="<?php echo base_url();?>abm/materia">Materias</a></li>
-
-		<?php /*
 		<li><a href="<?php echo base_url();?>abm/planes/">Planes</a></li>
 		<li><a href="<?php echo base_url();?>abm/orientaciones">Orientaciones</a></li>
 		<li><a href="<?php echo base_url();?>abm/ciclo_materia">Ciclo - Materia</a></li>
@@ -28,8 +27,8 @@
 		<li><a href="<?php echo base_url();?>abm/correlatividad_tipo">Tipo Correlatividad</a></li>
 		<li><a href="<?php echo base_url();?>abm/regimen">Régimen</a></li>
 		<li><a href="<?php echo base_url();?>abm/titulo">Títulos</a></li>
-		*/ ?>
 	</ul>
+	*/ ?>
 </li>
 
 

@@ -27,7 +27,7 @@ class Ciclo extends MX_Controller{
     /*
      * Listing of ciclos
      */
-    function index($mensaje=null)
+    function index($id, $mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
         {
@@ -108,13 +108,14 @@ class Ciclo extends MX_Controller{
                 $data['planes'] = $this->Planes_model->get_all_planes();
 				$data['orientaciones'] = $this->Orientaciones_model->get_all_orientaciones(); 
 
-                $this->template->cargar_vista('abm/planes/edit', $data);
+                redirect(site_url('abm/planes/edit/'.$this->input->post('id_plan')));
+
             }
             else
             {
                 $data['user'] = $this->ion_auth->user()->row();
 				$data['planes'] = $this->Planes_model->get_all_planes();
-				$data['orientaciones'] = $this->Orientaciones_model->get_all_orientaciones(); 
+				$data['orientaciones'] = $this->Orientaciones_model->get_orientaciones_by_plan($data['ciclo']['id_plan']); 
 
                 $this->template->cargar_vista('abm/ciclo/edit', $data);
             }

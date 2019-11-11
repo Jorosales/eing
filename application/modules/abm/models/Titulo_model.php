@@ -48,6 +48,17 @@ class Titulo_model extends CI_Model
         return $this->db->get()->result();
     }
 
+    function get_all_titulos_by_plan($id_plan)
+    {
+        $this->db->select('titulos.*, planes.nombre as plan, orientaciones.nombre as orientacion');    
+        $this->db->from('titulos');
+        $this->db->join('planes', 'planes.id = titulos.id_plan');
+        $this->db->join('orientaciones', 'orientaciones.id = titulos.id_orientacion', 'LEFT');
+        $this->db->where('planes.id', $id_plan);
+        $this->db->order_by('titulos.id', 'desc');
+        return $this->db->get()->result();
+    }
+
     /*
      * function to add new titulo
      */
