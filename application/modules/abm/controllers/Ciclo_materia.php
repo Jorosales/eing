@@ -45,21 +45,28 @@ class Ciclo_materia extends MX_Controller{
      * Adding a new ciclo_materia
      */
     public function add($id_plan=null)
-    {   
+    { 
         $this->form_validation->set_rules('anio',lang('form_year'),'integer|required');
         $this->form_validation->set_rules('codigo',lang('form_code'),'integer');
         $this->form_validation->set_rules('horas',lang('form_hours'),'numeric');
         $this->form_validation->set_rules('hs_total',lang('form_total_hours'),'numeric');
         $this->form_validation->set_rules('id_ciclo',lang('form_cycle'),'required');
-        $this->form_validation->set_rules('id_materia',lang('form_course'),'required');
+        $this->form_validation->set_rules('materia',lang('form_course'),'required');
         $this->form_validation->set_rules('id_regimen',lang('form_regimen'),'required');
         $this->form_validation->set_rules('programa',lang('form_program'),'callback_pdf_file_check[programa]');
 		
 		if($this->form_validation->run($this))     
         {   
-            $params = array(
+            $params_materia = array(
+                'nombre' => $this->input->post('materia'),
+                'id_tipo' => $this->input->post('id_tipo'),
+            );
+
+            $id_materia = $this->Materia_model->add_materia($params_materia);
+
+            $params_ciclo_materia = array(
                 'id_ciclo' => $this->input->post('id_ciclo'),
-                'id_materia' => $this->input->post('id_materia'),
+                'id_materia' => $id_materia,
                 'id_regimen' => $this->input->post('id_regimen'),
                 'horas' => $this->input->post('horas'),
                 'hs_total' => $this->input->post('hs_total'),
@@ -69,17 +76,19 @@ class Ciclo_materia extends MX_Controller{
 
             if($_FILES['programa']['name'] != ''){
                 $pdf = $this->template->subir_archivo(PDFS_UPLOAD.'programas', 'pdf', 'programa');
-                $params['programa'] = $pdf['file_name'];
+                $params_ciclo_materia['programa'] = $pdf['file_name'];
             }
             
-            if ($this->Ciclo_materia_model->add_ciclo_materia($params))
+            if ($this->Ciclo_materia_model->add_ciclo_materia($params_ciclo_materia))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                 sprintf(lang('record_add_success_text'), $this->name));    
             else   
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_add_error_text'), $this->name)); 
-                    
-            $this->index($mensaje);
+
+            $url = 'abm/carrera/carrera_completa/'.$id_plan.'';
+    	    redirect($url, 'refresh');
+            //$this->index($mensaje);
         }
         else
         {
@@ -97,7 +106,7 @@ class Ciclo_materia extends MX_Controller{
             }
             
             $data['id_plan'] = $id_plan;
-            $data['materias'] = $this->Materia_model->get_all_materias();
+            $data['tipos'] = $this->Materias_tipo_model->get_all_tipos();
             $data['regimenes'] = $this->Regimen_model->get_all_regimen();
 
             $this->template->cargar_vista('abm/ciclo_materia/add', $data);
