@@ -1,0 +1,7 @@
+Error: no muestra correctamente el index del frontend.
+
+Solucion: Ejecutar la siguiente sentencia en la base para actualizar la tabla publicaicones.
+
+ALTER TABLE `publicaciones` ADD `imagen` VARCHAR(100) NULL DEFAULT NULL AFTER `tipo`;
+
+
