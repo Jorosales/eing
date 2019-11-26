@@ -2,14 +2,16 @@
 	<div class="box box-success">
 
 		<div class="box-header with-border">
-		  	<h3 class="box-title"><?php echo lang('create_cycle_course_heading');?></h3>
+		  	<h3 class="box-title"><?php echo lang('create_course_heading');?></h3>
 		</div>
 
 		<?php echo form_open_multipart('abm/ciclo_materia/add',array("class"=>"form-horizontal")); ?>
 
 		<?php echo $this->template->cargar_select(lang('form_cycle'), 'id_ciclo', '*', form_error('id_ciclo'), $ciclos, $this->input->post('id_ciclo')); ?>
 
-		<?php echo $this->template->cargar_select(lang('form_course'), 'id_materia', '*', form_error('id_materia'), $materias, $this->input->post('id_materia')); ?>
+		<?php echo $this->template->cargar_input(lang('form_name'), 'materia', 'text', '*', form_error('materia'), $this->input->post('materia')); ?>
+
+		<?php echo $this->template->cargar_select(lang('form_type'), 'id_tipo', '*', form_error('id_tipo'), $tipos, $this->input->post('id_tipo')); ?>
 
 		<?php echo $this->template->cargar_select(lang('form_regimen'), 'id_regimen', '*', form_error('id_regimen'), $regimenes, $this->input->post('id_regimen')); ?>
 
