@@ -29,7 +29,7 @@ class Regimen_model extends CI_Model
      */
     function get_all_regimen()
     {
-        $this->db->order_by('id', 'desc');
+        $this->db->order_by('id', 'asc');
         return $this->db->get('regimen')->result();
     }
         

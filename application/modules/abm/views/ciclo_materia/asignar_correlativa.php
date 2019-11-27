@@ -1,3 +1,5 @@
+<?= $this->template->boton_atras('carrera/carrera_completa/'.$ciclo_materia['id']); ?>
+
 <?php echo $this->template->get_perfil_materia($ciclo_materia['id']); ?>
 
 <div class="col-lg-11">

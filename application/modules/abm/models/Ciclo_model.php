@@ -47,7 +47,7 @@ class Ciclo_model extends CI_Model
         $this->db->join('carrera', 'carrera.id = planes.id_carrera');
         $this->db->join('orientaciones', 'orientaciones.id = ciclos.id_orientacion', 'LEFT');
         $this->db->where('ciclos.id_plan', $id_plan);
-        $this->db->order_by('ciclos.id', 'desc');
+        $this->db->order_by('ciclos.id', 'asc');
 
         return $this->db->get()->result();
     }

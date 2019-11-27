@@ -2,6 +2,7 @@
 	echo $alerta;
 } 
 ?>
+<?= $this->template->boton_atras(); ?>
 <?php echo $this->template->boton_nuevo('abm/regimen/add', 'Nuevo Regimen'); ?>
 
 <hr>

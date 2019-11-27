@@ -67,20 +67,21 @@ class Planes extends MX_Controller{
                 'nombre' => $this->input->post('nombre'),
 				'duracion' => $this->input->post('duracion'),
             );
+            $plan_id = $this->Planes_model->add_planes($params);            
             
-            if ($this->Planes_model->add_planes($params))
+            if ($plan_id)
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                 sprintf(lang('record_add_success_text'), $this->name));    
             else   
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_add_error_text'), $this->name)); 
-                    
-            $this->index($this->input->post('id_carrera'), $mensaje);
+             
+            redirect(site_url('abm/planes/edit/'.$plan_id));
+            //$this->edit($plan_id, $mensaje);
         }
         else
         {
 			$data['carreras'] = $this->Carrera_model->get_all_carrera();
-            
             $this->template->cargar_vista('abm/planes/add', $data);
         }
     }  
@@ -136,15 +137,15 @@ class Planes extends MX_Controller{
         $plan = $this->Planes_model->get_planes($id);
 
         if(isset($plan['id']))
-        {
+        {   
+            $c = $this->Planes_model->get_carrera_by_plan($plan['id']);
             if ($this->Planes_model->delete_planes($id))
                 $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                 sprintf(lang('record_remove_success_text'), $this->name));    
             else   
                 $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_remove_error_text'), $this->name));    
-                
-            $c = $this->Planes_model->get_carrera_by_plan($plan['id_plan']);
+            
             $this->index($c->id_carrera, $mensaje);
         }
         else

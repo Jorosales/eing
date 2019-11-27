@@ -2,7 +2,7 @@
 	echo $alerta;
 	} 
 ?>
-
+<?= $this->template->boton_atras(); ?>
 <hr>
 
 <div class="col-md-11">

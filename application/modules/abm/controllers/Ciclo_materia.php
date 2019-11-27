@@ -19,6 +19,7 @@ class Ciclo_materia extends MX_Controller{
             $this->load->model('Materia_model');
             $this->load->model('Materias_tipo_model');
             $this->load->model('Regimen_model');
+            $this->load->library('../controllers/Carrera');
             $this->load->helper(array('language'));
             $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
             $this->lang->load('auth');
@@ -54,7 +55,10 @@ class Ciclo_materia extends MX_Controller{
         $this->form_validation->set_rules('materia',lang('form_course'),'required');
         $this->form_validation->set_rules('id_regimen',lang('form_regimen'),'required');
         $this->form_validation->set_rules('programa',lang('form_program'),'callback_pdf_file_check[programa]');
-		
+        
+        //$c = $this->Planes_model->get_carrera_by_plan($id_plan);
+        //var_dump($id_plan); exit();
+
 		if($this->form_validation->run($this))     
         {   
             $params_materia = array(
@@ -86,9 +90,7 @@ class Ciclo_materia extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_add_error_text'), $this->name)); 
 
-            $url = 'abm/carrera/carrera_completa/'.$id_plan.'';
-    	    redirect($url, 'refresh');
-            //$this->index($mensaje);
+            $this->carrera->carrera_completa($this->input->post('plan'));
         }
         else
         {
@@ -130,8 +132,6 @@ class Ciclo_materia extends MX_Controller{
             echo $this->Ciclo_materia_model->fetch_anios($this->input->post('ciclo_id'));
         }
     }
-
-    
 
     /*
      * Editing a ciclo_materia

@@ -1,3 +1,5 @@
+<?= $this->template->boton_atras(); ?>
+
 <div class="col-lg-12">
 	<div class="box box-success">
 

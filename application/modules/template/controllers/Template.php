@@ -131,7 +131,22 @@ class Template extends MX_Controller
 	{
 		$boton = '<div class="col-md-3 col-md-offset-8">
 					<a href='.site_url($url).' style="border: 1px solid rgba(0,0,0,0.1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);" class="btn btn-block btn-success btn-lg">'.$titulo.'</a> 
-				  </div> <br>';
+				  </div> <br><br>';
+		return $boton;
+	}
+
+	public function boton_atras($url=null)
+	{
+		if(isset($_SERVER["HTTP_REFERER"])){
+			$url = (is_null($url))?$_SERVER["HTTP_REFERER"]:site_url($url);
+		}
+		else{
+			$url =  current_url();
+		}
+		
+		$boton = '<div class="col-md-3">
+					<a href='.$url.'> <i class="fas fa-backward"> Volver </i> </a>
+				  </div>';
 		return $boton;
 	}
 	

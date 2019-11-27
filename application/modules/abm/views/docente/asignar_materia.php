@@ -1,3 +1,5 @@
+<?= $this->template->boton_atras(); ?>
+
 <?php echo $this->template->get_perfil_docente($docente['id']); ?>
 
 <div class="col-lg-11">
