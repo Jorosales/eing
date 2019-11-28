@@ -4,7 +4,7 @@ class Materia_model  extends CI_Model  {
 
 	public function getMateria($idMateria)
     {
-      $this->db->select('ciclo_materia.id, materias.nombre, materias.id_tipo, carrera.id AS id_carrera, carrera.nombre AS nom_carrera');
+      $this->db->select('ciclo_materia.id as ciclo_materia_id, materias.nombre, materias.id_tipo, carrera.id AS id_carrera, carrera.nombre AS nom_carrera');
       $this->db->from('carrera');
       $this->db->join('planes', 'planes.id_carrera = carrera.id');
       $this->db->join('ciclos', 'ciclos.id_plan = planes.id');
@@ -60,7 +60,7 @@ class Materia_model  extends CI_Model  {
 
 	public function getOptativas($idMateria)
 	{
-    $this->db->select('materias.id as id_materia, materias.nombre as optativa, orientaciones.nombre as orientacion');
+    $this->db->select('ciclo_materia.id as id_materia, materias.nombre as optativa, orientaciones.nombre as orientacion');
     $this->db->from('optativas');
     $this->db->join('ciclo_materia', 'ciclo_materia.id = optativas.id_optativa');
     $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
@@ -71,6 +71,16 @@ class Materia_model  extends CI_Model  {
     $this->db->order_by('orientaciones.id, materias.id');
 
     return $this->db->get()->result();
+  }
+
+  public function get_generica_by_optativa($id_optativa)
+  {
+    $this->db->select('ciclo_materia.*, regimen.nombre as regimen, optativas.id_origen');
+    $this->db->from('optativas');
+    $this->db->join('ciclo_materia', 'ciclo_materia.id =  optativas.id_origen');
+    $this->db->join('regimen', 'regimen.id =  ciclo_materia.id_regimen');
+    $this->db->where('optativas.id_optativa', $id_optativa);
+    return $this->db->get()->row_array();
   }
 
 }

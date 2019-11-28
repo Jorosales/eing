@@ -27,8 +27,15 @@ class Materia extends MX_Controller {
 				$data['optativas'] = $this->Materia_model->getOptativas($idMateria);
 			}
 			else
-			{
+			{	
 				$data['pr'] = $this->Materia_model->getProgramaResumido($idMateria);
+
+				if ($data['materia'][0]->id_tipo == '3') {
+					$data['generica'] = $this->Materia_model->get_generica_by_optativa($idMateria);
+					$data['pr'][0]->regimen = $data['generica']['regimen'];
+					$data['pr'][0]->anio = $data['generica']['anio'];
+					$data['pr'][0]->hs_total = $data['generica']['hs_total'];
+				}
 				$data['equipo'] = $this->Materia_model->getEquipo($idMateria);
 
 				$data['regulCursar'] = $this->Materia_model->getCorrelatividades($idMateria, 1);
