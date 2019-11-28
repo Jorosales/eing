@@ -209,6 +209,17 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->get()->result();
     }
 
+    function get_optativas_by_plan($id_plan)
+    {
+        $this->db->select('ciclo_materia.id as id, materias.nombre as nombre');
+        $this->db->from('ciclo_materia');
+        $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
+        $this->db->join('ciclos', 'ciclos.id = ciclo_materia.id_ciclo');
+        $this->db->where('materias.id_tipo', 3); 
+        $this->db->where('ciclos.id_plan', $id_plan); 
+        return $this->db->get()->result();
+    }
+
     function add_optativa($params)
     {
         $this->db->insert('optativas',$params);

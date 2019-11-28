@@ -323,7 +323,7 @@ class Ciclo_materia extends MX_Controller{
             {
                 $data['carrera'] = $this->Ciclo_materia_model->get_carrera_by_ciclo_materia($id);
                 $data['ciclos_materias'] = $this->Ciclo_materia_model->get_ciclos_materias();
-                $data['optativas'] = $this->Ciclo_materia_model->get_all_optativas();
+                $data['optativas'] = $this->Ciclo_materia_model->get_optativas_by_plan($data['carrera'][0]->id_plan);
                 $data['optativas_materia'] = $this->Ciclo_materia_model->get_optativas_by_materia($id);
 
                 $data['user'] = $this->ion_auth->user()->row(); 
