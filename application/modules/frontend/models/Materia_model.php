@@ -65,7 +65,7 @@ class Materia_model  extends CI_Model  {
     $this->db->join('ciclo_materia', 'ciclo_materia.id = optativas.id_optativa');
     $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
     $this->db->join('ciclos', 'ciclos.id = ciclo_materia.id_ciclo');
-    $this->db->join('orientaciones', 'orientaciones.id = ciclos.id_orientacion');
+    $this->db->join('orientaciones', 'orientaciones.id = ciclos.id_orientacion', 'LEFT');
 
     $this->db->where('optativas.id_origen', $idMateria);
     $this->db->order_by('orientaciones.id, materias.id');
