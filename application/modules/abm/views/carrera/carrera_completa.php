@@ -2,8 +2,8 @@
 	echo $alerta;
     } 
 ?>
-<?= $this->template->boton_atras(); ?>
-<?php echo $this->template->boton_nuevo('abm/ciclo_materia/add/'.$carrera[0]->plan_id, 'Nueva Materia'); ?>
+<?= $this->template->boton_volver_a('abm/planes/index/'.$carrera[0]->carrera_id, 'Planes'); ?>
+<?= $this->template->boton_nuevo('abm/ciclo_materia/add/'.$carrera[0]->plan_id, 'Nueva Materia'); ?>
 
 <br><br>
 

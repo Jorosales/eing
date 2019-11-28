@@ -16,7 +16,7 @@
           </tbody>
         </table>
 
-        <?php echo anchor("abm/carrera/edit/".$carrera['id'], '<span class="btn btn-primary btn-md col-md-3 col-md-offset-9">Editar</span>') ;?>
+        <?php //echo anchor("abm/carrera/edit/".$carrera['id'], '<span class="btn btn-primary btn-md col-md-3 col-md-offset-9">Editar</span>') ;?>
       </div>
     </div>
 </div>

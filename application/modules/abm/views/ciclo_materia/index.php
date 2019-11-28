@@ -2,7 +2,7 @@
 	echo $alerta;
 	} 
 ?>
-<?= $this->template->boton_atras(); ?>
+<?= $this->template->boton_volver_a('abm/planes/index/'.$carrera[0]->id_carrera, 'Planes'); ?>
 <hr>
 
 <div class="col-md-11">

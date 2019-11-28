@@ -1,4 +1,4 @@
-<?= $this->template->boton_atras('carrera/carrera_completa/'.$ciclo_materia['id']); ?>
+<?= $this->template->boton_atras('abm/carrera/carrera_completa/'.$carrera[0]->id); ?>
 
 <?php echo $this->template->get_perfil_materia($ciclo_materia['id']); ?>
 

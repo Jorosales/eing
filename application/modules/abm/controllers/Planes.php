@@ -55,7 +55,7 @@ class Planes extends MX_Controller{
     /*
      * Adding a new planes
      */
-    function add()
+    function add($id_carrera=null)
     {   
         $this->form_validation->set_rules('nombre',lang('form_name'),'required');
 		$this->form_validation->set_rules('duracion',lang('form_duration'),'required|integer');
@@ -77,11 +77,10 @@ class Planes extends MX_Controller{
                                 sprintf(lang('record_add_error_text'), $this->name)); 
              
             redirect(site_url('abm/planes/edit/'.$plan_id));
-            //$this->edit($plan_id, $mensaje);
         }
         else
         {
-			$data['carreras'] = $this->Carrera_model->get_all_carrera();
+            $data['carrera'] = $this->Carrera_model->get_carrera($id_carrera);
             $this->template->cargar_vista('abm/planes/add', $data);
         }
     }  

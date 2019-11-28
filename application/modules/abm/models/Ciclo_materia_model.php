@@ -123,6 +123,18 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->get()->result();
     }
 
+    function get_carrera_by_ciclo_materia($id_ciclo_materia)
+    {
+        $this->db->select('carrera.*');    
+        $this->db->from('carrera');
+        $this->db->join('planes', 'planes.id_carrera = carrera.id');
+        $this->db->join('ciclos', 'ciclos.id_plan = planes.id');
+        $this->db->join('ciclo_materia', 'ciclo_materia.id_ciclo = ciclos.id'); 
+        $this->db->where('ciclo_materia.id', $id_ciclo_materia);
+        
+        return $this->db->get()->result();
+    }
+
 
     //CORRELATIVAS
 

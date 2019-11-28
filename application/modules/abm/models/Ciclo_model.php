@@ -84,4 +84,14 @@ class Ciclo_model extends CI_Model
         return $this->db->delete('ciclos',array('id'=>$id));
     }
 
+
+    function get_carrera_by_ciclo($id_ciclo){
+        $this->db->select('*');    
+        $this->db->from('carrera');
+        $this->db->join('planes', 'planes.id_carrera = carrera.id');
+        $this->db->join('ciclos', 'ciclos.id_plan = planes.id');
+        $this->db->where('ciclos.id', $id_ciclo);
+        return $this->db->get()->result();
+    }
+
 }

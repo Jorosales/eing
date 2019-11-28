@@ -1,4 +1,4 @@
-<?= $this->template->boton_atras(); ?>
+<?= var_dump($carrera); $this->template->boton_atras(); ?>
 
 <?php echo $this->template->get_perfil_materia($ciclo_materia['id']); ?>
 

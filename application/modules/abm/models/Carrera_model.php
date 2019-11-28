@@ -62,7 +62,7 @@ class Carrera_model  extends CI_Model  {
 
 
     function get_data_carrera($id_plan){
-        $this->db->select(' carrera.nombre AS carrera, 
+        $this->db->select(' carrera.nombre AS carrera, carrera.id AS carrera_id, 
                             planes.id as plan_id, planes.nombre AS plan, planes.duracion, planes.vigente, 
                             orientaciones.nombre AS orientacion, 
                             titulos.nombre AS titulo');    

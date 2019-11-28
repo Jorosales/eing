@@ -4,7 +4,7 @@
 ?>
 
 <?= $this->template->boton_atras('abm/carrera/'); ?>
-<?= $this->template->boton_nuevo('abm/planes/add', 'Nuevo Plan'); ?>
+<?= $this->template->boton_nuevo('abm/planes/add/'.$id_carrera, 'Nuevo Plan'); ?>
 
 <hr>
 

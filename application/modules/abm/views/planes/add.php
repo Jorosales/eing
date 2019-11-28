@@ -9,8 +9,13 @@
 
 		<?php echo form_open('abm/planes/add',array("class"=>"form-horizontal")); ?>
 
-			<?php echo $this->template->cargar_select(lang('form_career'), 'id_carrera', '*', form_error('carrera'), $carreras, $this->input->post('id_carrera')); ?>
-
+			<div class="form-group">
+				<label for="Carrera" class="col-md-6 control-label">
+					<?= $carrera['nombre']; ?>
+				</label>
+				<input type="hidden" name="id_carrera" value="<?= $carrera['id']; ?>" class="form-control col-md-2" id="id_carrera" />
+			</div>
+			
 			<?php echo $this->template->cargar_input(lang('form_name'), 'nombre', 'text', '*', form_error('nombre'), $this->input->post('nombre')); ?>
 
 			<?php echo $this->template->cargar_input(lang('form_duration'), 'duracion', 'text', '*', form_error('duracion'), $this->input->post('duracion')); ?>

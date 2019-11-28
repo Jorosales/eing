@@ -32,6 +32,7 @@ class Ciclo_materia extends MX_Controller{
     public function index($id_ciclo, $mensaje=null)
     {
         //$data['ciclo_materia'] = $this->Ciclo_materia_model->get_all_ciclo_materia();
+        $data['carrera'] = $this->Ciclo_model->get_carrera_by_ciclo($id_ciclo);
         $data['ciclo'] = $this->Ciclo_model->get_ciclo($id_ciclo);
         $data['ciclo_materia'] = $this->Ciclo_materia_model->get_all_ciclo_materia_by_ciclo($id_ciclo);
         $data['user'] = $this->ion_auth->user()->row();
@@ -254,6 +255,7 @@ class Ciclo_materia extends MX_Controller{
             }
             else
             {
+                $data['carrera'] = $this->Ciclo_materia_model->get_carrera_by_ciclo_materia($id);
                 $data['ciclos_materias'] = $this->Ciclo_materia_model->get_ciclos_materias_by_plan($data['ciclo_materia']['id_plan'], $data['ciclo_materia']['codigo']);
                 $data['tipos'] = $this->Ciclo_materia_model->get_all_correlativas_tipo();
                 $data['correlativas'] = $this->Ciclo_materia_model->get_correlativas($id);
