@@ -1,0 +1,7 @@
+Error: no permite borrar planes referenciadas en otras tablas.
+
+Solucion: Ejecutar la siguiente sentencia en la base para actualizar la tabla publicaicones.
+
+ALTER TABLE `ciclos` DROP FOREIGN KEY `ciclo_plan`; ALTER TABLE `ciclos` ADD CONSTRAINT `ciclo_plan` FOREIGN KEY (`id_plan`) REFERENCES `planes`(`id`) ON DELETE CASCADE ON UPDATE RESTRICT; 
+
+ALTER TABLE `titulos` DROP FOREIGN KEY `titulo_plan`; ALTER TABLE `titulos` ADD CONSTRAINT `titulo_plan` FOREIGN KEY (`id_plan`) REFERENCES `planes`(`id`) ON DELETE CASCADE ON UPDATE RESTRICT; 
