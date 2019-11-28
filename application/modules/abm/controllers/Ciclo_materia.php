@@ -219,7 +219,8 @@ class Ciclo_materia extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_remove_error_text'), $this->name));    
                 
-            $this->index($mensaje);
+            redirect('abm/carrera/carrera_completa/'.$ciclo_materia['id_plan'], 'refresh');
+
         }
         else
             show_error(sprintf(lang('no_existe'), $this->name));
