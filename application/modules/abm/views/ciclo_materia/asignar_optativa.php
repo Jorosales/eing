@@ -1,4 +1,4 @@
-<?= var_dump($carrera); $this->template->boton_atras(); ?>
+<?= $this->template->boton_volver_a('abm/carrera/carrera_completa/'.$carrera[0]->id_plan, "Plan"); ?>
 
 <?php echo $this->template->get_perfil_materia($ciclo_materia['id']); ?>
 

@@ -12,8 +12,9 @@ class Ciclo_materia_model extends CI_Model
      */
     function get_ciclo_materia($id)
     {
-        $this->db->select('ciclo_materia.*, ciclos.id_plan');
+        $this->db->select('ciclo_materia.*, ciclos.id_plan, materias.nombre as materia, materias.id_tipo as id_tipo');
         $this->db->join('ciclos', 'ciclos.id = ciclo_materia.id_ciclo');
+        $this->db->join('materias', 'materias.id = ciclo_materia.id_materia');
         return $this->db->get_where('ciclo_materia',array('ciclo_materia.id'=>$id))->row_array();
     }
     
@@ -125,7 +126,7 @@ class Ciclo_materia_model extends CI_Model
 
     function get_carrera_by_ciclo_materia($id_ciclo_materia)
     {
-        $this->db->select('carrera.*');    
+        $this->db->select('carrera.*, planes.id as id_plan');    
         $this->db->from('carrera');
         $this->db->join('planes', 'planes.id_carrera = carrera.id');
         $this->db->join('ciclos', 'ciclos.id_plan = planes.id');

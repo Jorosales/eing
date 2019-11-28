@@ -1,5 +1,5 @@
 
-<?= $this->template->boton_volver_a('abm/planes/index/'.$plan['id_carrera'], 'Planes'); ?>
+<?= $this->template->boton_volver_a('abm/carrera/carrera_completa/'.$plan['id'], 'Planes'); ?>
 
 <div class="col-lg-12">
 	<div class="box box-success">

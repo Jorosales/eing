@@ -5,7 +5,7 @@
       <h4 class="panel-title"><strong><?= $carrera['nombre'].' - '.$plan['nombre']?></strong></h4>
       </div>
       <div class="panel-body">
-     
+        
         <table class="table profile__table">
           <tbody>
             <tr>
@@ -26,7 +26,7 @@
                                 echo '<ul><li>'.$c->orientacion.'</li></ul>';
                             }
                         } ?>
-                    <ul>
+                    </ul>
                 </td>
                 <td>
                     Títulos:
@@ -37,7 +37,7 @@
                                 echo '<ul><li>'.$t->orientacion.'</li></ul>';
                             }
                         } ?>
-                    <ul>
+                    </ul>
                 </td>
             </tr>
 

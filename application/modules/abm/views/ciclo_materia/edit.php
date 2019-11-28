@@ -4,15 +4,19 @@
 	<div class="box box-success">
 
 		<div class="box-header with-border">
-		  	<h3 class="box-title"><?php echo lang('edit_cycle_course_heading');?></h3>
+		  	<h3 class="box-title"><?php echo lang('edit_course_heading');?></h3>
 		</div>
 
 		<?php echo form_open_multipart('abm/ciclo_materia/edit/'.$ciclo_materia['id'],array("class"=>"form-horizontal")); ?>
 
 			<?php echo $this->template->cargar_select(lang('form_cycle'), 'id_ciclo', '*', form_error('id_ciclo'), $ciclos, $ciclo_materia['id_ciclo']); ?>
 			
-			<?php echo $this->template->cargar_select(lang('form_course'), 'id_materia', '*', form_error('id_materia'), $materias, $ciclo_materia['id_materia']); ?>
-			
+			<input type="hidden" name="id_materia" value="<?= $ciclo_materia['id_materia'] ?>" >
+
+			<?php echo $this->template->cargar_input(lang('form_name'), 'materia', 'text', '*', form_error('materia'),  ($this->input->post('materia') ? $this->input->post('materia') : $ciclo_materia['materia'])); ?>
+
+			<?php echo $this->template->cargar_select(lang('form_type'), 'id_tipo', '*', form_error('id_tipo'), $tipos, $ciclo_materia['id_tipo']); ?>
+
 			<?php echo $this->template->cargar_select(lang('form_regimen'), 'id_regimen', '*', form_error('id_regimen'), $regimenes, $ciclo_materia['id_regimen']); ?>
 
 			<?php echo $this->template->cargar_input(lang('form_hours'), 'horas', 'text', '', form_error('horas'), ($this->input->post('horas') ? $this->input->post('horas') : $ciclo_materia['horas'])); ?>
