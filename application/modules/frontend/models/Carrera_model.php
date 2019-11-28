@@ -30,10 +30,11 @@ class Carrera_model  extends CI_Model  {
       	$this->db->join('materias_tipo', 'materias_tipo.id = materias.id_tipo');
 
       	$this->db->where('carrera.id', $idCarrera);
-      	$this->db->where('ciclos.id_orientacion', null);
+      	//$this->db->where('ciclos.id_orientacion', null);
+        $this->db->where('materias.id_tipo !=', 3);
         $this->db->where('planes.vigente', 1);
       	$this->db->where('carrera.activo', 1);
-      	$this->db->order_by('CAST(ciclo_materia.codigo as UNSIGNED INTEGER), ciclo_materia.anio, ciclo_materia.id_regimen');
+      	$this->db->order_by('ciclo_materia.anio, CAST(ciclo_materia.codigo as UNSIGNED INTEGER), ciclo_materia.id_regimen');
 
       	return $this->db->get()->result();
 	}

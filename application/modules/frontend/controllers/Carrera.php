@@ -55,7 +55,7 @@ class Carrera extends MX_Controller {
 	public function verCarrera($idCarrera)
 	{
 		$data['carrera'] = $this->Carrera_model->getCarrera($idCarrera);
-		$data['plan'] = $this->Carrera_model->getPlan($idCarrera);	
+        $data['plan'] = $this->Carrera_model->getPlan($idCarrera);
         
 		if (count($data['plan']) == 0){
             $data['alerta'] = lang('undefined_plan');

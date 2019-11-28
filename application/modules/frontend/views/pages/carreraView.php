@@ -64,20 +64,26 @@
 									<td><?=$row->hs_total;?></td>
 								</tr>
 							<?php } ?>
-
-							<?php if(!empty($orientaciones)){ ?>
-								<tr><td colspan="8" align="center"><b>ORIENTACIONES</b></td></tr>
-							<?php } ?>
 							
-							<?php foreach ($orientaciones as $value) {?>
-								<tr> 
-									<td colspan="8">
-										<b><?php echo $value->id.' - '.$value->nombre ; ?></b>
-									</td>
-								</tr> 
+						</tbody>
+					</table>
+					
+					<br><br>
+					<?php if(!empty($orientaciones)){ ?>
+						<table class="table table-hover">
+							<thead>
+								<tr><th colspan="8" style="text-align: center; background-color: <?= $escuela['claro'] ?>"><b>ORIENTACIONES</b></th></tr>
+							</thead>
+							<tbody>
+								<?php foreach ($orientaciones as $value) {?>
+									<tr> 
+										<td colspan="8">
+											<b><?= ' - '.$value->nombre ; ?></b>
+										</td>
+									</tr> 
+								<?php } ?>
 								
-								<?php  ?>
-									<?php foreach ($orientacion[$value->id] as $row) {?>
+								<?php /*foreach ($orientacion[$value->id] as $row) {?>
 										<tr>
 											<td>
 											<a href="<?= base_url('/materia/'.$row->id)?>">
@@ -92,11 +98,12 @@
 											<td><?php if ($row->regid == 3) echo $row->horas; else echo '-'?></td>
 											<td><?=$row->hs_total;?></td>
 											<?php } ?>
-										</tr>
-								<?php } ?>
-							
-						</tbody>
-					</table>
+											</tr>
+									<?php }*/ ?>
+							</tbody>
+						</table>
+					<?php } ?>
+
 
 	            </div>
 
