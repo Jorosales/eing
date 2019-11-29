@@ -70,7 +70,7 @@ class Publicaciones extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_add_error_text'), $this->name)); 
                     
-            $this->index($mensaje);
+            redirect('abm/publicaciones/', 'refresh');
         }
         else
         {
@@ -124,7 +124,7 @@ class Publicaciones extends MX_Controller{
                         $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                     sprintf(lang('record_edit_error_text'), $this->name));    
                     
-                $this->index($mensaje);
+                redirect('abm/publicaciones/', 'refresh');
             }
             else
             {
@@ -155,7 +155,8 @@ class Publicaciones extends MX_Controller{
                 $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_remove_error_text'), $this->name));    
                 
-            $this->index($mensaje);
+            //$this->index($mensaje);
+            redirect('abm/publicaciones/', 'refresh');
         }
         else
             show_error(sprintf(lang('no_existe'), $this->name));
