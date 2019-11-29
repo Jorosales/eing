@@ -1,8 +1,8 @@
 <?php
  
 class Ciclo extends MX_Controller{
-    public $name = 'El ciclo';
 
+    private $name = 'El ciclo';
     function __construct()
     {
         parent::__construct();    
@@ -24,10 +24,7 @@ class Ciclo extends MX_Controller{
         }
     } 
 
-    /*
-     * Listing of ciclos
-     */
-    function index($id, $mensaje=null)
+    public function index($id, $mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
         {
@@ -44,11 +41,8 @@ class Ciclo extends MX_Controller{
         }
     }
 
-    /*
-     * Adding a new ciclo
-     */
-    function add()
-    {   
+    public function add()
+    {
 		$this->form_validation->set_rules('nombre',lang('form_name'),'required');
 		$this->form_validation->set_rules('id_plan',lang('form_plan'),'required');
 		
@@ -71,12 +65,8 @@ class Ciclo extends MX_Controller{
         }
     }  
 
-    /*
-     * Editing a ciclo
-     */
-    function edit($id)
-    {   
-        // check if the ciclo exists before trying to edit it
+    public function edit($id)
+    {
         $data['ciclo'] = $this->Ciclo_model->get_ciclo($id);
         
         if(isset($data['ciclo']['id']))
@@ -124,10 +114,7 @@ class Ciclo extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting ciclo
-     */
-    function remove($id)
+    public function remove($id)
     {
         $ciclo = $this->Ciclo_model->get_ciclo($id);
         
@@ -142,7 +129,7 @@ class Ciclo extends MX_Controller{
                                 sprintf(lang('record_remove_error_text'), $this->name));    
                 
             redirect(site_url('abm/planes/edit/'.$ciclo['id_plan']));
-    }
+        }
         else
             show_error(sprintf(lang('no_existe'), $this->name));
     }

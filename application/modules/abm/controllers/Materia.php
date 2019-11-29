@@ -2,8 +2,7 @@
 
 class Materia extends MX_Controller {
     
-    public $name = 'La materia';
-
+    private $name = 'La materia';
 	function __construct()
     {
 		parent::__construct();    
@@ -22,7 +21,7 @@ class Materia extends MX_Controller {
         }
     }
 
-    function index($mensaje=null)
+    public function index($mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
         {
@@ -39,11 +38,8 @@ class Materia extends MX_Controller {
 
     }
 
-    /*
-     * Adding a new materia
-     */
-    function add()
-    {   
+    public function add()
+    {
 		$this->form_validation->set_rules('id_tipo',lang('form_course_type'),'required');
 		$this->form_validation->set_rules('nombre',lang('form_name'),'required');
 		
@@ -73,11 +69,8 @@ class Materia extends MX_Controller {
         }
     }  
 
-    /*
-     * Editing a materia
-     */
-    function edit($id)
-    {   
+    public function edit($id)
+    {
         $data['materia'] = $this->Materia_model->get_materia($id);
         
         if(isset($data['materia']['id']))
@@ -114,10 +107,7 @@ class Materia extends MX_Controller {
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting materia
-     */
-    function remove($id)
+    public function remove($id)
     {
         $materia = $this->Materia_model->get_materia($id);
 

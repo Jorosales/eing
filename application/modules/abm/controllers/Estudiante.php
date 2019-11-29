@@ -2,7 +2,7 @@
  
 class Estudiante extends MX_Controller{
 
-    public $name = 'El estudiante';
+    private $name = 'El estudiante';
     function __construct()
     {
         parent::__construct();    
@@ -23,12 +23,8 @@ class Estudiante extends MX_Controller{
         }
     } 
 
-    /*
-     * Listing of estudiantes
-     */
-    function index($mensaje=null)
+    public function index($mensaje=null)
     {
-
         if (!$this->ion_auth->logged_in())
         {
             redirect('login', 'refresh');
@@ -44,11 +40,8 @@ class Estudiante extends MX_Controller{
         }
     }
 
-    /*
-     * Adding a new estudiante
-     */
-    function add()
-    {   
+    public function add()
+    {
 		$this->form_validation->set_rules('apellido',lang('form_last_name'),'required');
         $this->form_validation->set_rules('nombre','1º Nombre','required');
         $this->form_validation->set_rules('email1',sprintf(lang('form_email'),'1'),'required|valid_email');
@@ -113,12 +106,8 @@ class Estudiante extends MX_Controller{
         }
     }  
 
-    /*
-     * Editing a estudiante
-     */
-    function edit($id)
-    {   
-        // check if the estudiante exists before trying to edit it
+    public function edit($id)
+    {
         $data['estudiante'] = $this->Estudiante_model->get_estudiante($id);
         
         $data['persona'] = $this->Persona_model->get_persona($data['estudiante']['persona_id']);
@@ -194,10 +183,7 @@ class Estudiante extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting estudiante
-     */
-    function remove($id)
+    public function remove($id)
     {
         $estudiante = $this->Estudiante_model->get_estudiante($id);
 

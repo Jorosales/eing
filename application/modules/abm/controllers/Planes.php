@@ -2,7 +2,7 @@
 
 class Planes extends MX_Controller{
 
-    public $name = 'El plan';
+    private $name = 'El plan';
     function __construct()
     {
         parent::__construct();    
@@ -25,10 +25,7 @@ class Planes extends MX_Controller{
         }
     } 
 
-    /*
-     * Listing of planes
-     */
-    function index($id_carrera, $mensaje=null)
+    public function index($id_carrera, $mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
         {
@@ -52,11 +49,8 @@ class Planes extends MX_Controller{
         }
     }
 
-    /*
-     * Adding a new planes
-     */
-    function add($id_carrera=null)
-    {   
+    public function add($id_carrera=null)
+    {
         $this->form_validation->set_rules('nombre',lang('form_name'),'required');
 		$this->form_validation->set_rules('duracion',lang('form_duration'),'required|integer');
 		
@@ -85,11 +79,8 @@ class Planes extends MX_Controller{
         }
     }  
 
-    /*
-     * Editing a planes
-     */
-    function edit($id)
-    {   
+    public function edit($id)
+    {
         $data['plan'] = $this->Planes_model->get_planes($id);
         
         if(isset($data['plan']['id']))
@@ -128,10 +119,7 @@ class Planes extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting planes
-     */
-    function remove($id)
+    public function remove($id)
     {
         $plan = $this->Planes_model->get_planes($id);
 
@@ -151,7 +139,7 @@ class Planes extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     }
 
-    public function activate($id, $code = FALSE)
+    public function activate($id)
     {
         if ($this->ion_auth->is_admin())
         {
@@ -171,8 +159,7 @@ class Planes extends MX_Controller{
         }
     }
 
-
-    public function deactivate($id = NULL)
+    public function deactivate($id=NULL)
     {
         if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin())
         {

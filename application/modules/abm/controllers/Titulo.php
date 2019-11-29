@@ -2,7 +2,7 @@
  
 class Titulo extends MX_Controller{
 
-    public $name = 'El título';
+    private $name = 'El título';
     function __construct()
     {
         parent::__construct();    
@@ -23,10 +23,7 @@ class Titulo extends MX_Controller{
         }
     } 
 
-    /*
-     * Listing of titulos
-     */
-    function index($id_carrera, $mensaje=null)
+    public function index($id_carrera, $mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
         {
@@ -43,11 +40,8 @@ class Titulo extends MX_Controller{
         }
     }
 
-    /*
-     * Adding a new titulo
-     */
-    function add()
-    {   
+    public function add()
+    {
 		$this->form_validation->set_rules('nombre','Nombre','required');
         
         if($this->form_validation->run())     
@@ -76,12 +70,8 @@ class Titulo extends MX_Controller{
         }
     }  
 
-    /*
-     * Editing a titulo
-     */
-    function edit($id)
-    {   
-        // check if the titulo exists before trying to edit it
+    public function edit($id)
+    {
         $data['titulo'] = $this->Titulo_model->get_titulo($id);
         
         if(isset($data['titulo']['id']))
@@ -116,10 +106,7 @@ class Titulo extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting titulo
-     */
-    function remove($id)
+    public function remove($id)
     {
         $titulo = $this->Titulo_model->get_titulo($id);
 

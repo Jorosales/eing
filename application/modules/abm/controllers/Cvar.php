@@ -2,9 +2,9 @@
  
 class Cvar extends MX_Controller{
     
-    public $name = 'CV resumido';
+    private $name = 'CV resumido';
     function __construct()
-    {   
+    {
         parent::__construct();    
         $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
         $this->load->library(array('ion_auth', 'form_validation'));
@@ -23,11 +23,8 @@ class Cvar extends MX_Controller{
         }
     } 
 
-    /*
-     * Editing a docente
-     */
-    function edit($id)
-    {   
+    public function edit($id)
+    {
         $data['docente'] = $this->Docente_model->get_docente($id);
         $data['persona'] = $this->Persona_model->get_persona($data['docente']['persona_id']);
         $data['cvar'] = $this->Docente_model->get_cvar_by_docente($id);

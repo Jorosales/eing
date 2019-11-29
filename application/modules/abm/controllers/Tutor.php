@@ -2,7 +2,7 @@
  
 class Tutor extends MX_Controller{
     
-    public $name = 'El tutor';
+    private $name = 'El tutor';
     function __construct()
     {
         parent::__construct();    
@@ -21,10 +21,7 @@ class Tutor extends MX_Controller{
         }
     }
 
-    /*
-     * Listing of tutor
-     */
-    function index($mensaje=null)
+    public function index($mensaje=null)
     {
         $data['tutores'] = $this->Tutor_model->get_all_tutores();
         $data['user'] = $this->ion_auth->user()->row();
@@ -36,9 +33,8 @@ class Tutor extends MX_Controller{
         $this->template->cargar_vista('abm/tutor/index', $data);
     }
 
-    function detalle($id)
+    public function detalle($id)
     {
-        $data['user'] = $this->ion_auth->user()->row();
         $data['tipos_proyecto'] =$this->Tutor_model->get_tipos_proyectos();
         
         foreach ($data['tipos_proyecto'] as $key => $tipos) {

@@ -1,12 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Correlatividad_tipo extends MX_Controller {
-    
-    public $name = 'El tipo de correlatividad';
 
+    private $name = 'El tipo de correlatividad';
 	function __construct()
     {
-		
         parent::__construct();    
         $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
         $this->load->library(array('ion_auth', 'form_validation'));
@@ -23,7 +21,7 @@ class Correlatividad_tipo extends MX_Controller {
         }
     }
 
-    function index($mensaje=null)
+    public function index($mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
         {
@@ -40,11 +38,8 @@ class Correlatividad_tipo extends MX_Controller {
 
     }
 
-    /*
-     * Adding a new materia
-     */
-    function add()
-    {   
+    public function add()
+    {
 		$this->form_validation->set_rules('nombre',lang('form_name'),'required');
 		
 		if($this->form_validation->run())     
@@ -69,11 +64,8 @@ class Correlatividad_tipo extends MX_Controller {
         }
     }  
 
-    /*
-     * Editing a materia
-     */
-    function edit($id)
-    {   
+    public function edit($id)
+    {
         $data['tipo'] = $this->Correlatividad_tipo_model->get_correlativas_tipo($id);
         
         if(isset($data['tipo']['id']))
@@ -106,10 +98,7 @@ class Correlatividad_tipo extends MX_Controller {
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting materia
-     */
-    function remove($id)
+    public function remove($id)
     {
         $tipo = $this->Correlatividad_tipo_model->get_correlativas_tipo($id);
 
@@ -131,4 +120,3 @@ class Correlatividad_tipo extends MX_Controller {
 	
 }
 
-?>

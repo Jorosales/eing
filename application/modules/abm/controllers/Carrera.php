@@ -2,7 +2,7 @@
 
 class Carrera extends MX_Controller {
 
-    public $name = 'La carrera';
+    private $name = 'La carrera';
 	function __construct(){
 		parent::__construct();    
         $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
@@ -33,9 +33,6 @@ class Carrera extends MX_Controller {
         $this->template->cargar_vista('abm/carrera/index', $data);
     }
 
-    /*
-     * Adding a new carrera
-     */
     public function add()
     {   
         $this->form_validation->set_rules('nombre',lang('form_name'),'required');
@@ -72,9 +69,6 @@ class Carrera extends MX_Controller {
         }
     }  
 
-    /*
-     * Editing a carrera
-     */
     public function edit($id)
     {       
         $data['carrera'] = $this->Carrera_model->get_carrera($id);
@@ -122,9 +116,6 @@ class Carrera extends MX_Controller {
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting carrera
-     */
     public function remove($id)
     {
         $carrera = $this->Carrera_model->get_carrera($id);
@@ -144,8 +135,7 @@ class Carrera extends MX_Controller {
             show_error(sprintf(lang('no_existe'), $this->name));
     }
 
-
-    public function activate($id, $code = FALSE)
+    public function activate($id)
 	{
 		if ($this->ion_auth->is_admin())
 		{
@@ -155,7 +145,6 @@ class Carrera extends MX_Controller {
 
 		redirect('abm/carrera/', 'refresh');
 	}
-
 
     public function deactivate($id = NULL)
 	{

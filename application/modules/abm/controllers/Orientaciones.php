@@ -1,7 +1,8 @@
 <?php
 
 class Orientaciones extends MX_Controller{
-    public $name = 'La orientación';
+    
+    private $name = 'La orientación';
     function __construct()
     {
         parent::__construct();    
@@ -21,10 +22,7 @@ class Orientaciones extends MX_Controller{
         }
     } 
 
-    /*
-     * Listing of orientaciones
-     */
-    function index($id_carrera, $mensaje=null)
+    public function index($id_carrera, $mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
         {
@@ -39,11 +37,8 @@ class Orientaciones extends MX_Controller{
         }
     }
 
-    /*
-     * Adding a new orientacione
-     */
-    function add()
-    {   
+    public function add()
+    {
         $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('nombre',lang('form_name'),'required');
@@ -75,11 +70,8 @@ class Orientaciones extends MX_Controller{
         }
     }  
 
-    /*
-     * Editing a orientaciones
-     */
-    function edit($id)
-    {   
+    public function edit($id)
+    {
         // check if the orientacione exists before trying to edit it
         $data['orientaciones'] = $this->Orientaciones_model->get_orientaciones($id);
         
@@ -117,10 +109,7 @@ class Orientaciones extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting orientaciones
-     */
-    function remove($id)
+    public function remove($id)
     {
         $orientaciones = $this->Orientaciones_model->get_orientaciones($id);
 
@@ -138,7 +127,7 @@ class Orientaciones extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     }
 
-    function fetch_orientaciones()
+    public function fetch_orientaciones()
     {
         if($this->input->post('plan_id'))
         {

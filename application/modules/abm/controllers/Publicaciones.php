@@ -2,7 +2,7 @@
  
 class Publicaciones extends MX_Controller{
     
-    public $name = 'La publicación';
+    private $name = 'La publicación';
     function __construct()
     {
         parent::__construct();    
@@ -21,9 +21,6 @@ class Publicaciones extends MX_Controller{
         }
     } 
 
-    /*
-     * Listing of publicaciones
-     */
     public function index($mensaje=null)
     {
         $data['publicaciones'] = $this->Publicaciones_model->get_all_publicaciones();
@@ -33,11 +30,8 @@ class Publicaciones extends MX_Controller{
         $this->template->cargar_vista('abm/publicaciones/index', $data);
     }
 
-    /*
-     * Adding a new publicaciones
-     */
-    function add()
-    {   
+    public function add()
+    {
         $data['user'] = $this->ion_auth->user()->row();
         $this->form_validation->set_rules('titulo','Titulo','required|max_length[100]');
         $this->form_validation->set_rules('imagen',lang('form_image'),'callback_image_file_check[imagen]');
@@ -79,11 +73,8 @@ class Publicaciones extends MX_Controller{
         }
     }  
 
-    /*
-     * Editing a publicaciones
-     */
-    function edit($id)
-    {   
+    public function edit($id)
+    {
         // check if the publicaciones exists before trying to edit it
         $data['publicacion'] = $this->Publicaciones_model->get_publicaciones($id);
         $data['user'] = $this->ion_auth->user()->row();
@@ -139,10 +130,7 @@ class Publicaciones extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting publicaciones
-     */
-    function remove($id)
+    public function remove($id)
     {
         $publicaciones = $this->Publicaciones_model->get_publicaciones($id);
 
@@ -161,7 +149,6 @@ class Publicaciones extends MX_Controller{
         else
             show_error(sprintf(lang('no_existe'), $this->name));
     }
-
 
     public function image_file_check($str, $nombre)
     {

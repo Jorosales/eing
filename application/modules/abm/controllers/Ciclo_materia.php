@@ -26,9 +26,6 @@ class Ciclo_materia extends MX_Controller{
         }
     } 
 
-    /*
-     * Listing of ciclo_materia
-     */
     public function index($id_ciclo, $mensaje=null)
     {
         $data['carrera'] = $this->Ciclo_model->get_carrera_by_ciclo($id_ciclo);
@@ -41,9 +38,6 @@ class Ciclo_materia extends MX_Controller{
         $this->template->cargar_vista('abm/ciclo_materia/index', $data);
     }
 
-    /*
-     * Adding a new ciclo_materia
-     */
     public function add($id_plan=null)
     { 
         $this->form_validation->set_rules('anio',lang('form_year'),'integer|required');
@@ -114,26 +108,6 @@ class Ciclo_materia extends MX_Controller{
 
     }  
 
- 
-    function fetch_materias()
-    {
-        if($this->input->post('ciclo_id'))
-        {
-            echo $this->Ciclo_materia_model->fetch_materias($this->input->post('ciclo_id'));
-        }
-    }
-
-    function fetch_anios()
-    {
-        if($this->input->post('ciclo_id'))
-        {
-            echo $this->Ciclo_materia_model->fetch_anios($this->input->post('ciclo_id'));
-        }
-    }
-
-    /*
-     * Editing a ciclo_materia
-     */
     public function edit($id)
     {   
         $data['ciclo_materia'] = $this->Ciclo_materia_model->get_ciclo_materia($id);
@@ -203,9 +177,6 @@ class Ciclo_materia extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting ciclo_materia
-     */
     public function remove($id)
     {
         $ciclo_materia = $this->Ciclo_materia_model->get_ciclo_materia($id);
@@ -226,12 +197,26 @@ class Ciclo_materia extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     }
 
-
     public function pdf_file_check($str, $nombre)
     {
         return $this->template->pdf_file_check($str, $nombre);
     }
-    
+
+    public function fetch_materias()
+    {
+        if($this->input->post('ciclo_id'))
+        {
+            echo $this->Ciclo_materia_model->fetch_materias($this->input->post('ciclo_id'));
+        }
+    }
+
+    public function fetch_anios()
+    {
+        if($this->input->post('ciclo_id'))
+        {
+            echo $this->Ciclo_materia_model->fetch_anios($this->input->post('ciclo_id'));
+        }
+    }
 
     public function asignar_correlativa($id)
     {   
@@ -295,7 +280,6 @@ class Ciclo_materia extends MX_Controller{
     
     }
 
-
     public function asignar_optativas($id)
     {   
         $data['ciclo_materia'] = $this->Ciclo_materia_model->get_ciclo_materia($id);
@@ -335,7 +319,6 @@ class Ciclo_materia extends MX_Controller{
         else
             show_error(sprintf(lang('no_existe'), $this->name));
     }
-
 
     public function remove_optativa($id)
     {

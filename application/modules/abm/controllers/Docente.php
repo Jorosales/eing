@@ -2,7 +2,7 @@
  
 class Docente extends MX_Controller{
     
-    public $name = 'El docente';
+    private $name = 'El docente';
     function __construct()
     {
         parent::__construct();    
@@ -26,12 +26,8 @@ class Docente extends MX_Controller{
         }
     } 
 
-    /*
-     * Listing of docente
-     */
-    function index($mensaje=null)
+    public function index($mensaje=null)
     {
-
         if (!$this->ion_auth->logged_in())
         {
             redirect('login', 'refresh');
@@ -47,11 +43,8 @@ class Docente extends MX_Controller{
         }
     }
 
-    /*
-     * Adding a new docente
-     */
-    function add()
-    {   
+    public function add()
+    {
         $this->form_validation->set_rules('apellido',lang('form_last_name'),'required');
         $this->form_validation->set_rules('nombre','1º Nombre','required');
         $this->form_validation->set_rules('cuit',lang('form_cuit'),'alpha_numeric');
@@ -111,11 +104,8 @@ class Docente extends MX_Controller{
         }
     }  
 
-    /*
-     * Editing a docente
-     */
-    function edit($id)
-    {   
+    public function edit($id)
+    {
         $data['docente'] = $this->Docente_model->get_docente($id);
         $data['persona'] = $this->Persona_model->get_persona($data['docente']['persona_id']);
 
@@ -172,10 +162,7 @@ class Docente extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting docente
-     */
-    function remove($id)
+    public function remove($id)
     {
         $docente = $this->Docente_model->get_docente($id);
 
@@ -194,9 +181,8 @@ class Docente extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     }
     
-
-    function asignar_materia($id)
-    {   
+    public function asignar_materia($id)
+    {
         $data['docente'] = $this->Docente_model->get_docente($id);
         $data['persona'] = $this->Persona_model->get_persona($data['docente']['persona_id']);
 
@@ -237,8 +223,7 @@ class Docente extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     }
 
-
-    function remove_materia_docente($id)
+    public function remove_materia_docente($id)
     {
         $materia = $this->Docente_model->get_materia_asignada($id);
 
@@ -256,6 +241,5 @@ class Docente extends MX_Controller{
         else
             show_error(sprintf(lang('no_existe'), $this->name));
     }
-
 
 }

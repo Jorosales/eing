@@ -2,7 +2,7 @@
 
 class Escuela extends MX_Controller {
 
-    public $name = 'La escuela';
+    private $name = 'La escuela';
 	function __construct()
     {
 		parent::__construct();    
@@ -21,8 +21,8 @@ class Escuela extends MX_Controller {
         }
     }
 
-	function index($mensaje=null)
-    {    
+	public function index($mensaje=null)
+    {
         if (!$this->ion_auth->logged_in())
         {
             redirect('login', 'refresh');
@@ -37,11 +37,8 @@ class Escuela extends MX_Controller {
         }
     }
 
-    /*
-     * Adding a new escuela
-     */
-    function add()
-    {   
+    public function add()
+    {
         if (!$this->ion_auth->logged_in())
         {
             redirect('login', 'refresh');
@@ -79,11 +76,8 @@ class Escuela extends MX_Controller {
         }
     }  
 
-    /*
-     * Editing a escuela
-     */
-    function edit($id)
-    {   
+    public function edit($id)
+    {
         if (!$this->ion_auth->logged_in())
         {
             redirect('login', 'refresh');
@@ -128,10 +122,7 @@ class Escuela extends MX_Controller {
         }
     } 
 
-    /*
-     * Deleting escuela
-     */
-    function remove($id)
+    public function remove($id)
     {
         $escuela = $this->Escuela_model->get_escuela($id);
 
@@ -149,7 +140,6 @@ class Escuela extends MX_Controller {
         else
             show_error(sprintf(lang('no_existe'), $this->name));
     }
-
 
 }
 

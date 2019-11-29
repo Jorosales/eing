@@ -2,7 +2,7 @@
  
 class Institucion extends MX_Controller{
 
-    public $name = 'La institución';
+    private $name = 'La institución';
     function __construct()
     {
         parent::__construct();    
@@ -21,9 +21,6 @@ class Institucion extends MX_Controller{
         }
     } 
 
-    /*
-     * Listing of institucion
-     */
     public function index($mensaje=null)
     {
         $data['instituciones'] = $this->Institucion_model->get_all_instituciones();
@@ -33,11 +30,8 @@ class Institucion extends MX_Controller{
         $this->template->cargar_vista('abm/institucion/index', $data);
     }
 
-    /*
-     * Adding a new institucion
-     */
-    function add()
-    {   
+    public function add()
+    {
 		$this->form_validation->set_rules('razon_social','Razon Social','required|max_length[100]');
         $this->form_validation->set_rules('cuit','Cuit','required|max_length[11]');
 		$this->form_validation->set_rules('direccion','Dirección','required|max_length[100]');
@@ -66,11 +60,8 @@ class Institucion extends MX_Controller{
         }
     }  
 
-    /*
-     * Editing a institucion
-     */
-    function edit($id)
-    {   
+    public function edit($id)
+    {
         $data['institucion'] = $this->Institucion_model->get_institucion($id);
         
         if(isset($data['institucion']['id']))
@@ -106,10 +97,7 @@ class Institucion extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting institucion
-     */
-    function remove($id)
+    public function remove($id)
     {
         $institucion = $this->Institucion_model->get_institucion($id);
 

@@ -2,7 +2,7 @@
  
 class Proyecto extends MX_Controller{
     
-    public $name = 'El proyecto';
+    private $name = 'El proyecto';
     function __construct()
     {
         parent::__construct();    
@@ -24,9 +24,6 @@ class Proyecto extends MX_Controller{
         }
     }  
 
-    /*
-     * Listing of proyectos
-     */
     public function index($tipo, $mensaje=null)
     {
         $data['proyectos'] = $this->Proyecto_model->get_all_proyectos($tipo);
@@ -38,11 +35,8 @@ class Proyecto extends MX_Controller{
         $this->template->cargar_vista('abm/proyecto/index', $data);
     }
 
-    /*
-     * Adding a new proyecto
-     */
-    function add()
-    {   
+    public function add()
+    {
         $data['instituciones'] = $this->Proyecto_model->get_instituciones();
         $data['tutores'] = $this->Tutor_model->get_tutores_disponibles();
         $data['tipos_proyecto'] = $this->Proyecto_model->get_tipos_proyecto();
@@ -101,11 +95,8 @@ class Proyecto extends MX_Controller{
         }
     }  
 
-    /*
-     * Editing a proyecto
-     */
-    function edit($id)
-    {   
+    public function edit($id)
+    {
         $data['proyecto'] = $this->Proyecto_model->get_proyecto($id);
         $data['proy_est'] = $this->Proyecto_model->get_proy_est($id);
         $data['proyecto']=array_merge($data['proy_est'], $data['proyecto']); 
@@ -158,10 +149,7 @@ class Proyecto extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting proyecto
-     */
-    function remove($id)
+    public function remove($id)
     {
         $proyecto = $this->Proyecto_model->get_proyecto($id);
 
@@ -179,8 +167,7 @@ class Proyecto extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     }
 
-
-    public function activate($id, $code = FALSE)
+    public function activate($id)
     {
         $params['activo']= 1;
         $proyecto = $this->Proyecto_model->get_proyecto($id); 
@@ -189,8 +176,7 @@ class Proyecto extends MX_Controller{
         redirect('abm/proyecto/'.$proyecto['id_tipo'].'', 'refresh');
     }
 
-
-    public function deactivate($id, $code = FALSE)
+    public function deactivate($id)
     {
         $params['activo']= 0;
         $proyecto = $this->Proyecto_model->get_proyecto($id);
