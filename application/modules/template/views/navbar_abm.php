@@ -54,26 +54,7 @@
 	</a>
 </li>
 
-<li class="treeview">
-	<a href="#"><i class="fa fa-link"></i> <span>PROYECTOS</span>
-		<span class="pull-right-container">
-			<i class="fa fa-angle-left pull-right"></i>
-		</span>
-	</a>
-
-	<ul class="treeview-menu"> 
-		<?php 
-			foreach ($tipo_proyecto as $tipo){
-				echo "<li><a href=\"".base_url()."abm/proyecto/".$tipo->id."\">";
-				echo $tipo->nombre;
-				echo "</a></li>";
-			}
-		?>
-		<li><a href="<?php echo base_url();?>abm/estudiante">Estudiantes</a></li>
-		<li><a href="<?php echo base_url();?>abm/tutor">Tutores</a></li>
-		<li><a href="<?php echo base_url();?>abm/institucion">Instituciones</a></li>
-	</ul>
-</li>
+<?php /*
 
 <li class="treeview">
 	<a href="#"><i class="fa fa-link"></i> <span>PROYECTOS</span>
@@ -95,3 +76,5 @@
 		<li><a href="<?php echo base_url();?>abm/institucion">Instituciones</a></li>
 	</ul>
 </li>
+*/
+?>

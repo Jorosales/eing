@@ -2,7 +2,6 @@
 	echo $alerta;
 	} 
 ?>
-<?= $this->template->boton_atras(); ?>
 
 <?php //echo $this->template->boton_nuevo('abm/escuela/add', 'Nueva escuela'); ?>
 							
