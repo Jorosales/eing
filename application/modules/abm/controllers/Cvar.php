@@ -29,10 +29,9 @@ class Cvar extends MX_Controller{
     function edit($id)
     {   
         $data['docente'] = $this->Docente_model->get_docente($id);
-        $data['persona'] = $this->Persona_model->get_persona($data['docente']['id']);
+        $data['persona'] = $this->Persona_model->get_persona($data['docente']['persona_id']);
         $data['cvar'] = $this->Docente_model->get_cvar_by_docente($id);
-
-        $data['docente']=array_merge($data['docente'], $data['persona']); 
+        $data['docente']=array_merge($data['persona'], $data['docente']); 
         
         if(isset($data['docente']['id']))
         {   

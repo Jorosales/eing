@@ -1,0 +1,7 @@
+Error: no permite borrar docentes referenciadas en otras tablas.
+
+Solucion: Ejecutar la siguiente sentencia en la base para actualizar la tabla publicaicones.
+
+ALTER TABLE `cvar` DROP FOREIGN KEY `FK_cvar_docentes`; ALTER TABLE `cvar` ADD CONSTRAINT `FK_cvar_docentes` FOREIGN KEY (`id_docente`) REFERENCES `docentes`(`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+ALTER TABLE `materia_docente` DROP FOREIGN KEY `cm_docente`; ALTER TABLE `materia_docente` ADD CONSTRAINT `cm_docente` FOREIGN KEY (`id_docente`) REFERENCES `docentes`(`id`) ON DELETE CASCADE ON UPDATE RESTRICT;

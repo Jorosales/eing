@@ -16,6 +16,7 @@ class Docente extends MX_Controller{
             $this->load->module('template');
             $this->load->model('Docente_model');
             $this->load->model('Persona_model');
+            $this->load->model('Planes_model');
             $this->load->model('Ciclo_model');
             $this->load->model('Ciclo_materia_model');
             $this->load->model('Docente_categoria_model');
@@ -51,13 +52,11 @@ class Docente extends MX_Controller{
      */
     function add()
     {   
-
         $this->form_validation->set_rules('apellido',lang('form_last_name'),'required');
         $this->form_validation->set_rules('nombre','1º Nombre','required');
         $this->form_validation->set_rules('cuit',lang('form_cuit'),'alpha_numeric');
         $this->form_validation->set_rules('email1',sprintf(lang('form_email'),'1'),'required|valid_email');
         $this->form_validation->set_rules('email2',sprintf(lang('form_email'),'2'),'valid_email');
-
         
         if($this->form_validation->run())     
         {   
@@ -93,8 +92,6 @@ class Docente extends MX_Controller{
 
             $cvar_id = $this->Docente_model->add_cvar($params_cvar);
 
-
-            
             if ($persona_id && $docente_id && $cvar_id)
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                 sprintf(lang('record_add_success_text'), $this->name));    
@@ -102,7 +99,8 @@ class Docente extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_add_error_text'), $this->name)); 
                     
-            $this->index($mensaje);
+            //$this->index($mensaje);
+            redirect('abm/docente/', 'refresh');
         }
         else
         {
@@ -119,9 +117,9 @@ class Docente extends MX_Controller{
     function edit($id)
     {   
         $data['docente'] = $this->Docente_model->get_docente($id);
-        $data['persona'] = $this->Persona_model->get_persona($data['docente']['id']);
+        $data['persona'] = $this->Persona_model->get_persona($data['docente']['persona_id']);
 
-        $data['docente']=array_merge($data['docente'], $data['persona']); 
+        $data['docente']=array_merge($data['persona'], $data['docente']); 
         
         if(isset($data['docente']['id']))
         {
@@ -160,7 +158,7 @@ class Docente extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                     sprintf(lang('record_edit_error_text'), $this->name));    
                     
-                $this->index($mensaje);
+                redirect('abm/docente/', 'refresh');
             }
             else
             {
@@ -228,7 +226,8 @@ class Docente extends MX_Controller{
             }
             else
             {
-                $data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
+                //$data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
+                $data['planes'] = $this->Planes_model->get_all_planes();
                 $data['user'] = $this->ion_auth->user()->row(); 
         
                 $this->template->cargar_vista('abm/docente/asignar_materia', $data);

@@ -1,4 +1,4 @@
-<?= $this->template->boton_atras(); ?>
+<?= $this->template->boton_volver_a('abm/docente/', 'Docentes'); ?>
 
 <?php echo $this->template->get_perfil_docente($docente['id']); ?>
 
@@ -13,9 +13,9 @@
 			
 			<?php //echo $this->template->cargar_select(lang('form_cycle_course'), 'id_ciclo_materia', '*', form_error('id_ciclo_materia'), $ciclos_materias, $this->input->post('id_ciclo_materia')); ?>
 
-			<?php echo $this->template->cargar_select(lang('form_cycle'), 'id_ciclo', '*', form_error('id_ciclo'), $ciclos, $this->input->post('id_ciclo')); ?>
+			<?php echo $this->template->cargar_select(lang('form_plan'), 'id_ciclo', '*', form_error('id_ciclo'), $planes, $this->input->post('id_ciclo')); ?>
 
-			<?php echo $this->template->cargar_select(lang('form_cycle_course'), 'id_materia', '*', form_error('id_materia'), $vacio='', $this->input->post('id_materia')); ?>	
+			<?php echo $this->template->cargar_select(lang('form_course'), 'id_materia', '*', form_error('id_materia'), $vacio='', $this->input->post('id_materia')); ?>	
 			
 			<?php echo $this->template->cargar_submit(); ?>
 			

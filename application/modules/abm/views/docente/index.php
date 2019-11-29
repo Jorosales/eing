@@ -1,4 +1,3 @@
-<?= $this->template->boton_atras(); ?>
 
 <?php if(isset($alerta))  {  
 	echo $alerta;

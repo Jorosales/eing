@@ -1,4 +1,4 @@
-<?= $this->template->boton_atras(); ?>
+<?= $this->template->boton_volver_a('abm/categoria/', 'Categoría'); ?>
 
 <div class="col-lg-12">
 	<div class="box box-success">
