@@ -1,5 +1,0 @@
-Error: no permite borrar ciclos materias cuando tienen optativas o estan referenciadas en otras tablas.
-
-Solucion: Ejecutar la siguiente sentencia en la base para actualizar la tabla publicaicones.
-
-ALTER TABLE `optativas` DROP FOREIGN KEY `optativa_cm`; ALTER TABLE `optativas` ADD CONSTRAINT `optativa_cm` FOREIGN KEY (`id_optativa`) REFERENCES `ciclo_materia`(`id`) ON DELETE CASCADE ON UPDATE RESTRICT; ALTER TABLE `optativas` DROP FOREIGN KEY `origen_cm`; ALTER TABLE `optativas` ADD CONSTRAINT `origen_cm` FOREIGN KEY (`id_origen`) REFERENCES `ciclo_materia`(`id`) ON DELETE CASCADE ON UPDATE RESTRICT;

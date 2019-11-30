@@ -1,7 +1,7 @@
 <?php 
 	$ci = &get_instance();
 	$ci->load->model("abm/Proyecto_model");
-    $tipo_proyecto= $ci->Proyecto_model->get_tipos_proyecto(); 
+    //$tipo_proyecto= $ci->Proyecto_model->get_tipos_proyecto(); 
 ?>
 
 <li class="header">ABMs</li>

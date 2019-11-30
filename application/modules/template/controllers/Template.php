@@ -65,40 +65,6 @@ class Template extends MX_Controller
 		}
 	}
 
-
-/*	//Links
-
-	public function get_params()
-	{
-		$params['limit'] = RECORDS_PER_PAGE; 
-        $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
-        return $params;
-	}
-
-	public function get_config($pag, $count)
-	{
-		$config = $this->config->item('pagination');
-        $config['base_url'] = site_url($pag);
-        $config['total_rows'] = $count;
-        $config['attributes'] = array('class' => 'page-link');
-        
-        return $config;
-	}
-
-	public function get_links()
-	{
-		$links = '<div class="clearfix">
-					<div class="float-right">
-					    '.$this->pagination->create_links().'    
-					</div>
-				</div>';
-        
-        return $links;
-	}
-
-	//Fin Links*/
-
-
 	public function subir_archivo($path, $type, $name)
 	{
 		$config['upload_path'] = $path;
@@ -249,8 +215,6 @@ class Template extends MX_Controller
                 return FALSE;
             }
         }
-
-        
     }
 
     public function image_file_check($str, $nombre)
