@@ -2,38 +2,24 @@
  
 class Estudiante_model extends CI_Model
 {
-    function __construct()
-    {
-        parent::__construct();
-    }
-    
-    /*
-     * Get estudiante by id
-     */
-    function get_estudiante($id)
+    public function get_estudiante($id)
     {
         return $this->db->get_where('estudiantes',array('id'=>$id))->row_array();
     }
     
-    function get_estudiante_by_legajo($legajo)
+    public function get_estudiante_by_legajo($legajo)
     {
         $query = $this->db->get_where('estudiantes',array('legajo'=>$legajo))->row_array();
         return $query['id'];
     }
 
-    /*
-     * Get all estudiantes count
-     */
-    function get_all_estudiantes_count()
+    public function get_all_estudiantes_count()
     {
         $this->db->from('estudiantes');
         return $this->db->count_all_results();
     }
-        
-    /*
-     * Get all estudiantes
-     */
-    function get_all_estudiantes($params = array())
+
+    public function get_all_estudiantes($params = array())
     {
         $this->db->select('estudiantes.*, persona.apellido, persona.nombre, persona.dni, persona.email1, carrera.nombre AS carrera ');    
         $this->db->from('estudiantes');
@@ -44,8 +30,7 @@ class Estudiante_model extends CI_Model
         return $this->db->get()->result();
     }
      
-
-    function get_estudiantes_disponibles()
+    public function get_estudiantes_disponibles()
     {
         $this->db->select('estudiantes.id, CONCAT(persona.apellido,", ", persona.nombre) as nombre');    
         $this->db->from('estudiantes');
@@ -55,29 +40,21 @@ class Estudiante_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    /*
-     * function to add new estudiante
-     */
-    function add_estudiante($params)
+    public function add_estudiante($params)
     {
         $this->db->insert('estudiantes',$params);
         return $this->db->insert_id();
     }
-    
-    /*
-     * function to update estudiante
-     */
-    function update_estudiante($id,$params)
+
+    public function update_estudiante($id,$params)
     {
         $this->db->where('id',$id);
         return $this->db->update('estudiantes',$params);
     }
-    
-    /*
-     * function to delete estudiante
-     */
-    function delete_estudiante($id)
+
+    public function delete_estudiante($id)
     {
         return $this->db->delete('estudiantes',array('id'=>$id));
     }
+    
 }

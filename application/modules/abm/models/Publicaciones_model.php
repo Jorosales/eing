@@ -2,23 +2,12 @@
  
 class Publicaciones_model extends CI_Model
 {
-    function __construct()
-    {
-        parent::__construct();
-    }
-    
-    /*
-     * Get publicaciones by id
-     */
-    function get_publicaciones($id)
+    public function get_publicaciones($id)
     {
         return $this->db->get_where('publicaciones',array('id'=>$id))->row_array();
     }
-        
-    /*
-     * Get all publicaciones
-     */
-    function get_all_publicaciones()
+
+    public function get_all_publicaciones()
     {
         $this->db->select('publicaciones.*, u_creador.id AS id_creador, CONCAT(u_creador.last_name, ", ", u_creador.first_name) AS creador, u_modificador.id AS id_modificador, CONCAT(u_creador.last_name, ", ", u_creador.first_name) AS modificador ');    
         $this->db->from('publicaciones');
@@ -27,38 +16,25 @@ class Publicaciones_model extends CI_Model
         $this->db->order_by('publicaciones.id', 'desc');
         return $this->db->get()->result_array();
     }
-        
-    /*
-     * function to add new publicaciones
-     */
-    function add_publicaciones($params)
+
+    public function add_publicaciones($params)
     {
         $this->db->insert('publicaciones',$params);
         return $this->db->insert_id();
     }
-    
-    /*
-     * function to update publicaciones
-     */
-    function update_publicaciones($id,$params)
+
+    public function update_publicaciones($id,$params)
     {
         $this->db->where('id',$id);
         return $this->db->update('publicaciones',$params);
     }
-    
-    /*
-     * function to delete publicaciones
-     */
-    function delete_publicaciones($id)
+
+    public function delete_publicaciones($id)
     {
         return $this->db->delete('publicaciones',array('id'=>$id));
     }
 
-
-    /*
-     * function to get user by publicacion
-     */
-    function get_users_by_publicacion($id_publicacion)
+    public function get_users_by_publicacion($id_publicacion)
     {
         $this->db->select('u_creador.id AS id_creador, CONCAT(u_creador.last_name, ", ", u_creador.first_name) AS creador, u_modificador.id AS id_modificador, CONCAT(u_creador.last_name, ", ", u_creador.first_name) AS modificador');    
         $this->db->from('publicaciones');
@@ -68,12 +44,11 @@ class Publicaciones_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    function getTipos()
+    public function getTipos()
 	{
 		$this->db->select('*');
       	$this->db->from('tipo_publicacion');
 	    return $this->db->get()->result();
     }
-
 
 }

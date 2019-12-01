@@ -2,32 +2,18 @@
  
 class Docente_model extends CI_Model
 {
-    function __construct()
-    {
-        parent::__construct();
-    }
-    
-    /*
-     * Get docente by id
-     */
-    function get_docente($id)
+    public function get_docente($id)
     {
         return $this->db->get_where('docentes',array('id'=>$id))->row_array();
     }
-    
-    /*
-     * Get all docente count
-     */
-    function get_all_docente_count()
+
+    public function get_all_docente_count()
     {
         $this->db->from('docentes');
         return $this->db->count_all_results();
     }
-        
-    /*
-     * Get all docente
-     */
-    function get_all_docente()
+
+    public function get_all_docente()
     {
         $this->db->select('docentes.id, CONCAT(persona.apellido, ", ",  persona.nombre) as docente, docente_categoria.nombre AS categoria, docentes.descripcion');    
         $this->db->from('docentes');
@@ -38,50 +24,31 @@ class Docente_model extends CI_Model
 
         return $this->db->get()->result();
     }
-        
-    /*
-     * function to add new docente
-     */
-    function add_docente($params)
+
+    public function add_docente($params)
     {
         $this->db->insert('docentes',$params);
         return $this->db->insert_id();
     }
-    
-    /*
-     * function to update docente
-     */
-    function update_docente($id,$params)
+
+    public function update_docente($id,$params)
     {
         $this->db->where('id',$id);
         return $this->db->update('docentes',$params);
     }
-    
-    /*
-     * function to delete docente
-     */
-    function delete_docente($id)
+
+    public function delete_docente($id)
     {
         return $this->db->delete('docentes',array('id'=>$id));
     }
 
-
-
     //CVAR
-
-    /*
-     * Get docente by id
-     */
-    function get_cvar_by_docente($id)
+    public function get_cvar_by_docente($id)
     {
         return $this->db->get_where('cvar',array('id_docente'=>$id))->row_array();
     }
 
-
-    /*
-     * Get all cvar docente
-     */
-    function get_all_cvar_docente($params = array())
+    public function get_all_cvar_docente($params = array())
     {
         $this->db->select('docentes.id, CONCAT(persona.apellido, ", ",  persona.nombre) as docente, docente_categoria.nombre AS categoria, cvar.areas');    
         $this->db->from('docentes');
@@ -95,25 +62,20 @@ class Docente_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    function add_cvar($params)
+    public function add_cvar($params)
     {
         $this->db->insert('cvar',$params);
         return $this->db->insert_id();
     }
 
-    /*
-     * function to update cvar
-     */
-    function update_cvar($id,$params)
+    public function update_cvar($id,$params)
     {
         $this->db->where('id_docente',$id);
         return $this->db->update('cvar',$params);
     }
 
-
     //MATERIAS ASIGNADAS
-
-    function get_materias_asignadas($id)
+    public function get_materias_asignadas($id)
     {
         $this->db->select('materia_docente.id as id, carrera.nombre as carrera, planes.nombre as plan, ciclos.nombre as ciclo, orientaciones.nombre as orientacion, materias.nombre as materia');    
         $this->db->from('materia_docente');
@@ -130,19 +92,20 @@ class Docente_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    function add_materia_docente($params)
+    public function add_materia_docente($params)
     {
         $this->db->insert('materia_docente',$params);
         return $this->db->insert_id();
     }
 
-    function delete_materia_docente($id)
+    public function delete_materia_docente($id)
     {
         return $this->db->delete('materia_docente',array('id'=>$id));
     }
 
-    function get_materia_asignada($id)
+    public function get_materia_asignada($id)
     {
         return $this->db->get_where('materia_docente',array('id'=>$id))->row_array();
     }
+
 }

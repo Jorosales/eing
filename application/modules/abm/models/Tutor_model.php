@@ -2,23 +2,12 @@
  
 class Tutor_model extends CI_Model
 {
-    function __construct()
-    {
-        parent::__construct();
-    }
-    
-    /*
-     * Get tutor by id
-     */
-    function get_tutor($id)
+    public function get_tutor($id)
     {
         return $this->db->get_where('tutor',array('id'=>$id))->row_array();
     }
-        
-    /*
-     * Get all tutor
-     */
-    function get_all_tutores($params = array())
+
+    public function get_all_tutores($params = array())
     {
         $this->db->select('docentes.id, CONCAT(persona.apellido, ", ",  persona.nombre) as docente, docente_categoria.nombre AS categoria, COUNT(proyectos.id) AS proyectos');
         $this->db->from('docentes'); 
@@ -32,7 +21,7 @@ class Tutor_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    function get_proyectos_by_tutor($id_docente, $tipo_proyecto, $activo)
+    public function get_proyectos_by_tutor($id_docente, $tipo_proyecto, $activo)
     {
         $this->db->select('proyectos.id, proyectos.id_tipo, tipo_proyecto.nombre AS tipo , proyectos.titulo, institucion.razon_social, institucion.cuit, institucion.direccion, estudiantes.legajo, CONCAT(persona.apellido, ", ", persona.nombre) as estudiante, persona.dni');
         $this->db->from('proyectos');
@@ -49,14 +38,13 @@ class Tutor_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    function get_tipos_proyectos()
+    public function get_tipos_proyectos()
     {
         $this->db->from('tipo_proyecto');
         return $this->db->get()->result();
     }
 
-
-    function get_tutores_disponibles()
+    public function get_tutores_disponibles()
     {
         $this->db->select('docentes.id, CONCAT(persona.apellido, ", ",  persona.nombre) as nombre');    
         $this->db->from('docentes');
@@ -64,4 +52,5 @@ class Tutor_model extends CI_Model
         $this->db->order_by('id', 'desc');
         return $this->db->get()->result();
     }
+    
 }

@@ -1,16 +1,8 @@
 <?php
  
 class Ciclo_materia_model extends CI_Model
-{
-    function __construct()
-    {
-        parent::__construct();
-    }
-    
-    /*
-     * Get ciclo_materia by id
-     */
-    function get_ciclo_materia($id)
+{    
+    public function get_ciclo_materia($id)
     {
         $this->db->select('ciclo_materia.*, ciclos.id_plan, materias.nombre as materia, materias.id_tipo as id_tipo');
         $this->db->join('ciclos', 'ciclos.id = ciclo_materia.id_ciclo');
@@ -18,19 +10,13 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->get_where('ciclo_materia',array('ciclo_materia.id'=>$id))->row_array();
     }
     
-    /*
-     * Get all ciclo_materia count
-     */
-    function get_all_ciclo_materia_count()
+    public function get_all_ciclo_materia_count()
     {
         $this->db->from('ciclo_materia');
         return $this->db->count_all_results();
     }
         
-    /*
-     * Get all ciclo_materia
-     */
-    function get_all_ciclo_materia()
+    public function get_all_ciclo_materia()
     {
         $this->db->select('ciclo_materia.*, ciclos.nombre as nombre_ciclo, materias.nombre as nombre_materia, regimen.nombre as nombre_regimen, materias.id_tipo as tipo');    
         $this->db->from('ciclo_materia');
@@ -42,7 +28,7 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    function get_all_ciclo_materia_by_plan($plan)
+    public function get_all_ciclo_materia_by_plan($plan)
     {
         $this->db->select('ciclo_materia.*, ciclos.nombre as nombre_ciclo, materias.nombre as nombre_materia, regimen.nombre as nombre_regimen, materias.id_tipo as tipo');    
         $this->db->from('ciclo_materia');
@@ -56,7 +42,7 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    function get_all_ciclo_materia_by_ciclo($id_ciclo)
+    public function get_all_ciclo_materia_by_ciclo($id_ciclo)
     {
         $this->db->select('ciclo_materia.*, ciclos.nombre as nombre_ciclo, materias.nombre as nombre_materia, regimen.nombre as nombre_regimen, materias.id_tipo as tipo');    
         $this->db->from('ciclo_materia');
@@ -70,34 +56,24 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->get()->result();
     }
         
-    /*
-     * function to add new ciclo_materia
-     */
-    function add_ciclo_materia($params)
+    public function add_ciclo_materia($params)
     {
         $this->db->insert('ciclo_materia',$params);
         return $this->db->insert_id();
     }
-    
-    /*
-     * function to update ciclo_materia
-     */
-    function update_ciclo_materia($id,$params)
+
+    public function update_ciclo_materia($id,$params)
     {
         $this->db->where('id',$id);
         return $this->db->update('ciclo_materia',$params);
     }
     
-    /*
-     * function to delete ciclo_materia
-     */
-    function delete_ciclo_materia($id)
+    public function delete_ciclo_materia($id)
     {
         return $this->db->delete('ciclo_materia',array('id'=>$id));
     }
 
-
-    function get_ciclos_materias($params = array())
+    public function get_ciclos_materias($params = array())
     {
         $this->db->select('ciclo_materia.id as id, CONCAT(ciclos.nombre, " - " , materias.nombre) as nombre');    
         $this->db->from('ciclo_materia');
@@ -110,7 +86,7 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    function get_ciclos_materias_by_plan($idPlan, $codigo)
+    public function get_ciclos_materias_by_plan($idPlan, $codigo)
     {
         $this->db->select('ciclo_materia.id as id, ciclo_materia.codigo, CONCAT(ciclo_materia.codigo, " - ",ciclos.nombre, " - " , materias.nombre) as nombre');    
         $this->db->from('ciclo_materia');
@@ -124,7 +100,7 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    function get_carrera_by_ciclo_materia($id_ciclo_materia)
+    public function get_carrera_by_ciclo_materia($id_ciclo_materia)
     {
         $this->db->select('carrera.*, planes.id as id_plan');    
         $this->db->from('carrera');
@@ -138,8 +114,7 @@ class Ciclo_materia_model extends CI_Model
 
 
     //CORRELATIVAS
-
-    function get_correlativas($id)
+    public function get_correlativas($id)
     {
         $this->db->select('correlativas.id as id, CONCAT(ciclo_materia.codigo, " - " ,materias.nombre) as materia, correlativas_tipo.descripcion as descripcion');   
         $this->db->from('correlativas');
@@ -152,33 +127,30 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->get()->result();
     }
 
-
-    function get_all_correlativas_tipo()
+    public function get_all_correlativas_tipo()
     {
         $this->db->select('correlativas_tipo.id as id, correlativas_tipo.descripcion as nombre');
         return $this->db->get('correlativas_tipo')->result();
     }
 
-    function add_correlativa($params)
+    public function add_correlativa($params)
     {
         $this->db->insert('correlativas',$params);
         return $this->db->insert_id();
     }
 
-    function delete_correlativa($id)
+    public function delete_correlativa($id)
     {
         return $this->db->delete('correlativas',array('id'=>$id));
     }
 
-    function get_correlativa($id)
+    public function get_correlativa($id)
     {
         return $this->db->get_where('correlativas',array('id'=>$id))->row_array();
     }
 
-
     //OPTATIVAS
-
-    function get_optativas_by_materia($id)
+    public function get_optativas_by_materia($id)
     {
         $this->db->select('optativas.id as id, materias.nombre as nombre');    
         $this->db->from('optativas');
@@ -190,8 +162,7 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->get()->result();
     }
 
-
-    function get_all_genericas()
+    public function get_all_genericas()
     {
         $this->db->select('ciclo_materia.id as id, materias.nombre as nombre');
         $this->db->from('ciclo_materia');
@@ -200,7 +171,7 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    function get_all_optativas()
+    public function get_all_optativas()
     {
         $this->db->select('ciclo_materia.id as id, materias.nombre as nombre');
         $this->db->from('ciclo_materia');
@@ -209,7 +180,7 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    function get_optativas_by_plan($id_plan)
+    public function get_optativas_by_plan($id_plan)
     {
         $this->db->select('ciclo_materia.id as id, materias.nombre as nombre');
         $this->db->from('ciclo_materia');
@@ -220,24 +191,25 @@ class Ciclo_materia_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    function add_optativa($params)
+    public function add_optativa($params)
     {
         $this->db->insert('optativas',$params);
         return $this->db->insert_id();
     }
 
-    function get_optativa($id)
+    public function get_optativa($id)
     {
         return $this->db->get_where('optativas',array('id'=>$id))->row_array();
     }
 
-    function delete_optativa($id)
+    public function delete_optativa($id)
     {
         return $this->db->delete('optativas',array('id'=>$id));
     }
 
 
-    function fetch_materias($plan_id)
+    //Formularios
+    public function fetch_materias($plan_id)
     {
         $this->db->select('ciclo_materia.codigo as codigo, ciclo_materia.id as id, CONCAT(ciclo_materia.codigo, " - ",ciclos.nombre, " - " , materias.nombre) as nombre'); 
         $this->db->from('ciclo_materia');
@@ -257,7 +229,7 @@ class Ciclo_materia_model extends CI_Model
         return $output;
     }
 
-    function fetch_anios($ciclo_id)
+    public function fetch_anios($ciclo_id)
     {
         $this->db->select('planes.duracion as id, planes.duracion as nombre'); 
         $this->db->from('ciclos');
