@@ -22,7 +22,7 @@ class Carrera extends MX_Controller {
         }
         $prefs = array(
             'show_next_prev' => TRUE,
-            'next_prev_url' => 'http://localhost/eing/calendar'
+            'next_prev_url' => site_url().'/calendar'
         );
         $this->load->library('calendar', $prefs);
         $publicaciones = $this->Publicaciones_model->getEventosPorMes($mes, $anio);
