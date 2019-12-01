@@ -2,7 +2,8 @@
 
 class Carrera extends MX_Controller {
 
-	function __construct(){
+    public function __construct()
+    {
 		parent::__construct();
         $this->load->model('Carrera_model');
         $this->load->model('Escuela_model');
@@ -13,7 +14,7 @@ class Carrera extends MX_Controller {
     }
 
 	public function index($anio=null, $mes=null)
-	{  
+	{
         //Calendario
         if(is_null($anio) || is_null($mes)){
             $anio=date('Y');
@@ -81,9 +82,8 @@ class Carrera extends MX_Controller {
         }        
 	}
 
-
 	public function carrera_completa($id_carrera)
-    {        
+    {
         if (!$this->ion_auth->logged_in())
         {
             redirect('login', 'refresh');
@@ -106,8 +106,8 @@ class Carrera extends MX_Controller {
         }
     }
 
-
-    private function _setting(){
+    private function _setting()
+    {
       return array(
        'start_day'   => 'monday',
        'show_next_prev'  => true,
@@ -137,7 +137,7 @@ class Carrera extends MX_Controller {
                         'cal_row_end'               => '</tr>',
                         'table_close'               => '</table>
                             '));
-     }
+    }
 
 }
 

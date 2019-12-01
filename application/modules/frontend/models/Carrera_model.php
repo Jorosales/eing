@@ -80,20 +80,16 @@ class Carrera_model  extends CI_Model  {
 	    return $this->db->get()->result();
 	}
 
-	function get_carrera($id)
+	public function get_carrera($id)
     {
         return $this->db->get_where('carrera',array('id'=>$id))->row_array();
     }
     
-    /*
-     * Get all carrera count
-     */
     function get_all_carrera_count()
     {
         $this->db->from('carrera');
         return $this->db->count_all_results();
-    }
-        
+    }    
             	
 }
 

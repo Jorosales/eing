@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-
 class Publicaciones extends MX_Controller {
 
-	function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
 		$this->load->library('table');
 		$this->load->model('Publicaciones_model');
@@ -13,7 +13,7 @@ class Publicaciones extends MX_Controller {
 	}
 
 	public function index($tipo)
-	{	
+	{
 		$data['listado'] = $this->Publicaciones_model->datosLista($tipo);
 		$data['_view'] = 'pages/publicacionesList';
 		$this->load->view('layouts/main',$data);

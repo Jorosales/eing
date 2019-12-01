@@ -3,7 +3,7 @@
 class Materia_model  extends CI_Model  {
 
 	public function getMateria($idMateria)
-    {
+  {
       $this->db->select('ciclo_materia.id as ciclo_materia_id, materias.nombre, materias.id_tipo, carrera.id AS id_carrera, carrera.nombre AS nom_carrera');
       $this->db->from('carrera');
       $this->db->join('planes', 'planes.id_carrera = carrera.id');
@@ -32,7 +32,6 @@ class Materia_model  extends CI_Model  {
       return $this->db->get()->result();
   }
 
-
 	public function getEquipo($idMateria)
 	{
     $this->db->select('docentes.id as id_docente, persona.nombre, persona.nombre_2, persona.apellido, docentes.descripcion, persona.email1');
@@ -55,8 +54,6 @@ class Materia_model  extends CI_Model  {
     $this->db->where('correlativas.id_correlativa_tipo', $tipo); 
     return $this->db->get()->result();
 	}
-
-
 
 	public function getOptativas($idMateria)
 	{

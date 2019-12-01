@@ -2,7 +2,8 @@
 
 class Materia extends MX_Controller {
 
-	function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
         $this->load->helper('url');
 		$this->load->model('Materia_model');
@@ -10,7 +11,6 @@ class Materia extends MX_Controller {
         $this->load->helper(array('language'));
         $this->lang->load('auth');
     }
-
 
 	public function verMateria($idMateria)
 	{
