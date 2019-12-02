@@ -26,7 +26,7 @@ class Carrera extends MX_Controller {
         );
         $this->load->library('calendar', $prefs);
         $publicaciones = $this->Publicaciones_model->getEventosPorMes($mes, $anio);
-
+        
         if (!empty($publicaciones)) {
             foreach ($publicaciones as $p) {
                 if ($p->cantidad == 1) {
