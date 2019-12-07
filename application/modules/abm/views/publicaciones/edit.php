@@ -1,4 +1,4 @@
-<?= $this->template->boton_volver_a('abm/docente/', 'Docentes'); ?>
+<?= $this->template->boton_volver_a('abm/publicaciones/', 'Publicaciones'); ?>
 <div class="col-lg-12">
 	<div class="box box-success">
 

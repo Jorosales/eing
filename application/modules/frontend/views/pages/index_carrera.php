@@ -3,38 +3,40 @@
     
 	    <!-- Eventos -->
 	    <div class="container col-lg-2 sidenav eventos" id="tourpackages-carousel">
-			<?php if(!empty($prox_even)) {?>
+			
 				<h4>Calendario de Eventos</h4>
 				<div class="row">
 					<div class="container card border-primary mb-3 text-center" style="width: 250px;">
 							<?php echo $calendario ?>
 					</div>
+				<?php if(!empty($prox_even)) {?>
 					<?php foreach ($prox_even as $e) { ?>
 						<div class="box">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-12">
-									<a target="_BLANK" href="<?= base_url('publicacion/'.$e->id) ?>">
-										<figure class="text-center">
-											<?php if($e->imagen == ''){?>
-												<img src="<?= base_url('assets/images/undec.jpg') ?>" alt="UNdeC">
-											<?php }else{ ?>
-												<img src="<?= base_url(IMAGES_UPLOAD.'publicaciones/'.$e->imagen) ?>" alt="<?= $e->imagen ?>">
-											<?php } ?>
-											<figcaption>
-												<h5><?= $e->titulo ?></h5>
-												<h6><?= date("d.m.Y", strtotime($e->fecha)) ?></h6>
-											</figcaption>
-										</figure>
-									</a>
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12">
+										<a target="_BLANK" href="<?= base_url('publicacion/'.$e->id) ?>">
+											<figure class="text-center">
+												<?php if($e->imagen == ''){?>
+													<img src="<?= base_url('assets/images/undec.jpg') ?>" alt="UNdeC">
+												<?php }else{ ?>
+													<img src="<?= base_url(IMAGES_UPLOAD.'publicaciones/'.$e->imagen) ?>" alt="<?= $e->imagen ?>">
+												<?php } ?>
+												<figcaption>
+													<h5><?= $e->titulo ?></h5>
+													<h6><?= date("d.m.Y", strtotime($e->fecha)) ?></h6>
+												</figcaption>
+											</figure>
+										</a>
+									</div>
 								</div>
+								
 							</div>
-							
 						</div>
-					</div>
 					<?php } ?>
+				<?php }	?>
 				</div>
-			<?php }	?>
+			
 
 	    </div>
 	    <!-- Eventos -->

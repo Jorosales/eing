@@ -2,7 +2,7 @@
         <button class="btn btn-default" type="button">
           <?php echo "Hoy es ".date('d - M - Y', time()); $ban=0;?>
         </button>
-        <div class="container">
+        <div class="container"> 
             <h1><?= (isset($listado[0]->tipo_nombre))?$listado[0]->tipo_nombre:"Publicaciones"?></h1>
             <hr>
             
@@ -13,8 +13,11 @@
                             <?php foreach ($listado as $row) {?>
                                 
                                 <?php if ( date("m/d/Y", strtotime($row->fecha)) < date('m/d/Y', time()) && $ban==0) {
-                                            echo "<hr style='border: 5px solid;'>";
-                                            echo "<h3>".$listado[0]->tipo_nombre." pasados</h3>"; 
+                                            
+                                            if($listado[0]->tipo == 1) {
+                                                echo "<hr style='border: 5px solid;'>";
+                                                echo "<h3>".$listado[0]->tipo_nombre." pasados</h3>"; 
+                                            }
                                             $ban=1;
                                         }
                                 ?>
