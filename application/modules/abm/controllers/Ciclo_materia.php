@@ -144,7 +144,7 @@ class Ciclo_materia extends MX_Controller{
     
                     if($_FILES['programa']['name'] != ''){
                         $pdf = $this->template->subir_archivo(PDFS_UPLOAD.'programas', 'pdf', 'programa');
-                        $params['programa'] = $pdf['file_name'];
+                        $params_ciclo_materia['programa'] = $pdf['file_name'];
                     }
     
                     if ($this->Ciclo_materia_model->update_ciclo_materia($id,$params_ciclo_materia))
