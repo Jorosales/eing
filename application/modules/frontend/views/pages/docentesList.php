@@ -19,7 +19,7 @@
                 
 				<tbody class="contenidobusqueda">
 					<?php foreach ($listado as $row) {?>
-						<tr> 
+						<tr onclick="window.location='<?= base_url('/docente/'.$row->id)?>'" class="pointer" > 
 							<td> 
 								<a href="<?= base_url('/docente/'.$row->id)?>">
 									<i class="fas fa-search-plus"></i>

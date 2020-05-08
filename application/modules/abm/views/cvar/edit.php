@@ -2,6 +2,7 @@
 	echo $alerta;
 	} 
 ?>
+<?= $this->template->boton_volver_a('abm/docente/', 'Docentes'); ?>
 
 <div class="col-lg-12">
 	<div class="box box-success">

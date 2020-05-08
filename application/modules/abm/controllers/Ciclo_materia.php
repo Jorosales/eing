@@ -19,19 +19,18 @@ class Ciclo_materia extends MX_Controller{
             $this->load->model('Materia_model');
             $this->load->model('Materias_tipo_model');
             $this->load->model('Regimen_model');
+            $this->load->library('../../modules/abm/controllers/Carrera');
             $this->load->helper(array('language'));
             $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
             $this->lang->load('auth');
         }
     } 
 
-    /*
-     * Listing of ciclo_materia
-     */
-    public function index($mensaje=null)
+    public function index($id_ciclo, $mensaje=null)
     {
-        $data['ciclo_materia'] = $this->Ciclo_materia_model->get_all_ciclo_materia();
-        $data['user'] = $this->ion_auth->user()->row();
+        $data['carrera'] = $this->Ciclo_model->get_carrera_by_ciclo($id_ciclo);
+        $data['ciclo'] = $this->Ciclo_model->get_ciclo($id_ciclo);
+        $data['ciclo_materia'] = $this->Ciclo_materia_model->get_all_ciclo_materia_by_ciclo($id_ciclo);
         if (isset($mensaje)) {
             $data['alerta'] = $mensaje;
         }
@@ -39,25 +38,29 @@ class Ciclo_materia extends MX_Controller{
         $this->template->cargar_vista('abm/ciclo_materia/index', $data);
     }
 
-    /*
-     * Adding a new ciclo_materia
-     */
-    public function add()
-    {   
+    public function add($id_plan=null)
+    { 
         $this->form_validation->set_rules('anio',lang('form_year'),'integer|required');
         $this->form_validation->set_rules('codigo',lang('form_code'),'integer');
         $this->form_validation->set_rules('horas',lang('form_hours'),'numeric');
         $this->form_validation->set_rules('hs_total',lang('form_total_hours'),'numeric');
         $this->form_validation->set_rules('id_ciclo',lang('form_cycle'),'required');
-        $this->form_validation->set_rules('id_materia',lang('form_course'),'required');
+        $this->form_validation->set_rules('materia',lang('form_course'),'required');
         $this->form_validation->set_rules('id_regimen',lang('form_regimen'),'required');
         $this->form_validation->set_rules('programa',lang('form_program'),'callback_pdf_file_check[programa]');
-		
+
 		if($this->form_validation->run($this))     
         {   
-            $params = array(
+            $params_materia = array(
+                'nombre' => $this->input->post('materia'),
+                'id_tipo' => $this->input->post('id_tipo'),
+            );
+
+            $id_materia = $this->Materia_model->add_materia($params_materia);
+
+            $params_ciclo_materia = array(
                 'id_ciclo' => $this->input->post('id_ciclo'),
-                'id_materia' => $this->input->post('id_materia'),
+                'id_materia' => $id_materia,
                 'id_regimen' => $this->input->post('id_regimen'),
                 'horas' => $this->input->post('horas'),
                 'hs_total' => $this->input->post('hs_total'),
@@ -67,23 +70,37 @@ class Ciclo_materia extends MX_Controller{
 
             if($_FILES['programa']['name'] != ''){
                 $pdf = $this->template->subir_archivo(PDFS_UPLOAD.'programas', 'pdf', 'programa');
-                $params['programa'] = $pdf['file_name'];
+                $params_ciclo_materia['programa'] = $pdf['file_name'];
             }
             
-            if ($this->Ciclo_materia_model->add_ciclo_materia($params))
+            if ($this->Ciclo_materia_model->add_ciclo_materia($params_ciclo_materia))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                 sprintf(lang('record_add_success_text'), $this->name));    
             else   
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_add_error_text'), $this->name)); 
-                    
-            $this->index($mensaje);
+
+            //$this->carrera->carrera_completa($this->input->post('plan'));
+            redirect('abm/carrera/carrera_completa/'.$this->input->post('plan'), 'refresh');
+
         }
         else
         {
-            $data['user'] = $this->ion_auth->user()->row();
-            $data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
-            $data['materias'] = $this->Materia_model->get_all_materias();
+            if (is_null($id_plan)){
+                $data['ciclos'] = $this->Ciclo_model->get_all_ciclos();    
+            }
+            else{
+                $data['ciclos'] = $this->Ciclo_model->get_ciclos_by_plan($id_plan);
+
+                for ($i=0; $i < $data['ciclos'][0]->duracion ; $i++) { 
+                    $data['anios'][$i] = new stdClass;
+                    $data['anios'][$i]->id = $i+1;
+                    $data['anios'][$i]->nombre = $i+1;
+                }
+            }
+            
+            $data['id_plan'] = $id_plan;
+            $data['tipos'] = $this->Materias_tipo_model->get_all_tipos();
             $data['regimenes'] = $this->Regimen_model->get_all_regimen();
 
             $this->template->cargar_vista('abm/ciclo_materia/add', $data);
@@ -91,30 +108,10 @@ class Ciclo_materia extends MX_Controller{
 
     }  
 
-    function fetch_materias()
-    {
-        if($this->input->post('ciclo_id'))
-        {
-            echo $this->Ciclo_materia_model->fetch_materias($this->input->post('ciclo_id'));
-        }
-    }
-
-    function fetch_anios()
-    {
-        if($this->input->post('ciclo_id'))
-        {
-            echo $this->Ciclo_materia_model->fetch_anios($this->input->post('ciclo_id'));
-        }
-    }
-
-    
-
-    /*
-     * Editing a ciclo_materia
-     */
     public function edit($id)
     {   
         $data['ciclo_materia'] = $this->Ciclo_materia_model->get_ciclo_materia($id);
+        //var_dump($data['ciclo_materia']); exit();
         
         if(isset($data['ciclo_materia']['id']))
         {
@@ -126,36 +123,43 @@ class Ciclo_materia extends MX_Controller{
 			$this->form_validation->set_rules('id_materia',lang('form_course'),'required');
 			$this->form_validation->set_rules('id_regimen',lang('form_regimen'),'required');
             $this->form_validation->set_rules('programa',lang('form_program'),'callback_pdf_file_check[programa]');
-		
+            
 			if($this->form_validation->run($this))     
             {   
-                $params = array(
-					'id_ciclo' => $this->input->post('id_ciclo'),
-					'id_materia' => $this->input->post('id_materia'),
-					'id_regimen' => $this->input->post('id_regimen'),
-					'horas' => $this->input->post('horas'),
-					'hs_total' => $this->input->post('hs_total'),
-					'anio' => $this->input->post('anio'),
-					'codigo' => $this->input->post('codigo'),
-                );
+                $params_materia = array(
+                    'nombre' => $this->input->post('materia'),
+                    'id_tipo' => $this->input->post('id_tipo'),
+                );    
 
-                if($_FILES['programa']['name'] != ''){
-                    $pdf = $this->template->subir_archivo(PDFS_UPLOAD.'programas', 'pdf', 'programa');
-                    $params['programa'] = $pdf['file_name'];
+                if ($this->Materia_model->update_materia($this->input->post('id_materia'), $params_materia)) {
+                    $params_ciclo_materia = array(
+                        'id_ciclo' => $this->input->post('id_ciclo'),
+                        'id_materia' => $this->input->post('id_materia'),
+                        'id_regimen' => $this->input->post('id_regimen'),
+                        'horas' => $this->input->post('horas'),
+                        'hs_total' => $this->input->post('hs_total'),
+                        'anio' => $this->input->post('anio'),
+                        'codigo' => $this->input->post('codigo'),
+                    );
+    
+                    if($_FILES['programa']['name'] != ''){
+                        $pdf = $this->template->subir_archivo(PDFS_UPLOAD.'programas', 'pdf', 'programa');
+                        $params_ciclo_materia['programa'] = $pdf['file_name'];
+                    }
+    
+                    if ($this->Ciclo_materia_model->update_ciclo_materia($id,$params_ciclo_materia))
+                        $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
+                                        sprintf(lang('record_edit_success_text'), $this->name));    
+                    else   
+                        $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
+                                        sprintf(lang('record_edit_error_text'), $this->name));    
                 }
-
-                if ($this->Ciclo_materia_model->update_ciclo_materia($id,$params))
-                    $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
-                                    sprintf(lang('record_edit_success_text'), $this->name));    
-                else   
-                    $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
-                                    sprintf(lang('record_edit_error_text'), $this->name));    
                     
-                $this->index($mensaje);
+                redirect('abm/ciclo_materia/asignar_correlativa/'.$id, 'refresh');
             }
             else
             {
-                $data['user'] = $this->ion_auth->user()->row();
+                $data['tipos'] = $this->Materias_tipo_model->get_all_tipos();
 				$data['ciclos'] = $this->Ciclo_model->get_all_ciclos(); 
 				$data['materias'] = $this->Materia_model->get_all_materias();
 				$data['regimenes'] = $this->Regimen_model->get_all_regimen();
@@ -173,9 +177,6 @@ class Ciclo_materia extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting ciclo_materia
-     */
     public function remove($id)
     {
         $ciclo_materia = $this->Ciclo_materia_model->get_ciclo_materia($id);
@@ -189,18 +190,33 @@ class Ciclo_materia extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_remove_error_text'), $this->name));    
                 
-            $this->index($mensaje);
+            redirect('abm/carrera/carrera_completa/'.$ciclo_materia['id_plan'], 'refresh');
+
         }
         else
             show_error(sprintf(lang('no_existe'), $this->name));
     }
 
-
     public function pdf_file_check($str, $nombre)
     {
         return $this->template->pdf_file_check($str, $nombre);
     }
-    
+
+    public function fetch_materias()
+    {
+        if($this->input->post('ciclo_id'))
+        {
+            echo $this->Ciclo_materia_model->fetch_materias($this->input->post('ciclo_id'));
+        }
+    }
+
+    public function fetch_anios()
+    {
+        if($this->input->post('ciclo_id'))
+        {
+            echo $this->Ciclo_materia_model->fetch_anios($this->input->post('ciclo_id'));
+        }
+    }
 
     public function asignar_correlativa($id)
     {   
@@ -230,6 +246,7 @@ class Ciclo_materia extends MX_Controller{
             }
             else
             {
+                $data['carrera'] = $this->Ciclo_materia_model->get_carrera_by_ciclo_materia($id);
                 $data['ciclos_materias'] = $this->Ciclo_materia_model->get_ciclos_materias_by_plan($data['ciclo_materia']['id_plan'], $data['ciclo_materia']['codigo']);
                 $data['tipos'] = $this->Ciclo_materia_model->get_all_correlativas_tipo();
                 $data['correlativas'] = $this->Ciclo_materia_model->get_correlativas($id);
@@ -263,7 +280,6 @@ class Ciclo_materia extends MX_Controller{
     
     }
 
-
     public function asignar_optativas($id)
     {   
         $data['ciclo_materia'] = $this->Ciclo_materia_model->get_ciclo_materia($id);
@@ -290,8 +306,9 @@ class Ciclo_materia extends MX_Controller{
             }
             else
             {
+                $data['carrera'] = $this->Ciclo_materia_model->get_carrera_by_ciclo_materia($id);
                 $data['ciclos_materias'] = $this->Ciclo_materia_model->get_ciclos_materias();
-                $data['optativas'] = $this->Ciclo_materia_model->get_all_optativas();
+                $data['optativas'] = $this->Ciclo_materia_model->get_optativas_by_plan($data['carrera'][0]->id_plan);
                 $data['optativas_materia'] = $this->Ciclo_materia_model->get_optativas_by_materia($id);
 
                 $data['user'] = $this->ion_auth->user()->row(); 
@@ -302,7 +319,6 @@ class Ciclo_materia extends MX_Controller{
         else
             show_error(sprintf(lang('no_existe'), $this->name));
     }
-
 
     public function remove_optativa($id)
     {

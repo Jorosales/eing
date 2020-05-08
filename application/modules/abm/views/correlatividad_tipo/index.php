@@ -2,6 +2,7 @@
 	echo $alerta;
 } 
 ?>
+
 <?php echo $this->template->boton_nuevo('abm/correlatividad_tipo/add', 'Nuevo Tipo'); ?>
 
 <hr>

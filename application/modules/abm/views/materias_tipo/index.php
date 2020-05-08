@@ -2,6 +2,8 @@
 	echo $alerta;
 } 
 ?>
+<?= $this->template->boton_atras(); ?>
+
 <?php echo $this->template->boton_nuevo('abm/materia_tipo/add', 'Nuevo Tipo'); ?>
 
 <hr>

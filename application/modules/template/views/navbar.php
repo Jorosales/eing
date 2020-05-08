@@ -12,10 +12,11 @@
 			<?php if(isset($usuarios)) ?>
 					<?=$usuarios?>
 
+			<?php /* ?>
 			<li>
 				<a href="<?php echo base_url();?>auth/change_password"><i class="fa fa-link"></i> <span>Modificar Contraseña</span></a>
 			</li>
-
+			*/ ?>
 			<?php if(isset($abm)) ?>
 					<?=$abm?>
 

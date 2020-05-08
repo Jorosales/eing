@@ -3,21 +3,27 @@
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1><?php echo lang('index_heading');?></h1>
+		<h1><?php //echo lang('index_heading');?></h1>
 	</section>
 
 	<!-- Main content -->
 	<section class="content">
 		<!-- Your Page Content Here -->
 		<?php if($message != '') { ?>
-		<div class="alert alert-danger alert-dismissible">
+		<div class="alert alert-success alert-dismissible">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			<p><?php echo $message;?></p>
 		</div>
 		<?php } ?>
+
+		<?php echo $this->template->boton_nuevo('auth/create_user', 'Nuevo Usuario'); ?>
+		<br><br>
 		<div class="row">
 			<div class="col-md-11">
 				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title"><?php echo lang('index_heading');?></h3>
+					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
 						<table id="tabla" class="table table-bordered table-striped">

@@ -2,7 +2,7 @@
  
 class Docente extends MX_Controller{
     
-    public $name = 'El docente';
+    private $name = 'El docente';
     function __construct()
     {
         parent::__construct();    
@@ -16,6 +16,7 @@ class Docente extends MX_Controller{
             $this->load->module('template');
             $this->load->model('Docente_model');
             $this->load->model('Persona_model');
+            $this->load->model('Planes_model');
             $this->load->model('Ciclo_model');
             $this->load->model('Ciclo_materia_model');
             $this->load->model('Docente_categoria_model');
@@ -25,12 +26,8 @@ class Docente extends MX_Controller{
         }
     } 
 
-    /*
-     * Listing of docente
-     */
-    function index($mensaje=null)
+    public function index($mensaje=null)
     {
-
         if (!$this->ion_auth->logged_in())
         {
             redirect('login', 'refresh');
@@ -46,18 +43,13 @@ class Docente extends MX_Controller{
         }
     }
 
-    /*
-     * Adding a new docente
-     */
-    function add()
-    {   
-
+    public function add()
+    {
         $this->form_validation->set_rules('apellido',lang('form_last_name'),'required');
         $this->form_validation->set_rules('nombre','1º Nombre','required');
         $this->form_validation->set_rules('cuit',lang('form_cuit'),'alpha_numeric');
         $this->form_validation->set_rules('email1',sprintf(lang('form_email'),'1'),'required|valid_email');
         $this->form_validation->set_rules('email2',sprintf(lang('form_email'),'2'),'valid_email');
-
         
         if($this->form_validation->run())     
         {   
@@ -93,8 +85,6 @@ class Docente extends MX_Controller{
 
             $cvar_id = $this->Docente_model->add_cvar($params_cvar);
 
-
-            
             if ($persona_id && $docente_id && $cvar_id)
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                 sprintf(lang('record_add_success_text'), $this->name));    
@@ -102,7 +92,8 @@ class Docente extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_add_error_text'), $this->name)); 
                     
-            $this->index($mensaje);
+            //$this->index($mensaje);
+            redirect('abm/docente/', 'refresh');
         }
         else
         {
@@ -113,15 +104,12 @@ class Docente extends MX_Controller{
         }
     }  
 
-    /*
-     * Editing a docente
-     */
-    function edit($id)
-    {   
+    public function edit($id)
+    {
         $data['docente'] = $this->Docente_model->get_docente($id);
-        $data['persona'] = $this->Persona_model->get_persona($data['docente']['id']);
+        $data['persona'] = $this->Persona_model->get_persona($data['docente']['persona_id']);
 
-        $data['docente']=array_merge($data['docente'], $data['persona']); 
+        $data['docente']=array_merge($data['persona'], $data['docente']); 
         
         if(isset($data['docente']['id']))
         {
@@ -160,7 +148,7 @@ class Docente extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                     sprintf(lang('record_edit_error_text'), $this->name));    
                     
-                $this->index($mensaje);
+                redirect('abm/docente/', 'refresh');
             }
             else
             {
@@ -174,10 +162,7 @@ class Docente extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting docente
-     */
-    function remove($id)
+    public function remove($id)
     {
         $docente = $this->Docente_model->get_docente($id);
 
@@ -196,9 +181,8 @@ class Docente extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     }
     
-
-    function asignar_materia($id)
-    {   
+    public function asignar_materia($id)
+    {
         $data['docente'] = $this->Docente_model->get_docente($id);
         $data['persona'] = $this->Persona_model->get_persona($data['docente']['persona_id']);
 
@@ -228,7 +212,8 @@ class Docente extends MX_Controller{
             }
             else
             {
-                $data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
+                //$data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
+                $data['planes'] = $this->Planes_model->get_all_planes();
                 $data['user'] = $this->ion_auth->user()->row(); 
         
                 $this->template->cargar_vista('abm/docente/asignar_materia', $data);
@@ -238,8 +223,7 @@ class Docente extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     }
 
-
-    function remove_materia_docente($id)
+    public function remove_materia_docente($id)
     {
         $materia = $this->Docente_model->get_materia_asignada($id);
 
@@ -257,6 +241,5 @@ class Docente extends MX_Controller{
         else
             show_error(sprintf(lang('no_existe'), $this->name));
     }
-
 
 }

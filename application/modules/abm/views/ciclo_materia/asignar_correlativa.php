@@ -1,3 +1,5 @@
+<?= $this->template->boton_volver_a('abm/carrera/carrera_completa/'.$carrera[0]->id_plan, "Plan"); ?>
+
 <?php echo $this->template->get_perfil_materia($ciclo_materia['id']); ?>
 
 <div class="col-lg-11">
@@ -6,6 +8,12 @@
 		<div class="box-header with-border">
 		  	<h3 class="box-title"><?php echo lang('designate_correlative_heading');?></h3>
 		</div>
+
+		<div class="box-title">
+			<?php echo $this->template->boton_link('abm/correlatividad_tipo', 'Ver tipos correlativas'); ?>
+		</div>
+
+		<br>
 
 		<?php echo form_open('abm/ciclo_materia/asignar_correlativa/'.$ciclo_materia['id'],array("class"=>"form-horizontal")); ?>
 	

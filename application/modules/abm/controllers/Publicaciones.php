@@ -2,7 +2,7 @@
  
 class Publicaciones extends MX_Controller{
     
-    public $name = 'La publicación';
+    private $name = 'La publicación';
     function __construct()
     {
         parent::__construct();    
@@ -21,9 +21,6 @@ class Publicaciones extends MX_Controller{
         }
     } 
 
-    /*
-     * Listing of publicaciones
-     */
     public function index($mensaje=null)
     {
         $data['publicaciones'] = $this->Publicaciones_model->get_all_publicaciones();
@@ -33,17 +30,13 @@ class Publicaciones extends MX_Controller{
         $this->template->cargar_vista('abm/publicaciones/index', $data);
     }
 
-    /*
-     * Adding a new publicaciones
-     */
-    function add()
-    {   
+    public function add()
+    {
         $data['user'] = $this->ion_auth->user()->row();
-
         $this->form_validation->set_rules('titulo','Titulo','required|max_length[100]');
-        //$this->form_validation->set_rules('fecha','Fecha','required');
-		
-		if($this->form_validation->run())     
+        $this->form_validation->set_rules('imagen',lang('form_image'),'callback_image_file_check[imagen]');
+        
+		if($this->form_validation->run($this))     
         {   
             $f = getdate();
             $params = array(
@@ -51,7 +44,8 @@ class Publicaciones extends MX_Controller{
 				'modificador_id' => $data['user']->user_id,
 				'titulo' => $this->input->post('titulo'),
 				'fecha_creacion' => $f['year']."-".$f['mon']."-".$f['mday'],
-				'ultima_modificacion' => $f['year']."-".$f['mon']."-".$f['mday'],
+                'ultima_modificacion' => $f['year']."-".$f['mon']."-".$f['mday'],
+                'imagen' => $_FILES['imagen']['name'],
 				'contenido' => $this->input->post('contenido'),
                 'esta_publicado' => ($this->input->post('esta_publicado')==1)? 1 : 0,
                 'fecha' => $this->input->post('fecha'),
@@ -60,6 +54,8 @@ class Publicaciones extends MX_Controller{
                 'fin' => $this->input->post('fin'),
                 'tipo' => $this->input->post('tipo'),
             );
+
+            $imagen = $this->template->subir_archivo(IMAGES_UPLOAD.'/publicaciones', 'jpg|png', 'imagen');
             
             if ($this->Publicaciones_model->add_publicaciones($params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
@@ -68,7 +64,7 @@ class Publicaciones extends MX_Controller{
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_add_error_text'), $this->name)); 
                     
-            $this->index($mensaje);
+            redirect('abm/publicaciones/', 'refresh');
         }
         else
         {
@@ -77,11 +73,8 @@ class Publicaciones extends MX_Controller{
         }
     }  
 
-    /*
-     * Editing a publicaciones
-     */
-    function edit($id)
-    {   
+    public function edit($id)
+    {
         // check if the publicaciones exists before trying to edit it
         $data['publicacion'] = $this->Publicaciones_model->get_publicaciones($id);
         $data['user'] = $this->ion_auth->user()->row();
@@ -89,11 +82,11 @@ class Publicaciones extends MX_Controller{
         if(isset($data['publicacion']['id']))
         {
 			$this->form_validation->set_rules('titulo','Titulo','required|max_length[100]');
-			//$this->form_validation->set_rules('fecha','Fecha','required');
-		    
-			if($this->form_validation->run())     
+            $this->form_validation->set_rules('imagen',lang('form_image'),'callback_image_file_check[imagen]');			
+
+			if($this->form_validation->run($this))     
             {   
-               
+                //var_dump($_FILES['imagen']['name']); exit();
                 $f = getdate();
                 $params = array(
 					'creador_id' => $data['publicacion']['creador_id'],
@@ -109,6 +102,11 @@ class Publicaciones extends MX_Controller{
                     'fin' => ($this->input->post('fin')==NULL)?0:$this->input->post('fin'),
                     'tipo' => $this->input->post('tipo'),  
                 );
+
+                if($_FILES['imagen']['name'] != ''){
+                    $imagen = $this->template->subir_archivo(IMAGES_UPLOAD.'/publicaciones', 'jpg|png', 'imagen');
+                    $params['imagen']= $imagen['file_name'];
+                }
                 
                 if ($this->Publicaciones_model->update_publicaciones($id,$params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
@@ -117,7 +115,7 @@ class Publicaciones extends MX_Controller{
                         $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                     sprintf(lang('record_edit_error_text'), $this->name));    
                     
-                $this->index($mensaje);
+                redirect('abm/publicaciones/', 'refresh');
             }
             else
             {
@@ -132,10 +130,7 @@ class Publicaciones extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting publicaciones
-     */
-    function remove($id)
+    public function remove($id)
     {
         $publicaciones = $this->Publicaciones_model->get_publicaciones($id);
 
@@ -148,10 +143,16 @@ class Publicaciones extends MX_Controller{
                 $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                 sprintf(lang('record_remove_error_text'), $this->name));    
                 
-            $this->index($mensaje);
+            //$this->index($mensaje);
+            redirect('abm/publicaciones/', 'refresh');
         }
         else
             show_error(sprintf(lang('no_existe'), $this->name));
+    }
+
+    public function image_file_check($str, $nombre)
+    {
+        return $this->template->image_file_check($str, $nombre);
     }
     
 }

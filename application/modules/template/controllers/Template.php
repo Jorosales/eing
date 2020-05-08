@@ -65,44 +65,10 @@ class Template extends MX_Controller
 		}
 	}
 
-
-/*	//Links
-
-	public function get_params()
-	{
-		$params['limit'] = RECORDS_PER_PAGE; 
-        $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
-        return $params;
-	}
-
-	public function get_config($pag, $count)
-	{
-		$config = $this->config->item('pagination');
-        $config['base_url'] = site_url($pag);
-        $config['total_rows'] = $count;
-        $config['attributes'] = array('class' => 'page-link');
-        
-        return $config;
-	}
-
-	public function get_links()
-	{
-		$links = '<div class="clearfix">
-					<div class="float-right">
-					    '.$this->pagination->create_links().'    
-					</div>
-				</div>';
-        
-        return $links;
-	}
-
-	//Fin Links*/
-
-
 	public function subir_archivo($path, $type, $name)
 	{
 		$config['upload_path'] = $path;
-        $config['allowed_types'] = $type;
+		$config['allowed_types'] = $type;
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
 
@@ -130,8 +96,50 @@ class Template extends MX_Controller
 	public function boton_nuevo($url, $titulo)
 	{
 		$boton = '<div class="col-md-3 col-md-offset-8">
-					<a href='.site_url($url).' class="btn btn-block btn-success btn-lg">'.$titulo.'</a> 
-				  </div> <br>';
+					<a href='.site_url($url).' style="border: 1px solid rgba(0,0,0,0.1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);" class="btn btn-block btn-success btn-lg">'.$titulo.'</a> 
+				  </div> <br><br>';
+		return $boton;
+	}
+
+	public function boton_atras($url=null)
+	{
+		if(isset($_SERVER["HTTP_REFERER"])){
+			$url = (is_null($url))?$_SERVER["HTTP_REFERER"]:site_url($url);
+		}
+		else{
+			$url =  current_url();
+		}
+		
+		$boton = '<div class="col-md-3">
+					<a href='.$url.'> <i class="fas fa-backward"> Atrás </i> </a>
+				  </div>';
+		return $boton;
+	}
+	
+	public function boton_volver_a($url, $volvera)
+	{
+		if($url){
+			$url = site_url($url);
+		}
+		else{
+			$url =  current_url();
+		}
+		
+		$boton = '<div class="col-md-3">
+					<a href='.$url.'> <i class="fas fa-backward"> Volver a '. $volvera .' </i> </a>
+				  </div>';
+		return $boton;
+	}
+
+	public function boton_link($url, $titulo)
+	{
+		$boton = ' 
+					<div class="btn-group demoPadder col-md-offset-10" role="group" aria-label="Basic example" style="margin-right:0px">
+						<a target="_blank" href="'.site_url($url).'"> 
+							<button type="button" class="btn btn-success btn-md-3" style="border: 1px solid rgba(0,0,0,0.1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);">'.$titulo.'</button>
+						</a>
+					</div>
+					';
 		return $boton;
 	}
 
@@ -186,7 +194,7 @@ class Template extends MX_Controller
 	{
 		$submit = '	
 					<div class="col-md-3 col-md-offset-7">
-						<button type="submit" class="btn btn-block btn-success btn-md">Guardar</button>
+						<button style="border: 1px solid rgba(0,0,0,0.1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);" type="submit" class="btn btn-block btn-success btn-md">Guardar</button>
 					</div>';
 		return $submit;
 	}
@@ -207,8 +215,6 @@ class Template extends MX_Controller
                 return FALSE;
             }
         }
-
-        
     }
 
     public function image_file_check($str, $nombre)
@@ -244,6 +250,9 @@ class Template extends MX_Controller
     public function get_perfil_docente($id)
 	{
         $this->load->model('Categoria_model');
+        $this->load->model('Docente_categoria_model');
+        $this->load->model('Docente_model');
+        $this->load->model('Persona_model');
 		$data['categorias'] = $this->Docente_categoria_model->get_all_categoria();
 		$data['docente'] = $this->Docente_model->get_docente($id);
         $data['persona'] = $this->Persona_model->get_persona($data['docente']['persona_id']);
@@ -263,11 +272,33 @@ class Template extends MX_Controller
 		$materia = $this->Materia_model->get_materia($data['ciclo_materia']['id_materia']);
 		$data['ciclo_materia']= array_merge($materia, $data['ciclo_materia']);
 		
-		$data['regimenes']= $this->Regimen_model->get_all_regimen();;
+		$data['regimenes']= $this->Regimen_model->get_all_regimen();
 		$data['tipos']= $this->Materias_tipo_model->get_all_materias_tipo();
-		$data['ciclos']= $this->Ciclo_model->get_all_ciclos();;
+		$data['ciclos']= $this->Ciclo_model->get_all_ciclos();
 		return $this->load->view('materia-profile',$data, true);
-	}	
+	}
+	
+	public function get_perfil_plan($id)
+	{
+        $this->load->model('Carrera_model');
+        $this->load->model('Planes_model');
+		$this->load->model('Ciclo_model');
+		$this->load->model('Titulo_model');
+		
+		$data['plan'] = $this->Planes_model->get_planes($id);		
+		$data['carrera'] = $this->Carrera_model->get_carrera($data['plan']['id_carrera']);		
+		$data['ciclos']= $this->Ciclo_model->get_ciclos_by_plan($id);
+		$data['titulos']= $this->Titulo_model->get_all_titulos_by_plan($id);
+
+		return $this->load->view('plan-profile',$data, true);
+	}
+	
+	public function get_perfil_carrera($id)
+	{
+        $this->load->model('Carrera_model');
+		$data['carrera'] = $this->Carrera_model->get_carrera($id);
+		return $this->load->view('carrera-profile',$data, true);
+	}
 
 	public function get_anios($years)
     {

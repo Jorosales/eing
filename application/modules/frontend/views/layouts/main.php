@@ -14,13 +14,15 @@
 	<body>
 		<?php $this->load->view('nav', $data);?>
 		
-		<div class="container">
+		<div class="container col-lg-12">
 		<?php 
 			if(isset($_view) && $_view)
 		    $this->load->view($_view);
 		?>
 		</div>
 	
+
+		<hr>
 		<?php 
 			$this->load->view('footer', $data);
 		?>

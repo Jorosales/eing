@@ -2,12 +2,13 @@
 
 class Escuela_model  extends CI_Model  {
 	
-	function get_escuela($id)
+	public function get_escuela($id)
     {
         return $this->db->get_where('escuela',array('id'=>$id))->row_array();
     }
 
-    function aclararColor($color, $cant){
+	public function aclararColor($color, $cant)
+	{
 		 //voy a extraer las tres partes del color
 		 $rojo = substr($color,1,2);
 		 $verd = substr($color,3,2);

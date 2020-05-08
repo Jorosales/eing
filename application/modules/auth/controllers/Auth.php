@@ -421,7 +421,7 @@ class Auth extends MX_Controller
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('confirm', $this->lang->line('deactivate_validation_confirm_label'), 'required');
 		$this->form_validation->set_rules('id', $this->lang->line('deactivate_validation_user_id_label'), 'required|alpha_numeric');
-
+		/*
 		if ($this->form_validation->run() === FALSE)
 		{
 			// insert csrf check
@@ -454,7 +454,10 @@ class Auth extends MX_Controller
 
 			// redirect them back to the auth page
 			redirect('auth', 'refresh');
-		}
+		}*/
+		
+		$this->ion_auth->deactivate($id);
+		redirect('auth', 'refresh');
 	}
 
 	/**

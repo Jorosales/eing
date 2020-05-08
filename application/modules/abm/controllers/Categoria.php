@@ -1,12 +1,10 @@
 <?php
 
- 
 class Categoria extends MX_Controller{
     
-    public $name = 'La categoría';
+    private $name = 'La categoría';
     function __construct()
     {
-
         parent::__construct();    
         $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
         $this->load->library(array('ion_auth', 'form_validation'));
@@ -23,9 +21,6 @@ class Categoria extends MX_Controller{
         }
     } 
 
-    /*
-     * Listing of titulos
-     */
     function index($mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
@@ -41,9 +36,6 @@ class Categoria extends MX_Controller{
         }
     }
 
-    /*
-     * Adding a new categoria
-     */
     function add()
     {   
         $this->form_validation->set_rules('nombre',lang('form_name'),'required');
@@ -72,9 +64,6 @@ class Categoria extends MX_Controller{
         }
     }  
 
-    /*
-     * Editing a categoria
-     */
     function edit($id)
     {   
         $data['categoria'] = $this->Categoria_model->get_categoria($id); 
@@ -108,10 +97,6 @@ class Categoria extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-
-    /*
-     * Deleting categoria
-     */
     function remove($id)
     {
         $categoria = $this->Categoria_model->get_categoria($id);

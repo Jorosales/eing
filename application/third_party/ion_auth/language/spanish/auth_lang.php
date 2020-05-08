@@ -178,8 +178,8 @@ $lang['designate_optative_heading']    				= 'Asignar optativa';
 $lang['designate_correlative_heading']    			= 'Asignar correlativa';
 $lang['create_correlative_type_heading']    		= 'Crear tipo de correlativa';
 $lang['edit_correlative_type_heading']    			= 'Editar tipo de correlativa';
-$lang['create_cvar_heading']    					= 'Crear CVAR';
-$lang['edit_cvar_heading']    						= 'Editar CVAR';
+$lang['create_cvar_heading']    					= 'Crear Resumido';
+$lang['edit_cvar_heading']    						= 'Editar CV Resumido';
 $lang['create_teacher_heading']    					= 'Crear docente';
 $lang['edit_teacher_heading']    					= 'Editar docente';
 $lang['designate_course_heading']    				= 'Asignar materias';
@@ -197,6 +197,13 @@ $lang['create_title_heading']    					= 'Crear título';
 $lang['edit_title_heading'] 	   					= 'Editar título';
 $lang['create_publication_heading']    				= 'Crear Publicación';
 $lang['edit_publication_heading'] 	   				= 'Editar Publicación';
+$lang['edit_school_heading'] 	   				= 'Editar Escuela';
+$lang['create_student_heading']    					= 'Crear Estudiante';
+$lang['edit_student_heading'] 	   					= 'Editar Estudiante';
+$lang['create_institution_heading']    				= 'Crear Institución';
+$lang['edit_institution_heading'] 	   				= 'Editar Institución';
+$lang['create_project_heading']    					= 'Crear Proyecto';
+$lang['edit_project_heading'] 	   					= 'Editar Proyecto';
 
 //Comunes
 $lang['no_existe']    					= '%s no existe.';
@@ -204,8 +211,13 @@ $lang['no_existe']    					= '%s no existe.';
 $lang['record_success']    				= 'Datos Registrados';
 $lang['record_error']    				= 'Error';
 
+$lang['record_duplicated']    			= 'Registro duplicado.';
+
 $lang['record_add_success_text']    	= '%s se registró correctamente.';
+
 $lang['record_add_error_text']    		= 'Hubo un error, %s no se pudo registrar.';
+
+$lang['record_duplicated_text']    		= 'Hubo un error, %s no se pudo registrar.';
 
 $lang['record_edit_success_text']   	= '%s se actualizó correctamente';
 $lang['record_edit_error_text']   		= 'Hubo un error, %s no se pudo modificar.';
@@ -218,6 +230,7 @@ $lang['plan_activate_error']    		= 'El plan no se pudo activar, debido a que la
 
 $lang['plan_deactivate_success']    	= 'El plan se desactivo correctamente.';
 $lang['plan_deactivate_error']    		= 'El plan no se pudo desactivar.';
+
 
 $lang['title_cycle_course']  	= 'Ciclo-Materias';
 $lang['title_category']  		= 'Categorías';
@@ -236,6 +249,11 @@ $lang['title_designated']		= 'Correlativas Asignadas';
 $lang['title_optative']			= 'Optativas Asignadas';
 $lang['title_designated_course']= 'Materias Asignadas';
 $lang['title_publication']      = 'Publicaciones';
+$lang['title_tutor']      		= 'Tutores';
+$lang['title_institution']      		= 'Instituciones';
+$lang['title_student']      		= 'Estudiantes';
+$lang['title_projects']      		= 'Proyectos';
+
 
 
 //TITULOS DE TABLAS
@@ -273,7 +291,7 @@ $lang['table_code_th']    		= 'Código';
 $lang['table_teacher_th']    	= 'Docente';
 $lang['table_category_th']    	= 'Categoria';
 $lang['table_description_th']   = 'Descripción';
-$lang['table_cvar_th']   		= 'CVAR';
+$lang['table_cvar_th']   		= 'CV Resumido';
 $lang['table_asignation_th']   	= 'Asignar Materia';
 
 //Escuelas
@@ -288,7 +306,24 @@ $lang['table_title_th']    	    = 'Título';
 $lang['table_created_date_th']  = 'Creado';
 $lang['table_modified_date_th'] = 'Modificado';
 $lang['table_published_th']    	= 'Publicado';
-$lang['table_date_th']    	= 'Fecha';
+$lang['table_date_th']    		= 'Fecha';
+
+//Estudiantes
+$lang['table_mat_th']    		= 'Matrícula';
+$lang['table_last_name_th']    		= 'Apellido';
+$lang['table_identification_number_th']    		= 'DNI';
+
+//Instituciones
+$lang['table_cuit_th']    		= 'CUIT';
+$lang['table_address_th']    	= 'Dirección';
+
+//Proyectos
+$lang['table_active_project_th']= 'Proyectos Activos';
+$lang['table_institution_th']   = 'Insitución';
+$lang['table_tutor_th']    		= 'Tutor';
+$lang['table_active_th']    	= 'Activo';
+
+
 
 //TITULOS DE FORMULARIOS
 $lang['form_name']    			= 'Nombre';
@@ -340,6 +375,16 @@ $lang['form_start']  			= 'Comienzo';
 $lang['form_end']    			= 'Fin';
 $lang['form_place']  			= 'Lugar';
 $lang['form_type']  			= 'Tipo';
+
+$lang['form_mat']  				= 'Legajo';
+
+$lang['form_address']  			= 'Dirección';
+
+$lang['form_institution']  		= 'Institución';
+$lang['form_tutor'] 	 		= 'Tutor';
+$lang['form_project_type']		= 'Tipo Proyecto';
+$lang['form_observations']		= 'Observaciones';
+$lang['form_student']		= 'Estudiante';
 
 
 $lang['undefined_course']    	= 'La materia no existe.';

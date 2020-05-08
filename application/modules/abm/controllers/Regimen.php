@@ -1,9 +1,8 @@
-<?php
-
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  
 class Regimen extends MX_Controller{
     
-    public $name = 'El regimen';
+    private $name = 'El regimen';
     function __construct()
     {
         parent::__construct();    
@@ -22,10 +21,7 @@ class Regimen extends MX_Controller{
         }
     } 
 
-    /*
-     * Listing of regimen
-     */
-    function index($mensaje=null)
+    public function index($mensaje=null)
     {
 
         if (!$this->ion_auth->logged_in())
@@ -42,11 +38,8 @@ class Regimen extends MX_Controller{
         }
     }
 
-    /*
-     * Adding a new regimen
-     */
-    function add()
-    {   
+    public function add()
+    {
         $this->form_validation->set_rules('nombre',lang('form_name'),'required');
         
         if($this->form_validation->run($this))     
@@ -73,11 +66,8 @@ class Regimen extends MX_Controller{
         }
     }  
 
-    /*
-     * Editing a regimen
-     */
-    function edit($id)
-    {   
+    public function edit($id)
+    {
         $data['regimen'] = $this->Regimen_model->get_regimen($id); 
         
         if(isset($data['regimen']['id']))
@@ -109,11 +99,7 @@ class Regimen extends MX_Controller{
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-
-    /*
-     * Deleting regimen
-     */
-    function remove($id)
+    public function remove($id)
     {
         $regimen = $this->Regimen_model->get_regimen($id);
 

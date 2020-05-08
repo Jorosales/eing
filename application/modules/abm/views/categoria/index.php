@@ -2,6 +2,7 @@
 	echo $alerta;
 } 
 ?>
+
 <?php echo $this->template->boton_nuevo('abm/categoria/add', 'Nueva Categoria'); ?>
 
 <hr>

@@ -30,9 +30,11 @@ class Carrera_model  extends CI_Model  {
       	$this->db->join('materias_tipo', 'materias_tipo.id = materias.id_tipo');
 
       	$this->db->where('carrera.id', $idCarrera);
-      	$this->db->where('ciclos.id_orientacion', null);
-      	$this->db->where('planes.vigente', 1);
-      	$this->db->order_by('CAST(ciclo_materia.codigo as UNSIGNED INTEGER), ciclo_materia.anio, ciclo_materia.id_regimen');
+      	//$this->db->where('ciclos.id_orientacion', null);
+        $this->db->where('materias.id_tipo !=', 3);
+        $this->db->where('planes.vigente', 1);
+      	$this->db->where('carrera.activo', 1);
+      	$this->db->order_by('ciclo_materia.anio, CAST(ciclo_materia.codigo as UNSIGNED INTEGER), ciclo_materia.id_regimen');
 
       	return $this->db->get()->result();
 	}
@@ -78,20 +80,16 @@ class Carrera_model  extends CI_Model  {
 	    return $this->db->get()->result();
 	}
 
-	function get_carrera($id)
+	public function get_carrera($id)
     {
         return $this->db->get_where('carrera',array('id'=>$id))->row_array();
     }
     
-    /*
-     * Get all carrera count
-     */
     function get_all_carrera_count()
     {
         $this->db->from('carrera');
         return $this->db->count_all_results();
-    }
-        
+    }    
             	
 }
 

@@ -2,8 +2,7 @@
 
 class Materia_tipo extends MX_Controller {
     
-    public $name = 'El tipo materia';
-
+    private $name = 'El tipo materia';
 	function __construct()
     {
 		parent::__construct();    
@@ -22,7 +21,7 @@ class Materia_tipo extends MX_Controller {
         }
     }
 
-    function index($mensaje=null)
+    public function index($mensaje=null)
     {
         if (!$this->ion_auth->logged_in())
         {
@@ -39,11 +38,8 @@ class Materia_tipo extends MX_Controller {
 
     }
 
-    /*
-     * Adding a new materia
-     */
-    function add()
-    {   
+    public function add()
+    {
 		$this->form_validation->set_rules('nombre',lang('form_name'),'required');
 		
 		if($this->form_validation->run())     
@@ -69,11 +65,8 @@ class Materia_tipo extends MX_Controller {
         }
     }  
 
-    /*
-     * Editing a materia
-     */
-    function edit($id)
-    {   
+    public function edit($id)
+    {
         $data['tipo'] = $this->Materias_tipo_model->get_materias_tipo($id);
         
         if(isset($data['tipo']['id']))
@@ -106,10 +99,7 @@ class Materia_tipo extends MX_Controller {
             show_error(sprintf(lang('no_existe'), $this->name));
     } 
 
-    /*
-     * Deleting materia
-     */
-    function remove($id)
+    public function remove($id)
     {
         $tipo = $this->Materias_tipo_model->get_materias_tipo($id);
 

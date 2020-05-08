@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-
 class Docente extends MX_Controller {
 
-	function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
 		$this->load->library('table');
 		$this->load->model('Docente_model');
@@ -13,7 +13,7 @@ class Docente extends MX_Controller {
 	}
 
 	public function index()
-	{	
+	{
 		$data['listado'] = $this->Docente_model->datosLista();
 
 		$data['_view'] = 'pages/docentesList';

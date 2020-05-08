@@ -4,7 +4,7 @@
 			<!-- Main Header -->
 			<header class="main-header">
 				<!-- Logo -->
-				<a href="index2.html" class="logo">
+				<a href="<?= site_url('auth'); ?>" class="logo">
 					 <!-- mini logo for sidebar mini 50x50 pixels -->
 					 <span class="logo-mini"><b>A</b>P</span>
 					 <!-- logo for regular state and mobile devices -->
@@ -37,6 +37,9 @@
 									<li class="user-header">
 										<img src="<?php echo base_url(); ?>assets/dist/img/avatar.png" class="img-circle" alt="User Image">
 										<p><?php echo $user->first_name.' '.$user->last_name; ?><br/><?php echo $user->email; ?></p>
+									</li>
+									<li>
+										<a href="<?php echo base_url();?>auth/change_password" class="btn btn-default btn-flat" ><span>Modificar Contraseña</span></a>
 									</li>
 									<!-- Menu Footer-->
 									<li class="user-footer">

@@ -2,9 +2,9 @@
  
 class Cvar extends MX_Controller{
     
-    public $name = 'CVAR';
+    private $name = 'CV resumido';
     function __construct()
-    {   
+    {
         parent::__construct();    
         $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
         $this->load->library(array('ion_auth', 'form_validation'));
@@ -23,24 +23,25 @@ class Cvar extends MX_Controller{
         }
     } 
 
-    /*
-     * Editing a docente
-     */
-    function edit($id, $mensaje=null)
-    {   
+    public function edit($id)
+    {
         $data['docente'] = $this->Docente_model->get_docente($id);
-        $data['persona'] = $this->Persona_model->get_persona($data['docente']['id']);
+        $data['persona'] = $this->Persona_model->get_persona($data['docente']['persona_id']);
         $data['cvar'] = $this->Docente_model->get_cvar_by_docente($id);
-
-        $data['docente']=array_merge($data['docente'], $data['persona']); 
+        $data['docente']=array_merge($data['persona'], $data['docente']); 
         
         if(isset($data['docente']['id']))
-        {
-            $this->form_validation->set_rules('areas','areas','required');
+        {   
 
-            if($this->form_validation->run() && is_null($mensaje))     
+            $this->form_validation->set_rules('areas','Áreas de actuación','max_length[1000]');
+            $this->form_validation->set_rules('experticia','Experticia','max_length[1000]');
+            $this->form_validation->set_rules('grado','Grado','max_length[1000]');
+            $this->form_validation->set_rules('especializacion','Especialización','max_length[1000]');
+            $this->form_validation->set_rules('maestria','Maestria','max_length[1000]');
+            $this->form_validation->set_rules('doctorado','Doctorado','max_length[1000]');
+
+            if($this->form_validation->run())     
             {   
-
                 $params = array(
                     'areas' => $this->input->post('areas'),
                     'experticia' => $this->input->post('experticia'),
@@ -49,21 +50,23 @@ class Cvar extends MX_Controller{
                     'maestria' => $this->input->post('maestria'),
                     'doctorado' => $this->input->post('doctorado')
                 );            
-
+				
                 if ($this->Docente_model->update_cvar($id,$params))
                     $mensaje =  $this->template->cargar_alerta('success', lang('record_success'), 
                                     sprintf(lang('record_edit_success_text'), $this->name));    
                 else   
                     $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                     sprintf(lang('record_edit_error_text'), $this->name));    
-                    
-                $this->edit($id, $mensaje);
+                
+                $data['docentes'] = $this->Docente_model->get_all_docente();
+                $data['alerta'] = $mensaje;
+                $this->template->cargar_vista('abm/docente/index', $data);
             }
             else
             {
                 $data['categorias'] = $this->Docente_categoria_model->get_all_categoria(); 
                 $data['user'] = $this->ion_auth->user()->row(); 
-                $data['alerta'] = $mensaje;
+                
                 $this->template->cargar_vista('abm/cvar/edit', $data);
             }
         }

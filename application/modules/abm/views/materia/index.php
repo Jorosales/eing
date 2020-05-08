@@ -2,6 +2,7 @@
 	echo $alerta;
 	} 
 ?>
+<?= $this->template->boton_atras(); ?>
 
 <?php echo $this->template->boton_nuevo('abm/materia/add', 'Nueva Materia'); ?>
 
@@ -11,6 +12,9 @@
 	<div class="box">
 		<div class="box-header">
 		  <h3 class="box-title"><?php echo lang('title_course');?></h3>
+		</div>
+		<div class="box-title">
+			<?php echo $this->template->boton_link('materia_tipo', 'Tipos de materias'); ?>
 		</div>
 		<!-- /.box-header -->
 		<div class="box-body">

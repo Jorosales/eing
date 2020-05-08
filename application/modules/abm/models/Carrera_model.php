@@ -2,84 +2,62 @@
 
 class Carrera_model  extends CI_Model  {
 	
-	function get_carrera($id)
+	public function get_carrera($id)
     {
         return $this->db->get_where('carrera',array('id'=>$id))->row_array();
     }
     
-    /*
-     * Get all carrera count
-     */
-    function get_all_carrera_count()
+    public function get_all_carrera_count()
     {
         $this->db->from('carrera');
         return $this->db->count_all_results();
     }
         
-    /*
-     * Get all carrera
-     */
-    function get_all_carrera()
+    public function get_all_carrera()
     {
         $this->db->order_by('id', 'desc');
         return $this->db->get('carrera')->result();
     }
         
-    /*
-     * function to add new carrera
-     */
-    function add_carrera($params)
+    public function add_carrera($params)
     {
         $this->db->insert('carrera',$params);
         return $this->db->insert_id();
     }
     
-    /*
-     * function to update carrera
-     */
-    function update_carrera($id,$params)
+    public function update_carrera($id,$params)
     {
         $this->db->where('id',$id);
         return $this->db->update('carrera',$params);
     }
-    
-    /*
-     * function to delete carrera
-     */
-    function delete_carrera($id)
+
+    public function delete_carrera($id)
     {
         return $this->db->delete('carrera',array('id'=>$id));
     }	
 
-    /*
-     * function to change status carrera
-     */
-    function change_status($id, $params)
+    public function change_status($id, $params)
     {
         $this->db->where('id',$id);
         return $this->db->update('carrera',$params);
     }
 
-
-
-
-
-
-    function get_data_carrera($id_carrera){
-        $this->db->select(' carrera.nombre AS carrera, 
+    public function get_data_carrera($id_plan)
+    {
+        $this->db->select(' carrera.nombre AS carrera, carrera.id AS carrera_id, 
                             planes.id as plan_id, planes.nombre AS plan, planes.duracion, planes.vigente, 
                             orientaciones.nombre AS orientacion, 
                             titulos.nombre AS titulo');    
         $this->db->from('carrera');
         $this->db->join('planes', 'planes.id_carrera = carrera.id');
         $this->db->join('orientaciones', 'orientaciones.id_plan = planes.id', 'LEFT');
-        $this->db->join('titulos', 'titulos.id_plan = planes.id');
-        $this->db->where('carrera.id', $id_carrera);
-        $this->db->where('planes.vigente', 1);
+        $this->db->join('titulos', 'titulos.id_plan = planes.id', 'LEFT');
+        $this->db->where('planes.id', $id_plan);
         return $this->db->get()->result();
     }
 
-    function get_ciclos_plan($id_plan){
+    public function get_ciclos_plan($id_plan)
+    {
 
         $this->db->select('*');
         $this->db->from('ciclos');
@@ -87,7 +65,8 @@ class Carrera_model  extends CI_Model  {
         return $this->db->get()->result();
     }       
     
-    function existe_orientacion($id_plan){
+    public function existe_orientacion($id_plan)
+    {
 
         $this->db->from('orientaciones');
         $this->db->where('id_plan', $id_plan);
@@ -99,14 +78,15 @@ class Carrera_model  extends CI_Model  {
             return false;
     }
 
-    function get_orientaciones($id_plan)
+    public function get_orientaciones($id_plan)
     {
         $this->db->from('orientaciones');
         $this->db->where('id_plan', $id_plan);
         return $this->db->get()->result();
     }
 
-    function get_materias_ciclo($id_ciclo){
+    public function get_materias_ciclo($id_ciclo)
+    {
         $this->db->select(' ciclo_materia.id as materia_id,
                             ciclo_materia.anio as anio,
                             materias.nombre as materia, 
@@ -121,7 +101,8 @@ class Carrera_model  extends CI_Model  {
         return $this->db->get()->result();
     }
 
-    function get_materias_orientacion($id_materia, $id_orientacion=null){
+    public function get_materias_orientacion($id_materia, $id_orientacion=null)
+    {
         $this->db->select(' optativas.id_optativa as id, materias.nombre as nombre');    
         $this->db->from('optativas');
         $this->db->join('ciclo_materia', 'ciclo_materia.id = optativas.id_origen');
@@ -137,7 +118,8 @@ class Carrera_model  extends CI_Model  {
         return $this->db->get()->result();
     }
 
-    function get_plan_carrera($id_plan){
+    public function get_plan_carrera($id_plan)
+    {
         $this->db->select(' ciclos.nombre as ciclo, 
                             ciclo_materia.id as materia_id,
                             ciclo_materia.anio as anio,
@@ -155,8 +137,8 @@ class Carrera_model  extends CI_Model  {
         return $this->db->get()->result();
     }
 
-
-    function get_optativas_materia($id_materia){
+    public function get_optativas_materia($id_materia)
+    {
         $this->db->select(' optativas.id_optativa as id, materias.nombre as nombre');    
         $this->db->from('optativas');
         $this->db->join('ciclo_materia', 'ciclo_materia.id = optativas.id_origen');
@@ -166,7 +148,8 @@ class Carrera_model  extends CI_Model  {
         return $this->db->get()->result();
     }
 
-    function get_carrera_completa($id_carrera){
+    public function get_carrera_completa($id_carrera)
+    {
         $carrera['data'] = $this->get_data_carrera($id_carrera);
         
         if (count($carrera['data']) > 0) {
@@ -194,8 +177,6 @@ class Carrera_model  extends CI_Model  {
                 }
             }
         }
-        
-
         return $carrera;
     }
 
