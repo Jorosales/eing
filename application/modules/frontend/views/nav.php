@@ -36,6 +36,10 @@
                 <li class="nav-item">
                     <a class="nav-link menu" href="<?= base_url('docentes') ?>">Docentes</a>
 				</li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu" href="<?= base_url('cronograma') ?>">Cursos</a>
+                </li>
                 
                 <?php foreach ($tipo_publicaciones as $tipo) {?>
                     <li class="nav-item">
