@@ -204,6 +204,8 @@ $lang['create_institution_heading']    				= 'Crear Institución';
 $lang['edit_institution_heading'] 	   				= 'Editar Institución';
 $lang['create_project_heading']    					= 'Crear Proyecto';
 $lang['edit_project_heading'] 	   					= 'Editar Proyecto';
+$lang['create_schedule_heading']    				= 'Crear Curso';
+$lang['edit_schedule_heading'] 	   					= 'Editar Curso';
 
 //Comunes
 $lang['no_existe']    					= '%s no existe.';
@@ -250,9 +252,10 @@ $lang['title_optative']			= 'Optativas Asignadas';
 $lang['title_designated_course']= 'Materias Asignadas';
 $lang['title_publication']      = 'Publicaciones';
 $lang['title_tutor']      		= 'Tutores';
-$lang['title_institution']      		= 'Instituciones';
-$lang['title_student']      		= 'Estudiantes';
-$lang['title_projects']      		= 'Proyectos';
+$lang['title_institution']      = 'Instituciones';
+$lang['title_student']      	= 'Estudiantes';
+$lang['title_projects']      	= 'Proyectos';
+$lang['title_schedule']      	= 'Cursos';
 
 
 
@@ -323,6 +326,12 @@ $lang['table_institution_th']   = 'Insitución';
 $lang['table_tutor_th']    		= 'Tutor';
 $lang['table_active_th']    	= 'Activo';
 
+//Cursos
+$lang['table_start_date_th']  	= 'Inicio';
+$lang['table_end_date_th'] 		= 'Fin';
+$lang['table_modality_th'] 		= 'Modalidad';
+$lang['table_teacher_cron_th'] 	= 'Profesor';
+$lang['table_link_th'] 			= 'Enlace';
 
 
 //TITULOS DE FORMULARIOS
@@ -371,7 +380,7 @@ $lang['form_color']  			= 'Color';
 $lang['form_title']  			= 'Título';
 $lang['form_content']  			= 'Contenido';
 $lang['form_date']  			= 'Fecha';
-$lang['form_start']  			= 'Comienzo';
+$lang['form_start']  			= 'Inicio';
 $lang['form_end']    			= 'Fin';
 $lang['form_place']  			= 'Lugar';
 $lang['form_type']  			= 'Tipo';
@@ -384,7 +393,11 @@ $lang['form_institution']  		= 'Institución';
 $lang['form_tutor'] 	 		= 'Tutor';
 $lang['form_project_type']		= 'Tipo Proyecto';
 $lang['form_observations']		= 'Observaciones';
-$lang['form_student']		= 'Estudiante';
+$lang['form_student']			= 'Estudiante';
+
+$lang['form_modality']			= 'Modalidad';
+$lang['form_link']				= 'Enlace';
+$lang['form_teacher_schedule']	= 'Profesor';
 
 
 $lang['undefined_course']    	= 'La materia no existe.';
@@ -394,3 +407,7 @@ $lang['undefined_publication']  = 'La publicación no existe.';
 $lang['undefined_page']    		= 'Usted está intentando acceder a una página que no existe.';
 $lang['login']    				= 'Iniciar sesión';
 $lang['forgot_my_password']    	= 'Olvidé mi contraseña'; 
+
+
+
+

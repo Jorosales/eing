@@ -41,6 +41,7 @@ class Publicaciones extends MX_Controller {
 		$this->load->view('layouts/main',$data);	
 	}
 
+
 }
 
 ?>
