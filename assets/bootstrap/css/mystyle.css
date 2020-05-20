@@ -862,3 +862,21 @@ img {
     #container {
       background-color: #dcdcdc;
     }
+
+
+
+    /*Tablas*/
+
+@media (max-width:599px) {
+  .no_mostrar{
+     display:none;
+  }
+}
+
+@media (min-width:600px) {
+  .mobile{
+     display:none;
+
+  }
+
+}

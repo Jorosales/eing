@@ -13,7 +13,7 @@
                         <th></th>
                         <th><a>Nombre</a></th>
                         <th><a>Apellido<a/></th>
-                        <th><a>Mail</a></th>
+                        <th class="no_mostrar"><a>Mail</a></th>
                     </tr>
                 </thead>
                 
@@ -27,7 +27,7 @@
 							</td>
 							<td><?=$row->nombre.' '.$row->nombre_2;?></td>
 							<td><?=$row->apellido;?></td>
-							<td><?=$row->email1;?></td>
+							<td class="no_mostrar"><?=$row->email1;?></td>
 						</tr>
 					<?php } ?>
 				</tbody>
