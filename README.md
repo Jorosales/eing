@@ -1,7 +1,7 @@
 # Escuela de Ingeniería de La Universidad de Chilecito
 Desarrollo de sistema de gestión de información de la Escuela de Ingeniería (EING), perteneciente a la Universidad Nacional de Chilecito.
 
-## Installation
+## Instalación
 
 > 1. Descargar el paquete y copiar en la carpeta del servidor correspondiente /var/www/html/eing (linux)
 > 2. Crear base de datos en el motor de mysql e importar el archivo que se encuentra en /database/eing.sql
@@ -16,6 +16,7 @@ Desarrollo de sistema de gestión de información de la Escuela de Ingeniería (
 
 
 ### Usuarios
+http://localhost/eing/login
 
 ### Admin Login
 Username: admin Password: 12345678

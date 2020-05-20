@@ -3,15 +3,14 @@
     
 	    <!-- Eventos -->
 	    <div class="container col-lg-2 sidenav eventos" id="tourpackages-carousel">
-			
 				<h4>Calendario de Eventos</h4>
-				<div class="row">
+				<div class="row" >
 					<div class="container card border-primary mb-3 text-center" style="width: 250px;">
 							<?php echo $calendario ?>
 					</div>
 				<?php if(!empty($prox_even)) {?>
 					<?php foreach ($prox_even as $e) { ?>
-						<div class="box">
+						<div class="box no_mostrar">
 							<div class="container">
 								<div class="row">
 									<div class="col-md-12">
@@ -42,33 +41,34 @@
 	    <!-- Eventos -->
 
 	    <!-- Carreras -->
-	    <div class="container col-lg-8 row align-content-center"> 
-	      <?php foreach ($carreras as $row) {?>
-				<a href="<?= base_url("/carrera/".$row->id) ?>">
-					<div class="card" style="width: 20rem; border-radius: 20px;">
-						<?php if ($row->imagen <> ''){ ?>
-							<img class="card-img-top" style="border-radius: 20px;" src="<?= base_url(IMAGES_UPLOAD.$row->imagen) ?>" alt="<?= $row->nombre?>">
-						<?php }else { ?>
-							<img class="card-img-top" src="<?= base_url('assets/images/default.jpg') ?>">
-						<?php } ?>
-						<div class="card-body">
-							<a href="<?= base_url("/carrera/".$row->id) ?>" class="btn btn-primary float-right">Ver Carrera</a>
+	    <div class="container col-lg-8"> 
+	    	<div class="row">
+		      <?php foreach ($carreras as $row) {?>
+					<a href="<?= base_url("/carrera/".$row->id) ?>">
+						<div class="card" style="width: 20rem; border-radius: 20px;">
+							<?php if ($row->imagen <> ''){ ?>
+								<img class="card-img-top" style="border-radius: 20px;" src="<?= base_url(IMAGES_UPLOAD.$row->imagen) ?>" alt="<?= $row->nombre?>">
+							<?php }else { ?>
+								<img class="card-img-top" src="<?= base_url('assets/images/default.jpg') ?>">
+							<?php } ?>
+							<div class="card-body">
+								<a href="<?= base_url("/carrera/".$row->id) ?>" class="btn btn-primary float-right">Ver Carrera</a>
+							</div>
 						</div>
-					</div>
-				</a>
-			<?php } ?> 
+					</a>
+				<?php } ?> 
+			</div>
 	    </div>
 	    <!-- Carreras -->
 	    
 
 	    <!-- Articulos -->
-	    <div class="container col-lg-2 sidenav articulos">
-			
+	    <div class="container col-lg-2 sidenav articulos no_mostrar">
 			<?php if(!empty($ult_art)) {?>
 				<h4>Artículos de interés</h4>
 				<div class="row">
 					<?php foreach ($ult_art as $a) { ?>
-						<div class="col-lg-12">
+						<div class="col-lg-10">
 						<div class="thumbnail img-thumb-bg">
 							<div class="overlay">  
 									<?php if($a->imagen == ''){?>

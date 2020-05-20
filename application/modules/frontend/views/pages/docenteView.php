@@ -1,7 +1,9 @@
 <main>
-	<div class="row col align-self-center" >
-		<div class="col-sm-3"></div>			
-	        <div class="receipt-main col-md-6">				
+	<div class="container">
+	<div class="row" >
+					
+	    
+	    <div class="receipt-main col-md-12">				
 				<div class="row">
 					<div class="receipt-header receipt-header-mid">
 						<div class="col-xs-12 col-sm-12 col-md-12">
@@ -75,7 +77,9 @@
 	                    </tbody>
 	                </table>
 	            </div>				
-	        </div>    
-		<div class="col-sm-3"></div>
+	    </div>    
+		
+		
 	</div>	
+	</div>
 </main>
