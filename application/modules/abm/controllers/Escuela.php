@@ -109,7 +109,7 @@ class Escuela extends MX_Controller {
                             $mensaje = $this->template->cargar_alerta('danger', lang('record_error'),
                                         sprintf(lang('record_edit_error_text'), $this->name));  
 
-                    $this->index($mensaje);
+                    redirect('abm/escuela/edit/'.$id, 'refresh');
                 }
                 else
                 {
