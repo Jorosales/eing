@@ -87,5 +87,20 @@ class Publicaciones_model  extends CI_Model  {
 	    return $this->db->get()->result();
 	}
 
+	public function hay_publicaciones($tipo)
+	{
+		$this->db->select('COUNT(id) as cantidad');
+      	$this->db->from('publicaciones');
+        $this->db->where('publicaciones.esta_publicado', 1);
+        $this->db->where('publicaciones.tipo', $tipo);
+		$this->db->where('YEAR(publicaciones.fecha)', date("Y"));
+        
+	    $publicaciones = $this->db->get()->result();
+		if($publicaciones[0]->cantidad > 0){
+			return TRUE;
+		}
+		else return FALSE;
+	}
+
 }
 ?>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 30-11-2019 a las 22:00:30
--- Versión del servidor: 5.7.23
--- Versión de PHP: 7.2.10
+-- Tiempo de generación: 10-05-2020 a las 03:32:21
+-- Versión del servidor: 5.7.24
+-- Versión de PHP: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -1069,6 +1069,25 @@ INSERT INTO `correlativas_tipo` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `cursos`
+--
+
+DROP TABLE IF EXISTS `cursos`;
+CREATE TABLE IF NOT EXISTS `cursos` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL,
+  `modalidad` varchar(300) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombre` varchar(300) COLLATE utf8_spanish_ci NOT NULL,
+  `enlace` varchar(300) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `profesor` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `publicado` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Datos básicos de los cursos.';
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `cvar`
 --
 
@@ -1547,7 +1566,7 @@ CREATE TABLE IF NOT EXISTS `optativas` (
   KEY `id_origen` (`id_origen`),
   KEY `id_origen_2` (`id_origen`),
   KEY `optativa_cm` (`id_optativa`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Tabla de unión para definir la relación entre una materia genérica y sus optativas..';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Tabla de unión para definir la relación entre una materia genérica y sus optativas..';
 
 -- --------------------------------------------------------
 
@@ -1809,15 +1828,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `company` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `phone` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Datos básicos de cada usuario.';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Datos básicos de cada usuario.';
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'admin', '$2y$08$kOKjC2ZI.r9ZDap5y6VXzuOLTW01TWZI/mE5yD1VNWCEWaYidlBzq', '', 'admin@admin.com', NULL, NULL, NULL, NULL, 1268889823, 1575146732, 1, 'Sergio', 'Arevalo', 'ADMIN', '0'),
-(2, '127.0.0.1', 'user', '$2y$08$4t0JshOQrSJwbqJbTLRineDCBESSAwNTkL4kRz9KzAq0RoyPXHF0i', NULL, 'user@user.com', NULL, 'dbh2E39uTZ5Ud9Tb.wO9ee37b9e7bb6f9ed71b6b', 1522911545, NULL, 1521634623, 1560525321, 1, 'user', 'user', 'UNdeC', '');
+(1, '127.0.0.1', 'admin', '$2y$08$bV8iRMZvzY4E1dVidjIaluUqFNz4d33hFAWuAg45KaOYMP6nASIX6', '', 'admin@admin.com', NULL, NULL, NULL, NULL, 1268889823, 1589079918, 1, 'Sergio', 'Arevalo', NULL, '0'),
+(2, '127.0.0.1', 'user', '$2y$08$4t0JshOQrSJwbqJbTLRineDCBESSAwNTkL4kRz9KzAq0RoyPXHF0i', NULL, 'user@user.com', 'dd743404b4f69a84acc5dab31b54355fc39fe7d2', 'dbh2E39uTZ5Ud9Tb.wO9ee37b9e7bb6f9ed71b6b', 1522911545, NULL, 1521634623, 1560525321, 0, 'user', 'user', 'UNdeC', ''),
+(3, '127.0.0.1', 'jrosales', '$2y$08$1WlA1c4tjgSbq8O2sN5tIe4W0mKaoruFm277JYHCOwPex4XFKhInm', NULL, 'jrosales@undec.edu.ar', NULL, NULL, NULL, NULL, 1589080012, 1589080063, 1, 'Jorge', 'Rosales', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -1834,16 +1854,16 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
   UNIQUE KEY `uc_users_groups` (`user_id`,`group_id`),
   KEY `fk_users_groups_users1_idx` (`user_id`),
   KEY `fk_users_groups_groups1_idx` (`group_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Tabla de unión para definir a que grupo pertenece cada usuario.';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Tabla de unión para definir a que grupo pertenece cada usuario.';
 
 --
 -- Volcado de datos para la tabla `users_groups`
 --
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 2, 2);
+(6, 1, 1),
+(3, 2, 2),
+(5, 3, 1);
 
 --
 -- Restricciones para tablas volcadas

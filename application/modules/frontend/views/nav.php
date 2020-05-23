@@ -7,6 +7,13 @@
         $ci2 = &get_instance();
         $ci2->load->model("Publicaciones_model");
         $tipo_publicaciones = $ci2->Publicaciones_model->getTipos();
+        foreach ($tipo_publicaciones as $tipo) {
+             $p[$tipo->id]= $ci2->Publicaciones_model->hay_publicaciones($tipo->id);
+        }
+
+        $ci3 = &get_instance();
+        $ci3->load->model("Cursos_model");
+        $cursos = $ci3->Cursos_model->hay_cursos();        
     ?>
     
     <nav class="navbar navbar-escuela bg-escuela navbar-expand-lg margen-inf" style="background-color: <?= $escuela['color'] ?>">
@@ -37,15 +44,19 @@
                     <a class="nav-link menu" href="<?= base_url('docentes') ?>">Docentes</a>
 				</li>
 
+                <?php if($cursos == TRUE){ ?>
                 <li class="nav-item">
                     <a class="nav-link menu" href="<?= base_url('cronograma') ?>">Cursos</a>
                 </li>
+                <?php } ?>
                 
                 <?php foreach ($tipo_publicaciones as $tipo) {?>
+                    <?php if ($p[$tipo->id]) { ?>
                     <li class="nav-item">
                         <a class="nav-link menu" href="<?= base_url("/publicaciones/".$tipo->id) ?>"><?=$tipo->nombre;?></a>
                     </li>
-                <?php } ?> 
+                    <?php } ?>
+                <?php } ?>  
 
             </ul>              
 		</div>
