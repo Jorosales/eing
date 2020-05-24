@@ -214,6 +214,10 @@ class Docente extends MX_Controller{
             {
                 //$data['ciclos'] = $this->Ciclo_model->get_all_ciclos();
                 $data['planes'] = $this->Planes_model->get_all_planes();
+                $data['ciclo'] = $this->Ciclo_model->get_ciclos_by_plan($data['planes'][0]->id);
+                $data['materias'] = $this->Ciclo_materia_model->fetch_materias($data['ciclo'][0]->id, FALSE);
+                //var_dump($data['materias']); exit();
+
                 $data['user'] = $this->ion_auth->user()->row(); 
         
                 $this->template->cargar_vista('abm/docente/asignar_materia', $data);

@@ -1,5 +1,11 @@
+<?php  
+        $ci = &get_instance();
+        $ci->load->model("Escuela_model");
+        $carreras= $ci->Escuela_model->get_escuela(1);
+?>
+
 	<head>
-		<title>EING</title>
+		<title><?=$carreras['universidad'] ?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="icon" type="image/png" href="<?= base_url('assets/images/favicon.png') ?>" />
 		<link rel="stylesheet" href="<?= base_url('assets/bootstrap/css/mystyle.css') ?>">

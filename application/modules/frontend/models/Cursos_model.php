@@ -21,5 +21,19 @@ class Cursos_model extends CI_Model  {
         $this->db->order_by('day(cursos.fecha_inicio)', 'asc');
 	    return $this->db->get()->result();
 	}
+
+	public function hay_cursos()
+    {
+    	$this->db->select('COUNT(id) as cantidad');
+      	$this->db->from('cursos');
+		$this->db->where('year(cursos.fecha_inicio)', date("Y"));
+		$this->db->where('publicado', 1);
+
+		$cursos = $this->db->get()->result();
+		if($cursos[0]->cantidad > 0){
+			return TRUE;
+		}
+		else return FALSE;
+    }
 }
 ?>

@@ -15,7 +15,7 @@
 
 			<?php echo $this->template->cargar_select(lang('form_plan'), 'id_ciclo', '*', form_error('id_ciclo'), $planes, $this->input->post('id_ciclo')); ?>
 
-			<?php echo $this->template->cargar_select(lang('form_course'), 'id_materia', '*', form_error('id_materia'), $vacio='', $this->input->post('id_materia')); ?>	
+			<?php echo $this->template->cargar_select(lang('form_course'), 'id_materia', '*', form_error('id_materia'), $materias, $this->input->post('id_materia')); ?>	
 			
 			<?php echo $this->template->cargar_submit(); ?>
 			

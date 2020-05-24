@@ -209,7 +209,7 @@ class Ciclo_materia_model extends CI_Model
 
 
     //Formularios
-    public function fetch_materias($plan_id)
+    public function fetch_materias($plan_id, $var=TRUE)
     {
         $this->db->select('ciclo_materia.codigo as codigo, ciclo_materia.id as id, CONCAT(ciclo_materia.codigo, " - ",ciclos.nombre, " - " , materias.nombre) as nombre'); 
         $this->db->from('ciclo_materia');
@@ -220,13 +220,19 @@ class Ciclo_materia_model extends CI_Model
         $this->db->where('materias.id_tipo <>', 2);
         $this->db->order_by('ciclo_materia.codigo', 'asc');
         $query = $this->db->get()->result();
-          
-        $output = '';
-        foreach($query as $row)
-        {
-            $output .= '<option value="'.$row->id.'">'.$row->nombre.'</option>';
+        
+        if($var){
+            $output = '';
+            foreach($query as $row)
+            {
+                $output .= '<option value="'.$row->id.'">'.$row->nombre.'</option>';
+            }
+            return $output;    
         }
-        return $output;
+        else{
+              return $query;
+          }  
+        
     }
 
     public function fetch_anios($ciclo_id)

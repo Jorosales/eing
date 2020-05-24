@@ -3,12 +3,15 @@
     
 	    <!-- Eventos -->
 	    <div class="container col-lg-2 sidenav eventos" id="tourpackages-carousel">
+				<?php if(!empty($prox_even)) {?>
 				<h4>Calendario de Eventos</h4>
+				<?php } ?>
 				<div class="row" >
+					
+				<?php if(!empty($prox_even)) {?>
 					<div class="container card border-primary mb-3 text-center" style="width: 250px;">
 							<?php echo $calendario ?>
 					</div>
-				<?php if(!empty($prox_even)) {?>
 					<?php foreach ($prox_even as $e) { ?>
 						<div class="box no_mostrar">
 							<div class="container">
@@ -43,9 +46,10 @@
 	    <!-- Carreras -->
 	    <div class="container col-lg-8"> 
 	    	<div class="row">
+	    	  <?php (count($carreras)==1)?$tam='50rem':$tam='20rem'; ?>
 		      <?php foreach ($carreras as $row) {?>
 					<a href="<?= base_url("/carrera/".$row->id) ?>">
-						<div class="card" style="width: 20rem; border-radius: 20px;">
+						<div class="card" style="width: <?php echo $tam ?>; border-radius: 20px;">
 							<?php if ($row->imagen <> ''){ ?>
 								<img class="card-img-top" style="border-radius: 20px;" src="<?= base_url(IMAGES_UPLOAD.$row->imagen) ?>" alt="<?= $row->nombre?>">
 							<?php }else { ?>
