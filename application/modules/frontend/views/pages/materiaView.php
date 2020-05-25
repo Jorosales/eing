@@ -111,7 +111,7 @@
 									<?=strtoupper($row->apellido);?>, <?=strtoupper($row->nombre);?>
 								</a>
 							</td>
-							<td colspan="2" class="no_mostrar"><?=$row->descripcion;?></td>
+							<td colspan="2" class="no_mostrar"><?=$row->categoria;?></td>
 							<td colspan="2" class="no_mostrar"><?=$row->email1;?></td>
 						</tr>
 					<?php } ?>

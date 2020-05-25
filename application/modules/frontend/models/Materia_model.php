@@ -33,15 +33,16 @@ class Materia_model  extends CI_Model  {
   }
 
 	public function getEquipo($idMateria)
-	{
-    $this->db->select('docentes.id as id_docente, persona.nombre, persona.nombre_2, persona.apellido, docentes.descripcion, persona.email1');
+  {
+    $this->db->select('docentes.id as id_docente, persona.nombre, persona.nombre_2, persona.apellido, docente_categoria.nombre as categoria, persona.email1');
     $this->db->from('docentes');
+    $this->db->join('docente_categoria', 'docente_categoria.id = docentes.id_docente_categoria');
     $this->db->join('persona', 'persona.id = docentes.persona_id');
     $this->db->join('materia_docente', 'materia_docente.id_docente = docentes.id');
     $this->db->join('ciclo_materia', 'ciclo_materia.id = materia_docente.id_ciclo_materia');
     $this->db->where('ciclo_materia.id', $idMateria); 
     return $this->db->get()->result();
-	}
+  }
 
 	public function getCorrelatividades($idMateria, $tipo)
 	{
